@@ -9,4 +9,6 @@ dotfiles:
 		ln -sfn $$file $(HOME)/$$f; \
 	done
 
-	ln -sfn $(shell pwd)/.terminalrc $(HOME)/.config/xfce4/terminal/terminalrc
+	mkdir -p $(HOME)/.config/xfce4/terminal/
+	ln -sf $(shell pwd)/.terminalrc $(HOME)/.config/xfce4/terminal/terminalrc
+	ln -sf $(shell pwd)/submodules/vim/vimrc $(HOME)/.vimrc
