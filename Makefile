@@ -11,4 +11,5 @@ dotfiles:
 
 	mkdir -p $(HOME)/.config/xfce4/terminal/
 	ln -sf $(shell pwd)/.terminalrc $(HOME)/.config/xfce4/terminal/terminalrc
+	ln -sf $(shell pwd)/submodules/vim $(HOME)/.vim
 	ln -sf $(shell pwd)/submodules/vim/vimrc $(HOME)/.vimrc
