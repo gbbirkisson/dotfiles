@@ -154,3 +154,10 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+# switch between the current and the previously focused one
+bindsym $mod+b workspace back_and_forth
+
+# move the whole workspace to the next output
+bindsym $mod+x move workspace to output right
+bindsym $mod+Shift+b move container to workspace back_and_forth
