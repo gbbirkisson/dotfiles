@@ -161,3 +161,5 @@ bindsym $mod+b workspace back_and_forth
 # move the whole workspace to the next output
 bindsym $mod+x move workspace to output right
 bindsym $mod+Shift+b move container to workspace back_and_forth
+
+exec --no-startup-id nm-applet
