@@ -39,6 +39,13 @@ prompt_git() {
 				s+='$';
 			fi;
 
+            if [ -n "$(git status | grep 'branch is behind')" ]; then
+				s+='<';
+			fi;
+
+            if [ -n "$(git status | grep 'branch is ahead')" ]; then
+				s+='>';
+			fi;
 		fi;
 
 		# Get the short symbolic ref.
