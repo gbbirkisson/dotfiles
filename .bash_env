@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Set default editor for git and other programs to git
+export VISUAL=vim;
+export EDITOR="$VISUAL";
