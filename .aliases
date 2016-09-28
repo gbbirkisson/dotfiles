@@ -45,7 +45,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 # remove all docker containers
-alias drma='docker rm `docker ps -aq`'
+alias drma='docker rm `docker ps -aq --filter status=exited`'
 
 # remove all untagged images
-alias drmi='docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}")'
+alias drmi='docker rmi -f $(docker images -f "dangling=true" -q)'
