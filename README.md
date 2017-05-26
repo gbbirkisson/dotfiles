@@ -11,3 +11,5 @@ git clone --recursive https://github.com/gbbirkisson/dotfiles.git dotfiles
 cd dotfiles
 make
 ```
+
+Wallpaper: https://alpha.wallhaven.cc/wallpaper/490733
