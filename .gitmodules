@@ -1,3 +1,0 @@
-[submodule "submodules/vim"]
-	path = submodules/vim
-	url = https://github.com/jfrazelle/.vim.git
