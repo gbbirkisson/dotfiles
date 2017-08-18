@@ -7,9 +7,13 @@ My files are heavily inspired by Jess Frazelle (https://github.com/jfrazelle)
 Use this these commands to setup
 
 ```console
+# Install fonts
+sudo apt-get install fonts-inconsolata
+sudo fc-cache -fv
+
 git clone --recursive https://github.com/gbbirkisson/dotfiles.git dotfiles
 cd dotfiles
 make
 ```
 
-Wallpaper: https://alpha.wallhaven.cc/wallpaper/490733
+Wallpaper: https://alpha.wallhaven.cc/wallpaper/458193
