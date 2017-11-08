@@ -49,3 +49,6 @@ alias drma='docker rm `docker ps -aq --filter status=exited --filter status=crea
 
 # remove all untagged images
 alias drmi='docker rmi -f $(docker images -f "dangling=true" -q)'
+
+# remove dangling volumes
+alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)'
