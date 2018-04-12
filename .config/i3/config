@@ -1,8 +1,17 @@
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+# Set Monitors TODO: CHANGE
+# my laptop's internal screen
+set $monitor1 VGA-1
+# external screen, they are set here to make it easier to move to new setups
+set $monitor2 VGA-2
+bindsym XF86Display exec --no-startup-id sh ~/.local/bin/gbb-screen $monitor1 $monitor2
+bindsym $mod+p exec --no-startup-id ~/.local/bin/gbb-screen $monitor1 $monitor2
+
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
+set $mod2 Mod1
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -27,7 +36,7 @@ font xft:URWGothic-Book 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminal
+bindsym $mod+Return exec ~/.local/bin/gbb-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -141,14 +150,42 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 1
-set $ws2 2
-set $ws3 3
-set $ws4 4
-set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
+set $ws1 "1:w1"
+set $ws2 "2:w2"
+set $ws3 "3:w3"
+set $ws4 "4:w4"
+set $ws5 "5:w5"
+set $ws6 "6:w6"
+set $ws7 "7:w7"
+set $ws8 "8:✉8"
+
+set $ws9 "9:a1"
+set $ws10 "10:a2"
+set $ws11 "11:a3"
+set $ws12 "12:a4"
+set $ws13 "13:a5"
+set $ws14 "14:a6"
+set $ws15 "15:a7"
+set $ws16 "16:a8"
+
+# Workspace location
+workspace $ws1 output $monitor1
+workspace $ws2 output $monitor1
+workspace $ws3 output $monitor1
+workspace $ws4 output $monitor1
+workspace $ws5 output $monitor1
+workspace $ws6 output $monitor1
+workspace $ws7 output $monitor1
+workspace $ws8 output $monitor1
+
+workspace $ws9 output $monitor2
+workspace $ws10 output $monitor2
+workspace $ws11 output $monitor2
+workspace $ws12 output $monitor2
+workspace $ws13 output $monitor2
+workspace $ws14 output $monitor2
+workspace $ws15 output $monitor2
+workspace $ws16 output $monitor2
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -160,6 +197,15 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 
+bindsym $mod2+1 workspace $ws9
+bindsym $mod2+2 workspace $ws10
+bindsym $mod2+3 workspace $ws11
+bindsym $mod2+4 workspace $ws12
+bindsym $mod2+5 workspace $ws13
+bindsym $mod2+6 workspace $ws14
+bindsym $mod2+7 workspace $ws15
+bindsym $mod2+8 workspace $ws16
+
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
 bindsym $mod+Ctrl+2 move container to workspace $ws2
@@ -169,6 +215,15 @@ bindsym $mod+Ctrl+5 move container to workspace $ws5
 bindsym $mod+Ctrl+6 move container to workspace $ws6
 bindsym $mod+Ctrl+7 move container to workspace $ws7
 bindsym $mod+Ctrl+8 move container to workspace $ws8
+
+bindsym $mod2+Ctrl+1 move container to workspace $ws9
+bindsym $mod2+Ctrl+2 move container to workspace $ws10
+bindsym $mod2+Ctrl+3 move container to workspace $ws11
+bindsym $mod2+Ctrl+4 move container to workspace $ws12
+bindsym $mod2+Ctrl+5 move container to workspace $ws13
+bindsym $mod2+Ctrl+6 move container to workspace $ws14
+bindsym $mod2+Ctrl+7 move container to workspace $ws15
+bindsym $mod2+Ctrl+8 move container to workspace $ws16
 
 # Move to workspace with focused container
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
@@ -180,11 +235,21 @@ bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
+bindsym $mod2+Shift+1 move container to workspace $ws9; workspace $ws9
+bindsym $mod2+Shift+2 move container to workspace $ws10; workspace $ws10
+bindsym $mod2+Shift+3 move container to workspace $ws11; workspace $ws11
+bindsym $mod2+Shift+4 move container to workspace $ws12; workspace $ws12
+bindsym $mod2+Shift+5 move container to workspace $ws13; workspace $ws13
+bindsym $mod2+Shift+6 move container to workspace $ws14; workspace $ws14
+bindsym $mod2+Shift+7 move container to workspace $ws15; workspace $ws15
+bindsym $mod2+Shift+8 move container to workspace $ws16; workspace $ws16
+
 # Open applications on specific workspaces
 # assign [class="Thunderbird"] $ws1
 # assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
+assign [class="Rambox"] $ws8
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -214,9 +279,10 @@ for_window [class="Thus"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
+for_window [class="Spotify"] floating enable
 
 # switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
+# for_window [urgent=latest] focus
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -321,12 +387,13 @@ set_from_resource $term_color15    color15
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
     i3bar_command i3bar
-    status_command i3status
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    #status_command i3status -c ~/.config/i3/i3status.conf
     position bottom
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #   tray_output primary
-#   tray_output eDP1
+   tray_output $monitor1
 
     bindsym button4 nop
     bindsym button5 nop
@@ -416,3 +483,7 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+#exec ~/.local/bin/gbb-screen
+exec rambox
+exec pidgin
