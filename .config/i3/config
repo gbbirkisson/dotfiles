@@ -250,6 +250,7 @@ bindsym $mod2+Shift+8 move container to workspace $ws16; workspace $ws16
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
 assign [class="Rambox"] $ws8
+assign [class="Pidgin"] $ws8
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
