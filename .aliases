@@ -60,6 +60,9 @@ alias drmi='docker rmi -f $(docker images -f "dangling=true" -q)'
 # remove dangling volumes
 alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)'
 
+# kubectl proxy
+alias kubeproxy='kubectl proxy --port=9999'
+
 colors() {
 	local fgc bgc vals seq0
 
@@ -91,6 +94,7 @@ ex ()
 {
   if [ -f $1 ] ; then
     case $1 in
+      *.jar)   	   jar xf $1   ;;
       *.tar.bz2)   tar xjf $1   ;;
       *.tar.gz)    tar xzf $1   ;;
       *.bz2)       bunzip2 $1   ;;
