@@ -2,6 +2,18 @@
 
 These dotfiles are for Manjaro I3 edition
 
+## Setup dotfiles
+
+```bash
+make dotfiles
+```
+
+## Git hooks
+
+```bash
+git config --global init.templatedir '~/.git_template'
+```
+
 ## Extra dependencies
 
 For the status bar you need to install:

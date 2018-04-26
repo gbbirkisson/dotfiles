@@ -1,0 +1,40 @@
+#!/usr/bin/python
+
+import argparse
+import os
+
+from colors import colors
+from jira import get_jira_issue
+
+enforce = os.environ.get('GIT_JIRA', '1').lower() in ['y', '1', 'true']
+
+parser = argparse.ArgumentParser()
+parser.add_argument("commit_message_file", help="File containing the commit message")
+
+
+def read_commit_file(file):
+    with open(file, 'r') as commit_message_file:
+        data = commit_message_file.read().replace('\n', '')
+    return data
+
+
+if __name__ == "__main__":
+    if not enforce:
+        exit(0)
+    args = parser.parse_args()
+    commit_message = read_commit_file(args.commit_message_file)
+    jira_issue = get_jira_issue(commit_message)
+    if jira_issue is None:
+        print("{FAILB}Commit failed!{ENDC}".format(**colors))
+        print('Specify a valid JIRA issue in your message, i.e. "{OKGRB}BAN-XXX {}{ENDC}".'.format(
+            commit_message,
+            **colors
+        ))
+        print('To disable this check you can do either of the two:')
+        print(' * {WARN}GIT_JIRA=0 git commit -m "{}"{ENDC} (disable for this one commit)'.format(
+            commit_message,
+            **colors
+        ))
+        print(' * {WARN}export GIT_JIRA=0{ENDC} (disable for this terminal session)'.format(**colors))
+        exit(-1)
+    exit(0)
