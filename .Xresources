@@ -1,4 +1,4 @@
-# http://www.xcolors.net/dl/neon
+! http://www.xcolors.net/dl/neon
 
 ! black
 *color0  			: #171717
@@ -25,7 +25,7 @@
 *color7  			: #EBEBEB
 *color15 			: #F8F8F8
 
-# Rest
+! Rest
 
 *background:                      #272827
 *foreground:                      #657b83
@@ -73,7 +73,8 @@ URxvt*cursorBlink:                true
 URxvt*background:                 black
 URxvt*foreground:                 grey
 URxvt*saveLines:                  5000
-urxvt*urlLauncher:				  firefox-developer-edition
+URxvt*url-launcher:				  /usr/bin/xdg-open
+URxvt*matcher.button: 1
 
 ! for 'fake' transparency (without Compton) uncomment the following three lines
 ! URxvt*inheritPixmap:            true
@@ -81,6 +82,7 @@ urxvt*urlLauncher:				  firefox-developer-edition
 ! URxvt*shading:                  138
 
 ! other possible settings:
+URxvt*perl-ext-common: default,matcher
 ! Rxvt.perl-ext-common:            ...,clipboard
 ! URxvt.keysym.M-C-c:              perl:clipboard:copy
 ! URxvt.keysym.M-v:                perl:clipboard:paste
