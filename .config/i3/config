@@ -486,5 +486,5 @@ mode "$mode_gaps_outer" {
 }
 
 #exec ~/.local/bin/gbb-screen
-exec rambox
-exec pidgin
+#exec rambox
+#exec pidgin
