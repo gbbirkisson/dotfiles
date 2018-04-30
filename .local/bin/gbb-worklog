@@ -1,0 +1,104 @@
+#!/usr/bin/python
+
+import datetime
+import getpass
+import json
+
+try:
+    from dateutil import parser
+except:
+    print('Install dateutils: "sudo pip install python-dateutil"')
+    exit(-1)
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+try:
+    input = raw_input
+except NameError:
+    pass
+
+
+def jira(url): return "https://soci80.atlassian.net{}".format(url)
+
+
+def get_issue(issue_id):
+    r = requests.get(jira("/rest/api/2/issue/{}".format(issue_id)), auth=auth)
+    assert r.status_code == 200
+    return json.loads(r.text)
+
+
+def get_worklogs(since):
+    r = requests.get(jira("/rest/api/2/worklog/updated?since={}".format(since)), auth=auth)
+    assert r.status_code == 200
+    d = json.loads(r.text)
+    ids = {"ids": [w['worklogId'] for w in d['values']]}
+    d = json.dumps(ids)
+    r = requests.post(
+        jira("/rest/api/2/worklog/list".format(since)),
+        auth=auth,
+        headers={
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        data=d)
+    assert r.status_code == 200
+    return json.loads(r.text)
+
+
+username = input('Enter username (not email address): ')
+password = getpass.getpass('Enter password: ')
+
+auth = HTTPBasicAuth(username, password)
+
+print("Select timerange to fetch worklog:")
+print("1) Today")
+print("2) This week")
+print("3) This week and last week")
+choice = int(input("Choice: "))
+
+if choice == 1:
+    timestamp = datetime.datetime.combine(datetime.datetime.today(), datetime.time.min)
+elif choice == 2:
+    timestamp = datetime.date.today()
+    timestamp -= datetime.timedelta(days=-(timestamp.weekday() - 1), weeks=1)
+elif choice == 3:
+    timestamp = datetime.date.today()
+    timestamp -= datetime.timedelta(days=-(timestamp.weekday() - 1), weeks=1)
+    timestamp += datetime.timedelta(days=-7)
+else:
+    print("Bad selection")
+    exit(-1)
+
+timestamp = int(timestamp.strftime("%s")) * 1000
+
+worklogs = get_worklogs(timestamp)
+worklogs = [w for w in worklogs if w['author']['name'] == username]
+
+cleaned = []
+for w in worklogs:
+    issue = get_issue(w['issueId'])
+    cleaned.append({
+        'created': parser.parse(w['created']).strftime("%Y-%m-%d %H:%M"),
+        'issue': "{} {} ({})".format(issue['key'], issue['fields']['summary'], jira("/browse/{}".format(issue['key']))),
+        'timeSpent': w['timeSpent'],
+        'timeSpentSeconds': w['timeSpentSeconds'],
+        'comment': w.get('comment', '<NO COMMENT>')
+    })
+
+cleaned = sorted(cleaned, key=lambda x: x['created'])
+
+print()
+
+totalSeconds = 0
+
+for w in cleaned:
+    totalSeconds += w['timeSpentSeconds']
+    print(w['issue'])
+    print("{}\t{}\t{}".format(w['created'], w['timeSpent'], w['comment']))
+    print()
+
+total_hours = datetime.timedelta(seconds=totalSeconds).seconds // 3600
+total_minutes = (totalSeconds - (total_hours * 3600)) // 60
+
+print('Total time logged: {}h {}m'.format(total_hours, total_minutes))
