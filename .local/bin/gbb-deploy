@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -e
+
+# Colors
+WARN='\033[93m'
+FAIL='\033[91m'
+ENDC='\033[0m'
+BOLD='\033[1m'
+OKBL='\033[94m'
+OKGR='\033[92m'
+
+# Check our current context
+CTX=$(kubectl config current-context)
+if [[ ${CTX} = *"-dev_"* ]] || [[ ${CTX} = "minikube" ]]; then
+    DEV_ENV=1
+else
+    DEV_ENV=0
+fi
+
+BLOCK=${KUBE_CTX_BLOCK:-1}
+
+if [[ ${DEV_ENV} -eq "0" ]] && [[ ${BLOCK} -ne "0" ]]; then
+    echo -e -n "${FAIL}${BOLD}Command failed!${ENDC} "
+    echo -e "You are trying to issue command '${OKGR}$@${ENDC}' on a live cluster. Current context is '${OKBL}${CTX}${ENDC}'. To disable this check, run:"
+    echo -e " * ${WARN}KUBE_CTX_BLOCK=0 $@${ENDC} (disable for this one command)"
+    echo -e " * ${WARN}export KUBE_CTX_BLOCK=0${ENDC} (disable for this terminal session)"
+    exit -1
+elif [[ ${DEV_ENV} -eq "0" ]]; then
+    echo -e -n "${WARN}Warning!${ENDC} "
+fi
+
+echo -e "Issuing command '${OKGR}$@${ENDC}' on cluster '${OKBL}${CTX}${ENDC}'."
+echo ""
+
+exec "$@"
