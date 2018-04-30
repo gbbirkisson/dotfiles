@@ -3,6 +3,7 @@
 import datetime
 import getpass
 import json
+import os
 
 try:
     from dateutil import parser
@@ -45,8 +46,17 @@ def get_worklogs(since):
     assert r.status_code == 200
     return json.loads(r.text)
 
+userfile = '/tmp/jira_worklog_user'
 
-username = input('Enter username (not email address): ')
+if not os.path.exists(userfile):
+    username = input('Enter username (not email address): ')
+    with open(userfile,'w') as f:
+        f.write(username)
+else:
+    with open(userfile) as f:
+        username = f.readline()
+        print('Enter username: {} (from file \'{}\')'.format(username, userfile))
+
 password = getpass.getpass('Enter password: ')
 
 auth = HTTPBasicAuth(username, password)
