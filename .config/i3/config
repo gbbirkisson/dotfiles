@@ -37,7 +37,6 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec ~/.local/bin/gbb-terminal
-bindsym $mod2+Return exec ~/.local/bin/gbb-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
