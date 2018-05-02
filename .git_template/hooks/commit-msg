@@ -23,6 +23,8 @@ if __name__ == "__main__":
         exit(0)
     args = parser.parse_args()
     commit_message = read_commit_file(args.commit_message_file)
+    if commit_message.startswith('Merge'):
+        exit(0)
     jira_issue = get_jira_issue(commit_message)
     if jira_issue is None:
         print("{FAILB}Commit failed!{ENDC}".format(**colors))
