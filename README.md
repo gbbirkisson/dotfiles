@@ -79,3 +79,9 @@ yaourt -S kubectl-bin
 yaourt -S google-cloud-sdk
 yaourt -S kubernetes-helm (edit version and checksum)
 ```
+
+## Remove cheet sheet
+
+```bash
+sudo vim conky1.10_shortcuts_maia
+```
