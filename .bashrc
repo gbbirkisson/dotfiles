@@ -57,7 +57,7 @@ unset file
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 # Add kubectl completion
-#source <(kubectl completion bash)
+source <(kubectl completion bash)
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config
 # ignoring wildcards
