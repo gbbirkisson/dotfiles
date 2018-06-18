@@ -10,6 +10,18 @@ BOLD='\033[1m'
 OKBL='\033[94m'
 OKGR='\033[92m'
 
+# Check if we are doing bash completion
+if [[ $@ == *"kubectl completion bash"* ]]; then
+	exec "$@"
+	exit 0
+fi
+
+# Check if we are doing bash completion
+if [[ $@ == *"kubectl config"* ]]; then
+	exec "$@"
+	exit 0
+fi
+
 # Check our current context
 CTX=$(kubectl config current-context)
 if [[ ${CTX} = *"-dev_"* ]] || [[ ${CTX} = "minikube" ]]; then

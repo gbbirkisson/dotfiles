@@ -53,6 +53,9 @@ for file in ~/.{bash_env,bash_prompt,aliases}; do
 done
 unset file
 
+# Add local bin to path
+PATH=$PATH:$HOME/.local/bin
+
 # Add bash-completion
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
@@ -70,8 +73,7 @@ source <(kubectl completion bash)
 # Makefile Completion
 complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
 
-# Add local bin to path
-PATH=$PATH:$HOME/.local/bin
+
 
 # Set aah-agent socket
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
