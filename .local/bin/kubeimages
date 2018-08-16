@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo $(kubectl config current-context) && KUBE_CTX_BLOCK=0 kubectl get pods --all-namespaces -o jsonpath="{..image}" |tr -s '[[:space:]]' '\n' |sort |uniq -c|grep docker.io/fintech | sed 's@.*/@@'
