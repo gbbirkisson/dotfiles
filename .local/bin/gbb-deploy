@@ -24,7 +24,7 @@ fi
 
 # Check our current context
 CTX=$(kubectl config current-context)
-if [[ ${CTX} = *"-dev_"* ]] || [[ ${CTX} = "minikube" ]]; then
+if [[ ${CTX} = *"-dev_"* ]] || [[ ${CTX} = "minikube" ]] || [[ ${CTX} = *"-test-"* ]]; then
     DEV_ENV=1
 else
     DEV_ENV=0

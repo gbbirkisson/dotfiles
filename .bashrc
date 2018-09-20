@@ -1,7 +1,7 @@
 # ~/.bashrc
 #
-# If you’ve already logged into your machine and open a new terminal window (xterm) 
-# then .bashrc is executed before the  window command prompt. .bashrc is also run 
+# If you’ve already logged into your machine and open a new terminal window (xterm)
+# then .bashrc is executed before the  window command prompt. .bashrc is also run
 # when you start a new bash instance by typing /bin/bash in a terminal.
 
 # Change the window title of X terminals
@@ -61,6 +61,10 @@ PATH=$PATH:$HOME/.local/bin
 
 # Add kubectl completion
 source <(kubectl completion bash)
+
+# Add fzf stuff
+source /usr/share/fzf/key-bindings.bash
+source /usr/share/fzf/completion.bash
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config
 # ignoring wildcards

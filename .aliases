@@ -68,6 +68,11 @@ alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)'
 # kubectl proxy
 alias kubeproxy='kubectl proxy --port=9999'
 
+# use bat not cat
+alias cat='bat'
+
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+
 colors() {
 	local fgc bgc vals seq0
 
@@ -118,17 +123,13 @@ ex ()
   fi
 }
 
-decode_base64_url() {
-  local len=$((${#1} % 4))
-  local result="$1"
-  if [ $len -eq 2 ]; then result="$1"'=='
-  elif [ $len -eq 3 ]; then result="$1"'=' 
-  fi
-  echo "$result" | tr '_-' '/+' | openssl enc -d -base64
+decode_jwt(){
+  echo -n $2 | cut -d "." -f $1 | base64 --decode --ignore-garbage 2>/dev/null | jq
 }
 
-decode_jwt(){
-   decode_base64_url $(echo -n $2 | cut -d "." -f $1) | jq .
+print_jwt(){
+  decode_jwt 1 $1;
+  decode_jwt 2 $1;
 }
 
 # Decode JWT header
@@ -136,3 +137,5 @@ alias jwth="decode_jwt 1"
 
 # Decode JWT Payload
 alias jwtp="decode_jwt 2"
+
+alias jwt="print_jwt"
