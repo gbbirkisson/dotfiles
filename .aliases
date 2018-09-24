@@ -123,6 +123,10 @@ ex ()
   fi
 }
 
+comp () {
+	tar -zcvf $(realpath $1).tar.gz $1
+}
+
 decode_jwt(){
   echo -n $2 | cut -d "." -f $1 | base64 --decode --ignore-garbage 2>/dev/null | jq
 }
@@ -139,3 +143,5 @@ alias jwth="decode_jwt 1"
 alias jwtp="decode_jwt 2"
 
 alias jwt="print_jwt"
+
+alias zip="comp"
