@@ -1,0 +1,10 @@
+sysstat
+i3blocks
+numlockx
+docker
+bash-completion
+code
+bat
+colordiff
+httpie
+ansible

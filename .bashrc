@@ -75,7 +75,7 @@ source /usr/share/fzf/completion.bash
 	tr ' ' '\n')" scp sftp ssh
 
 # Makefile Completion
-complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
+# complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
 
 
 
