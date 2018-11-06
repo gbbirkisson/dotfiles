@@ -65,8 +65,9 @@ alias drmi='docker rmi -f $(docker images -f "dangling=true" -q)'
 # remove dangling volumes
 alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)'
 
-# kubectl proxy
+# kubectl aliases
 alias kubeproxy='kubectl proxy --port=9999'
+alias kubetoken='kubectl config view -o jsonpath="{.users[?(@.name == \"$(kubectl config current-context)\")].user.auth-provider.config.access-token}"'
 
 # use bat not cat
 alias cat='bat'
