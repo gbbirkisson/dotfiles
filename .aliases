@@ -69,6 +69,8 @@ alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)'
 alias kubeproxy='kubectl proxy --port=9999'
 alias kubetoken='kubectl config view -o jsonpath="{.users[?(@.name == \"$(kubectl config current-context)\")].user.auth-provider.config.access-token}"'
 
+alias githookreset='rm -r ./.git/hooks && git init'
+
 # use bat not cat
 alias cat='bat'
 

@@ -6,7 +6,8 @@ import os
 from colors import colors
 from jira import get_jira_issue
 
-enforce = os.environ.get('GIT_JIRA', '1').lower() in ['y', '1', 'true']
+# enforce = os.environ.get('GIT_JIRA', '1').lower() in ['y', '1', 'true']
+enforce = False # Disable this for now
 
 parser = argparse.ArgumentParser()
 parser.add_argument("commit_message_file", help="File containing the commit message")

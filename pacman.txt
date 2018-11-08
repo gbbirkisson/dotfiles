@@ -8,3 +8,4 @@ bat
 colordiff
 httpie
 ansible
+lastpass-cli
