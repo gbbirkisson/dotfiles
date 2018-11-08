@@ -68,6 +68,7 @@ alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)'
 # kubectl aliases
 alias kubeproxy='kubectl proxy --port=9999'
 alias kubetoken='kubectl config view -o jsonpath="{.users[?(@.name == \"$(kubectl config current-context)\")].user.auth-provider.config.access-token}"'
+alias kubeexec='kubectl run tmp --rm --restart=Never -it --image=gbbirkisson/httpie --command /bin/ash --'
 
 alias githookreset='rm -r ./.git/hooks && git init'
 
