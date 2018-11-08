@@ -7,5 +7,6 @@ code
 bat
 colordiff
 httpie
+jq
 ansible
 lastpass-cli
