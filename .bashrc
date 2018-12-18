@@ -55,6 +55,7 @@ unset file
 
 # Add local bin to path
 PATH=$PATH:$HOME/.local/bin
+PATH=$PATH:$HOME/go/bin
 
 # Add bash-completion
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
@@ -65,6 +66,9 @@ source <(kubectl completion bash)
 # Add fzf stuff
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
+
+# Add node version manager
+source /usr/share/nvm/init-nvm.sh
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config
 # ignoring wildcards
