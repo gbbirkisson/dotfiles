@@ -107,21 +107,27 @@ colors() {
 ex ()
 {
   if [ -f $1 ] ; then
+	currpath=$(pwd)
+	tmpfile="$(realpath  $1)"
+	tmpdir="$(realpath $1)-extracted"
+	rm -rf $tmpdir
+	mkdir -p $tmpdir
     case $1 in
-      *.jar)   	   jar xf $1   ;;
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1     ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
+      *.jar)   	   cd $tmpdir && jar xf $tmpfile    ;;
+      *.tar.bz2)   cd $tmpdir && tar xjf $tmpfile   ;;
+      *.tar.gz)    cd $tmpdir && tar xzf $tmpfile   ;;
+      *.bz2)       cd $tmpdir && bunzip2 $tmpfile   ;;
+      *.rar)       cd $tmpdir && unrar x $tmpfile   ;;
+      *.gz)        cd $tmpdir && gunzip $tmpfile    ;;
+      *.tar)       cd $tmpdir && tar xf $tmpfile    ;;
+      *.tbz2)      cd $tmpdir && tar xjf $tmpfile   ;;
+      *.tgz)       cd $tmpdir && tar xzf $tmpfile   ;;
+      *.zip)       cd $tmpdir && unzip $tmpfile     ;;
+      *.Z)         cd $tmpdir && uncompress $tmpfile;;
+      *.7z)        cd $tmpdir && 7z x $tmpfile      ;;
       *)           echo "'$1' cannot be extracted via ex()" ;;
     esac
+	cd $currpath
   else
     echo "'$1' is not a valid file"
   fi

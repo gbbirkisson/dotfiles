@@ -22,8 +22,8 @@
 *color6  			: #0FDCB6
 *color14 			: #0A9B81
 ! white
-*color7  			: #EBEBEB
-*color15 			: #F8F8F8
+*color7  			: #F1F1F1
+*color15 			: #FEFEFE
 
 ! Rest
 
@@ -35,7 +35,7 @@
 *pointerColorBackground:          #2B2C2B
 *pointerColorForeground: 		  #16A085
 
-Xft.dpi: 96 
+Xft.dpi: 100
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
