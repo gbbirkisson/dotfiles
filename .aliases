@@ -146,6 +146,16 @@ print_jwt(){
   decode_jwt 2 $1;
 }
 
+swaggerserve() {
+	port=8080
+	echo "Serving definition on port $port"
+	docker run -it --rm \
+		-v $(realpath $1):/usr/share/nginx/html/swagger.json:ro \
+		-e API_URL=./swagger.json \
+		-p $port:8080 \
+		swaggerapi/swagger-ui
+}
+
 # Decode JWT header
 alias jwth="decode_jwt 1"
 
