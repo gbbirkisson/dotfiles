@@ -52,7 +52,9 @@ dotfiles:
 services:
 	sudo systemctl enable docker
 	sudo systemctl start docker
-	sudo usermod -aG docker ${USER} 
+	sudo usermod -aG docker ${USER}
+	systemctl --user enable ssh-agent
+	systemctl --user start ssh-agent
 
 bg:
 	@nitrogen --set-zoom-fill .config/wallpaper.jpg
