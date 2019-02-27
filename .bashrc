@@ -56,6 +56,11 @@ unset file
 # Add local bin to path
 PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$HOME/go/bin
+PATH=$PATH:$HOME/.gem/ruby/2.6.0/bin
+
+# Add local libs
+#LIBRARY_PATH=$LIBRARY_PATH:/usr/local/lib
+#LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 # Add bash-completion
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion

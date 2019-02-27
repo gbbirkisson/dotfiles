@@ -2,3 +2,5 @@ kubectl-bin
 kubernetes-helm
 nvm
 balena-cli
+kubefwd-bin
+kubernetes-helm
