@@ -58,12 +58,14 @@ alias mv='mv -i'
 
 # remove all docker containers
 alias drma='docker rm `docker ps -aq --filter status=exited --filter status=created`'
-
 # remove all untagged images
 alias drmi='docker rmi -f $(docker images -f "dangling=true" -q)'
-
 # remove dangling volumes
 alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)'
+# stop all containers
+alias dstp='docker stop `docker ps -q`'
+# do all of the above
+alias dcln='dstp; drma; drmi; drmv'
 
 # kubectl aliases
 alias kubeproxy='kubectl proxy --port=9999'
