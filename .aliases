@@ -149,7 +149,7 @@ print_jwt(){
 }
 
 swaggerserve() {
-	port=8080
+	port=${2:-8080}
 	echo "Serving definition on port $port"
 	docker run -it --rm \
 		-v $(realpath $1):/usr/share/nginx/html/swagger.json:ro \

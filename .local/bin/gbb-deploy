@@ -10,13 +10,15 @@ BOLD='\033[1m'
 OKBL='\033[94m'
 OKGR='\033[92m'
 
+echoerr() { echo $@ 1>&2; }
+
 # Check if we are doing bash completion
 if [[ $@ == *"kubectl completion bash"* ]]; then
 	exec "$@"
 	exit 0
 fi
 
-# Check if we are doing bash completion
+# Check if we are doing kube config
 if [[ $@ == *"kubectl config"* ]]; then
 	exec "$@"
 	exit 0
@@ -33,16 +35,16 @@ fi
 BLOCK=${KUBE_CTX_BLOCK:-1}
 
 if [[ ${DEV_ENV} -eq "0" ]] && [[ ${BLOCK} -ne "0" ]]; then
-    echo -e -n "${FAIL}${BOLD}Command failed!${ENDC} "
-    echo -e "You are trying to issue command '${OKGR}$@${ENDC}' on a live cluster. Current context is '${OKBL}${CTX}${ENDC}'. To disable this check, run:"
-    echo -e " * ${WARN}KUBE_CTX_BLOCK=0 $@${ENDC} (disable for this one command)"
-    echo -e " * ${WARN}export KUBE_CTX_BLOCK=0${ENDC} (disable for this terminal session)"
+    echoerr -e -n "${FAIL}${BOLD}Command failed!${ENDC} "
+    echoerr -e "You are trying to issue command '${OKGR}$@${ENDC}' on a live cluster. Current context is '${OKBL}${CTX}${ENDC}'. To disable this check, run:"
+    echoerr -e " * ${WARN}KUBE_CTX_BLOCK=0 $@${ENDC} (disable for this one command)"
+    echoerr -e " * ${WARN}export KUBE_CTX_BLOCK=0${ENDC} (disable for this terminal session)"
     exit -1
 elif [[ ${DEV_ENV} -eq "0" ]]; then
-    echo -e -n "${WARN}Warning!${ENDC} "
+    echoerr -e -n "${WARN}Warning!${ENDC} "
 fi
 
-echo -e "Issuing command '${OKGR}$@${ENDC}' on cluster '${OKBL}${CTX}${ENDC}'."
-echo ""
+echoerr -e "Issuing command '${OKGR}$@${ENDC}' on cluster '${OKBL}${CTX}${ENDC}'."
+echoerr ""
 
 exec "$@"
