@@ -1,6 +1,6 @@
 .DEFAULT_GOAL:=all
 
-all: pacman yay dotfiles bg _done
+all: pacman yay dotfiles bg services _done
 
 pacman:
 	@sudo pacman -S --needed - < pacman.txt

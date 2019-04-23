@@ -70,22 +70,21 @@ source <(kubectl completion bash)
 
 # Add fzf stuff
 source /usr/share/fzf/key-bindings.bash
-source /usr/share/fzf/completion.bash
+#source /usr/share/fzf/completion.bash
 
 # Add node version manager
-source /usr/share/nvm/init-nvm.sh
+#source /usr/share/nvm/init-nvm.sh
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config
 # ignoring wildcards
-[[ -e "$HOME/.ssh/config" ]] && complete -o "default" \
-	-o "nospace" \
-	-W "$(grep "^Host" ~/.ssh/config | \
-	grep -v "[?*]" | cut -d " " -f2 | \
-	tr ' ' '\n')" scp sftp ssh
+# [[ -e "$HOME/.ssh/config" ]] && complete -o "default" \
+# 	-o "nospace" \
+# 	-W "$(grep "^Host" ~/.ssh/config | \
+# 	grep -v "[?*]" | cut -d " " -f2 | \
+# 	tr ' ' '\n')" scp sftp ssh
 
 # Makefile Completion
 # complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
-
 
 
 # Set aah-agent socket
