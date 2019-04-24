@@ -167,3 +167,8 @@ alias jwtp="decode_jwt 2"
 alias jwt="print_jwt"
 
 alias zip="comp"
+
+alias cred_docker_w="gbb-login docker-login-work"
+alias cred_docker_p="gbb-login docker-login-personal"
+alias cred_ssh_w="gbb-login ssh-set-key-work"
+alias cred_ssh_p="gbb-login ssh-set-key-personal"
