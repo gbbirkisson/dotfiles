@@ -10,3 +10,5 @@ httpie
 jq
 ansible
 lastpass-cli
+go
+go-tools

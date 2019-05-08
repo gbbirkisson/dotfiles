@@ -3,6 +3,7 @@
 
 # Set Monitors TODO: CHANGE
 # my laptop's internal screen
+#set $monitor1 LVDS1
 set $monitor1 VGA-1
 # external screen, they are set here to make it easier to move to new setups
 set $monitor2 VGA-2
@@ -391,6 +392,7 @@ bar {
     i3bar_command i3bar
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     #status_command i3status -c ~/.config/i3/i3status.conf
+    #status_command i3status
     position bottom
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
