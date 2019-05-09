@@ -71,6 +71,10 @@ source <(kubectl completion bash)
 # Add fzf stuff + history
 HISTSIZE=10000
 HISTFILESIZE=10000
+HISTCONTROL=ignoredups:erasedups
+shopt -s histappend
+PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+
 source /usr/share/fzf/key-bindings.bash
 FZF_DEFAULT_OPTS="--layout=reverse --border"
 FZF_CTRL_T_OPTS="--preview 'gbb-fzf-preview {}'"

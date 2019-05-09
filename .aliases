@@ -11,6 +11,7 @@ alias cd..="cd .."
 
 alias helm='gbb-deploy helm'
 alias kubectl='gbb-deploy kubectl'
+alias historydel='history -d $(history | fzf | c1)'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
