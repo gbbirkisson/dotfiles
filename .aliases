@@ -74,6 +74,9 @@ alias dstp='docker stop `docker ps -q`'
 # do all of the above
 alias dcln='dstp; drma; drmi; drmv'
 
+# git log
+alias glg='git log --graph --pretty=oneline --abbrev-commit --all'
+
 # kubectl aliases
 alias kubeproxy='kubectl proxy --port=9999'
 alias kubetoken='kubectl config view -o jsonpath="{.users[?(@.name == \"$(kubectl config current-context)\")].user.auth-provider.config.access-token}"'
