@@ -1,5 +1,12 @@
 #!/bin/bash
 
+alias c1="awk '{print \$1}'"
+alias c2="awk '{print \$2}'"
+alias c3="awk '{print \$3}'"
+alias c4="awk '{print \$4}'"
+alias c5="awk '{print \$5}'"
+alias c6="awk '{print \$6}'"
+
 alias cd..="cd .."
 
 alias helm='gbb-deploy helm'
@@ -77,8 +84,6 @@ alias githookreset='rm -r ./.git/hooks && git init'
 # use bat not cat
 alias cat='bat'
 
-alias preview="fzf --preview 'bat --color \"always\" {}'"
-
 colors() {
 	local fgc bgc vals seq0
 
@@ -106,6 +111,7 @@ colors() {
 	done
 }
 
+# Extract alias
 ex ()
 {
   if [ -f $1 ] ; then
@@ -135,17 +141,9 @@ ex ()
   fi
 }
 
+# Compress alias
 comp () {
 	tar -zcvf $(realpath $1).tar.gz $1
-}
-
-decode_jwt(){
-  echo -n $2 | cut -d "." -f $1 | base64 --decode --ignore-garbage 2>/dev/null | jq
-}
-
-print_jwt(){
-  decode_jwt 1 $1;
-  decode_jwt 2 $1;
 }
 
 swaggerserve() {
@@ -158,13 +156,9 @@ swaggerserve() {
 		swaggerapi/swagger-ui
 }
 
-# Decode JWT header
-alias jwth="decode_jwt 1"
-
-# Decode JWT Payload
-alias jwtp="decode_jwt 2"
-
-alias jwt="print_jwt"
+# JWT ALIASES
+alias jwth="tr '.' '\t' | awk '{print \$1}' | base64 -d 2>/dev/null | jq"
+alias jwtp="tr '.' '\t' | awk '{print \$2}' | base64 -d 2>/dev/null | jq"
 
 alias zip="comp"
 
