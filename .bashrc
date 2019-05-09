@@ -74,7 +74,7 @@ HISTFILESIZE=10000
 source /usr/share/fzf/key-bindings.bash
 FZF_DEFAULT_OPTS="--layout=reverse --border"
 FZF_CTRL_T_OPTS="--preview 'gbb-fzf-preview {}'"
-#source /usr/share/fzf/completion.bash
+source /usr/share/fzf/completion.bash
 
 # Add node version manager
 #source /usr/share/nvm/init-nvm.sh
