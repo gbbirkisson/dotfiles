@@ -68,8 +68,12 @@ PATH=$PATH:$HOME/.gem/ruby/2.6.0/bin
 # Add kubectl completion
 source <(kubectl completion bash)
 
-# Add fzf stuff
+# Add fzf stuff + history
+HISTSIZE=10000
+HISTFILESIZE=10000
 source /usr/share/fzf/key-bindings.bash
+FZF_DEFAULT_OPTS="--layout=reverse --border"
+FZF_CTRL_T_OPTS="--preview 'gbb-fzf-preview {}'"
 #source /usr/share/fzf/completion.bash
 
 # Add node version manager
