@@ -8,6 +8,14 @@ These dotfiles are for Manjaro I3 edition
 make
 ```
 
+## Cheet sheet
+
+In terminal:
+* `ALT+C` fzf folders and cd into
+* `CTL+R` fzf history
+* `CTL+T` fzf current directory
+* `cd **<TAB>` fzf autocomplete
+
 ## Git hooks
 
 ```bash
