@@ -1,0 +1,5 @@
+#!/bin/bash
+
+[[ $(file --mime $1) =~ binary ]] &&
+                 echo "no preview for '$1'" ||
+                 bat -r 0:23 --style=numbers --color=always $1

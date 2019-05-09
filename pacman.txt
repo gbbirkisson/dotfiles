@@ -12,3 +12,5 @@ ansible
 lastpass-cli
 go
 go-tools
+firefox
+asciinema
