@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Easy column extraction
 alias c1="awk '{print \$1}'"
 alias c2="awk '{print \$2}'"
 alias c3="awk '{print \$3}'"
@@ -7,11 +8,26 @@ alias c4="awk '{print \$4}'"
 alias c5="awk '{print \$5}'"
 alias c6="awk '{print \$6}'"
 
-alias cd..="cd .."
+# Clipboard
+alias clip="xclip -selection clipboard -i"
 
+# Passwords and login management
+alias lpassfzf="lpass ls -l --sync=no --color=always | awk '{\$1=\$1;print}' | fzf --ansi | sed -r 's/.*\[id://g' | awk '{ gsub(\"]\",\"\",\$1); print \$1 }'"
+alias lpash="lpass show --sync=no"
+alias guserpass='LID=$(lpassfzf) && lpash --user $LID && lpash --password $LID'
+alias guser='LID=$(lpassfzf) && lpash --user $LID'
+alias gpass='LID=$(lpassfzf) && lpash --password $LID'
+alias glogin="cat ~/.login | fzf | xargs gbb-login"
+
+# Delete entry from history
+alias historyrm='HID=$(history | fzf | c1) && history -d $HID'
+
+# Deploy guards
 alias helm='gbb-deploy helm'
 alias kubectl='gbb-deploy kubectl'
-alias historydel='history -d $(history | fzf | c1)'
+
+# My usual cd mistake
+alias cd..="cd .."
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -76,7 +92,7 @@ alias dstp='docker stop `docker ps -q`'
 alias dcln='dstp; drma; drmi; drmv'
 
 # git log
-alias glg='git log --graph --pretty=oneline --abbrev-commit --all'
+alias glog='git log --graph --pretty=oneline --abbrev-commit --all'
 
 # kubectl aliases
 alias kubeproxy='kubectl proxy --port=9999'
@@ -149,7 +165,13 @@ ex ()
 comp () {
 	tar -zcvf $(realpath $1).tar.gz $1
 }
+alias zip="comp"
 
+# Extract jwt header/payload
+alias jwth="tr '.' '\t' | awk '{print \$1}' | base64 -d 2>/dev/null | jq"
+alias jwtp="tr '.' '\t' | awk '{print \$2}' | base64 -d 2>/dev/null | jq"
+
+# Serve swagger documentation locally
 swaggerserve() {
 	port=${2:-8080}
 	echo "Serving definition on port $port"
@@ -159,14 +181,3 @@ swaggerserve() {
 		-p $port:8080 \
 		swaggerapi/swagger-ui
 }
-
-# JWT ALIASES
-alias jwth="tr '.' '\t' | awk '{print \$1}' | base64 -d 2>/dev/null | jq"
-alias jwtp="tr '.' '\t' | awk '{print \$2}' | base64 -d 2>/dev/null | jq"
-
-alias zip="comp"
-
-alias cred_docker_w="gbb-login docker-login-work"
-alias cred_docker_p="gbb-login docker-login-personal"
-alias cred_ssh_w="gbb-login ssh-set-key-work"
-alias cred_ssh_p="gbb-login ssh-set-key-personal"

@@ -3,39 +3,20 @@
 set -e
 
 ## Docker
-
 docker-login() {
     echo "Using docker credentials $1"
-    lpass show $1 --password | docker login --username $(lpass show $1 --username) --password-stdin
-}
-
-docker-login-personal() {
-    docker-login 'personal\devtools/docker.com'
-}
-
-docker-login-work() {
-    docker-login 'work\fi/docker.com'
+    lpass show --sync=no $1 --password | docker login --username $(lpass show --sync=no $1 --username) --password-stdin
 }
 
 ## SSH keys
-
 CURRENT_KEY=~/.ssh/currkey
-
-ssh-set-key() {
+ssh-key() {
     ssh-add -D
     echo "Using key $1"
     rm -f $CURRENT_KEY
-    lpass show $1 --field='Private Key' > $CURRENT_KEY
+    lpass show --sync=no $1 --field='Private Key' > $CURRENT_KEY
     chmod 400 $CURRENT_KEY
-    SSH_ASKPASS=gbb-ssh-give-pass ssh-add $CURRENT_KEY <<< "$(lpass show $1 --field=Passphrase)"
-}
-
-ssh-set-key-personal() {
-    ssh-set-key 'personal\devtools/github-ssh'
-}
-
-ssh-set-key-work() {
-    ssh-set-key 'work\fi/github-ssh'
+    SSH_ASKPASS=gbb-ssh-give-pass ssh-add $CURRENT_KEY <<< "$(lpass show --sync=no $1 --field=Passphrase)"
 }
 
 "$@"
