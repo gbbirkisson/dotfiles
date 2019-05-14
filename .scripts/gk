@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# My kubernetes utilities
+
+set -e
+
+POD=""
+NS=""
+
+if [ "$#" == 1 ]; then
+    GET_PODS_MODIFIER="--all-namespaces"
+else
+    GET_PODS_MODIFIER="--namespace core ${1}"
+    NS=${1}
+    shift 1
+fi
+
+print_and_do() {
+    echo "${@}"
+    "${@}"
+}
+
+fzf_pods() {
+    if [ -n "$NS" ]; then
+        POD=$(kubectl get pods --namespace $NS | fzf | awk '{print $1}')
+    else
+        TMP=$(kubectl get pods --all-namespaces | fzf)
+        NS=$(echo $TMP | awk '{print $1}')
+        POD=$(echo $TMP | awk '{print $2}')
+    fi
+
+    if [ -z "$POD" ] || [ -z "$POD" ]; then
+        exit 1
+    fi
+}
+
+# gk <OPTIONAL_NS> pods
+pods() {
+    fzf_pods
+    echo "$NS   $POD"
+}
+
+logs() {
+    fzf_pods
+    print_and_do kubectl -n $NS logs -f ${@} $POD
+}
+
+
+# gk <OPTIONAL_NS> delete
+delete() {
+    fzf_pods
+    print_and_do kubectl -n $NS delete pod $POD
+}
+
+# gk <OPTIONAL_NS> exec
+exec() {
+    if [ "$#" != 0 ]; then
+        LAST_ARG=${!#}
+        OTHER_ARGS=${*%${!#}}
+    fi
+    fzf_pods
+    print_and_do kubectl -n $NS exec -it $OTHER_ARGS $POD ${LAST_ARG:-sh}
+}
+
+# gk <OPTIONAL_NS> describe
+describe() {
+    fzf_pods
+    print_and_do kubectl -n $NS describe pod $POD
+}
+
+# gk <OPTIONAL_NS> images
+images() {
+    if [ -n "$NS" ]; then
+        kubectl -n $NS get pods -o jsonpath="{..image}" | tr -s '[[:space:]]' '\n' | sort | uniq -c | awk '{print $2}'
+    else
+        kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s '[[:space:]]' '\n' | sort | uniq -c | awk '{print $2}'
+    fi
+}
+
+"${@}"

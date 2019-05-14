@@ -1,8 +1,6 @@
 [user]
 	name = Guðmundur Björn Birkisson
 	email = gbbirkisson@gmail.com
-[init]
-	templatedir = ~/.git_template
 [includeIf "gitdir:~/repos/bankbridge/"]
 	path = ~/.gitconfig-work
 [includeIf "gitdir:~/repos/monifair/"]

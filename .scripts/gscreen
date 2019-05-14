@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Manage displays with i3
+
 # First argument: Primary monitor
 # Second argument: Secondary monitor
 if  xrandr | grep -q "$2 d"; then
@@ -9,4 +11,4 @@ else
     xrandr --output "$2" --right-of "$1"
 fi
 
-sh ~/.local/bin/gbb-bg # wallpaper can look weird if not refreshed
+gbg # wallpaper can look weird if not refreshed

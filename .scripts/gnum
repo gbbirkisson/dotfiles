@@ -1,3 +1,5 @@
 #!/bin/bash
 
+# Turn off numlock
+
 numlockx off

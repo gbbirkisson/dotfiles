@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Script to enable glogin to pass key password to ssh-add
+
 # READ Secret from STDIN and echo it
 read SECRET
 echo $SECRET

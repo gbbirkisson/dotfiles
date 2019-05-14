@@ -48,14 +48,23 @@ for option in autocd globstar; do
 	shopt -s "$option" 2> /dev/null
 done
 
-
 for file in ~/.{bash_env,bash_prompt,aliases}; do
 	[[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
 unset file
 
+# Start ssh agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent | head -2 > ~/.ssh-agent
+fi
+
+# Setup ssh env
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    eval "$(<~/.ssh-agent)"
+fi
+
 # Add local bin to path
-PATH=$PATH:$HOME/.local/bin
+PATH=$PATH:$HOME/.scripts
 PATH=$PATH:$HOME/go/bin
 PATH=$PATH:$HOME/.gem/ruby/2.6.0/bin
 
@@ -86,7 +95,3 @@ source /usr/share/fzf/completion.bash
 
 # Makefile Completion
 # complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make
-
-
-# Set aah-agent socket
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# A script to open up the terminal in the same directory as the previous terminal
+
 # From https://gist.github.com/projectgus/b93d16870ea167845831
 
 CMD="urxvt"

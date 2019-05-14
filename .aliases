@@ -17,14 +17,14 @@ alias lpash="lpass show --sync=no"
 alias guserpass='LID=$(lpassfzf) && lpash --user $LID && lpash --password $LID'
 alias guser='LID=$(lpassfzf) && lpash --user $LID'
 alias gpass='LID=$(lpassfzf) && lpash --password $LID'
-alias glogin="cat ~/.login | fzf | xargs gbb-login"
+alias glogin="cat ~/.glogin | fzf | xargs glogin"
 
 # Delete entry from history
 alias historyrm='HID=$(history | fzf | c1) && history -d $HID'
 
 # Deploy guards
-alias helm='gbb-deploy helm'
-alias kubectl='gbb-deploy kubectl'
+alias helm='gdeploy helm'
+alias kubectl='gdeploy kubectl'
 
 # My usual cd mistake
 alias cd..="cd .."

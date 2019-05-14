@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+
+# Check if an arbitrary password has been hacked
+
 import hashlib
 import sys
 import getpass

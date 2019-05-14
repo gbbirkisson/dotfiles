@@ -6,8 +6,8 @@ pacman:
 	@sudo pacman -S --needed - < pacman.txt
 
 yay:
-	@yaourt -S yay
-	@yay -S --needed - < yay.txt
+	#@yaourt -S yay
+	#@yay -S --needed - < yay.txt
 
 dotfiles:
 	@# Remove i3 config
@@ -53,8 +53,6 @@ services:
 	sudo systemctl enable docker
 	sudo systemctl start docker
 	sudo usermod -aG docker ${USER}
-	systemctl --user enable ssh-agent
-	systemctl --user start ssh-agent
 
 bg:
 	@nitrogen --set-zoom-fill .config/wallpaper.jpg

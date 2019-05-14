@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Script to log in to some services using last pass
+
 set -e
 
 ## Docker
@@ -16,7 +18,7 @@ ssh-key() {
     rm -f $CURRENT_KEY
     lpass show --sync=no $1 --field='Private Key' > $CURRENT_KEY
     chmod 400 $CURRENT_KEY
-    SSH_ASKPASS=gbb-ssh-give-pass ssh-add $CURRENT_KEY <<< "$(lpass show --sync=no $1 --field=Passphrase)"
+    SSH_ASKPASS=glogin-ssh-give-pass ssh-add $CURRENT_KEY <<< "$(lpass show --sync=no $1 --field=Passphrase)"
 }
 
 "$@"
