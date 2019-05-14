@@ -15,9 +15,3 @@ In terminal:
 * `CTL+R` fzf history
 * `CTL+T` fzf current directory
 * `cd **<TAB>` fzf autocomplete
-
-## Git hooks
-
-```bash
-git config --global init.templatedir '~/.git_template'
-```
