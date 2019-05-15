@@ -1,13 +1,13 @@
 .DEFAULT_GOAL:=all
 
-all: pacman yay dotfiles bg services _done
+all: pacman yay dotfiles bg vim services _done
 
 pacman:
 	@sudo pacman -S --needed - < pacman.txt
 
 yay:
-	#@yaourt -S yay
-	#@yay -S --needed - < yay.txt
+	@yaourt -S yay
+	@yay -S --needed - < yay.txt
 
 dotfiles:
 	@# Remove i3 config
@@ -49,10 +49,7 @@ dotfiles:
 		ln -sf $$file $(HOME)/$$f; \
 	done
 
-services:
-	sudo systemctl enable docker
-	sudo systemctl start docker
-	sudo usermod -aG docker ${USER}
+services: docker ssh-agent
 
 bg:
 	@nitrogen --set-zoom-fill .config/wallpaper.jpg
@@ -60,14 +57,24 @@ bg:
 _done:
 	@echo "Logout / Login for changes to take effect"
 
-#vim:
-#	rm -rf .vim
-#	git clone --recursive https://github.com/jessfraz/.vim.git .vim
-#	cd .vim && git submodule update --init
-#	rm -rf ${HOME}/.vim
-#	rm -rf ${HOME}/.vimrc
-#	ln -sf $(shell pwd)/.vim ${HOME}/.vim
-#	ln -sf $(shell pwd)/.vim/vimrc ${HOME}/.vimrc
+vim:
+	git clone --recursive https://github.com/jessfraz/.vim.git vim
+	cd vim && git submodule update --init
+	rm -rf ${HOME}/.vim
+	rm -rf ${HOME}/.vimrc
+	ln -sf $(shell pwd)/vim ${HOME}/.vim
+	ln -sf $(shell pwd)/vim/vimrc ${HOME}/.vimrc
 
 remove_cheat_sheet:
 	mv -f /usr/share/conky/conky1.10_shortcuts_maia /usr/share/conky/conky1.10_shortcuts_maia.old
+
+docker:
+	sudo systemctl enable docker
+	sudo systemctl start docker
+	sudo usermod -aG docker ${USER}
+
+ssh-agent:
+	@mkdir -p ~/.config/systemd/user
+	@cp -f ssh-agent.service ~/.config/systemd/user/ssh-agent.service
+	systemctl --user enable ssh-agent
+	systemctl --user start ssh-agent

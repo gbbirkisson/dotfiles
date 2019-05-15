@@ -53,16 +53,6 @@ for file in ~/.{bash_env,bash_prompt,aliases}; do
 done
 unset file
 
-# Start ssh agent
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent | head -2 > ~/.ssh-agent
-fi
-
-# Setup ssh env
-if [[ ! "$SSH_AUTH_SOCK" ]]; then
-    eval "$(<~/.ssh-agent)"
-fi
-
 # Add local bin to path
 PATH=$PATH:$HOME/.scripts
 PATH=$PATH:$HOME/go/bin
