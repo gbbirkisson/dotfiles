@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# My kubernetes utilities
+
+set -e
+
+if [ "$#" != 1 ]; then
+    echo "usage gopen [program]"
+    echo "i.e gopen code"
+    exit 1
+fi
+
+FP=$(find -L . -mindepth 1 -path '*/.*' -prune -o -print 2> /dev/null | cut -b3- | fzf --preview 'gfzf-preview {}')
+
+if [ -z "$FP" ]
+then
+      exit 0
+fi
+
+if [ -d "$FP" ]; then
+    cd $FP
+    $1 .
+    exec /bin/bash
+else
+    $1 $FP
+fi
