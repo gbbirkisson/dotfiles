@@ -11,4 +11,4 @@ if [[ $TYPE =~ binary ]]; then
     exit 0
 fi
 
-bat -r 0:23 --style=numbers --color=always $1
+bat -r 0:70 --style=numbers --color=always $1
