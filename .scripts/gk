@@ -62,6 +62,12 @@ exec() {
     print_and_do kubectl -n $NS exec -it $OTHER_ARGS $POD ${LAST_ARG:-sh}
 }
 
+# gk <NAMESPACE> pf <PORT>
+pf() {
+    fzf_pods
+    print_and_do kubectl -n $NS port-forward $POD $1
+}
+
 # gk <OPTIONAL_NS> describe
 describe() {
     fzf_pods

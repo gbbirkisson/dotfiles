@@ -1,0 +1,21 @@
+{
+    "editor.mouseWheelScrollSensitivity": 2,
+    "editor.smoothScrolling": true,
+    "editor.scrollBeyondLastLine": false,
+    "explorer.openEditors.visible": 0,
+    "breadcrumbs.enabled": true,
+    "editor.formatOnSave": true,
+    "workbench.startupEditor": "none",
+    "editor.wordWrap": "on",
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "terminal.integrated.fontSize": 13,
+    "window.zoomLevel": 0,
+    "files.autoSave": "onFocusChange",
+    "editor.renderWhitespace": "boundary",
+    "window.menuBarVisibility": "toggle",
+    "editor.minimap.enabled": false,
+    "editor.disableTranslate3d": true,
+    "editor.parameterHints.cycle": true
+}

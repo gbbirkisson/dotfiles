@@ -1,6 +1,6 @@
 .DEFAULT_GOAL:=all
 
-all: pacman yay dotfiles bg vim services _done
+all: pacman dotfiles bg vim services _done
 
 pacman:
 	@sudo pacman -S --needed - < pacman.txt
@@ -67,6 +67,12 @@ vim:
 
 remove_cheat_sheet:
 	mv -f /usr/share/conky/conky1.10_shortcuts_maia /usr/share/conky/conky1.10_shortcuts_maia.old
+
+vscode:
+	rm -rf "${HOME}/.config/Code - OSS"
+	mkdir -p ${HOME}/.config/Code/User
+	ln -sf ${HOME}/.config/Code/ "${HOME}/.config/Code - OSS"
+	ln -sf $(shell pwd)/vscode_settings.json ${HOME}/.config/Code/User/settings.json
 
 docker:
 	sudo systemctl enable docker
