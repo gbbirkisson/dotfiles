@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# My kubernetes utilities
+# Simplify common kubernetes operations with fzf
 
 set -e
 

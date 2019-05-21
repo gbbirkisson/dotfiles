@@ -2,4 +2,6 @@
 
 # Simple script to mount a virtualbox share
 
+set -e
+
 sudo mount -t vboxsf shared /home/gudmundurbb/shared

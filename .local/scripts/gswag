@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Serve swagger documentation file locally
+
+set -e
+
+if [ -f $1 ] ; then
+    port=${2:-8080}
+    echo "Serving definition on port $port"
+    docker run -it --rm \
+        -v $(realpath $1):/usr/share/nginx/html/swagger.json:ro \
+        -e API_URL=./swagger.json \
+        -p $port:8080 \
+        swaggerapi/swagger-ui
+else
+    echo "'$1' is not a valid file"
+fi

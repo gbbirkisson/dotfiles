@@ -19,8 +19,7 @@ link() {
 
 link $(find $PWD/.config -maxdepth 1 -not -name ".config" -not -name "Code")
 link $(find $PWD/.config/Code/User -maxdepth 1 -not -name "User")
-link $(find $PWD/.local/bin -maxdepth 1 -not -name "bin")
-link $(find $PWD/.local/share -maxdepth 1 -not -name "share")
+link $(find $PWD/.local -maxdepth 1 -not -name ".local")
 link $(find $PWD/.ssh -maxdepth 1 -not -name ".ssh")
 
 link $(find $PWD -maxdepth 1 -name ".*"	\

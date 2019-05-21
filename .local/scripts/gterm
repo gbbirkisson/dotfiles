@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # A script to open up the terminal in the same directory as the previous terminal
+
+set -e
+
 CWD=''
 
 # Get window ID

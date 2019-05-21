@@ -2,6 +2,8 @@
 
 # Delete junk folders from my home folder
 
+set -e
+
 rm -rf ~/Desktop
 rm -rf ~/Documents
 rm -rf ~/Downloads

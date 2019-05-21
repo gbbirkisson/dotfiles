@@ -11,58 +11,38 @@ alias c6="awk '{print \$6}'"
 # Clipboard
 alias clip="xclip -selection clipboard -i"
 
+# Delete entry from history
+alias historyrm='HID=$(history | fzf | c1) && history -d $HID'
+
 # Passwords and login management
 alias lpassfzf="lpass ls -l --sync=no --color=always | awk '{\$1=\$1;print}' | fzf --ansi | sed -r 's/.*\[id://g' | awk '{ gsub(\"]\",\"\",\$1); print \$1 }'"
 alias lpash="lpass show --sync=no"
 alias guserpass='LID=$(lpassfzf) && lpash --user $LID && lpash --password $LID'
 alias guser='LID=$(lpassfzf) && lpash --user $LID'
 alias gpass='LID=$(lpassfzf) && lpash --password $LID'
-alias glogin="cat ~/.local/share/login_params | fzf | xargs glogin"
-
-# Delete entry from history
-alias historyrm='HID=$(history | fzf | c1) && history -d $HID'
+alias glogin="cat ~/.local/scripts/glogin-params | fzf | xargs glogin"
 
 # Deploy guards
 alias helm='gdeploy helm'
 alias kubectl='gdeploy kubectl'
 
-# My usual cd mistake
-alias cd..="cd .."
-
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
-else # OS X `ls`
-	colorflag="-G"
-fi
-
-# List all files colorized in long format
-alias l="ls -lF ${colorflag}"
-
-# Lise all files colorized in long format, including dot files
-alias la="ls -laF ${colorflag}"
-
-# List only directories
-alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
-
-# Always use color output for `ls`
-alias ls="command ls ${colorflag}"
+# Set ls aliases
+colorflag="--color"
+alias l="ls -lF ${colorflag}" # List all files colorized in long format
+alias la="ls -laF ${colorflag}" # List all files colorized in long format, including dot files
+alias lsd="ls -lF ${colorflag} | grep --color=never '^d'" # List only directories
+alias ls="command ls ${colorflag}" # Always use color output for `ls`
 
 # Always enable colored `grep` output
 alias grep='grep --color=auto '
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 
-# Enable aliases to be sudo’ed
-alias sudo='sudo '
-
-# human-readable sizes
-alias df='df -h'
-
-# show sizes in MB
-alias free='free -m'
-
-alias diff='colordiff -u'
+alias sudo='sudo '# Enable aliases to be sudo’ed
+alias df='df -h' # human-readable sizes
+alias free='free -m' # show sizes in MB
+alias diff='colordiff -u' # Nicer diff
+alias cd..="cd .." # My usual cd mistake
 
 # IP addresses
 alias pubip="wget http://ipinfo.io/ip -qO -"
@@ -80,86 +60,24 @@ alias cp='cp -i'
 # move file interactive
 alias mv='mv -i'
 
-# remove all docker containers
-alias drma='docker rm `docker ps -aq --filter status=exited --filter status=created`'
-# remove all untagged images
-alias drmi='docker rmi -f $(docker images -f "dangling=true" -q)'
-# remove dangling volumes
-alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)'
-# stop all containers
-alias dstp='docker stop `docker ps -q`'
-# do all of the above
-alias dcln='dstp; drma; drmi; drmv'
-
-# git log
-alias glog='git log --graph --pretty=oneline --abbrev-commit --all'
+# docker aliases
+alias drma='docker rm `docker ps -aq --filter status=exited --filter status=created`' # remove all docker containers
+alias drmi='docker rmi -f $(docker images -f "dangling=true" -q)' # remove all untagged images
+alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)' # remove dangling volumes
+alias dstp='docker stop `docker ps -q`' # stop all containers
+alias dcln='dstp; drma; drmi; drmv' # do all of the above
 
 # kubectl aliases
 alias kubeproxy='kubectl proxy --port=9999'
 alias kubetoken='kubectl config view -o jsonpath="{.users[?(@.name == \"$(kubectl config current-context)\")].user.auth-provider.config.access-token}"'
 alias kubeexec='kubectl run tmp --rm --restart=Never -it --image=gbbirkisson/httpie --command /bin/ash --'
 
+# git aliases
+alias glog='git log --graph --pretty=oneline --abbrev-commit --all'
 alias githookreset='rm -r ./.git/hooks && git init'
 
 # use bat not cat
 alias cat='bat'
-
-colors() {
-	local fgc bgc vals seq0
-
-	printf "Color escapes are %s\n" '\e[${value};...;${value}m'
-	printf "Values 30..37 are \e[33mforeground colors\e[m\n"
-	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
-	printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
-
-	# foreground colors
-	for fgc in {30..37}; do
-		# background colors
-		for bgc in {40..47}; do
-			fgc=${fgc#37} # white
-			bgc=${bgc#40} # black
-
-			vals="${fgc:+$fgc;}${bgc}"
-			vals=${vals%%;}
-
-			seq0="${vals:+\e[${vals}m}"
-			printf "  %-9s" "${seq0:-(default)}"
-			printf " ${seq0}TEXT\e[m"
-			printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
-		done
-		echo; echo
-	done
-}
-
-# Extract alias
-ex ()
-{
-  if [ -f $1 ] ; then
-	currpath=$(pwd)
-	tmpfile="$(realpath  $1)"
-	tmpdir="$(realpath $1)-extracted"
-	rm -rf $tmpdir
-	mkdir -p $tmpdir
-    case $1 in
-      *.jar)   	   cd $tmpdir && jar xf $tmpfile    ;;
-      *.tar.bz2)   cd $tmpdir && tar xjf $tmpfile   ;;
-      *.tar.gz)    cd $tmpdir && tar xzf $tmpfile   ;;
-      *.bz2)       cd $tmpdir && bunzip2 $tmpfile   ;;
-      *.rar)       cd $tmpdir && unrar x $tmpfile   ;;
-      *.gz)        cd $tmpdir && gunzip $tmpfile    ;;
-      *.tar)       cd $tmpdir && tar xf $tmpfile    ;;
-      *.tbz2)      cd $tmpdir && tar xjf $tmpfile   ;;
-      *.tgz)       cd $tmpdir && tar xzf $tmpfile   ;;
-      *.zip)       cd $tmpdir && unzip $tmpfile     ;;
-      *.Z)         cd $tmpdir && uncompress $tmpfile;;
-      *.7z)        cd $tmpdir && 7z x $tmpfile      ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-	cd $currpath
-  else
-    echo "'$1' is not a valid file"
-  fi
-}
 
 # Compress alias
 comp () {
@@ -170,14 +88,3 @@ alias zip="comp"
 # Extract jwt header/payload
 alias jwth="tr '.' '\t' | awk '{print \$1}' | base64 -d 2>/dev/null | jq"
 alias jwtp="tr '.' '\t' | awk '{print \$2}' | base64 -d 2>/dev/null | jq"
-
-# Serve swagger documentation locally
-swaggerserve() {
-	port=${2:-8080}
-	echo "Serving definition on port $port"
-	docker run -it --rm \
-		-v $(realpath $1):/usr/share/nginx/html/swagger.json:ro \
-		-e API_URL=./swagger.json \
-		-p $port:8080 \
-		swaggerapi/swagger-ui
-}

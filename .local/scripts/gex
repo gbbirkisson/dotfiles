@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Extract a file
+
+set -e
+
+if [ -f $1 ] ; then
+    currpath=$(pwd)
+    tmpfile="$(realpath  $1)"
+    tmpdir="$(realpath $1)-extracted"
+    rm -rf $tmpdir
+    mkdir -p $tmpdir
+    case $1 in
+        *.jar)   	 cd $tmpdir && jar xf $tmpfile    ;;
+        *.tar.bz2)   cd $tmpdir && tar xjf $tmpfile   ;;
+        *.tar.gz)    cd $tmpdir && tar xzf $tmpfile   ;;
+        *.bz2)       cd $tmpdir && bunzip2 $tmpfile   ;;
+        *.rar)       cd $tmpdir && unrar x $tmpfile   ;;
+        *.gz)        cd $tmpdir && gunzip $tmpfile    ;;
+        *.tar)       cd $tmpdir && tar xf $tmpfile    ;;
+        *.tbz2)      cd $tmpdir && tar xjf $tmpfile   ;;
+        *.tgz)       cd $tmpdir && tar xzf $tmpfile   ;;
+        *.zip)       cd $tmpdir && unzip $tmpfile     ;;
+        *.Z)         cd $tmpdir && uncompress $tmpfile;;
+        *.7z)        cd $tmpdir && 7z x $tmpfile      ;;
+        *)           echo "'$1' cannot be extracted via gex" ;;
+    esac
+    cd $currpath
+else
+    echo "'$1' is not a valid file"
+fi

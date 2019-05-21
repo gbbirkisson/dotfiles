@@ -1,3 +1,6 @@
 #!/bin/bash
 
+# Restore wallpaper
+
+set -e
 nitrogen --restore

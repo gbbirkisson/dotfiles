@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Manage displays with i3
+# Manage displays
+
+set -e
 
 # First argument: Primary monitor
 # Second argument: Secondary monitor

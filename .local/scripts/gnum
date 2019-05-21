@@ -2,4 +2,6 @@
 
 # Turn off numlock
 
+set -e
+
 numlockx off
