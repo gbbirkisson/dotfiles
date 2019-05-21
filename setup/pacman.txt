@@ -14,3 +14,4 @@ go
 go-tools
 firefox
 asciinema
+unclutter

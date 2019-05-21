@@ -7,8 +7,8 @@
 set $monitor1 VGA-1
 # external screen, they are set here to make it easier to move to new setups
 set $monitor2 VGA-2
-bindsym XF86Display exec --no-startup-id ~/.scripts/gscreen $monitor1 $monitor2
-bindsym $mod+p exec --no-startup-id ~/.scripts/gscreen $monitor1 $monitor2
+bindsym XF86Display exec --no-startup-id gscreen $monitor1 $monitor2
+bindsym $mod+p exec --no-startup-id gscreen $monitor1 $monitor2
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
@@ -37,7 +37,7 @@ font xft:URWGothic-Book 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec ~/.scripts/gterm
+bindsym $mod+Return exec gterm
 
 # kill focused window
 bindsym $mod+Shift+q kill

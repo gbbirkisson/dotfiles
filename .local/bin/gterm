@@ -1,10 +1,6 @@
 #!/bin/bash
 
 # A script to open up the terminal in the same directory as the previous terminal
-
-# From https://gist.github.com/projectgus/b93d16870ea167845831
-
-CMD="urxvt"
 CWD=''
 
 # Get window ID
@@ -24,7 +20,7 @@ if [ -n "$PID" ]; then
   fi
 fi
 if [ -n "$CWD" ]; then
-  cd $CWD && $CMD
+  cd $CWD && $TERMINAL
 else
-  $CMD
+  $TERMINAL
 fi
