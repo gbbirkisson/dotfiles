@@ -73,6 +73,6 @@ PS1="\[${bold}\]\[${red}\][";
 PS1+="\[${yellow}\]\u";
 PS1+="\[${green}\]@";
 PS1+="\[${blue}\]\h ";
-PS1+="\[${green}\]\w";
+PS1+="\[${green}\]\W";
 PS1+="\$(prompt_git)";
 PS1+="\[${red}\]]\[${white}\]\\$ \[$(tput sgr0)\]";
