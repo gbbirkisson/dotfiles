@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Set wallpaper and save change
+
+set -e
+nitrogen --save
