@@ -45,4 +45,5 @@ source <(kubectl completion bash)
 
 # Fzf key bindings and completion
 source /usr/share/fzf/key-bindings.bash
+bind "$(bind -s | grep '^"\\ec"' | sed 's/\\ec/\\C-f/')" # Rebind ATL-C to CTRL-F
 source /usr/share/fzf/completion.bash

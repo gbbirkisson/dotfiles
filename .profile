@@ -30,3 +30,4 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 export FZF_DEFAULT_OPTS="--height 100% --layout=reverse"
 export FZF_CTRL_T_OPTS="--preview 'gfzf-preview {}'"
 export FZF_ALT_C_OPTS="--preview 'gfzf-preview {}'"
+export FZF_COMPLETION_OPTS="--preview 'gfzf-preview {}'"
