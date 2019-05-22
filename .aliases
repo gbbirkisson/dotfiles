@@ -38,7 +38,7 @@ alias grep='grep --color=auto '
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 
-alias sudo='sudo '# Enable aliases to be sudo’ed
+alias sudo='sudo ' # Enable aliases to be sudo’ed
 alias df='df -h' # human-readable sizes
 alias free='free -m' # show sizes in MB
 alias diff='colordiff -u' # Nicer diff
