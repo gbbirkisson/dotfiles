@@ -28,6 +28,17 @@
 *color7  			: #EBEBEB
 *color15 			: #F8F8F8
 
-*alpha: 0.98
+*alpha: 0.95
 
-*font:	mono:pixelsize=13:antialias=true:autohint=true;
+*font:	monospace:pixelsize=13:antialias=true:autohint=true;
+URxvt*font: xft:monospace:size=9
+URxvt*scrollBar: false
+URxvt*url-launcher: /usr/bin/xdg-open
+
+Xft.dpi: 100
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
