@@ -16,6 +16,8 @@ complete -cf sudo
 # http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
 shopt -s checkwinsize
 
+# Enable history appending instead of overwriting.  #139609
+shopt -s histappend
 HISTSIZE= HISTFILESIZE= # Infinite history.
 
 # Case-insensitive globbing (used in pathname expansion)
