@@ -17,5 +17,6 @@
     "window.menuBarVisibility": "toggle",
     "editor.minimap.enabled": false,
     "editor.disableTranslate3d": true,
-    "editor.parameterHints.cycle": true
+    "editor.parameterHints.cycle": true,
+    "editor.fontSize": 13
 }

@@ -1,7 +1,5 @@
 [user]
 	name = Guðmundur Björn Birkisson
 	email = gbbirkisson@gmail.com
-[includeIf "gitdir:~/repos/bankbridge/"]
-	path = ~/.gitconfig-work
-[includeIf "gitdir:~/repos/monifair/"]
+[includeIf "gitdir:~/repos/enonic/"]
 	path = ~/.gitconfig-work

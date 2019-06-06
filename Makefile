@@ -2,6 +2,9 @@
 
 all: pacman yay dotfiles vim docker remove_cheat_sheet
 
+i3:
+	@sudo pacman -S --needed - < setup/i3.txt
+
 pacman:
 	@sudo pacman -S --needed - < setup/pacman.txt
 
@@ -10,6 +13,7 @@ yay:
 	@yay -S --needed - < setup/yay.txt
 
 dotfiles:
+	#rm ${HOME}/.bash_profile
 	./setup/link.sh
 
 vim:
@@ -24,6 +28,3 @@ docker:
 	sudo systemctl enable docker
 	sudo systemctl start docker
 	sudo usermod -aG docker ${USER}
-
-remove_cheat_sheet:
-	mv -f /usr/share/conky/conky1.10_shortcuts_maia /usr/share/conky/conky1.10_shortcuts_maia.old

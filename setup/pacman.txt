@@ -1,5 +1,4 @@
 sysstat
-i3blocks
 numlockx
 docker
 bash-completion
@@ -15,3 +14,4 @@ go-tools
 firefox
 asciinema
 unclutter
+kubectl
