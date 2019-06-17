@@ -1,8 +1,9 @@
 #!/bin/bash
 
 alias xphome="export XP_HOME=\$(find ~/.enonic/sandboxes -maxdepth 2 -name "home" -type d | fzf); echo Set XP_HOME to \'\$XP_HOME\'"
-alias xpdeploy="./gradlew -t deploy"
+alias xpdevelop="./gradlew -t deploy"
 alias xpsandbox="enonic sandbox ls 2>&1 >/dev/null | sed -e 's*^\W\W**g' | awk '{print \$1}' | fzf | xargs enonic sandbox start"
+alias xpruntime="./modules/runtime/build/install/bin/server.sh"
 
 # Easy column extraction
 alias c1="awk '{print \$1}'"
@@ -84,10 +85,20 @@ alias githookreset='rm -r ./.git/hooks && git init'
 alias cat='bat'
 
 # Compress alias
-comp () {
-	tar -zcvf $(realpath $1).tar.gz $1
+# comp () {
+# 	tar -zcvf $(realpath $1).tar.gz $1
+# }
+# alias zip="comp"
+
+zip_dir () {
+	DIR_2_ZIP=$1
+	DIR_2_ZIP_NAME=$(basename $DIR_2_ZIP)
+	CURR=$PWD
+	cd $DIR_2_ZIP
+	zip -r ../$DIR_2_ZIP_NAME-zipped.zip *
+	cd $CURR
 }
-alias zip="comp"
+alias zipdir='zip_dir'
 
 # Extract jwt header/payload
 alias jwth="tr '.' '\t' | awk '{print \$1}' | base64 -d 2>/dev/null | jq"
