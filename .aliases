@@ -1,5 +1,7 @@
 #!/bin/bash
 
+alias gmount="sudo fdisk -l | grep ^/dev/ | fzf | awk '{print $1}' | xargs -I {} echo mount {} FOLDER"
+
 alias xphome="export XP_HOME=\$(find ~/.enonic/sandboxes -maxdepth 2 -name "home" -type d | fzf); echo Set XP_HOME to \'\$XP_HOME\'"
 alias xpdevelop="./gradlew -t deploy"
 alias xpsandbox="enonic sandbox ls 2>&1 >/dev/null | sed -e 's*^\W\W**g' | awk '{print \$1}' | fzf | xargs enonic sandbox start"
