@@ -18,7 +18,10 @@ shopt -s checkwinsize
 
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
-HISTSIZE= HISTFILESIZE= # Infinite history.
+# Infinite history.
+HISTSIZE=
+HISTFILESIZE=
+HISTCONTROL=ignoreboth:erasedups
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
