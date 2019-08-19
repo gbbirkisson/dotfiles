@@ -1,4 +1,3 @@
 docker-login    'personal\devtools/docker.com'
-docker-login    'work\fi/docker.com'
 ssh-key         'personal\devtools/github.com-ssh'
-ssh-key         'work\fi/github.com-ssh'
+ssh-key         'work\enonic/vault.enonic.io-ssh'
