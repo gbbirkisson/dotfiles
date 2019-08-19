@@ -2,10 +2,37 @@
 
 alias gmount="sudo fdisk -l | grep ^/dev/ | fzf | awk '{print $1}' | xargs -I {} echo mount {} FOLDER"
 
-alias xphome="export XP_HOME=\$(find ~/.enonic/sandboxes -maxdepth 2 -name "home" -type d | fzf); echo Set XP_HOME to \'\$XP_HOME\'"
+# XP
+alias xphome='
+read -p "Select XP sandbox to set as XP_HOME ..."
+export XP_HOME=$(find ~/.enonic/sandboxes -maxdepth 2 -name "home" -type d | fzf)
+echo "XP_HOME=$XP_HOME"
+'
+
+alias xpclean='
+xphome
+rm -r $XP_HOME/repo
+echo "Removed $XP_HOME/repo"
+'
+
+# Build runtime
+alias xpbuild='./gradlew clean build -x test'
+alias xpsetup='
+read -p "Select XP distribution to copy runtime dependencies from ..."
+TMP=$(find ~/.enonic/distributions/ -maxdepth 1 | tail -n 1 | fzf) && cp -rf $TMP/system/40 ./modules/runtime/build/install/system/40
+'
+alias xpstart='
+[ -z "$XP_HOME" ] && echo "XP_HOME not set" && test -n $XP_HOME || ./modules/runtime/build/install/bin/server.sh
+'
+alias xpruntime='
+xpbuild
+xpsetup
+xphome
+xpstart
+'
+
 alias xpdevelop="./gradlew -t deploy"
-alias xpsandbox="enonic sandbox ls 2>&1 >/dev/null | sed -e 's*^\W\W**g' | awk '{print \$1}' | fzf | xargs enonic sandbox start"
-alias xpruntime="./modules/runtime/build/install/bin/server.sh"
+alias xpsandbox="enonic sandbox ls | sed -e 's*^\W\W**g' | awk '{print \$1}' | fzf | xargs enonic sandbox start"
 
 # Easy column extraction
 alias c1="awk '{print \$1}'"
