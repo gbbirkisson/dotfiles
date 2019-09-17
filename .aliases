@@ -56,9 +56,11 @@ alias guser='LID=$(lpassfzf) && lpash --user $LID'
 alias gpass='LID=$(lpassfzf) && lpash --password $LID'
 alias glogin="cat ~/.local/scripts/glogin-params | fzf | xargs glogin"
 
+alias kindcfg="export KUBECONFIG=$(kind get kubeconfig-path)"
+
 # Deploy guards
-alias helm='gdeploy helm'
-alias kubectl='gdeploy kubectl'
+#alias helm='gdeploy helm'
+#alias kubectl='gdeploy kubectl'
 
 # Set ls aliases
 colorflag="--color"

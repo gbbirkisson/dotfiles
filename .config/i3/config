@@ -31,7 +31,7 @@ bindsym $mod+d exec --no-startup-id gdmenu
 bindsym $mod2+d exec --no-startup-id gdmenu
 
 # Program hotkeys
-bindsym $mod+F2 exec firefox
+bindsym $mod+F2 exec gbrowser
 bindsym $mod+F3 exec thunar
 
 # focus_follows_mouse no

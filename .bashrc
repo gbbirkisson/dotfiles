@@ -37,7 +37,7 @@ for option in autocd globstar; do
 done
 
 # Source bash_prompt and aliases
-for file in ~/.{bash_prompt,aliases}; do
+for file in ~/.{bash_prompt,aliases,aliases_kubectl}; do
 	[[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
 unset file
