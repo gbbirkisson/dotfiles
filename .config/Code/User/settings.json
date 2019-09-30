@@ -10,13 +10,17 @@
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "workbench.iconTheme": "material-icon-theme",
-    "terminal.integrated.fontSize": 13,
-    "window.zoomLevel": 0,
+    "terminal.integrated.fontSize": 12,
     "files.autoSave": "onFocusChange",
     "editor.renderWhitespace": "boundary",
     "window.menuBarVisibility": "toggle",
     "editor.minimap.enabled": false,
     "editor.disableTranslate3d": true,
     "editor.parameterHints.cycle": true,
-    "editor.fontSize": 13
+    "editor.fontSize": 12,
+    "[go]": {
+        "editor.formatOnSave": false
+    },
+    "debug.console.fontSize": 12,
+    "markdown.preview.fontSize": 12
 }

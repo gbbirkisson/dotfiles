@@ -8,6 +8,9 @@ i3:
 pacman:
 	@sudo pacman -S --needed - < setup/pacman.txt
 
+vscode:
+	cat setup/vscode.txt | xargs -L 1 code --install-extension
+
 yay:
 	@yaourt -S yay
 	@yay -S --needed - < setup/yay.txt
