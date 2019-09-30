@@ -15,3 +15,8 @@ firefox
 asciinema
 unclutter
 kubectl
+pulseaudio
+pulseaudio-jack
+pulseaudio-bluetooth
+xfce4-power-manager
+xfce4-clipman-plugin
