@@ -1,5 +1,4 @@
 sysstat
-i3blocks
 numlockx
 docker
 bash-completion
@@ -15,3 +14,9 @@ go-tools
 firefox
 asciinema
 unclutter
+kubectl
+pulseaudio
+pulseaudio-jack
+pulseaudio-bluetooth
+xfce4-power-manager
+xfce4-clipman-plugin

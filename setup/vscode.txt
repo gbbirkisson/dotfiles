@@ -1,0 +1,13 @@
+ms-vscode.Go
+PKief.material-icon-theme
+CoenraadS.bracket-pair-colorizer
+esbenp.prettier-vscode
+redhat.vscode-yaml
+ms-vscode-remote.vscode-remote-extensionpack
+ms-azuretools.vscode-docker
+formulahendry.auto-close-tag
+yzhang.markdown-all-in-one
+oderwat.indent-rainbow
+ms-kubernetes-tools.vscode-kubernetes-tools
+IBM.output-colorizer
+donjayamanne.git-extension-pack

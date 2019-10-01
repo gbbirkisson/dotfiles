@@ -33,4 +33,6 @@ link $(find $PWD -maxdepth 1 -name ".*"	\
 
 rm -rf ${HOME}/.i3
 rm -rf "${HOME}/.config/Code - OSS"
+rm -rf "${HOME}/.config/Code - Insiders"
 ln -sf ${HOME}/.config/Code "${HOME}/.config/Code - OSS"
+ln -sf ${HOME}/.config/Code "${HOME}/.config/Code - Insiders"

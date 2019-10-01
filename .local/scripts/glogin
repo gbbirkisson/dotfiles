@@ -11,7 +11,7 @@ docker-login() {
 }
 
 ## SSH keys
-CURRENT_KEY=~/.ssh/currkey
+CURRENT_KEY=~/.ssh/id_rsa
 ssh-key() {
     ssh-add -D
     echo "Using key $1"
