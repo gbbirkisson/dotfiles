@@ -3,7 +3,7 @@
 # Profile file. Runs on login.
 
 # Set path
-export PATH=$PATH:$HOME/.local/scripts:$HOME/go/bin
+export PATH=$PATH:$HOME/.local/scripts:$HOME/go/bin:$HOME/.linkerd2/bin
 
 # Qt and Gtk2 themes
 export QT_QPA_PLATFORMTHEME="qt5ct"
