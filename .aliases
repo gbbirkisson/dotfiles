@@ -90,9 +90,6 @@ for method in get post put delete; do
 	alias "$method"="http '$method'"
 done
 
-# vscode
-alias code="code-insiders"
-
 # copy file interactive
 alias cp='cp -i'
 
