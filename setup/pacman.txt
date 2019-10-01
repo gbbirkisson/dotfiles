@@ -19,3 +19,6 @@ pulseaudio
 pulseaudio-bluetooth
 xfce4-power-manager
 xfce4-clipman-plugin
+papirus-icon-theme
+adapta-gtk-theme
+xcursor-breeze
