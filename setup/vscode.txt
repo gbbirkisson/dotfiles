@@ -11,3 +11,4 @@ oderwat.indent-rainbow
 ms-kubernetes-tools.vscode-kubernetes-tools
 IBM.output-colorizer
 donjayamanne.git-extension-pack
+quicktype.quicktype
