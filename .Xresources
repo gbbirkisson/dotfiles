@@ -35,10 +35,14 @@ URxvt*font: xft:monospace:size=8
 URxvt*scrollBar: false
 URxvt*url-launcher: /usr/bin/xdg-open
 
-Xft.dpi: 120
+Xft.dpi: 164
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
 Xft.autohint: false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
+
+urxvt.perl-ext-common:  resize-font
+URxvt.keysym.C-Down:    resize-font:smaller
+URxvt.keysym.C-Up:      resize-font:bigger

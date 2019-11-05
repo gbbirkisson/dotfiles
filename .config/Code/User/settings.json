@@ -22,5 +22,6 @@
         "editor.formatOnSave": false
     },
     "debug.console.fontSize": 12,
-    "markdown.preview.fontSize": 12
+    "markdown.preview.fontSize": 12,
+    "go.formatTool": "goimports"
 }

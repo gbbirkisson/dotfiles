@@ -3,7 +3,7 @@
 # Profile file. Runs on login.
 
 # Set path
-export PATH=$PATH:$HOME/.local/scripts:$HOME/go/bin:$HOME/.linkerd2/bin
+export PATH=$PATH:$HOME/.local/scripts:$HOME/.local/kubectl-plugins:$HOME/go/bin:$HOME/.linkerd2/bin:${KREW_ROOT:-$HOME/.krew}/bin
 export JAVA_HOME=/usr/lib/jvm/default
 
 # Qt and Gtk2 themes

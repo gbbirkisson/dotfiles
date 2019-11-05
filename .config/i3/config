@@ -216,8 +216,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+9 exec --no-startup-id glock
 
 # Reset display settings
-bindsym XF86Display exec --no-startup-id gscr
-bindsym $mod+p exec --no-startup-id gscr
+bindsym XF86Display exec --no-startup-id gscreen
+bindsym $mod+p exec --no-startup-id gscreen
 
 # Set shut down, restart and locking features
 bindsym $mod+0 mode "$mode_system"

@@ -4,7 +4,7 @@
 import -window root /tmp/screenshot.png
 
 # blur it
-convert /tmp/screenshot.png -scale 10% -blur 0x3 -resize 1000% /tmp/screenshotblur.png
+convert /tmp/screenshot.png -scale 10% -blur 0x10 -resize 1000% /tmp/screenshotblur.png
 rm /tmp/screenshot.png
 
 # lock the screen

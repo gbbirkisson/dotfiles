@@ -1,0 +1,11 @@
+#!/bin/sh
+
+ctx() {
+    kubectl config view -o=jsonpath="{.current-context} | {.contexts[?(@.name==\"$(kubectl config view -o=jsonpath='{.current-context}')\")].context.namespace}" | sed 's/^\s|\s$//g' | sed 's/\s|\s$/ | default/g'
+}
+
+if timeout -k 5 5 kubectl cluster-info ; then
+    echo `ctx`
+else
+    echo "<none>"
+fi

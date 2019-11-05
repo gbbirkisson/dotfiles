@@ -4,13 +4,15 @@
 
 set -e
 
-# First argument: Primary monitor
-# Second argument: Secondary monitor
-if  xrandr | grep -q "$2 d"; then
-    xrandr --output "$2" --off
+INT=`xrandr --current | sed 's/^\(.*\) connected.*$/\1/p;d' | grep -v ^DP | head -n 1`
+EXT=`xrandr --current | sed 's/^\(.*\) connected.*$/\1/p;d' | grep -v ^eDP | head -n 1`
+
+if [[ -z "$EXT" ]]; then
+    # No secondary screen
+    xrandr --output "${INT}" --auto
 else
-    xrandr --output "$2" --auto
-    xrandr --output "$2" --right-of "$1"
+    xrandr --output "${INT}" --auto --scale 1x1 --output "${EXT}" --auto --scale 1.4x1.4 --pos 0x0 --right-of "${INT}"
 fi
 
-gbg # wallpaper can look weird if not refreshed
+sleep 2
+nitrogen --restore
