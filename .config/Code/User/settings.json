@@ -15,7 +15,6 @@
     "editor.renderWhitespace": "boundary",
     "window.menuBarVisibility": "toggle",
     "editor.minimap.enabled": false,
-    "editor.disableTranslate3d": true,
     "editor.parameterHints.cycle": true,
     "editor.fontSize": 12,
     "[go]": {
@@ -23,5 +22,6 @@
     },
     "debug.console.fontSize": 12,
     "markdown.preview.fontSize": 12,
-    "go.formatTool": "goimports"
+    "go.formatTool": "goimports",
+    "workbench.colorTheme": "Material Theme Darker"
 }

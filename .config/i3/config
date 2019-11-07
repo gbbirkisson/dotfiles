@@ -317,7 +317,7 @@ exec --no-startup-id system-config-printer-applet 	# Print queue applet
 exec --no-startup-id xfce4-power-manager 		# Power Manager
 exec --no-startup-id nm-applet 				# Network Manager
 exec --no-startup-id msm_notifier 			# MSM Notifier
-exec --no-startup-id xfce4-clipman 			# Clipboard Manager
+#exec --no-startup-id xfce4-clipman 			# Clipboard Manager
 exec --no-startup-id blueman-applet 			# Blueman Applet
 exec --no-startup-id pasystray --notify=sink 		# Audio Control
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b --config ~/.config/i3/compton.conf # Background and Transpenecy
