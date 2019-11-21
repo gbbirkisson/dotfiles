@@ -6,7 +6,6 @@
     "breadcrumbs.enabled": true,
     "editor.formatOnSave": true,
     "workbench.startupEditor": "none",
-    "editor.wordWrap": "on",
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "workbench.iconTheme": "material-icon-theme",
@@ -23,5 +22,6 @@
     "debug.console.fontSize": 12,
     "markdown.preview.fontSize": 12,
     "go.formatTool": "goimports",
-    "workbench.colorTheme": "Material Theme Darker"
+    "workbench.colorTheme": "Material Theme Darker",
+    "editor.wrappingIndent": "none"
 }
