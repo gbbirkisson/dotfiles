@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Restore wallpaper
+
+set -e
+
+LIGHT=""
+ACTION=1
+
+if [ "$1" == "green" ]; then
+    LIGHT="0"
+fi
+
+if [ "$1" == "yellow" ]; then
+    LIGHT="1"
+fi
+
+if [ "$1" == "red" ]; then
+    LIGHT="2"
+fi
+
+if [ "$2" == "on" ]; then
+    ACTION="0"
+fi
+
+http http://10.0.6.244/ctrl.cgi?F$LIGHT=$ACTION > /dev/null

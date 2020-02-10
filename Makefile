@@ -19,6 +19,9 @@ dotfiles:
 	#rm ${HOME}/.bash_profile
 	./setup/link.sh
 
+fonts:
+	sudo fc-cache -f -v
+
 vim:
 	git clone --recursive https://github.com/jessfraz/.vim.git vim
 	cd vim && git submodule update --init

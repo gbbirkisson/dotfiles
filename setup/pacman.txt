@@ -22,3 +22,6 @@ xfce4-clipman-plugin
 papirus-icon-theme
 adapta-gtk-theme
 xcursor-breeze
+noto-fonts-emoji
+termite
+termite-terminfo

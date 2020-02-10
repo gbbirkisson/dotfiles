@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# # Fetch config for kubectl from Enonic cloud
+# kubectl enonic cluster config ls
+# kubectl enonic cluster config fetch <ID|ALL>
+# kubectl enonic cluster config rm <ID|ALL>
+
+# # Management of Enonic XP
+# kubectl enonic xp get
+# kubectl enonic xp exec <ID>
+# kubectl enonic xp logs <ID>
+# kubectl enonic xp dump [-c/--copy, --targetDir] <ID>
+# kubectl enonic xp dump copy <ID> --targetDir
+# kubectl enonic xp config view [id]
+# kubectl enonic xp config edit <ID>
+# kubectl enonic xp port-forward <ID>
+# kubectl enonic xp backup run ??
+# kubectl enonic xp backup restore ??
+
+echoerr () {
+    echo "$@" 1>&2;
+}
+
+# usage: create_credentials <name> <host> <cluster-ca-file> <client-certificate-file> <client-key-file>
+function create_credentials () {
+    kubectl config set-cluster $1 --embed-certs=true --server=$2 --certificate-authority=$3
+    kubectl config set-credentials $1 --embed-certs=true --client-certificate=$4 --client-key=$5
+    kubectl config set-context $1 --cluster=$1 --namespace=default --user=$1
+    kubectl config use-context $1
+}
+
+create_credentials test https://192.168.99.153:8443 /home/gummi/.minikube/ca.crt /home/gummi/.minikube/client.crt /home/gummi/.minikube/client.key

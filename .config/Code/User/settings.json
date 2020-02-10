@@ -15,7 +15,6 @@
     "window.menuBarVisibility": "toggle",
     "editor.minimap.enabled": false,
     "editor.parameterHints.cycle": true,
-    "editor.fontSize": 12,
     "[go]": {
         "editor.formatOnSave": false
     },
@@ -23,5 +22,7 @@
     "markdown.preview.fontSize": 12,
     "go.formatTool": "goimports",
     "workbench.colorTheme": "Material Theme Darker",
-    "editor.wrappingIndent": "none"
+    "editor.wrappingIndent": "none",
+    "editor.fontSize": 12,
+    "latex-workshop.view.pdf.viewer": "tab"
 }
