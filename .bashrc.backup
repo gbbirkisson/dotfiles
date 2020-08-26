@@ -37,7 +37,7 @@ for option in autocd globstar; do
 done
 
 # Source bash_prompt and aliases
-for file in ~/.{aliases,aliases_kubectl}; do
+for file in ~/.{bash_prompt,aliases,aliases_kubectl}; do
 	[[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
 unset file
@@ -55,7 +55,3 @@ source /usr/share/fzf/completion.bash
 
 # For ssh connections
 export TERM=xterm-88color
-export PATH=$PATH:$HOME/.azure/bin:$HOME/.krew/bin
-
-source '/home/gummi/.azure/lib/az.completion'
-eval "$(starship init bash)"

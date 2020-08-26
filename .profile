@@ -14,7 +14,7 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 # Set default editor for git and other programs
 export VISUAL="vim"
 export EDITOR="$VISUAL"
-export BROWSER="chromium"
+export BROWSER="firefox-developer-edition"
 export TERMINAL="termite"
 #export TERMINAL="urxvt"
 
