@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+set -e
+
+ensure_backup() {
+    local bak="$1.bak"
+
+    # If no previous file exists, exit ...
+    [ ! -f "$1" ] && [ ! -d "$1" ] && return
+
+    # If previous backup file exits, exit ...
+    [ -f "$bak" ] || [ -d "$bak" ] && return
+
+    cp -rf "$1" "$bak"
+}
+
+ensure_parent() {
+    local parent="$(dirname "$1")"
+    [ -d "$parent" ] || mkdir -p "$parent"
+}
+
+link() {
+    [ ! -f "$1" ] && [ ! -d "$1" ] && echo "Not found $1" && return
+
+    local src=$(realpath "$1")
+    local dst=${HOME}/$(realpath --relative-to=$PWD "$1")
+    
+    echo "Link $src -> $dst"
+    ensure_backup "$dst"
+    ensure_parent "$dst"
+    
+    rm -rf "$dst"
+    ln -sf "$src" "$dst"
+}
+
+
+#link '.config/Code - OSS/User/settings.json'
+#link .config/systemd/user/ssh-agent.service
+#link .config/termite/config
+#link .config/starship.toml
+
+#link .fonts
+
+# link .local/scripts
+
+# link .bash_logout
+# link .bash_profile
+# link .bashrc
+link .gitconfig
+# link .profile

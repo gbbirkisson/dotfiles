@@ -1,0 +1,31 @@
+# Common
+firefox
+file-roller     # Gnome Archive Manager
+
+# Terminal tools
+termite
+noto-fonts-emoji  # Emoji support
+lastpass-cli
+bash-completion
+jq
+fzf
+bat
+colordiff       # Better diff
+unclutter       # Hide mouse
+neofetch        # Termial info
+asciinema       # Record terminal
+diff-so-fancy   # Fancy diff
+
+# Development
+code    # VS Code
+gcc     # Needed by rust
+go
+go-tools
+rustup
+jdk11-openjdk
+
+# Deployment tools
+#docker
+#ansible
+kubectl
+helm

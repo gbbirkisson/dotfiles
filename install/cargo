@@ -1,0 +1,4 @@
+starship        # Fancy prompt
+drill           # HTTP stress testing
+ht              # HTTPie clone
+cargo-script    # Run rust as scripts
