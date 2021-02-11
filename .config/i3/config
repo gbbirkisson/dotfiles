@@ -1,6 +1,6 @@
 # Set Monitors
 set $monitor1 eDP1
-set $monitor2 DP1-1
+set $monitor2 HDMI1
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
@@ -307,6 +307,8 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000
 client.background #2B2C2B
 
 # Pulse Audio controls
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%- unmute
 bindsym XF86AudioMute exec --no-startup-id amixer -q sset Master toggle

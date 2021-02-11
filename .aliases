@@ -64,22 +64,22 @@ alias kindcfg="export KUBECONFIG=$(kind get kubeconfig-path)"
 
 # Set ls aliases
 colorflag="--color"
-alias l="exa -lF -s type" # List all files colorized in long format
+alias l="exa -lF -s type"   # List all files colorized in long format
 alias la="exa -alF -s type" # List all files colorized in long format, including dot files
 alias ll="exa -alF -s type"
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'" # List only directories
-alias ls="command ls ${colorflag}" # Always use color output for `ls`
+alias ls="command ls ${colorflag}"                        # Always use color output for `ls`
 
 # Always enable colored `grep` output
 alias grep='grep --color=auto '
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 
-alias sudo='sudo ' # Enable aliases to be sudo’ed
-alias df='df -h' # human-readable sizes
-alias free='free -m' # show sizes in MB
+alias sudo='sudo '        # Enable aliases to be sudo’ed
+alias df='df -h'          # human-readable sizes
+alias free='free -m'      # show sizes in MB
 alias diff='colordiff -u' # Nicer diff
-alias cd..="cd .." # My usual cd mistake
+alias cd..="cd .."        # My usual cd mistake
 
 # IP addresses
 alias pubip="wget http://ipinfo.io/ip -qO -"
@@ -99,10 +99,10 @@ alias mv='mv -i'
 
 # docker aliases
 alias drma='docker rm `docker ps -aq --filter status=exited --filter status=created`' # remove all docker containers
-alias drmi='docker rmi -f $(docker images -f "dangling=true" -q)' # remove all untagged images
-alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)' # remove dangling volumes
-alias dstp='docker stop `docker ps -q`' # stop all containers
-alias dcln='dstp; drma; drmi; drmv' # do all of the above
+alias drmi='docker rmi -f $(docker images -f "dangling=true" -q)'                     # remove all untagged images
+alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)'                 # remove dangling volumes
+alias dstp='docker stop `docker ps -q`'                                               # stop all containers
+alias dcln='dstp; drma; drmi; drmv'                                                   # do all of the above
 
 # kubectl aliases
 alias kubeproxy='kubectl proxy --port=9999'
@@ -116,13 +116,16 @@ alias githookreset='rm -r ./.git/hooks && git init'
 # use bat not cat
 alias cat='bat'
 
+# python http server
+alias pyserv='python3 -m http.server'
+
 # Compress alias
 # comp () {
 # 	tar -zcvf $(realpath $1).tar.gz $1
 # }
 # alias zip="comp"
 
-zip_dir () {
+zip_dir() {
 	DIR_2_ZIP=$1
 	DIR_2_ZIP_NAME=$(basename $DIR_2_ZIP)
 	CURR=$PWD
@@ -139,3 +142,4 @@ alias jwtp="tr '.' '\t' | awk '{print \$2}' | base64 -d 2>/dev/null | jq"
 alias ec="cd /home/gummi/repos/enonic/ec/env-ec-prod && ./ec"
 
 alias ts="/home/gummi/repos/enonic/ec-new/terraform-shell/terraform-shell"
+alias code="code --disable-gpu"

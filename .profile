@@ -3,7 +3,7 @@
 # Profile file. Runs on login.
 
 # Set path
-export PATH=$PATH:$HOME/.local/scripts:$HOME/.local/kubectl-plugins:$HOME/go/bin:$HOME/.linkerd2/bin:${KREW_ROOT:-$HOME/.krew}/bin
+export PATH=$HOME/.cargo/bin:$PATH:$HOME/.local/scripts:$HOME/.local/kubectl-plugins:$HOME/go/bin:$HOME/.linkerd2/bin:${KREW_ROOT:-$HOME/.krew}/bin
 export JAVA_HOME=/usr/lib/jvm/default
 
 # Qt and Gtk2 themes
@@ -38,3 +38,5 @@ export FZF_DEFAULT_OPTS="--height 100% --layout=reverse"
 export FZF_CTRL_T_OPTS="--preview 'gfzf-preview {}'"
 export FZF_ALT_C_OPTS="--preview 'gfzf-preview {}'"
 export FZF_COMPLETION_OPTS="--preview 'gfzf-preview {}'"
+
+export PATH="$HOME/.cargo/bin:$PATH"
