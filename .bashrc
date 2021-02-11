@@ -50,7 +50,8 @@ if ${use_color} ; then
 		fi
 	fi
 
-	alias ls='ls --color=auto'
+	alias ls='exa'
+	alias tree='tree -C'
 	alias grep='grep --colour=auto'
 	alias egrep='egrep --colour=auto'
 	alias fgrep='fgrep --colour=auto'
@@ -63,11 +64,6 @@ else
 	fi
 fi
 unset use_color safe_term match_lhs sh
-
-alias cp="cp -i"                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias more=less
 
 # Permits the root user on the local machine to connect to X windows display
 xhost +local:root > /dev/null 2>&1
@@ -99,3 +95,9 @@ source <(kubectl completion bash)
 source /usr/share/fzf/key-bindings.bash
 bind "$(bind -s | grep '^"\\ec"' | sed 's/\\ec/\\C-f/')" # Rebind ATL-C to CTRL-F
 source /usr/share/fzf/completion.bash
+
+# Source bash_prompt and aliases
+for file in ~/.{aliases_kubectl,aliases_personal}; do
+	[[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
+done
+unset file

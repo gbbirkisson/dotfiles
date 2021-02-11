@@ -1,0 +1,68 @@
+#!/bin/bash
+
+alias gmount="sudo fdisk -l | grep ^/dev/ | fzf | awk '{print $1}' | xargs -I {} echo mount {} FOLDER"
+
+# Easy column extraction
+alias c1="awk '{print \$1}'"
+alias c2="awk '{print \$2}'"
+alias c3="awk '{print \$3}'"
+alias c4="awk '{print \$4}'"
+alias c5="awk '{print \$5}'"
+alias c6="awk '{print \$6}'"
+
+# Delete entry from history
+alias historyrm='HID=$(history | fzf | c1) && history -d $HID'
+
+# Set ls aliases
+colorflag="--color"
+alias l="exa -lF -s type"   # List all files colorized in long format
+alias la="exa -alF -s type" # List all files colorized in long format, including dot files
+alias ll="exa -alF -s type"
+
+alias cp="cp -i"          # Confirm before overwriting something
+alias mv='mv -i'		  # Confirm before overwriting something
+alias sudo='sudo '        # Enable aliases to be sudo’ed
+alias df='df -h'          # human-readable sizes
+alias du='du -h'          # human-readable sizes
+alias free='free -m'      # show sizes in MB
+alias diff='colordiff -u' # Nicer diff
+alias cd..="cd .."        # My usual cd mistake
+alias more=less
+
+# IP addresses
+alias pubip="wget http://ipinfo.io/ip -qO -"
+alias localip="ip addr | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+alias ips="ip addr | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# httpie
+for method in get post put delete; do
+	alias "$method"="ht '$method'"
+done
+
+# docker aliases
+alias drma='docker rm `docker ps -aq --filter status=exited --filter status=created`' # remove all docker containers
+alias drmi='docker rmi -f $(docker images -f "dangling=true" -q)'                     # remove all untagged images
+alias drmv='docker volume rm $(docker volume ls -f dangling=true -q)'                 # remove dangling volumes
+alias dstp='docker stop `docker ps -q`'                                               # stop all containers
+alias dcln='dstp; drma; drmi; drmv'                                                   # do all of the above
+
+# kubectl aliases
+alias kubeproxy='kubectl proxy --port=9999'
+alias kubetoken='kubectl config view -o jsonpath="{.users[?(@.name == \"$(kubectl config current-context)\")].user.auth-provider.config.access-token}"'
+alias kubeexec='kubectl run tmp --rm --restart=Never -it --image=gbbirkisson/httpie --command /bin/ash --'
+
+# git aliases
+alias glog='git log --graph --pretty=oneline --abbrev-commit --all'
+alias githookreset='rm -r ./.git/hooks && git init'
+
+# use bat not cat
+alias cat='bat'
+
+# python http server
+alias serve='python3 -m http.server'
+
+# Extract jwt header/payload
+alias jwth="tr '.' '\t' | awk '{print \$1}' | base64 -d 2>/dev/null | jq"
+alias jwtp="tr '.' '\t' | awk '{print \$2}' | base64 -d 2>/dev/null | jq"
+
+alias ec="cd /home/gummi/repos/enonic/ec/env-ec-prod && ./ec"

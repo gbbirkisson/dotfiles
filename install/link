@@ -40,7 +40,10 @@ link .config/starship.toml
 link .fonts
 link .local/scripts
 link .ssh/config
-link .bash_logout
+
+link .aliases_kubectl
+link .aliases_personal
+link .bash_completion
 link .bash_profile
 link .bashrc
 link .gitconfig
