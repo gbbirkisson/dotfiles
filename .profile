@@ -11,9 +11,9 @@ export TERMINAL="termite"
 
 # FZF options
 export FZF_DEFAULT_OPTS="--height 100% --layout=reverse"
-export FZF_CTRL_T_OPTS="--preview 'gfzf-preview {}'"
-export FZF_ALT_C_OPTS="--preview 'gfzf-preview {}'"
-export FZF_COMPLETION_OPTS="--preview 'gfzf-preview {}'"
+export FZF_CTRL_T_OPTS="--preview 'gfzfpreview {}'"
+export FZF_ALT_C_OPTS="--preview 'gfzfpreview {}'"
+export FZF_COMPLETION_OPTS="--preview 'gfzfpreview {}'"
 
 # SSH agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"

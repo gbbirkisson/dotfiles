@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+size=1272
+while ping -s $size -M do -c1 $1 >/dev/null; do
+    ((size += 4))
+done
+
+echo "Max MTU size: $((size - 4 + 28))"

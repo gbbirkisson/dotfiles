@@ -33,18 +33,15 @@ link() {
     ln -sf "$src" "$dst"
 }
 
-
-#link '.config/Code - OSS/User/settings.json'
-#link .config/systemd/user/ssh-agent.service
-#link .config/termite/config
-#link .config/starship.toml
-
-#link .fonts
-
-# link .local/scripts
-
-# link .bash_logout
-# link .bash_profile
-# link .bashrc
+link '.config/Code - OSS/User/settings.json'
+link .config/systemd/user/ssh-agent.service
+link .config/termite/config
+link .config/starship.toml
+link .fonts
+link .local/scripts
+link .ssh/config
+link .bash_logout
+link .bash_profile
+link .bashrc
 link .gitconfig
-# link .profile
+link .profile

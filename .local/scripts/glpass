@@ -1,0 +1,158 @@
+#!/usr/bin/env run-cargo-script
+
+//! ```cargo
+//! [package]
+//! version = "0.1.0"
+//!
+//! [dependencies]
+//! structopt = "0.3"
+//! shellfn = "0.1"
+//! ```
+
+const NAME: &str = "glpass";
+const NONE: &str = "<NONE>";
+
+extern crate structopt;
+use structopt::StructOpt;
+
+extern crate shellfn;
+use shellfn::shell;
+use std::error::Error;
+
+/// Quick and easy integration with LastPass
+#[derive(StructOpt, Debug, PartialEq)]
+#[structopt(name = NAME)]
+struct Opts {
+    #[structopt(short, long, global = true, help = "Id of LastPass entry")]
+    id: Option<String>,
+
+    #[structopt(subcommand)]
+    cmd: Cmd,
+}
+
+#[derive(StructOpt, Debug, PartialEq)]
+enum Cmd {
+    field(FieldOpts),
+    login(LoginOpts),
+}
+
+/// Retrieve a field from LastPass entries
+#[derive(StructOpt, Debug, PartialEq)]
+struct FieldOpts {
+    #[structopt(short, long, help = "Search filter", default_value = ".")]
+    search: String,
+
+    #[structopt(name = "FIELDNAME")]
+    field_name: String,
+}
+
+/// Login to a service using LastPass
+#[derive(StructOpt, Debug, PartialEq)]
+struct LoginOpts {
+    #[structopt(short, long, help = "Search filter [defaults to the service name]")]
+    search: Option<String>,
+
+    #[structopt(name = "SERVICE_NAME", help = "Valid values are: ssh, docker")]
+    service_name: String,
+}
+
+fn main() {
+    // Parse opts
+    let opts = Opts::from_args();
+
+    // Setup search
+    let search = match &opts.cmd {
+        Cmd::field(c) => c.search.as_str(),
+        Cmd::login(c) => match &c.search {
+            Some(s) => s.as_str(),
+            None => c.service_name.as_str(),
+        },
+    };
+
+    // Setup ID
+    let id = match opts.id {
+        Some(id) => id,
+        None => find_id(search).expect("failed searching for id"),
+    };
+    let id = id.trim();
+
+    // Run command
+    let result = match &opts.cmd {
+        Cmd::field(ref c) => cmd_field(id, c.field_name.as_str()),
+        Cmd::login(ref c) => cmd_login(id, c.service_name.as_str()),
+    };
+
+    // Handle the result
+    match result {
+        Ok(s) => print!("{}", s),
+        Err(e) => eprintln!("{}", e),
+    }
+}
+
+fn cmd_field(id: &str, field_name: &str) -> Result<String, Box<Error>> {
+    let result = match field_name {
+        "id" => Ok(id.to_string()),
+        "name" | "password" | "username" | "notes" => get_field(id, field_name),
+        _ => get_custom_field(id, field_name),
+    };
+    Ok(result?)
+}
+
+fn cmd_login(id: &str, service_name: &str) -> Result<String, Box<Error>> {
+    let result = match service_name {
+        "docker" => login_docker(id),
+        "ssh" => login_ssh(id),
+        _ => err_msg(format!("{} is not a valid service name", service_name)),
+    };
+    Ok(result?)
+}
+
+#[shell]
+fn find_id(search: &str) -> Result<String, Box<Error>> {
+    r#"
+    lpass ls --sync=no | grep $SEARCH | fzf --header='Select item ...' | grep -o -e 'id: [0-9]*' | awk '{print $2}'
+    "#
+}
+
+#[shell]
+fn get_field(id: &str, field: &str) -> Result<String, Box<Error>> {
+    r#"
+    lpass show --sync=no $ID --$FIELD
+    "#
+}
+
+#[shell]
+fn get_custom_field(id: &str, field: &str) -> Result<String, Box<Error>> {
+    r#"
+    lpass show --sync=no $ID --field="$FIELD"
+    "#
+}
+
+#[shell]
+fn login_ssh(id: &str) -> Result<String, Box<Error>> {
+    r#"
+    TMP=$(mktemp)
+    cat << EOF > $TMP
+    #!/bin/sh    
+    set -e
+    glpass -i $ID field 'Passphrase'
+EOF
+    chmod +x $TMP
+    export SSH_ASKPASS=$TMP
+    glpass -i $ID field 'Private Key' | ssh-add - && rm $TMP
+    "#
+}
+
+#[shell]
+fn login_docker(id: &str) -> Result<String, Box<Error>> {
+    r#"
+    glpass -i $ID field password | docker login --username $(glpass -i $ID field username) --password-stdin 2> /dev/null
+    "#
+}
+
+fn err_msg(msg: String) -> Result<String, Box<Error>> {
+    return Err(Box::new(std::io::Error::new(
+        std::io::ErrorKind::Other,
+        msg,
+    )));
+}

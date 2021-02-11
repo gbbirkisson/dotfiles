@@ -4,7 +4,7 @@ all: install setup
 
 install: pacman rustup cargo vscode krew
 
-setup: link fonts
+setup: link fonts ssh-agent docker
 
 pacman:
 	@cat install/pacman | sed -e 's%\s*#.*$$%%g' | sudo pacman -S --needed -
@@ -31,3 +31,7 @@ fonts:
 
 ssh-agent:
 	@systemctl --user enable --now ssh-agent
+
+docker:
+	@sudo systemctl enable --now docker
+	@sudo usermod -aG docker ${USER}

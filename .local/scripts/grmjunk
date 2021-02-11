@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Delete junk folders from my home folder
+
+rm -rf ~/Desktop
+rm -rf ~/Documents
+rm -rf ~/Downloads
+rm -rf ~/Music
+rm -rf ~/Pictures
+rm -rf ~/Public
+rm -rf ~/Templates
+rm -rf ~/Videos

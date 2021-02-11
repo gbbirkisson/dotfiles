@@ -1,6 +1,8 @@
 # Common
 firefox
+wireguard-tools
 file-roller     # Gnome Archive Manager
+blueman         # Bluetooth applet
 
 # Terminal tools
 termite
@@ -15,6 +17,7 @@ unclutter       # Hide mouse
 neofetch        # Termial info
 asciinema       # Record terminal
 diff-so-fancy   # Fancy diff
+numlockx        # Turn off numlock
 
 # Development
 code    # VS Code

@@ -1,0 +1,67 @@
+#!/usr/bin/env run-cargo-script
+
+//! ```cargo
+//! [package]
+//! version = "0.1.0"
+//!
+//! [dependencies]
+//! structopt = "0.3"
+//! shellfn = "0.1"
+//! ```
+
+const NAME: &str = "g-cert";
+const NONE: &str = "<NONE>";
+
+extern crate structopt;
+use structopt::StructOpt;
+
+extern crate shellfn;
+use shellfn::shell;
+use std::error::Error;
+
+/// Create self signed certificate
+#[derive(StructOpt, Debug, PartialEq)]
+#[structopt(name = NAME)]
+struct Opts {
+    #[structopt(short, long, help = "Certificate expiry in days", default_value="3650")]
+    expiry: usize,
+
+    #[structopt(short, long, help = "Output files [default: <HOSTNAME>]")]
+    output: Option<String>,    
+
+    #[structopt(name = "HOSTNAME")]
+    hostname: String,
+}
+
+fn main() {
+    // Parse opts
+    let opts = Opts::from_args();
+
+    let output = match &opts.output {
+        Some(o) => o.as_str(),
+        None => opts.hostname.as_str(),
+    };
+    let hostname = opts.hostname.as_str();
+    let expiry = opts.expiry.to_string();
+
+    // Handle the result
+    match create_cert(hostname, output, expiry.as_str()) {
+        Ok(s) => print!("{}", s),
+        Err(e) => eprintln!("{}", e),
+    }
+}
+
+
+#[shell]
+fn create_cert(hostname: &str, output: &str, expiry: &str) -> Result<String, Box<Error>> {
+    r#"
+    openssl req -x509 -newkey rsa:4096 -keyout $OUTPUT.key -out $OUTPUT.crt -days $EXPIRY -nodes -subj '/CN=$HOSTNAME'
+    "#
+}
+
+fn err_msg(msg: String) -> Result<String, Box<Error>> {
+    return Err(Box::new(std::io::Error::new(
+        std::io::ErrorKind::Other,
+        msg,
+    )));
+}

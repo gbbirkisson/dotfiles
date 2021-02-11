@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Manage displays
+
+set -e
+
+SCREENS=(`xrandr --current | sed 's/^\(.*\) connected.*$/\1/p;d'`)
+
+INT="${SCREENS[0]}"
+EXT="${SCREENS[1]}"
+
+if [[ -z "$EXT" ]]; then
+    # No secondary screen
+    xrandr --output "${INT}" --auto
+else
+    xrandr --output "${INT}" --auto --scale 1x1 --output "${EXT}" --auto --scale 1.4x1.4 --pos 0x0 --right-of "${INT}"
+fi
+
+sleep 2
+nitrogen --restore
+killall -SIGUSR1 conky
