@@ -1,0 +1,234 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Set some variables
+OP=op
+OP_SESSION_file=$HOME/.ecopsess
+SCRIPT_NAME=$(basename $0)
+C_RED=$(tput setaf 1)
+C_GREEN=$(tput setaf 2)
+C_YELLOW=$(tput setaf 3)
+C_PINK=$(tput setaf 5)
+C_BOLD=$(tput bold)
+C_RESET=$(tput sgr0)
+
+usage() {
+    cat <<EOF
+Usage: $SCRIPT_NAME COMMAND [OPTIONS]
+Fetch 1password secrets.
+
+Supported commands are:
+  login
+  logout
+  ssh
+  token
+  credentials
+
+Examples:
+
+  Login to 1password:
+    $ $SCRIPT_NAME login -le <EMAIL> -lk <KEY>
+
+  Add ssh key to ssh-agent:
+    $ $SCRIPT_NAME ssh -s
+
+  Fetch token:
+    $ $SCRIPT_NAME token
+
+  Fetch token with id:
+    $ $SCRIPT_NAME token -i xaori6o43fhmyh4zzc34nkayee
+
+  Fetch a website login:
+    $ $SCRIPT_NAME credentials
+
+  Logout from 1password:
+    $ $SCRIPT_NAME logout
+
+Options:
+  -i,  --id=          Skip searching and provide ID of item
+  -s,  --ssh-add      Add to ssh agent (only works with ssh-key)
+  -le, --login-email  Email to login with
+  -lk, --login-key    Secret key (not your master password)
+  -h,  --help         Print usage
+EOF
+    exit 1
+}
+
+ecf-log-lines() {
+    for a in "$@"; do
+        printf "\n  $a" 1>&2
+    done
+    printf "\n" 1>&2
+}
+
+ecf-log-info() {
+    printf "${C_GREEN}INFO${C_RESET}: $1" 1>&2
+    ecf-log-lines "${@:2}"
+}
+
+ecf-log-warn() {
+    printf "${C_YELLOW}WARN${C_RESET}: $1" 1>&2
+    ecf-log-lines "${@:2}"
+}
+
+ecf-log-error() {
+    printf "${C_RED}ERROR${C_RESET}: $1" 1>&2
+    ecf-log-lines "${@:2}"
+    exit 1
+}
+
+ecf-string-highlight() {
+    d=""
+    for a in "$@"; do
+        printf "${C_BOLD}${C_PINK}$d$a${C_RESET}"
+        d=" "
+    done
+}
+
+op-select-generic() {
+    $OP list items "$@" | jq -r '.[] | "\(.uuid) | \(.overview.title)"' | sort | fzf --header 'Select item!' | awk '{print $1}'
+}
+
+op-select-category() {
+    op-select-generic --categories $1
+}
+
+op-select-tag() {
+    op-select-generic --tags $1
+}
+
+op-get-field() {
+    $OP get item $1 --fields $2
+}
+
+op-field-flatten() {
+    sep=""
+    for k in ${@:2}; do
+        echo -n "$sep$(echo $1 | jq -r '.["'$k'"]')"
+        sep=" "
+    done
+    echo ""
+}
+
+# Check for dependencies
+command -v jq &>/dev/null || ecf-log-error "Binary jq not found!" "Install jq before using this script!"
+command -v fzf &>/dev/null || ecf-log-error "Binary fzf not found!" "Install fzf before using this script!"
+command -v $OP &>/dev/null || ecf-log-error "Binary $OP not found!" "Install $OP before using this script!"
+
+# Input arguments
+COMMAND=""
+SSH_ADD="false"
+ID=""
+LOGIN_EMAIL=""
+LOGIN_KEY=""
+
+# Parse input arguments
+while [ "$#" -gt 0 ]; do
+    case $1 in
+    -h | --help)
+        usage
+        ;;
+    -s | --ssh-add)
+        SSH_ADD="true"
+        ;;
+    -i)
+        shift
+        ID="$1"
+        ;;
+    --id=*)
+        ID=$(echo $1 | awk '{split($0,r,"="); print r[2]}')
+        ;;
+    -le)
+        shift
+        LOGIN_EMAIL="$1"
+        ;;
+    --login-email=*)
+        LOGIN_EMAIL=$(echo $1 | awk '{split($0,r,"="); print r[2]}')
+        ;;
+    -lk)
+        shift
+        LOGIN_KEY="$1"
+        ;;
+    --login-key=*)
+        LOGIN_KEY=$(echo $1 | awk '{split($0,r,"="); print r[2]}')
+        ;;
+    *)
+        COMMAND="$1"
+        ;;
+    esac
+    shift
+done
+
+# Verify command
+case $COMMAND in
+ssh | token | credentials | login | logout) ;;
+*)
+    [ "$COMMAND" == "" ] && ecf-log-error "No command provided!"
+    ecf-log-error "Unsupported command: $COMMAND"
+    ;;
+esac
+
+# Handle login
+if [ "$COMMAND" == "login" ]; then
+    [ "$LOGIN_EMAIL" == "" ] && ecf-log-error "Login email not provided" "Log in by running: $(ecf-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
+    [ "$LOGIN_KEY" == "" ] && ecf-log-error "Login key not provided" "Log in by running: $(ecf-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
+    $OP signin enonic.1password.eu $LOGIN_EMAIL $LOGIN_KEY --raw >$OP_SESSION_file
+    chmod 600 $OP_SESSION_file
+    exit 0
+fi
+
+# Handle logout
+if [ "$COMMAND" == "logout" ]; then
+    $OP signout --forget
+    rm -f $OP_SESSION_file
+    exit 0
+fi
+
+# Set session
+export OP_SESSION_enonic="$(cat $OP_SESSION_file 2>/dev/null)"
+
+# Test if session is valid
+$OP list vaults >/dev/null 2>&1 || ecf-log-error "Not logged in to 1Password!" "Log in by running: $(ecf-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
+
+# Get ID
+if [ "$ID" == "" ]; then
+    case $COMMAND in
+    ssh)
+        ID=$(op-select-tag ssh-key)
+        ;;
+    token)
+        ID=$(op-select-category Password)
+        ;;
+    credentials)
+        ID=$(op-select-category Login)
+        ;;
+    *)
+        ecf-log-error "Unexpected state!"
+        ;;
+    esac
+fi
+
+# Verify ID is selected
+[ "$ID" == "" ] && ecf-log-error "No item selected!"
+
+# Fetch fields
+case $COMMAND in
+ssh)
+    if [ "$SSH_ADD" == "true" ]; then
+        op-get-field $ID notesPlain | ssh-add -
+    else
+        op-get-field $ID notesPlain
+    fi
+    ;;
+token)
+    op-get-field $ID password
+    ;;
+credentials)
+    RES=$(op-get-field $ID username,password)
+    op-field-flatten "$RES" username password
+    ;;
+*)
+    ecf-log-error "Unexpected state!"
+    ;;
+esac

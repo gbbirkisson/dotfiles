@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # A script to open up the terminal in the same directory as the previous terminal
 
