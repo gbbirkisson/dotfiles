@@ -24,6 +24,7 @@ $ make setup
 # I3 extra configuration
 
 ## Change bindings
+
 ```
 bindsym $mod+Return exec gterm
 bindsym $mod+F2 exec gbrowser
@@ -36,7 +37,6 @@ bindsym $mod+F2 exec gbrowser
 exec --no-startup-id blueman-applet
 exec --no-startup-id unclutter
 ```
-
 
 ## Change workspace management
 
