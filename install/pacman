@@ -30,7 +30,7 @@ jdk11-openjdk
 namcap  # Aur package build tool
 
 # Deployment tools
-#docker
-#ansible
+docker
+ansible
 kubectl
 helm
