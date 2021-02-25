@@ -27,6 +27,7 @@ go
 go-tools
 rustup
 jdk11-openjdk
+namcap  # Aur package build tool
 
 # Deployment tools
 #docker
