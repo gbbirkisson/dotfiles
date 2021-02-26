@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# A script to create a file out of std input
+
+set -e
+
+FILE=$1
+if [ "$FILE" == "" ]; then
+    FILE=$(mktemp /tmp/tofile.XXXXXX)
+fi
+
+cat - > $FILE
+
+echo $FILE
