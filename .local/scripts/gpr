@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Checkout a github pull request
+
+set -e
+
+[[ "$1" == "" ]] && (echo 'provide PR id' && exit 1)
+
+[[ -z $(git status -s) ]] || (echo 'git state dirty' && exit 1)
+
+ID="$1"
+BRANCHNAME="pr-$1"
+
+git fetch origin pull/$ID/head:$BRANCHNAME
+git checkout $BRANCHNAME
