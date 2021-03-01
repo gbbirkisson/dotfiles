@@ -1,6 +1,6 @@
 # Set Monitors
 set $monitor1 eDP1
-set $monitor2 HDMI1
+set $monitor2 HDMI2
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
