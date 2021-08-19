@@ -38,6 +38,7 @@ link .config/systemd/user/ssh-agent.service
 link .config/alacritty/alacritty.yml
 link .config/starship.toml
 link .fonts
+link .i3/config
 link .local/scripts
 link .ssh/config
 
