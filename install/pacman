@@ -8,6 +8,7 @@ snapd           # Snapcraft
 bluez
 bluez-utils
 blueman         # Bluetooth applet
+pipewire-pulse
 
 # Terminal tools
 noto-fonts-emoji  # Emoji support
