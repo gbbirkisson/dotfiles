@@ -107,7 +107,7 @@ bind "$(bind -s | grep '^"\\ec"' | sed 's/\\ec/\\C-f/')" # Rebind ATL-C to CTRL-
 source /usr/share/fzf/completion.bash
 
 # Source bash_prompt and aliases
-for file in ~/.{aliases_personal}; do
+for file in ~/.aliases; do
 	[[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
 unset file

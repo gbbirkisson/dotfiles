@@ -41,7 +41,7 @@ link .fonts
 link .local/scripts
 link .ssh/config
 
-link .aliases_personal
+link .aliases
 link .bash_profile
 link .bashrc
 link .gitconfig
