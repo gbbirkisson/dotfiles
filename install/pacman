@@ -16,6 +16,7 @@ bash-completion
 jq
 fzf
 bat
+neofetch
 colordiff       # Better diff
 unclutter       # Hide mouse
 neofetch        # Termial info
