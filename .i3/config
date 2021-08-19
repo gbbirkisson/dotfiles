@@ -1,6 +1,6 @@
 # Set Monitors
-set $monitor1 eDP1
-set $monitor2 HDMI2
+set $monitor1 eDP-1
+set $monitor2 DP-3
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
@@ -321,6 +321,10 @@ mode "resize" {
 
 # Lock screen
 bindsym $mod+9 exec --no-startup-id blurlock
+
+# Reset display settings
+bindsym XF86Display exec --no-startup-id gscreen
+bindsym $mod+p exec --no-startup-id gscreen
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
