@@ -2,12 +2,13 @@
 
 My dotfiles and setup notes!
 
-<h3>TOC</h3>
+<h2>TOC</h2>
 
 - [Install tools and dependencies](#install-tools-and-dependencies)
 - [Setup preferences](#setup-preferences)
 - [Bluetooth headset trouble](#bluetooth-headset-trouble)
 - [Sync timezones](#sync-timezones)
+- [Import wireguard profiles](#import-wireguard-profiles)
 
 ## Install tools and dependencies
 
@@ -31,4 +32,14 @@ Maybe install `pipewire-pulse`?
 
 ```console
 $ timedatectl set-ntp true
+```
+
+## Import wireguard profiles
+
+```
+$ nmcli connection import type wireguard file <FILE>
+```
+
+```
+$ nmcli connection modify wg0 connection.id "some-custom-name"
 ```
