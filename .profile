@@ -7,7 +7,7 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 # Default apps
 export EDITOR="/usr/bin/vim"
 export BROWSER="/usr/bin/firefox"
-export TERMINAL="termite"
+export TERMINAL="alacritty"
 
 # FZF options
 export FZF_DEFAULT_OPTS="--height 100% --layout=reverse"

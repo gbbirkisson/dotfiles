@@ -2,10 +2,14 @@
 firefox
 wireguard-tools
 file-roller     # Gnome Archive Manager
+snapd           # Snapcraft
+
+# Bluetooth
+bluez
+bluez-utils
 blueman         # Bluetooth applet
 
 # Terminal tools
-termite
 noto-fonts-emoji  # Emoji support
 lastpass-cli
 bash-completion
@@ -16,7 +20,6 @@ colordiff       # Better diff
 unclutter       # Hide mouse
 neofetch        # Termial info
 asciinema       # Record terminal
-diff-so-fancy   # Fancy diff
 numlockx        # Turn off numlock
 exa             # Better LS
 

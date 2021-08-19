@@ -3,6 +3,9 @@
 # If this is not an interactive shell, do not do anything
 [[ $- != *i* ]] && return
 
+# Add bash-completion
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
 # Change the window title of X terminals
 case ${TERM} in
 	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
@@ -13,7 +16,7 @@ case ${TERM} in
 		;;
 esac
 
-[[ "${TERM}" == "xterm-termite" ]] && use_color=true
+use_color=true
 
 # Set colorful PS1 only on colorful terminals.
 # dircolors --print-database uses its own built-in database
@@ -50,8 +53,15 @@ if ${use_color} ; then
 		fi
 	fi
 
-	alias ls='exa'
-	alias tree='tree -C'
+	if command -v exa &> /dev/null ; then
+		alias ls='exa'
+		alias l="exa -lF -s type"   # List all files colorized in long format
+		alias la="exa -alF -s type" # List all files colorized in long format, including dot files
+		alias ll="exa -alF -s type"
+	else
+		alias ls='ls --color=auto'
+	fi
+
 	alias grep='grep --colour=auto'
 	alias egrep='egrep --colour=auto'
 	alias fgrep='fgrep --colour=auto'
@@ -77,6 +87,9 @@ complete -cf sudo
 # http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
 shopt -s checkwinsize
 
+# Expand aliases
+#shopt -s expand_aliases
+
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
 
@@ -84,9 +97,6 @@ shopt -s histappend
 HISTSIZE=
 HISTFILESIZE=
 HISTCONTROL=ignoreboth:erasedups
-
-# Add bash-completion
-[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 # Add kubectl completion
 source <(kubectl completion bash)
@@ -97,7 +107,7 @@ bind "$(bind -s | grep '^"\\ec"' | sed 's/\\ec/\\C-f/')" # Rebind ATL-C to CTRL-
 source /usr/share/fzf/completion.bash
 
 # Source bash_prompt and aliases
-for file in ~/.{aliases_kubectl,aliases_personal}; do
+for file in ~/.{aliases_personal}; do
 	[[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
 unset file

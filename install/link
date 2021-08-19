@@ -35,15 +35,13 @@ link() {
 
 link '.config/Code - OSS/User/settings.json'
 link .config/systemd/user/ssh-agent.service
-link .config/termite/config
+link .config/alacritty/alacritty.yml
 link .config/starship.toml
 link .fonts
 link .local/scripts
 link .ssh/config
 
-link .aliases_kubectl
 link .aliases_personal
-link .bash_completion
 link .bash_profile
 link .bashrc
 link .gitconfig

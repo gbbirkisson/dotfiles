@@ -1,8 +1,6 @@
 [user]
 	name = Guðmundur Björn Birkisson
 	email = gbbirkisson@gmail.com
-[core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
 [pull]
 	rebase = false
 [push]

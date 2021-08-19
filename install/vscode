@@ -1,4 +1,4 @@
 yzhang.markdown-all-in-one      # Nice markdown support
 esbenp.prettier-vscode          # Code Formatter
-oderwat.indent-rainbow@7.4.0    # Indent rainbow
+#oderwat.indent-rainbow@7.4.0    # Indent rainbow
 #foxundermoon.shell-format       # Shell / Dockerfile formatting

@@ -1,24 +1,9 @@
 #!/bin/bash
 
-alias gmount="sudo fdisk -l | grep ^/dev/ | fzf | awk '{print $1}' | xargs -I {} echo mount {} FOLDER"
-
-# Easy column extraction
-alias c1="awk '{print \$1}'"
-alias c2="awk '{print \$2}'"
-alias c3="awk '{print \$3}'"
-alias c4="awk '{print \$4}'"
-alias c5="awk '{print \$5}'"
-alias c6="awk '{print \$6}'"
-
 # Delete entry from history
 alias historyrm='HID=$(history | fzf | c1) && history -d $HID'
 
-# Set ls aliases
-colorflag="--color"
-alias l="exa -lF -s type"   # List all files colorized in long format
-alias la="exa -alF -s type" # List all files colorized in long format, including dot files
-alias ll="exa -alF -s type"
-
+# Set better defaults for common ops
 alias cp="cp -i"          # Confirm before overwriting something
 alias mv='mv -i'		  # Confirm before overwriting something
 alias sudo='sudo '        # Enable aliases to be sudo’ed
@@ -30,8 +15,8 @@ alias cd..="cd .."        # My usual cd mistake
 alias more=less
 
 # IP addresses
-alias pubip="wget http://ipinfo.io/ip -qO -"
-alias localip="ip addr | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+alias ippub="wget http://ipinfo.io/ip -qO -"
+alias iplocal="ip addr | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias ips="ip addr | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
 # httpie
@@ -47,13 +32,11 @@ alias dstp='docker stop `docker ps -q`'                                         
 alias dcln='dstp; drma; drmi; drmv'                                                   # do all of the above
 
 # kubectl aliases
-alias kubeproxy='kubectl proxy --port=9999'
-alias kubetoken='kubectl config view -o jsonpath="{.users[?(@.name == \"$(kubectl config current-context)\")].user.auth-provider.config.access-token}"'
-alias kubeexec='kubectl run tmp --rm --restart=Never -it --image=gbbirkisson/httpie --command /bin/ash --'
+alias k='kubectl'
+complete -F __start_kubectl k
 
 # git aliases
-alias glog='git log --graph --pretty=oneline --abbrev-commit --all'
-alias githookreset='rm -r ./.git/hooks && git init'
+alias gitlog='git log --graph --pretty=oneline --abbrev-commit --all'
 
 # use bat not cat
 alias cat='bat'
