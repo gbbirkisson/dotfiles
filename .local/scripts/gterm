@@ -22,6 +22,11 @@ if [ -n "$PID" ]; then
     CWD=$(readlink /proc/$PID/cwd)
   fi
 fi
+
+if ! command -v $TERMINAL &> /dev/null ; then
+  TERMINAL="terminal"
+fi
+
 if [ -n "$CWD" ]; then
   cd $CWD && $TERMINAL
 else
