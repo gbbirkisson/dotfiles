@@ -11,9 +11,9 @@ EXT="${SCREENS[1]}"
 
 if [[ -z "$EXT" ]]; then
     # No secondary screen
-    xrandr --output "${INT}" --auto
+    xrandr --output "${INT}" --mode 1920x1080
 else
-    xrandr --output "${INT}" --auto --scale 1x1 --output "${EXT}" --auto --scale 1.4x1.4 --pos 0x0 --right-of "${INT}"
+    xrandr --output "${INT}" --mode 1920x1080 --output "${EXT}" --mode 1920x1080 --right-of "${INT}"
 fi
 
 sleep 2
