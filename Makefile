@@ -1,9 +1,11 @@
 .DEFAULT_GOAL:=help
-.PHONY: install setup mirrors pacman snapd snap rustup cargo vscode krew link fonts ssh-agent docker help
+.PHONY: install setup mirrors pacman pacman-update snapd snap snap-update rustup cargo cargo-update vscode krew link fonts ssh-agent docker help
 
 all: install setup ## Install, setup and link everything
 
 install: pacman snapd snap rustup cargo vscode krew ## Install all dependencies
+
+update: pacman-update snap-update cargo-update vscode krew ## Update all packages
 
 setup: link fonts ssh-agent docker ## Setup and link everything
 
@@ -17,6 +19,11 @@ pacman: ## Install pacman packages
 	@cat install/pacman | sed -e 's%\s*#.*$$%%g' | sudo pacman -S --needed -
 	### Install pacman packages done ###
 
+pacman-update: ## Install pacman packages
+	### Update pacman packages started ###
+	@sudo pacman -Syu
+	### Update pacman packages done ###
+
 snapd: ## Enable systemd snapd socket
 	### Enable systemd snapd socket started ###
 	@sudo systemctl enable --now snapd.socket
@@ -28,6 +35,11 @@ snap: ## Install snap packages
 	@cat install/snap | sed -e 's%\s*#.*$$%%g' | xargs -L 1 sudo snap install
 	@cat install/snap-classic | sed -e 's%\s*#.*$$%%g' | xargs -L 1 sudo snap install --classic
 	### Install snap packages done ###
+
+snap-update: ## Update snap packages
+	### Update snap packages started ###
+	@cat install/snap <(echo '') install/snap-classic | sed -e 's%\s*#.*$$%%g' | xargs -L 1 sudo snap refresh
+	### Update snap packages done ###
 
 rustup: ## Setup rust
 	### Setup rust started ###
@@ -41,15 +53,20 @@ cargo: ## Install cargo packages
 	@ln -sf ${HOME}/.cargo/bin/drill ${HOME}/.cargo/bin/drill-rs
 	### Install cargo packages done ###
 
+cargo-update: ## Update cargo packages
+	### Update cargo packages started ###
+	@cat install/cargo | sed -e 's%\s*#.*$$%%g' | xargs cargo install-update
+	### Update cargo packages done ###
+
 vscode: ## Install vscode addons
-	### Install vscode addons started ###
+	### Install/Update vscode addons started ###
 	@cat install/vscode | sed -e 's%\s*#.*$$%%g' | xargs -L 1 code --force --install-extension
-	### Install vscode addons done ###
+	### Install/Update vscode addons done ###
 
 krew: ## Install krew and kubectl addons
-	### Install krew and kubectl addons started ###
+	### Install/Update krew and kubectl addons started ###
 	@./install/krew
-	### Install krew and kubectl addons done ###
+	### Install/Update krew and kubectl addons done ###
 
 link: ## Link this repo to HOME folder
 	### Link this repo to HOME folder started ###
@@ -74,4 +91,4 @@ docker: ## Enable docker and setup user privileges
 
 help: ## Show help
 	@echo "Makefile targets:"
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
