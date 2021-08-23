@@ -4,7 +4,8 @@ set -e
 
 # Set some variables
 OP=op
-OP_SESSION_file=$HOME/.ecopsess
+OP_DOMAIN=enonic.1password.eu
+OP_SESSION_file=$HOME/.opsess
 SCRIPT_NAME=$(basename $0)
 C_RED=$(tput setaf 1)
 C_GREEN=$(tput setaf 2)
@@ -52,33 +53,33 @@ Options:
   -lk, --login-key    Secret key (not your master password)
   -h,  --help         Print usage
 EOF
-    exit 1
+    exit 2
 }
 
-ecf-log-lines() {
+sh-log-lines() {
     for a in "$@"; do
         printf "\n  $a" 1>&2
     done
     printf "\n" 1>&2
 }
 
-ecf-log-info() {
+sh-log-info() {
     printf "${C_GREEN}INFO${C_RESET}: $1" 1>&2
-    ecf-log-lines "${@:2}"
+    sh-log-lines "${@:2}"
 }
 
-ecf-log-warn() {
+sh-log-warn() {
     printf "${C_YELLOW}WARN${C_RESET}: $1" 1>&2
-    ecf-log-lines "${@:2}"
+    sh-log-lines "${@:2}"
 }
 
-ecf-log-error() {
+sh-log-error() {
     printf "${C_RED}ERROR${C_RESET}: $1" 1>&2
-    ecf-log-lines "${@:2}"
+    sh-log-lines "${@:2}"
     exit 1
 }
 
-ecf-string-highlight() {
+sh-string-highlight() {
     d=""
     for a in "$@"; do
         printf "${C_BOLD}${C_PINK}$d$a${C_RESET}"
@@ -112,9 +113,9 @@ op-field-flatten() {
 }
 
 # Check for dependencies
-command -v jq &>/dev/null || ecf-log-error "Binary jq not found!" "Install jq before using this script!"
-command -v fzf &>/dev/null || ecf-log-error "Binary fzf not found!" "Install fzf before using this script!"
-command -v $OP &>/dev/null || ecf-log-error "Binary $OP not found!" "Install $OP before using this script!"
+command -v jq &>/dev/null || sh-log-error "Binary jq not found!" "Install jq before using this script!"
+command -v fzf &>/dev/null || sh-log-error "Binary fzf not found!" "Install fzf before using this script!"
+command -v $OP &>/dev/null || sh-log-error "Binary $OP not found!" "Install $OP before using this script!"
 
 # Input arguments
 COMMAND=""
@@ -164,17 +165,17 @@ done
 case $COMMAND in
 ssh | token | credentials | login | logout) ;;
 *)
-    [ "$COMMAND" == "" ] && ecf-log-error "No command provided!"
-    ecf-log-error "Unsupported command: $COMMAND"
+    [ "$COMMAND" == "" ] && usage
+    sh-log-error "Unsupported command: $COMMAND"
     ;;
 esac
 
 # Handle login
 if [ "$COMMAND" == "login" ]; then
-    [ "$LOGIN_EMAIL" == "" ] && ecf-log-error "Login email not provided" "Log in by running: $(ecf-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
-    [ "$LOGIN_KEY" == "" ] && ecf-log-error "Login key not provided" "Log in by running: $(ecf-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
-    $OP signin enonic.1password.eu $LOGIN_EMAIL $LOGIN_KEY --raw >$OP_SESSION_file
-    chmod 600 $OP_SESSION_file
+    [ "$LOGIN_EMAIL" == "" ] && sh-log-error "Login email not provided" "Log in by running: $(sh-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
+    [ "$LOGIN_KEY" == "" ] && sh-log-error "Login key not provided" "Log in by running: $(sh-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
+    $OP signin $OP_DOMAIN $LOGIN_EMAIL $LOGIN_KEY --raw >$OP_SESSION_file
+    chmod 400 $OP_SESSION_file
     exit 0
 fi
 
@@ -189,7 +190,7 @@ fi
 export OP_SESSION_enonic="$(cat $OP_SESSION_file 2>/dev/null)"
 
 # Test if session is valid
-$OP list vaults >/dev/null 2>&1 || ecf-log-error "Not logged in to 1Password!" "Log in by running: $(ecf-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
+$OP list vaults >/dev/null 2>&1 || sh-log-error "Not logged in to 1Password!" "Log in by running: $(sh-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
 
 # Get ID
 if [ "$ID" == "" ]; then
@@ -204,13 +205,13 @@ if [ "$ID" == "" ]; then
         ID=$(op-select-category Login)
         ;;
     *)
-        ecf-log-error "Unexpected state!"
+        sh-log-error "Unexpected state!"
         ;;
     esac
 fi
 
 # Verify ID is selected
-[ "$ID" == "" ] && ecf-log-error "No item selected!"
+[ "$ID" == "" ] && sh-log-error "No item selected!"
 
 # Fetch fields
 case $COMMAND in
@@ -229,6 +230,6 @@ credentials)
     op-field-flatten "$RES" username password
     ;;
 *)
-    ecf-log-error "Unexpected state!"
+    sh-log-error "Unexpected state!"
     ;;
 esac
