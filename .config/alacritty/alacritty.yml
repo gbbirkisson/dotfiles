@@ -84,6 +84,6 @@ colors:
 bell:
   animation: Ease
   color: "#1ABB9B"
-  duration: 1
+  duration: 0
 
 background_opacity: 1.0
