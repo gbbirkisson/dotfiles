@@ -3,8 +3,6 @@
 
 My dotfiles and setup notes! I use [Manjaro I3](https://manjaro.org/download/#i3) so these files are catered to that distribution.
 
-<h2>TOC</h2>
-
 - [Usage](#usage)
   - [Install tools and dependencies](#install-tools-and-dependencies)
   - [Setup preferences](#setup-preferences)
