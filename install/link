@@ -33,9 +33,10 @@ link() {
     ln -sf "$src" "$dst"
 }
 
-link '.config/Code - OSS/User/settings.json'
-link .config/systemd/user/ssh-agent.service
 link .config/alacritty/alacritty.yml
+link '.config/Code - OSS/User/settings.json'
+link .config/i3status/config
+link .config/systemd/user/ssh-agent.service
 link .config/starship.toml
 link .fonts
 link .i3/config
