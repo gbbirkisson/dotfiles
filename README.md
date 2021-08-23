@@ -4,6 +4,7 @@
 My dotfiles and setup notes! I use [Manjaro I3](https://manjaro.org/downloads/community/i3/) so these files are catered to that distribution.
 
 - [Usage](#usage)
+  - [Makefile help](#makefile-help)
   - [Install tools and dependencies](#install-tools-and-dependencies)
   - [Setup preferences](#setup-preferences)
 - [Terminal Cheatsheet](#terminal-cheatsheet)
@@ -15,6 +16,33 @@ My dotfiles and setup notes! I use [Manjaro I3](https://manjaro.org/downloads/co
   - [Set Docker MTU](#set-docker-mtu)
 
 ## Usage
+
+### Makefile help
+
+```
+$ make
+Makefile targets:
+  all             Install, setup and link everything
+  install         Install all dependencies
+  update          Update all packages
+  setup           Setup and link everything
+  mirrors         Set pacman mirrors
+  pacman          Install pacman packages
+  pacman-update   Install pacman packages
+  snapd           Enable systemd snapd socket
+  snap            Install snap packages
+  snap-update     Update snap packages
+  rustup          Setup rust
+  cargo           Install cargo packages
+  cargo-update    Update cargo packages
+  vscode          Install vscode addons
+  krew            Install krew and kubectl addons
+  link            Link this repo to HOME folder
+  fonts           Update font cache
+  ssh-agent       Enable systemd ssh-agent service
+  docker          Enable docker and setup user privileges
+  help            Show help
+```
 
 ### Install tools and dependencies
 
