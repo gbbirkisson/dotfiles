@@ -1,4 +1,6 @@
-yzhang.markdown-all-in-one      # Nice markdown support
-esbenp.prettier-vscode          # Code Formatter
-#oderwat.indent-rainbow@7.4.0    # Indent rainbow
-#foxundermoon.shell-format       # Shell / Dockerfile formatting
+earshinov.sort-lines-by-selection   # Sort lines plugin
+esbenp.prettier-vscode              # Code Formatter
+foxundermoon.shell-format           # Shell / Dockerfile formatting
+oderwat.indent-rainbow              # Indent rainbow
+PKief.material-icon-theme           # Icon theme
+yzhang.markdown-all-in-one          # Nice markdown support
