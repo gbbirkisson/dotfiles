@@ -9,6 +9,7 @@ My dotfiles and setup notes!
 - [Bluetooth headset trouble](#bluetooth-headset-trouble)
 - [Sync timezones](#sync-timezones)
 - [Import wireguard profiles](#import-wireguard-profiles)
+- [Install pip](#install-pip)
 
 ## Install tools and dependencies
 
@@ -42,4 +43,10 @@ $ nmcli connection import type wireguard file <FILE>
 
 ```
 $ nmcli connection modify wg0 connection.id "some-custom-name"
+```
+
+## Install pip
+
+```
+$ python -m ensurepip --upgrade
 ```
