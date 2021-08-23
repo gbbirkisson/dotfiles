@@ -1,5 +1,6 @@
-starship        # Fancy prompt
+alacritty       # Terminal emulator
+cargo-script    # Run rust as scripts
+cargo-update    # To update cargo packages
 drill           # HTTP stress testing
 ht              # HTTPie clone
-cargo-script    # Run rust as scripts
-alacritty       # Terminal emulator
+starship        # Fancy prompt

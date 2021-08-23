@@ -1,41 +1,41 @@
 # Common
+file-roller         # Gnome Archive Manager
 firefox
+snapd               # Snapcraft
 wireguard-tools
-file-roller     # Gnome Archive Manager
-snapd           # Snapcraft
 
 # Bluetooth
+blueman             # Bluetooth applet
 bluez
 bluez-utils
-blueman         # Bluetooth applet
 
 # Terminal tools
-noto-fonts-emoji  # Emoji support
-lastpass-cli
+asciinema           # Record terminal
 bash-completion
-jq
-fzf
 bat
+colordiff           # Better diff
+exa                 # Better LS
+fzf
+jq
+lastpass-cli
 neofetch
-colordiff       # Better diff
-unclutter       # Hide mouse
-neofetch        # Termial info
-asciinema       # Record terminal
-numlockx        # Turn off numlock
-exa             # Better LS
+neofetch            # Termial info
+noto-fonts-emoji    # Emoji support
+numlockx            # Turn off numlock
+unclutter           # Hide mouse
 
 # Development
 code    # VS Code
 gcc     # Needed by rust
 go
 go-tools
-rustup
 jdk11-openjdk
-namcap  # Aur package build tool
+namcap              # Aur package build tool
+rustup
 
 # Deployment tools
+ansible
 docker
 docker-compose
-ansible
-kubectl
 helm
+kubectl
