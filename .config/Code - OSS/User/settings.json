@@ -1,6 +1,5 @@
 {
     "window.zoomLevel": 0,
-    "editor.formatOnSave": true,
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "window.menuBarVisibility": "toggle",
