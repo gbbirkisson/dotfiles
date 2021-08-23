@@ -1,7 +1,7 @@
 <img align="right" src="logo.png">
 <h1>dotfiles</h1>
 
-My dotfiles and setup notes! I use [Manjaro I3](https://manjaro.org/download/#i3) so these files are catered to that distribution.
+My dotfiles and setup notes! I use [Manjaro I3](https://manjaro.org/downloads/community/i3/) so these files are catered to that distribution.
 
 - [Usage](#usage)
   - [Install tools and dependencies](#install-tools-and-dependencies)
