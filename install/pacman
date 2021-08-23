@@ -35,6 +35,7 @@ namcap  # Aur package build tool
 
 # Deployment tools
 docker
+docker-compose
 ansible
 kubectl
 helm
