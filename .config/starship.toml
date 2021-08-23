@@ -18,9 +18,7 @@ $shell\
 $character"""
 
 [status]
-symbol = "ERROR"
-format = '[\[$symbol $common_meaning$signal_name$maybe_int\]]($style) '
-map_symbol = true
+format = '[\[$symbol$int\]$common_meaning]($style) '
 disabled = false
 
 [character]
