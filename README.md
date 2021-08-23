@@ -1,4 +1,4 @@
-<img align="right" src="logo.png">
+<img align="right" width="128" height="128" src="logo.png">
 <h1>dotfiles</h1>
 
 My dotfiles and setup notes! I use [Manjaro I3](https://manjaro.org/downloads/community/i3/) so these files are catered to that distribution.
