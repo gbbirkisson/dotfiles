@@ -10,6 +10,7 @@ My dotfiles and setup notes!
 - [Sync timezones](#sync-timezones)
 - [Import wireguard profiles](#import-wireguard-profiles)
 - [Install pip](#install-pip)
+- [Docker MTU](#docker-mtu)
 
 ## Install tools and dependencies
 
@@ -49,4 +50,16 @@ $ nmcli connection modify wg0 connection.id "some-custom-name"
 
 ```
 $ python -m ensurepip --upgrade
+```
+
+## Docker MTU
+
+```
+$ sudo bash
+$ cat << EOF > /etc/docker/daemon.json 
+{
+  "mtu": 1376
+}
+EOF
+$ systemctl restart docker
 ```
