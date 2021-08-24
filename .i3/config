@@ -349,8 +349,8 @@ exec --no-startup-id gscreen
 #bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+ unmute
 #bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%- unmute
 #bindsym XF86AudioMute exec --no-startup-id amixer -q sset Master toggle
-#bindsym XF86MonBrightnessUp exec light -A 1 # increase screen brightness
-#bindsym XF86MonBrightnessDown exec light -U 1 # decrease screen brightness
+#bindsym XF86MonBrightnessUp exec gbright $monitor1 up # increase screen brightness
+#bindsym XF86MonBrightnessDown exec gbright $monitor1 down # decrease screen brightness
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
