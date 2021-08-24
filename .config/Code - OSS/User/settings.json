@@ -7,4 +7,8 @@
     "workbench.startupEditor": "readme",
     "workbench.iconTheme": "material-icon-theme",
     "files.autoSave": "onFocusChange",
+    "files.enableTrash": false,
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
 }
