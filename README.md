@@ -79,23 +79,23 @@ $ timedatectl set-ntp true
 
 ### Import wireguard profiles
 
-```
+```console
 $ nmcli connection import type wireguard file <FILE>
 ```
 
-```
+```console
 $ nmcli connection modify wg0 connection.id "some-custom-name"
 ```
 
 ### Install pip
 
-```
+```console
 $ python -m ensurepip --upgrade
 ```
 
 ### Set Docker MTU
 
-```
+```console
 $ sudo bash
 $ cat << EOF > /etc/docker/daemon.json 
 {
