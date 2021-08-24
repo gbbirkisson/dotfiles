@@ -4,8 +4,9 @@ set -e
 
 # Set some variables
 OP=op
-OP_DOMAIN=enonic.1password.eu
-OP_SESSION_file=$HOME/.opsess
+OP_FOLDER=$HOME/.op
+OP_CONFIG=$OP_FOLDER/config
+OP_SESSION_FILE=$OP_FOLDER/session
 SCRIPT_NAME=$(basename $0)
 C_RED=$(tput setaf 1)
 C_GREEN=$(tput setaf 2)
@@ -29,7 +30,7 @@ Supported commands are:
 Examples:
 
   Login to 1password:
-    $ $SCRIPT_NAME login -le <EMAIL> -lk <KEY>
+    $ $SCRIPT_NAME login -le <EMAIL> -lk <SECRET_KEY_NOT_YOUR_PASSWORD>
 
   Add ssh key to ssh-agent:
     $ $SCRIPT_NAME ssh -s
@@ -53,7 +54,7 @@ Options:
   -lk, --login-key    Secret key (not your master password)
   -h,  --help         Print usage
 EOF
-    exit 2
+    exit 1
 }
 
 sh-log-lines() {
@@ -117,6 +118,18 @@ command -v jq &>/dev/null || sh-log-error "Binary jq not found!" "Install jq bef
 command -v fzf &>/dev/null || sh-log-error "Binary fzf not found!" "Install fzf before using this script!"
 command -v $OP &>/dev/null || sh-log-error "Binary $OP not found!" "Install $OP before using this script!"
 
+# Set permissions
+[ -d "$OP_FOLDER" ] || (mkdir -p $OP_FOLDER; chmod 700 $OP_FOLDER)
+[ -f "$OP_CONFIG" ] || (echo "{}" > $OP_CONFIG; chmod 600 $OP_CONFIG)
+
+# Check old login
+if [ "$(cat $OP_CONFIG | jq -e -r '.latest_signin // empty')" != "" ]; then
+    OLD_LOGIN="true"
+else
+    echo -n "{}" >$OP_CONFIG
+    OLD_LOGIN="false"
+fi
+
 # Input arguments
 COMMAND=""
 SSH_ADD="false"
@@ -165,32 +178,49 @@ done
 case $COMMAND in
 ssh | token | credentials | login | logout) ;;
 *)
-    [ "$COMMAND" == "" ] && usage
+    [ "$COMMAND" == "" ] && sh-log-error "No command provided!"
     sh-log-error "Unsupported command: $COMMAND"
     ;;
 esac
 
 # Handle login
 if [ "$COMMAND" == "login" ]; then
-    [ "$LOGIN_EMAIL" == "" ] && sh-log-error "Login email not provided" "Log in by running: $(sh-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
-    [ "$LOGIN_KEY" == "" ] && sh-log-error "Login key not provided" "Log in by running: $(sh-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
-    $OP signin $OP_DOMAIN $LOGIN_EMAIL $LOGIN_KEY --raw >$OP_SESSION_file
-    chmod 400 $OP_SESSION_file
+    if [ "$OLD_LOGIN" == "false" ]; then
+        ([ "$LOGIN_EMAIL" == "" ] || [ "$LOGIN_KEY" == "" ]) && sh-log-error "First time login!" "Get your secret key here: https://enonic.1password.eu/profile" "Log in by running: $(sh-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <SECRET_KEY_NOT_YOUR_PASSWORD>")"
+        $OP signin enonic.1password.eu $LOGIN_EMAIL $LOGIN_KEY --raw >$OP_SESSION_FILE
+    else
+        $OP signin --raw >$OP_SESSION_FILE
+    fi
+    chmod 600 $OP_SESSION_FILE
     exit 0
 fi
 
 # Handle logout
 if [ "$COMMAND" == "logout" ]; then
     $OP signout --forget
-    rm -f $OP_SESSION_file
+    rm -f $OP_SESSION_FILE
     exit 0
 fi
 
 # Set session
-export OP_SESSION_enonic="$(cat $OP_SESSION_file 2>/dev/null)"
+export OP_SESSION_enonic="$(cat $OP_SESSION_FILE 2>/dev/null)"
 
 # Test if session is valid
-$OP list vaults >/dev/null 2>&1 || sh-log-error "Not logged in to 1Password!" "Log in by running: $(sh-string-highlight "$SCRIPT_NAME login -le <EMAIL> -lk <KEY>")"
+if [ "$OLD_LOGIN" == "false" ]; then
+    $OP list vaults >/dev/null 2>&1 || sh-log-error "Not logged in to 1Password!" "Log in by running: $(sh-string-highlight "$SCRIPT_NAME login")"
+elif [ "$OP_SESSION_enonic" == "" ]; then
+    # Call your self to log in
+    sh-log-info "Provide 1password credentials!"
+    $SCRIPT_NAME login
+    export OP_SESSION_enonic="$(cat $OP_SESSION_FILE 2>/dev/null)"
+fi
+
+if $OP list vaults 2>&1 | grep "You are not currently signed in" > /dev/null; then
+    # Call your self to log in
+    sh-log-info "Provide 1password credentials!"
+    $SCRIPT_NAME login
+    export OP_SESSION_enonic="$(cat $OP_SESSION_FILE 2>/dev/null)"
+fi
 
 # Get ID
 if [ "$ID" == "" ]; then
