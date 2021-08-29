@@ -1,11 +1,11 @@
 .DEFAULT_GOAL:=help
-.PHONY: install setup mirrors pacman pacman-update snapd snap snap-update rustup cargo cargo-update vscode krew link fonts ssh-agent docker help
+.PHONY: install setup mirrors pacman pacman-update snapd snap snap-update rustup cargo cargo-update golang vscode krew link fonts ssh-agent docker help
 
 all: install setup ## Install, setup and link everything
 
 install: pacman snapd snap rustup cargo vscode krew ## Install all dependencies
 
-update: pacman-update snap-update cargo-update vscode krew ## Update all packages
+update: pacman-update snap-update cargo-update golang vscode krew ## Update all packages
 
 setup: link fonts ssh-agent docker ## Setup and link everything
 
@@ -57,6 +57,12 @@ cargo-update: ## Update cargo packages
 	### Update cargo packages started ###
 	@cat install/cargo | sed -e 's%\s*#.*$$%%g' | xargs cargo install-update
 	### Update cargo packages done ###
+
+golang: ## Install golang packages
+	### Install golang packages started ###
+	@cat install/golang | sed -e 's%\s*#.*$$%%g' | xargs -L 1 go get -u
+	### Install golang packages done ###
+
 
 vscode: ## Install vscode addons
 	### Install/Update vscode addons started ###
