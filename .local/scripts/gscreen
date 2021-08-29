@@ -18,4 +18,4 @@ fi
 
 sleep 2
 nitrogen --restore
-killall -SIGUSR1 conky
+#killall -SIGUSR1 conky
