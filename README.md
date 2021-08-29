@@ -14,6 +14,7 @@ My dotfiles and setup notes! I use [Manjaro I3](https://manjaro.org/downloads/co
   - [Import wireguard profiles](#import-wireguard-profiles)
   - [Install pip](#install-pip)
   - [Set Docker MTU](#set-docker-mtu)
+  - [Install sonic-pi](#install-sonic-pi)
 
 ## Usage
 
@@ -103,4 +104,23 @@ $ cat << EOF > /etc/docker/daemon.json
 }
 EOF
 $ systemctl restart docker
+```
+
+### Install sonic-pi
+
+If using pipewire:
+
+``` console
+$ sudo pacman -S sonic-pi pipewire-jack
+$ pw-jack sonic-pi
+```
+
+Some stuff that might have made a difference?
+
+``` console
+$ sudo pacman -S sonic-pi libffado
+$ sudo ldconfig
+$ sudo groupadd realtime
+$ sudo usermod -a -G realtime $USER
+$ sudo pacman -S pipewire-jack 
 ```
