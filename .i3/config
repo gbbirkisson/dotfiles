@@ -1,6 +1,7 @@
 # Set Monitors
 set $monitor1 eDP-1
 set $monitor2 DP-3
+#set $monitor2 DP-1-2
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
