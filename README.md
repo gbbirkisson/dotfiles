@@ -15,6 +15,7 @@ My dotfiles and setup notes! I use [Manjaro I3](https://manjaro.org/downloads/co
   - [Install pip](#install-pip)
   - [Set Docker MTU](#set-docker-mtu)
   - [Install sonic-pi](#install-sonic-pi)
+  - [Fix fonts for snaps](#fix-fonts-for-snaps)
 
 ## Usage
 
@@ -123,4 +124,13 @@ $ sudo ldconfig
 $ sudo groupadd realtime
 $ sudo usermod -a -G realtime $USER
 $ sudo pacman -S pipewire-jack 
+```
+
+### Fix fonts for snaps
+
+For example the slack fonts were not working:
+
+```console
+$ rm -r ~/snap/slack/common/.cache/fontconfig
+$ touch ~/snap/slack/common/.cache/fontconfig
 ```
