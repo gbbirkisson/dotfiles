@@ -32,6 +32,8 @@ go-tools
 jdk11-openjdk
 namcap              # Aur package build tool
 rustup
+ldd                 # Fast linking
+clang
 
 # Deployment tools
 ansible
