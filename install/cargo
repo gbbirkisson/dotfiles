@@ -1,4 +1,5 @@
 alacritty       # Terminal emulator
+cargo-generate  # Cargo templates
 cargo-script    # Run rust as scripts
 cargo-update    # To update cargo packages
 drill           # HTTP stress testing
