@@ -60,7 +60,7 @@ cargo-update: ## Update cargo packages
 
 golang: ## Install golang packages
 	### Install golang packages started ###
-	@cat install/golang | sed -e 's%\s*#.*$$%%g' | xargs -L 1 go get -u
+	@cat install/golang | sed -e 's%\s*#.*$$%%g' | xargs -L 1 go install
 	### Install golang packages done ###
 
 
