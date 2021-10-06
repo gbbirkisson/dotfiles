@@ -1,11 +1,11 @@
 .DEFAULT_GOAL:=help
-.PHONY: install setup mirrors pacman pacman-update snapd snap snap-update rustup cargo cargo-update golang vscode krew link fonts ssh-agent docker help
+.PHONY: install setup mirrors pacman pacman-update snapd snap snap-update rustup cargo cargo-update golang vscode krew krew-update link fonts ssh-agent docker help
 
 all: install setup ## Install, setup and link everything
 
 install: pacman snapd snap rustup cargo vscode krew ## Install all dependencies
 
-update: pacman-update snap-update cargo-update golang vscode krew ## Update all packages
+update: pacman-update snap-update cargo-update golang vscode krew-update ## Update all packages
 
 setup: link fonts ssh-agent docker ## Setup and link everything
 
@@ -73,6 +73,11 @@ krew: ## Install krew and kubectl addons
 	### Install/Update krew and kubectl addons started ###
 	@./install/krew
 	### Install/Update krew and kubectl addons done ###
+
+krew-update: ## Update krew and kubectl addons
+	### Update krew and kubectl addons started ###
+	kubectl krew list | grep -v 'VERSION' | xargs -I % bash -c 'kubectl krew upgrade % || true'
+	### Update krew and kubectl addons done ###
 
 link: ## Link this repo to HOME folder
 	### Link this repo to HOME folder started ###
