@@ -17,6 +17,7 @@ colordiff           # Better diff
 exa                 # Better LS
 fzf
 jq
+yq
 lastpass-cli
 neofetch
 neofetch            # Termial info
@@ -32,7 +33,7 @@ go-tools
 jdk11-openjdk
 namcap              # Aur package build tool
 rustup
-ldd                 # Fast linking
+#ldd                 # Fast linking
 clang
 
 # Deployment tools
@@ -41,3 +42,4 @@ docker
 docker-compose
 helm
 kubectl
+github-cli
