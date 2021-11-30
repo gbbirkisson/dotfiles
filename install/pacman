@@ -43,3 +43,4 @@ docker-compose
 helm
 kubectl
 github-cli
+mypaint

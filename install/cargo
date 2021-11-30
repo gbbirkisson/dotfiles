@@ -5,3 +5,5 @@ cargo-update    # To update cargo packages
 drill           # HTTP stress testing
 ht              # HTTPie clone
 starship        # Fancy prompt
+ouch            # Easy compress/decompress
+cross           # Cross compilation

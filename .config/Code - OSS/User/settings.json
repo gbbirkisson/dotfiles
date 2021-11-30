@@ -15,4 +15,5 @@
     },
     "prettier.proseWrap": "never",
     "git.suggestSmartCommit": false,
+    "workbench.editor.untitled.hint": "hidden",
 }

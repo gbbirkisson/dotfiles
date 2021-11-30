@@ -9,11 +9,15 @@ SCREENS=(`xrandr --current | sed 's/^\(.*\) connected.*$/\1/p;d'`)
 INT="${SCREENS[0]}"
 EXT="${SCREENS[1]}"
 
+INT_RES="1920x1080"
+EXT_RES="1920x1080"
+# EXT_RES="1920x1200"
+
 if [[ -z "$EXT" ]]; then
     # No secondary screen
-    xrandr --output "${INT}" --mode 1920x1080
+    xrandr --output "${INT}" --mode ${INT_RES}
 else
-    xrandr --output "${INT}" --mode 1920x1080 --output "${EXT}" --mode 1920x1080 --right-of "${INT}"
+    xrandr --output "${INT}" --mode ${INT_RES} --output "${EXT}" --mode ${EXT_RES} --right-of "${INT}"
 fi
 
 sleep 2
