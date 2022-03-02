@@ -4,6 +4,7 @@ env:
 window:
   title: terminal
   dynamic_title: true
+  opacity: 1.0
 
 scrolling:
   # maximum number of lines in the scrollback buffer. Specifying '0' will
@@ -85,8 +86,6 @@ bell:
   animation: Ease
   color: "#1ABB9B"
   duration: 0
-
-background_opacity: 1.0
 
 cursor:
   blink_interval: 500
