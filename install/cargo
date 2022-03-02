@@ -3,7 +3,7 @@ cargo-generate  # Cargo templates
 cargo-script    # Run rust as scripts
 cargo-update    # To update cargo packages
 drill           # HTTP stress testing
-ht              # HTTPie clone
+xh              # HTTPie clone
 starship        # Fancy prompt
 ouch            # Easy compress/decompress
 cross           # Cross compilation
