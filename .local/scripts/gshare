@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+PORT=$(shuf -i 10000-20000 -n 1)
+
+USER="gbi"
+PASSWORD="best"
+
+trap "exit" INT TERM ERR
+trap "kill 0" EXIT
+
+python3 -m http.server ${PORT} &
+ngrok http --region eu --auth "${USER}:${PASSWORD}" ${PORT}
