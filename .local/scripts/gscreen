@@ -12,12 +12,15 @@ EXT="${SCREENS[1]}"
 INT_RES="1920x1080"
 EXT_RES="1920x1080"
 # EXT_RES="1920x1200"
+# EXT_RES="3440x1440"
+POS="--right-of"
+#POS="--above"
 
 if [[ -z "$EXT" ]]; then
     # No secondary screen
     xrandr --output "${INT}" --mode ${INT_RES}
 else
-    xrandr --output "${INT}" --mode ${INT_RES} --output "${EXT}" --mode ${EXT_RES} --right-of "${INT}"
+    xrandr --output "${INT}" --mode ${INT_RES} --output "${EXT}" --mode ${EXT_RES} ${POS}  "${INT}"
 fi
 
 sleep 2
