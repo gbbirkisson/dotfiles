@@ -89,7 +89,7 @@ sh-string-highlight() {
 }
 
 op-select-generic() {
-    $OP list items "$@" | jq -r '.[] | "\(.uuid) | \(.overview.title)"' | sort | fzf --header 'Select item!' | awk '{print $1}'
+    $OP item list --format json "$@" | jq -r '.[] | "\(.id) | \(.title)"' | sort | fzf --header 'Select item!' | awk '{print $1}'
 }
 
 op-select-category() {
@@ -101,16 +101,7 @@ op-select-tag() {
 }
 
 op-get-field() {
-    $OP get item $1 --fields $2
-}
-
-op-field-flatten() {
-    sep=""
-    for k in ${@:2}; do
-        echo -n "$sep$(echo $1 | jq -r '.["'$k'"]')"
-        sep=" "
-    done
-    echo ""
+    $OP item get $1 --fields $2 --format json | jq -r '.value'
 }
 
 # Check for dependencies
@@ -207,7 +198,7 @@ export OP_SESSION_enonic="$(cat $OP_SESSION_FILE 2>/dev/null)"
 
 # Test if session is valid
 if [ "$OLD_LOGIN" == "false" ]; then
-    $OP list vaults >/dev/null 2>&1 || sh-log-error "Not logged in to 1Password!" "Log in by running: $(sh-string-highlight "$SCRIPT_NAME login")"
+    $OP vault list >/dev/null 2>&1 || sh-log-error "Not logged in to 1Password!" "Log in by running: $(sh-string-highlight "$SCRIPT_NAME login")"
 elif [ "$OP_SESSION_enonic" == "" ]; then
     # Call your self to log in
     sh-log-info "Provide 1password credentials!"
@@ -215,7 +206,7 @@ elif [ "$OP_SESSION_enonic" == "" ]; then
     export OP_SESSION_enonic="$(cat $OP_SESSION_FILE 2>/dev/null)"
 fi
 
-if $OP list vaults 2>&1 | grep "You are not currently signed in" > /dev/null; then
+if $OP vault list 2>&1 | grep "You are not currently signed in" > /dev/null; then
     # Call your self to log in
     sh-log-info "Provide 1password credentials!"
     $SCRIPT_NAME login
@@ -256,8 +247,7 @@ token)
     op-get-field $ID password
     ;;
 credentials)
-    RES=$(op-get-field $ID username,password)
-    op-field-flatten "$RES" username password
+    echo "$(op-get-field $ID username) $(op-get-field $ID password)"
     ;;
 *)
     sh-log-error "Unexpected state!"
