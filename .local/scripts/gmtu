@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 set -e
-
 size=1272
-while ping -s $size -M do -c1 $1 >/dev/null; do
+while ping -s $size -M do -c1 $1 >/dev/null 2>&1; do
     ((size += 4))
 done
 
