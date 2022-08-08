@@ -19,7 +19,6 @@ fzf
 jq
 yq
 lastpass-cli
-neofetch
 neofetch            # Termial info
 noto-fonts-emoji    # Emoji support
 numlockx            # Turn off numlock
