@@ -111,3 +111,9 @@ for file in ~/.aliases; do
 	[[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
 unset file
+
+# Source asdf
+source /opt/asdf-vm/asdf.sh
+
+# Use gcloud auth plugin
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
