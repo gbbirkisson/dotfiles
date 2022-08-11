@@ -47,6 +47,3 @@ alias serve='python3 -m http.server'
 # Extract jwt header/payload
 alias jwth="tr '.' '\t' | awk '{print \$1}' | base64 -d 2>/dev/null | jq"
 alias jwtp="tr '.' '\t' | awk '{print \$2}' | base64 -d 2>/dev/null | jq"
-
-# Work
-alias klipy="/home/gummi/repos/oda/klipy/.venv/bin/python -m klipy"

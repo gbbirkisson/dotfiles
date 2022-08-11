@@ -115,5 +115,8 @@ unset file
 # Source asdf
 source /opt/asdf-vm/asdf.sh
 
+#source <(_KLIPY_COMPLETE=bash_source klipy)
+source ~/.klipy/bash_completion
+
 # Use gcloud auth plugin
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
