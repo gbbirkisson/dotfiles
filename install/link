@@ -48,3 +48,4 @@ link .bash_profile
 link .bashrc
 link .gitconfig
 link .profile
+link .tool-versions
