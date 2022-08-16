@@ -47,7 +47,3 @@ alias serve='python3 -m http.server'
 # Extract jwt header/payload
 alias jwth="tr '.' '\t' | awk '{print \$1}' | base64 -d 2>/dev/null | jq"
 alias jwtp="tr '.' '\t' | awk '{print \$2}' | base64 -d 2>/dev/null | jq"
-
-alias ec="cd /home/gummi/repos/enonic/ec/env-ec-prod && ./ec"
-alias eca="cd /home/gummi/repos/enonic/ec/ansible && ./ec-shell"
-alias ecac="code /home/gummi/repos/enonic/ec/ansible"
