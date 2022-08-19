@@ -13,8 +13,8 @@ INT_RES="1920x1080"
 EXT_RES="1920x1080"
 # EXT_RES="1920x1200"
 # EXT_RES="3440x1440"
-POS="--right-of"
-#POS="--above"
+# POS="--right-of"
+POS="--above"
 
 if [[ -z "$EXT" ]]; then
     # No secondary screen

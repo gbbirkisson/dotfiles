@@ -21,6 +21,6 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # Different paths
 export GOPATH="$HOME/.go"
-export PATH="$PATH:$HOME/.local/scripts:$HOME/.go/bin:$HOME/.cargo/bin:$HOME/.klipy/bin"
+export PATH="$PATH:$HOME/.local/scripts:$HOME/.go/bin:$HOME/.cargo/bin:$HOME/.klipy/bin:$HOME/.asdf/shims"
 #export PATH="$HOME/.vector/bin:$PATH"
 export JAVA_HOME="/usr/lib/jvm/default"
