@@ -8,5 +8,5 @@
 [init]
 	defaultBranch = main
 
-[includeIf "gitdir:~/repos/oda/**"]
-    path = .gitconfig-oda
+[includeIf "gitdir:~/Documents/repos/oda/**"]
+    path = .gitconfig_oda

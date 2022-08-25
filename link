@@ -34,18 +34,12 @@ link() {
 }
 
 link .config/alacritty/alacritty.yml
-link '.config/Code - OSS/User/settings.json'
-link .config/i3status/config
-link .config/systemd/user/ssh-agent.service
 link .config/starship.toml
-link .fonts
-link .i3/config
+
 link .local/scripts
-link .ssh/config
 
 link .aliases
-link .bash_profile
-link .bashrc
+link .bashrc_gbb
 link .gitconfig
-link .profile
-link .tool-versions
+link .gitconfig_oda
+link .profile_gbb

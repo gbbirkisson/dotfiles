@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 if [ -d "$1" ]; then
     tree -C -L 5 $1
     exit 0
 fi
 
-TYPE=$(file --mime $1)
+TYPE=$(file -b --mime $1)
 if [[ $TYPE =~ binary ]]; then
     echo $TYPE
     exit 0
 fi
 
-bat -r 0:70 --style=numbers --color=always $1
+batcat -r 0:70 --style=numbers --color=always "$1"

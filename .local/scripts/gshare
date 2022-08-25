@@ -1,12 +1,40 @@
 #!/usr/bin/env bash
 
-PORT=$(shuf -i 10000-20000 -n 1)
+set -euo pipefail
 
-USER="gbi"
-PASSWORD="best"
+SCRIPT_NAME=$(basename $0)
+
+usage() {
+    cat 1>&2 <<EOF
+Usage: $SCRIPT_NAME [OPTIONS]
+
+Share a directory with ngrok!
+
+Options:
+  -a, --auth   Use basic auth gbb:gbbgbbgbb
+  -h, --help   Print this dialog
+EOF
+    exit 1
+}
+
+PORT=$(shuf -i 10000-20000 -n 1)
+AUTH=""
+while [ "$#" -gt 0 ]; do
+    case $1 in
+    -h | --help)
+        usage
+        ;;
+    -a | --auth)
+        AUTH="--basic-auth gbb:gbbgbbgbb"
+        ;;
+    *)
+        # Ignore
+    esac
+    shift
+done
 
 trap "exit" INT TERM ERR
 trap "kill 0" EXIT
 
 python3 -m http.server ${PORT} &
-ngrok http --region eu --auth "${USER}:${PASSWORD}" ${PORT}
+ngrok http --region eu $AUTH ${PORT}

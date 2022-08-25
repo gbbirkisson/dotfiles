@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-# Turn off numlock
-
-set -e
-
-numlockx off

@@ -52,7 +52,7 @@ draw_bold_text_with_bright_colors: false
 colors:
   # Default colors
   primary:
-    background: "#222D31"
+    background: "#171F22"
     foreground: "#d8d8d8"
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:

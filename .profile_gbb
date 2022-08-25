@@ -1,0 +1,8 @@
+for dir in \
+    $HOME/.local/scripts \
+    $HOME/.klipy/bin \
+    $HOME/.cargo/bin \
+    $HOME/.asdf/shims \
+    ; do
+	[[ -r "$dir" ]] && [[ -d "$dir" ]] && PATH="$dir:$PATH"
+done

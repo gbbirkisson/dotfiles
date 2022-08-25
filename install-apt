@@ -1,0 +1,17 @@
+apt-transport-https  # Basics
+
+exa         # Better ls
+bat         # Better cat
+fzf         # Fuzzy finder
+jq          # Json manipulation
+tree        # Tree for directories
+
+libssl-dev          # Python dependency
+libbz2-dev          # Python dependency
+libncurses-dev      # Python dependency
+libreadline6-dev    # Python dependency
+libsqlite3-dev      # Python dependency
+liblzma-dev         # Python dependency
+tk-dev              # Python dependency
+
+wireguard
