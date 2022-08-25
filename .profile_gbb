@@ -1,3 +1,5 @@
+EDITOR=/usr/bin/vim
+
 for dir in \
     $HOME/.local/scripts \
     $HOME/.klipy/bin \
