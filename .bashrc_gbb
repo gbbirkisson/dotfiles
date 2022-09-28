@@ -35,9 +35,6 @@ export FZF_COMPLETION_OPTS="--preview 'gfzfpreview {}'"
 source /usr/share/doc/fzf/examples/key-bindings.bash
 bind "$(bind -s | grep '^"\\ec"' | sed 's/\\ec/\\C-f/')" # Rebind ATL-C to CTRL-F
 
-# Add Aliases
-source $HOME/.aliases
-
 # Set title function
 function set_win_title(){
     echo -ne "\033]0; terminal - $PWD \007"
@@ -46,3 +43,6 @@ starship_precmd_user_func="set_win_title"
 
 # Enable vi mode
 set -o vi
+
+# Add Aliases
+source $HOME/.aliases
