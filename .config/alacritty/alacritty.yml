@@ -5,6 +5,9 @@ window:
   title: terminal
   dynamic_title: true
   opacity: 1.0
+  padding:
+    x: 5
+    y: 0
 
 scrolling:
   # maximum number of lines in the scrollback buffer. Specifying '0' will
