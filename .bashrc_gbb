@@ -16,13 +16,13 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # Starship
 source <(starship init bash)
 
-# Kubectl
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-source <(kubectl completion bash)
-
 # ASDF
 source $HOME/Documents/repos/personal/asdf/asdf.sh
 source $HOME/Documents/repos/personal/asdf/completions/asdf.bash
+
+# Kubectl
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+source <(kubectl completion bash)
 
 # DirEnv
 source <(direnv hook bash)
