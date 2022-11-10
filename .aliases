@@ -71,3 +71,4 @@ alias wal='/home/gbbirkisson/Documents/repos/personal/TorWAL/wal/wal.py'
 # Oda
 alias klipy="/home/gbbirkisson/Documents/repos/oda/klipy/.venv/bin/python -m klipy"
 alias velo="/home/gbbirkisson/Documents/repos/oda/velo/.venv/bin/python /home/gbbirkisson/Documents/repos/oda/velo/velo/cli/main.py"
+alias mat='echo -e "\e[0;31mMat NY24:\033[0m" && curl -s https://www.ny24.no/api/fetch/$(date "+%u") | jq -r ".menu.no[]" | nl -s ": " -w 1'
