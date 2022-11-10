@@ -1,0 +1,63 @@
+" Set leader
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+
+" Enable plugs
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+set multiple-cursors
+
+" surround cs"' to change "a" to 'a'
+set surround
+
+" gcc to comment out single line, gc4j to comment out many
+set commentary
+
+""" Idea stuff
+
+set number relativenumber
+
+set visualbell
+
+" Open hotkeys
+"map <leader>d <Action>(Debug)
+"map <leader>r <Action>(RenameElement)
+"map <leader>c <Action>(Stop)
+"map <leader>z <Action>(ToggleDistractionFreeMode)
+"map <leader>b <Action>(ToggleLineBreakpoint)
+"map <leader>o <Action>(FileStructurePopup)
+"map <leader>g :action GotoFile<CR>
+nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
+nnoremap <c-p> :action GotoFile<CR>
+nmap <leader><leader> <Action>(PreviousTab)
+
+nnoremap <leader>u :action FindUsages<CR>
+
+""" Generic
+
+" No arrow keys --- force yourself to use the home row
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+nnoremap <left> <nop>
+inoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <right> <nop>
+
+" The 'scrolloff' (scroll offset) option determines the number of context lines you would
+" like to see above and below the cursor.
+set so=5
+
+
+" multiple-cursors
+map mc <A-n> " Select one more
+map mx <A-x> " Select next
+map mx <A-p> " Select one less
+
+" reload conf hotkey
+nnoremap <leader>si :source ~/.ideavimrc<CR>
+
+" Use system clipboard
+set clipboard+=unnamed
