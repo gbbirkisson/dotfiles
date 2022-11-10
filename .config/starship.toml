@@ -12,6 +12,7 @@ $git_metrics\
 $git_status\
 $package\
 $python\
+$cmd_duration\
 $line_break\
 $battery\
 $status\
@@ -33,8 +34,9 @@ disabled = false
 
 [kubernetes.context_aliases]
 "gke_.*_(?P<cluster>[\\w-]+)" = "gke-$cluster"
+"nube-k8s-(?P<cluster>[\\w-]+)" = "$cluster"
 
 [cmd_duration]
-disabled = true
+disabled = false
 min_time = 2000
 format = "took [$duration]($style)"
