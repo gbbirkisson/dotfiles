@@ -8,6 +8,9 @@ window:
   padding:
     x: 5
     y: 0
+  dimensions:
+    columns: 133
+    lines: 40
 
 scrolling:
   # maximum number of lines in the scrollback buffer. Specifying '0' will
