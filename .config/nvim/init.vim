@@ -40,8 +40,9 @@ inoremap <right> <nop>
 "nnoremap <left> :bp<CR>
 "nnoremap <right> :bn<CR>
 
-" Toggle relative line numbers
+" Toggle hybrid line numbers
 :set relativenumber
+:set nu rnu
 highlight LineNr ctermbg=235
 
 " Always show git gutter
