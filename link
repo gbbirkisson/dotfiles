@@ -33,8 +33,8 @@ link() {
     ln -sf "$src" "$dst"
 }
 
-link .config/alacritty/alacritty.yml
-link .config/nvim/init.vim
+# link .config/alacritty/alacritty.yml
+# link .config/nvim/init.vim
 link .config/starship.toml
 
 link .local/scripts

@@ -5,6 +5,7 @@ bat         # Better cat
 fzf         # Fuzzy finder
 jq          # Json manipulation
 tree        # Tree for directories
+nvim        # NeoVim
 
 libssl-dev          # Python dependency
 libbz2-dev          # Python dependency
