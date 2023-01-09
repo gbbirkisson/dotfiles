@@ -26,22 +26,22 @@ font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
   normal:
-    family: DroidSansMono Nerd Font Mono
-    style: Light
+    family: RobotoMono Nerd Font
+    # style: Light
     # family: "Fira Code"
     # family: "Source Code Pro"
     # style: Retina
 
   # The bold font face
   bold:
-    family: DroidSansMono Nerd Font Mono
+    family: RobotoMono Nerd Font
     style: Medium
     # family: "Fira Code"
     # family: "Source Code Pro"
 
   # The italic font face
   italic:
-    family: DroidSansMono Nerd Font Mono
+    family: RobotoMono Nerd Font
     style: "Light Italic"
     # style: "Light Oblique"
     # family: "Fira Code"
@@ -55,36 +55,36 @@ font:
 draw_bold_text_with_bright_colors: false
 
 # Colors
-colors:
-  # Default colors
-  primary:
-    background: "#171F22"
-    foreground: "#d8d8d8"
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: "#2B2C2B"
-    cursor: "#1ABB9B"
+# colors:
+#   # Default colors
+#   primary:
+#     background: "#171F22"
+#     foreground: "#d8d8d8"
+#   # Colors the cursor will use if `custom_cursor_colors` is true
+#   cursor:
+#     text: "#2B2C2B"
+#     cursor: "#1ABB9B"
 
-  # Normal colors
-  normal:
-    black: "#7E807E"
-    red: "#ab4642"
-    green: "#54A756"
-    yellow: "#f7ca88"
-    blue: "#7cafc2"
-    magenta: "#ba8baf"
-    cyan: "#1ABB9B"
-    white: "#d8d8d8"
-  # Bright colors
-  bright:
-    black: "#585858"
-    red: "#ab4642"
-    green: "#8D8F8D"
-    yellow: "#f7ca88"
-    blue: "#7cafc2"
-    magenta: "#ba8baf"
-    cyan: "#1ABB9B"
-    white: "#f8f8f8"
+#   # Normal colors
+#   normal:
+#     black: "#7E807E"
+#     red: "#ab4642"
+#     green: "#54A756"
+#     yellow: "#f7ca88"
+#     blue: "#7cafc2"
+#     magenta: "#ba8baf"
+#     cyan: "#1ABB9B"
+#     white: "#d8d8d8"
+#   # Bright colors
+#   bright:
+#     black: "#585858"
+#     red: "#ab4642"
+#     green: "#8D8F8D"
+#     yellow: "#f7ca88"
+#     blue: "#7cafc2"
+#     magenta: "#ba8baf"
+#     cyan: "#1ABB9B"
+#     white: "#f8f8f8"
 
 # Bell
 
