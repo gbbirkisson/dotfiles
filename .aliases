@@ -60,6 +60,7 @@ alias ghpr='gh pr create --assignee gbbirkisson --draft'
 
 # Poetry
 alias venv_refresh='rm -r .venv && poetry install'
+alias poetry_fix='find ~/.cache/pypoetry/ -name '*.lock' -delete'
 
 # Songs listened to. This assumes the 'Notifications Logger' gnome extension
 # Example usage: songs | awk -F'|' '{print $3 " @ " $4}' | sort | uniq | wc -l
@@ -69,6 +70,9 @@ alias songs='grep -R "Shown|Low" ~/.notifications/ | sed "s%/home/gbbirkisson/.n
 alias wal='/home/gbbirkisson/Documents/repos/personal/TorWAL/wal/wal.py'
 
 # Oda
-alias klipy="/home/gbbirkisson/Documents/repos/oda/klipy/.venv/bin/python -m klipy"
-alias velo="/home/gbbirkisson/Documents/repos/oda/velo/.venv/bin/python /home/gbbirkisson/Documents/repos/oda/velo/velo/cli/main.py"
+alias klipy="/home/gbbirkisson/repos/oda/klipy/.venv/bin/python -m klipy"
+alias velo="/home/gbbirkisson/repos/oda/velo/.venv/bin/python /home/gbbirkisson/repos/oda/velo/velo/cli/main.py"
 alias mat='echo -e "\e[0;31mMat NY24:\033[0m" && curl -s https://www.ny24.no/api/fetch/$(date "+%u") | jq -r ".menu.no[]" | nl -s ": " -w 1'
+
+# Vim
+alias vim="nvim"
