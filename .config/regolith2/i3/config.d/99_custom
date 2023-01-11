@@ -1,0 +1,7 @@
+for_window [class="Spotify"] move to workspace $ws8
+assign [class="1Password"] $ws9
+assign [class="Slack"] $ws10
+
+# To fix config errors, comment out this line in file:
+# vim /usr/share/regolith/i3/config.d/15_base_launchers
+bindsym $mod+$i3-wm.binding.terminal exec --no-startup-id gterm

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# A script to open up the terminal in the same directory as the previous terminal
+
+set -ex
+
+CWD=''
+
+# Get window ID
+ID=$(xdpyinfo | grep focus | cut -f4 -d " ")
+
+# Get PID of process whose window this is
+PID=$(xprop -id $ID | grep -m 1 PID | cut -d " " -f 3)
+
+# Get last child process that isn't a thread (shell, vim, etc)
+if [ -n "$PID" ]; then
+    # TREE=$(pstree -lpA $PID | grep -oE '\-[^\{-]+\([0-9]+\)' | tail -n 1)
+    # PID=$(echo $TREE | awk -F'---' '{print $NF}' | sed -re 's/[^0-9]//g')
+
+    # The -o finds the oldest pid with a parent of the current terminal
+    PID=$(pgrep -oP $PID)
+
+    # If we find the working directory, run the command in that directory
+    if [ -e "/proc/$PID/cwd" ]; then
+        CWD=$(readlink /proc/$PID/cwd)
+    fi
+fi
+
+TERMINAL=/usr/bin/x-terminal-emulator
+
+if [ -n "$CWD" ]; then
+    set -- $TERMINAL --working-directory $CWD
+else
+    set -- $TERMINAL
+fi
+
+exec "$@"
