@@ -76,3 +76,6 @@ alias mat='echo -e "\e[0;31mMat NY24:\033[0m" && curl -s https://www.ny24.no/api
 
 # Vim
 alias vim="nvim"
+
+# Code
+alias c="code . && exit"
