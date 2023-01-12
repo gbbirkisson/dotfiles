@@ -1,4 +1,7 @@
 {
+    // Turn of telemetry
+    "telemetry.telemetryLevel": "off",
+
     // Setup titlebar
     "window.titleBarStyle": "custom",
     "window.customMenuBarAltFocus": false,
