@@ -79,3 +79,11 @@ alias vim="nvim"
 
 # Code
 alias c="code . && exit"
+
+# Git
+alias gc="git commit -m"
+alias gp="git pull"
+alias gps="git push"
+alias gs="git status"
+alias ga="git add"
+alias gd="git diff"
