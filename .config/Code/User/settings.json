@@ -1,0 +1,19 @@
+{
+    // Setup titlebar
+    "window.titleBarStyle": "custom",
+    "window.customMenuBarAltFocus": false,
+
+    // Make sure capslock -> escape works
+    "keyboard.dispatch": "keyCode",
+    
+    // Setup font
+    "editor.fontFamily": "'JetBrainsMonoNL Nerd Font Mono:style=ExtraLight', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.lineHeight": 1.8,
+    "editor.fontSize": 13,
+
+    // Setup rust
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+        "editor.formatOnSave": true
+    },
+}

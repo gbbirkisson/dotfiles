@@ -1,0 +1,33 @@
+[
+    // Terminal focus hotkeys
+    {
+        "key":     "alt+f12",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key":     "escape",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when":    "terminalFocus"
+    },
+    {
+        "key":     "alt+f12",
+        "command": "workbench.action.terminal.kill",
+        "when":    "terminalFocus"
+    },
+
+    // Line comment hotkey
+    {
+        "key": "ctrl+shift+7",
+        "command": "editor.action.commentLine",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+
+    {
+        "key": "alt+right",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "alt+left",
+        "command": "workbench.action.previousEditor"
+    },
+]
