@@ -42,7 +42,7 @@ function set_win_title(){
 starship_precmd_user_func="set_win_title"
 
 # Enable vi mode
-#set -o vi
+set -o vi
 
 # Add Aliases
 source $HOME/.aliases

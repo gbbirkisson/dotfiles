@@ -19,4 +19,10 @@
         "editor.defaultFormatter": "rust-lang.rust-analyzer",
         "editor.formatOnSave": true
     },
+
+    // For vim mode
+    "editor.lineNumbers": "relative",
+    "vim.leader": "<space>",
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "~/.config/nvim/common.vim",
 }
