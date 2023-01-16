@@ -33,5 +33,17 @@
                 "workbench.action.previousEditor"
             ]
         },
+        {
+            "before": ["<m-h>"],
+            "commands": [
+                "workbench.action.previousEditor"
+            ]
+        },
+        {
+            "before": ["<m-l>"],
+            "commands": [
+                "workbench.action.nextEditor"
+            ]
+        },
     ]
 }

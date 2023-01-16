@@ -45,8 +45,12 @@ elseif has('nvim')
     nnoremap <leader><leader> <c-^>
 endif
 
-" TODO swith buffers with alt-h and alt-l
-" TODO <leader><leader> swith to other file
+" Use alt + h or l to switch between buffers
+" - vscode: set in settings.json
+if has('nvim') || has('ide')
+    nnoremap <m-h> :bp<CR>
+    nnoremap <m-l> :bn<CR>
+endif
 
 " Setup check function
 nnoremap <leader>ch ovscode
