@@ -27,9 +27,22 @@ set so=8
 set nu
 set relativenumber
 
-" Close nvim buffers with C-w
-if has('nvim')
-    nnoremap <C-w> :bd<CR>
+" Close buffers with C-w
+nnoremap <C-w> :bd<CR>
+
+" Open files with C-p
+" - vscode: this is the default
+" - nvim: set in telescope.lua
+if has('ide')
+   nnoremap <C-p> :action GotoFile<CR>
+endif
+
+" Rotate between files with <leader><leader>
+" - vscode: set in settings.json
+if has('ide')
+    nmap <leader><leader> <Action>(PreviousTab)
+elseif has('nvim')
+    nnoremap <leader><leader> <c-^>
 endif
 
 " TODO swith buffers with alt-h and alt-l

@@ -25,4 +25,13 @@
     "vim.leader": "<space>",
     "vim.vimrc.enable": true,
     "vim.vimrc.path": "~/.config/nvim/common.vim",
+
+    "vim.normalModeKeyBindings": [
+        {
+            "before": ["<leader>", "<leader>"],
+            "commands": [
+                "workbench.action.previousEditor"
+            ]
+        },
+    ]
 }
