@@ -9,6 +9,9 @@ bindsym $mod+$i3-wm.binding.terminal exec --no-startup-id gterm
 set_from_resource $i3-wm.binding.browser i3-wm.binding.browser Shift+Return
 bindsym $mod+$i3-wm.binding.browser exec --no-startup-id gtk-launch $(xdg-settings get default-web-browser)
 
+## Launch screenshot
+bindsym Print exec flameshot gui
+
 ## Assign common programs to their workspaces
 for_window [class="Spotify"] move to workspace $ws8
 assign [class="1Password"] $ws9

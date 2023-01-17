@@ -16,3 +16,5 @@ liblzma-dev         # Python dependency
 tk-dev              # Python dependency
 
 wireguard
+
+flameshot  # For screenshots
