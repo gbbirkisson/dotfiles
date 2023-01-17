@@ -27,6 +27,12 @@ set so=8
 set nu
 set relativenumber
 
+" Only show cmd bar when entering commands
+set cmdheight=0
+
+" Only show status bar for the buffer in focus
+set laststatus=3
+
 " Close buffers with C-w
 nnoremap <C-w> :bd<CR>
 
