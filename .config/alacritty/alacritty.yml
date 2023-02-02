@@ -118,3 +118,5 @@ cursor:
   blink_interval: 500
   style:
     blinking: On
+  vi_mode_style: block
+

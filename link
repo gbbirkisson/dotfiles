@@ -48,4 +48,5 @@ link .bashrc_gbb
 link .gitconfig
 link .gitconfig_oda
 link .ideavimrc
+link .inputrc
 link .profile_gbb
