@@ -31,6 +31,9 @@ source <(direnv hook bash)
 export FZF_DEFAULT_OPTS="--height 100% --layout=reverse"
 export FZF_CTRL_T_OPTS="--preview 'gfzfpreview {}'"
 export FZF_ALT_C_OPTS="--preview 'gfzfpreview {}'"
+export FZF_ALT_C_COMMAND="command find -L . \
+    -mindepth 1 \\( -path './snap*' -o -path './go*' -o -path '*/__pycache__' -o -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+    -o -type d -print 2> /dev/null | cut -b3-"
 export FZF_COMPLETION_OPTS="--preview 'gfzfpreview {}'"
 source /usr/share/doc/fzf/examples/key-bindings.bash
 bind "$(bind -s | grep '^"\\ec"' | sed 's/\\ec/\\C-f/')" # Rebind ATL-C to CTRL-F
