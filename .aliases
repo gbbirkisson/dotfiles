@@ -60,7 +60,8 @@ alias ghpr='gh pr create --assignee gbbirkisson --draft'
 
 # Poetry
 alias venv_refresh='rm -r .venv && poetry install'
-alias poetry_fix='find ~/.cache/pypoetry/ -name '*.lock' -delete'
+# alias poetry_fix='find ~/.cache/pypoetry/ -name '*.lock' -delete'
+alias poetry_fix='poetry cache clear --all . && rm -rf echo $(poetry config cache-dir)/artifacts'
 
 # Songs listened to. This assumes the 'Notifications Logger' gnome extension
 # Example usage: songs | awk -F'|' '{print $3 " @ " $4}' | sort | uniq | wc -l
@@ -87,3 +88,7 @@ alias gps="git push"
 alias gs="git status"
 alias ga="git add"
 alias gd="git diff"
+
+# Docker compose
+alias dcup="docker compose up -d"
+alias dcstop="docker compose stop"
