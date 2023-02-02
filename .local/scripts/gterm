@@ -24,6 +24,11 @@ if [ -n "$PID" ]; then
     if [ -e "/proc/$PID/cwd" ]; then
         CWD=$(readlink /proc/$PID/cwd)
     fi
+    
+    # Ignore invalid working dir
+    if [[ $CWD = /proc/*/fdinfo ]]; then
+        CWD=''
+    fi
 fi
 
 TERMINAL=/usr/bin/x-terminal-emulator
