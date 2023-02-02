@@ -2,6 +2,7 @@ export EDITOR=/usr/bin/nvim
 
 for dir in \
     $HOME/.local/scripts \
+    $HOME/.local/bin \
     $HOME/.klipy/bin \
     $HOME/.cargo/bin \
     $HOME/.asdf/shims \
