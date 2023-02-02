@@ -45,5 +45,11 @@
                 "workbench.action.nextEditor"
             ]
         },
+    ],
+    "vim.insertModeKeyBindingsNonRecursive": [
+        { 
+            "before": ["<c-t>"],
+            "after": ["\"", "<c-r>", "\""],
+        },
     ]
 }

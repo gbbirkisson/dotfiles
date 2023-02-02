@@ -4,7 +4,14 @@ set number relativenumber
 " gcc to comment out single line, gc4j to comment out many
 set commentary
 
+" Source common config
 source ~/.config/nvim/common.vim
+
+" 1 2
+" 1 2
+" 1 2
+" 1 2
+
 
 """ Enable plugs
 " set ideajoin

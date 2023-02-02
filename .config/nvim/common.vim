@@ -6,9 +6,11 @@ let mapleader=" "
 nnoremap <C-u> <C-u>zz
 nnoremap <C-d> <C-d>zz
 
-" Yank to clipboard
-nnoremap <leader>y "+y
+" Yank to clipboard nnoremap <leader>y "+y
 vnoremap <leader>y "+y
+nnoremap <leader>y "+y
+vnoremap <leader>p "+p
+nnoremap <leader>p "+p
 
 " No arrow keys --- force yourself to use the home row
 nnoremap <up> <nop>
@@ -28,10 +30,14 @@ set nu
 set relativenumber
 
 " Only show cmd bar when entering commands
-set cmdheight=0
+" set cmdheight=0
 
 " Only show status bar for the buffer in focus
-set laststatus=3
+" set laststatus=3
+
+" Quote a selection by doing ciw<c-t>
+" vscode: set in settings.json
+inoremap <c-t> "<c-r>""
 
 " Close buffers with C-w
 nnoremap <C-w> :bd<CR>
