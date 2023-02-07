@@ -77,12 +77,14 @@ alias mat='echo -e "\e[0;31mMat NY24:\033[0m" && curl -s https://www.ny24.no/api
 
 # Vim
 alias vim="nvim"
+alias :q="exit"
 
 # Code
 alias c="code . && exit"
 
 # Git
 alias gc="git commit -m"
+alias gcb="git checkout -b"
 alias gp="git pull"
 alias gps="git push"
 alias gs="git status"
