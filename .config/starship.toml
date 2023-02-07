@@ -8,14 +8,14 @@ $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
-$package\
-$python\
 $cmd_duration\
 $battery\
 $status\
 $shell\
 $character"""
 
+# $package\
+# $python\
 #$line_break\
 
 [status]
