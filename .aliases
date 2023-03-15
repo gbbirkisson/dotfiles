@@ -78,6 +78,7 @@ alias mat='echo -e "\e[0;31mMat NY24:\033[0m" && curl -s https://www.ny24.no/api
 
 # Vim
 alias vim="nvim"
+alias v="poetry run nvim . || nvim ."
 alias :q="exit"
 alias vimcheat="xdg-open https://www.gbb.is/posts/2022-09-28-vim-cheatsheet/"
 
