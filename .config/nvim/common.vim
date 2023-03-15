@@ -60,8 +60,8 @@ endif
 " Use alt + h or l to switch between buffers
 " - vscode: set in settings.json
 if has('nvim') || has('ide')
-    nnoremap <m-h> :bp<CR>
-    nnoremap <m-l> :bn<CR>
+    nnoremap <m-l> :bp<CR>
+    nnoremap <m-h> :bn<CR>
 endif
 
 " Setup check function
