@@ -61,7 +61,8 @@ alias ghpr='gh pr create --assignee gbbirkisson --draft'
 # Poetry
 alias venv_refresh='rm -r .venv && poetry install'
 # alias poetry_fix='find ~/.cache/pypoetry/ -name '*.lock' -delete'
-alias poetry_fix='poetry cache clear --all . && rm -rf echo $(poetry config cache-dir)/artifacts'
+alias poetry_fix='poetry cache clear --all . && rm -rf $(poetry config cache-dir)/artifacts'
+# alias poetry_fix='poetry cache clear --all pypi'
 
 # Songs listened to. This assumes the 'Notifications Logger' gnome extension
 # Example usage: songs | awk -F'|' '{print $3 " @ " $4}' | sort | uniq | wc -l
@@ -78,6 +79,7 @@ alias mat='echo -e "\e[0;31mMat NY24:\033[0m" && curl -s https://www.ny24.no/api
 # Vim
 alias vim="nvim"
 alias :q="exit"
+alias vimcheat="xdg-open https://www.gbb.is/posts/2022-09-28-vim-cheatsheet/"
 
 # Code
 alias c="code . && exit"
