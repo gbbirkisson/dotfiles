@@ -50,3 +50,4 @@ link .gitconfig_oda
 link .ideavimrc
 link .inputrc
 link .profile_gbb
+link .tmux.conf
