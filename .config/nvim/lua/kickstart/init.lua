@@ -86,7 +86,7 @@ require('packer').startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
   use 'mzlogin/vim-markdown-toc'
-  
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -261,7 +261,7 @@ end, { desc = 'Search [A]ll by [G]rep (include dot files)' })
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'python', 'markdown' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'python', 'markdown', 'terraform' },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
@@ -383,7 +383,8 @@ local servers = {
   rust_analyzer = {},
   -- tsserver = {},
 
-  sumneko_lua = {
+  -- sumneko_lua = {
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },

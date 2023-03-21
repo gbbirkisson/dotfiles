@@ -6,6 +6,10 @@ let mapleader=" "
 nnoremap <C-u> <C-u>zz
 nnoremap <C-d> <C-d>zz
 
+" Center cursor when searching 
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " Yank to clipboard nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>y "+y
@@ -39,8 +43,8 @@ set relativenumber
 " vscode: set in settings.json
 inoremap <c-t> "<c-r>""
 
-" Close buffers with C-w
-nnoremap <C-w> :bd<CR>
+" Close buffers with C-q
+nnoremap <C-q> :bd<CR>
 
 " Open files with C-p
 " - vscode: this is the default
@@ -73,3 +77,8 @@ elseif has('nvim')
 else
     nnoremap <leader>ch ounknown
 endif
+
+" Set tab spacing
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
