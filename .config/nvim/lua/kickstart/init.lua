@@ -23,18 +23,22 @@ require('packer').startup(function(use)
           '.git',
           '.hg',
           '.svn',
-          'Makefile',
-          'Cargo.toml',
-          '.gitignore',
-          'init.lua',
-          'package.json',
-          'README.md',
-          'README.rst',
-          'README'
+          -- 'Makefile',
+          -- 'Cargo.toml',
+          -- '.gitignore',
+          -- 'init.lua',
+          -- 'package.json',
+          -- 'README.md',
+          -- 'README.rst',
+          -- 'README'
         },
       }
     end
   }
+
+  -- Leap plugin
+  use 'tpope/vim-repeat'
+  use 'ggandor/leap.nvim'
 
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -186,6 +190,27 @@ require('lualine').setup {
     theme = 'onedark',
     component_separators = '|',
     section_separators = '',
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {{'filename', path=1}, 'diff', 'diagnostics'},
+    lualine_c = {
+      {
+        'buffers',
+        show_filename_only = false,
+      }
+    },
+    lualine_x = {'encoding'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {{'filename', path=1}, 'diff', 'diagnostics'},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
   },
 }
 
@@ -464,6 +489,9 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- Configure leap bindings
+require('leap').add_default_mappings()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

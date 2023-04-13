@@ -26,12 +26,20 @@ inoremap <left> <nop>
 nnoremap <right> <nop>
 inoremap <right> <nop>
 
+" Move lines up and down with <A-j> and <A-k>
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
 " Scrolloff
 set so=8
 
 " Line numbers
 set nu
-set relativenumber
+" set relativenumber
 
 " Only show cmd bar when entering commands
 " set cmdheight=0
