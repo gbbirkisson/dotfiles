@@ -1,15 +1,21 @@
 [user]
 	name = Guðmundur Björn Birkisson
 	email = gbbirkisson@gmail.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIMOmyVFWXJ6Yrr7XCcokJdbGtNprIwcvHqWNnEv06TF
 [pull]
 	rebase = false
 [push]
 	default = simple
 [init]
 	defaultBranch = main
-
 [alias]
-    gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
+	gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /opt/1Password/op-ssh-sign
+[commit]
+	gpgsign = true
 
 [includeIf "gitdir:~/repos/oda/**"]
-    path = .gitconfig_oda
+	path = .gitconfig_oda
