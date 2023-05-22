@@ -1,0 +1,41 @@
+---
+- hosts: localhost
+  tasks:
+
+  - name: Find out playbook's path
+    shell: pwd
+    register: pwd
+
+  - name: Set asdf dir
+    set_fact:
+      asdf_dir: "{{ pwd.stdout }}/.asdf"
+
+  - name: Git checkout asdf
+    git:
+      repo: https://github.com/asdf-vm/asdf.git
+      dest: "{{ asdf_dir }}"
+      version: v0.11.3
+
+  - name: Source asdf
+    lineinfile:
+      path: ~/.bashrc
+      line: "{{ item }}"
+    with_items:
+    - "source {{ asdf_dir }}/asdf.sh"
+    - "source {{ asdf_dir }}/completions/asdf.bash"
+
+  - name: Source asdf shims
+    lineinfile:
+      path: ~/.profile
+      line: "PATH={{ asdf_dir }}/shims:$PATH"
+
+  - name: Get plugins
+    shell: "cat .tool-versions | awk '{ print $1}'"
+    register: plugins
+
+  - name: Add asdf plugins
+    shell: "asdf plugin-add {{ item }} || true"
+    with_items: "{{ plugins.stdout.split('\n') }}"
+
+  - name: Install tools
+    shell: "asdf install"

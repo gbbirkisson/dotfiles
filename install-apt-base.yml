@@ -1,6 +1,5 @@
 ---
 - hosts: localhost
-  connection: local
   tasks:
   - name: Stalled? Your sudo password is wrong!
     become: true
@@ -14,6 +13,7 @@
       - build-essential
       - cmake
       - apt-transport-https
+      - git
 
       - exa         # Better ls
       - bat         # Better cat

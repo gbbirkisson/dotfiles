@@ -10,6 +10,7 @@ ANSIBLE:=ANSIBLE_LOCALHOST_WARNING=False ANSIBLE_INVENTORY_UNPARSED_WARNING=Fals
 # Note: Add SPACE at end of each line!
 define PLAYBOOKS
 install.yml 
+install-asdf.yml 
 install-apt-base.yml 
 endef
 

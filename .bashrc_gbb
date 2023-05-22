@@ -16,10 +16,6 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # Starship
 source <(starship init bash)
 
-# ASDF
-source $HOME/.asdf/asdf.sh
-source $HOME/.asdf/completions/asdf.bash
-
 # Kubectl
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 source <(kubectl completion bash)
