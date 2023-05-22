@@ -89,6 +89,9 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
+  -- Linting and formatting
+  use 'jose-elias-alvarez/null-ls.nvim'
+
   use 'mzlogin/vim-markdown-toc'
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
@@ -114,6 +117,25 @@ if is_bootstrap then
   print '=================================='
   return
 end
+
+-- Setup linting and formatting
+local null_ls = require("null-ls")
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.completion.spell,
+        -- JS
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.formatting.prettier,
+        -- Python
+        null_ls.builtins.diagnostics.mypy,
+        null_ls.builtins.diagnostics.ruff,
+        null_ls.builtins.formatting.ruff,
+        null_ls.builtins.formatting.black,
+        -- rust
+        null_ls.builtins.formatting.rustfmt,
+    },
+})
 
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
@@ -378,6 +400,9 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
+  -- Format file
+  nmap('<leader>ff', vim.lsp.buf.format, '[F]ormat [F]ile')
+
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
@@ -468,8 +493,8 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
+      -- elseif luasnip.expand_or_jumpable() then
+      --   luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -477,8 +502,8 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+      -- elseif luasnip.jumpable(-1) then
+      --   luasnip.jump(-1)
       else
         fallback()
       end
