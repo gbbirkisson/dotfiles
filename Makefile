@@ -3,8 +3,8 @@
 
 RUST_PATH:=~/.cargo/bin
 
-install-all: install-be install-rust install-docker install-ngrok apt-install cargo-install vscode-install ## Install everything
-update-all: apt-update cargo-update vscode-install ## Update everything
+install-all: install-be install-rust install-docker apt-install cargo-install ## Install everything
+update-all: apt-update cargo-update ## Update everything
 
 install-be: ## Install build-essential
 	### Install build-essential started ###
@@ -30,7 +30,7 @@ install-docker: ## Install docker
 	sudo usermod -a -G docker ${USER}
 	### Install docker done ###
 
-install-ngrok:
+install-ngrok:  ## Install ngrok (optional)
 	### Install ngrok started ###
 	curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
 	echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list
@@ -58,11 +58,6 @@ cargo-update: ## Update cargo packages
 	### Update cargo packages started ###
 	cat install-cargo | sed -e 's%\s*#.*$$%%g' | xargs ${RUST_PATH}/cargo install-update
 	### Update cargo packages done ###
-
-vscode-install: ## Install vscode addons
-	### Install/Update vscode addons started ###
-	@cat install-vscode | sed -e 's%\s*#.*$$%%g' | xargs -L 1 code --force --install-extension
-	### Install/Update vscode addons done ###
 
 link: ## Link this repo to HOME folder
 	### Link this repo to HOME folder started ###
