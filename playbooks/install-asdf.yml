@@ -5,6 +5,7 @@
   - name: Set asdf dir
     set_fact:
       asdf_dir: "{{ dotfiles }}/.asdf"
+      asdf_bin: "{{ dotfiles }}/.asdf/bin/asdf"
 
   - name: Git checkout asdf
     git:
@@ -25,12 +26,12 @@
       line: 'PATH="{{ asdf_dir }}/shims:$PATH"'
 
   - name: Get plugins
-    shell: "cat .tool-versions | awk '{ print $1}'"
+    shell: "cat {{ dotfiles }}/.tool-versions | awk '{ print $1}'"
     register: plugins
 
   - name: Add missing asdf plugins
-    shell: "asdf plugin-list | grep {{ item }} || asdf plugin-add {{ item }}"
+    shell: "{{ asdf_bin }} plugin-list | grep {{ item }} || {{ asdf_bin }} plugin-add {{ item }}"
     with_items: "{{ plugins.stdout.split('\n') }}"
 
   - name: Install tools
-    shell: "asdf install"
+    shell: "{{ asdf_bin }} install"
