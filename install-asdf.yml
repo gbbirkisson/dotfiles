@@ -21,12 +21,23 @@
       path: "{{ item.path }}"
       line: "{{ item.line }}"
     with_items:
+    # For asdf
     - path: ~/.bashrc
       line: "source {{ asdf_dir }}/asdf.sh"
     - path: ~/.bashrc
       line: "source {{ asdf_dir }}/completions/asdf.bash"
     - path: ~/.profile
       line: 'PATH="{{ asdf_dir }}/shims:$PATH"'
+
+    # For direnv
+    - path: ~/.bashrc
+      line: "source <(direnv hook bash)"
+
+    # For kubectl
+    - path: ~/.bashrc
+      line: "export USE_GKE_GCLOUD_AUTH_PLUGIN=True"
+    - path: ~/.bashrc
+      line: "source <(kubectl completion bash)"
 
   - name: Get plugins
     shell: "cat .tool-versions | awk '{ print $1}'"

@@ -12,16 +12,8 @@ export HISTFILE=~/.bash_history_eternal
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-
 # Starship
 source <(starship init bash)
-
-# Kubectl
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-source <(kubectl completion bash)
-
-# DirEnv
-source <(direnv hook bash)
 
 # FZF
 export FZF_DEFAULT_OPTS="--height 100% --layout=reverse"
