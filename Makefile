@@ -10,8 +10,11 @@ ANSIBLE:=ANSIBLE_LOCALHOST_WARNING=False ANSIBLE_INVENTORY_UNPARSED_WARNING=Fals
 # Note: Add SPACE at end of each line!
 define PLAYBOOKS
 install.yml 
-install-asdf.yml 
+
+install-1password.yml 
 install-apt-base.yml 
+install-asdf.yml 
+install-docker.yml 
 endef
 
 $(VENV): ; $(info $(M) Creating python environment)
@@ -23,7 +26,7 @@ lint: $(VENV) ; $(info $(M) Linting playbooks)
 	$(Q) $(PYTHON) -m yamllint -s *.yml
 
 .PHONY: sudo
-sudo: ; $(info $(M) Make sure we can sudo)  ## Ensures we can sudo
+sudo: ; $(info $(M) Make sure we can sudo)
 	$(Q) sudo true
 
 .PHONY: run

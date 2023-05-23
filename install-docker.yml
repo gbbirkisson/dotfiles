@@ -2,6 +2,7 @@
 - hosts: localhost
   gather_facts: true
   tasks:
+
   - name: Add Docker GPG apt Key
     become: true
     apt_key:

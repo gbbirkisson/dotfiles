@@ -1,3 +1,6 @@
 ---
 - import_playbook: install-apt-base.yml
+
+- import_playbook: install-1password.yml
 - import_playbook: install-asdf.yml
+- import_playbook: install-docker.yml
