@@ -51,3 +51,4 @@ link .ideavimrc
 link .inputrc
 link .profile_gbb
 link .tmux.conf
+link .tool-versions

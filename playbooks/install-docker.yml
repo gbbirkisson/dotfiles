@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  gather_facts: true
+  tasks:
+
+  - name: Add Docker GPG apt Key
+    become: true
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Apt Repository
+    become: true
+    apt_repository:
+      repo: "deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+      state: present
+
+  - name: Install Docker
+    become: true
+    apt:
+      state: latest
+      update_cache: true
+      pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+
+  - name: Adding user to docker group
+    become: true
+    user:
+      name: "{{ lookup('env', 'USER') }}"
+      groups: docker
+      append: true

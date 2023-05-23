@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  tasks:
+
+  - name: Install packages
+    become: true
+    apt:
+      state: latest
+      update_cache: true
+      pkg:
+      # Bare essentials
+      - build-essential
+      - cmake
+      - apt-transport-https
+      - git
+
+      - exa         # Better ls
+      - bat         # Better cat
+      - fzf         # Fuzzy finder
+      - jq          # Json manipulation
+      - tree        # Tree for directories
+
+      - gnome-tweaks    # Tweak gnome
+      - wireguard       # VPN
+      - flameshot       # For screenshots
+
+      # Python dependencies
+      - libssl-dev
+      - libbz2-dev
+      - libncurses-dev
+      - libreadline6-dev
+      - libsqlite3-dev
+      - liblzma-dev
+      - tk-dev

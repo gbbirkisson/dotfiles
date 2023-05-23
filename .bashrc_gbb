@@ -9,23 +9,8 @@ export HISTTIMEFORMAT="[%F %T] "
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
 export HISTFILE=~/.bash_history_eternal
 # Force prompt to write history after every command.
-# http://superuser.com/questions/20900/bash-history-loss
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-
-
-# Starship
-source <(starship init bash)
-
-# ASDF
-source $HOME/.asdf/asdf.sh
-source $HOME/.asdf/completions/asdf.bash
-
-# Kubectl
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-source <(kubectl completion bash)
-
-# DirEnv
-source <(direnv hook bash)
+# https://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
+PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
 
 # FZF
 export FZF_DEFAULT_OPTS="--height 100% --layout=reverse"
@@ -38,11 +23,19 @@ export FZF_COMPLETION_OPTS="--preview 'gfzfpreview {}'"
 source /usr/share/doc/fzf/examples/key-bindings.bash
 bind "$(bind -s | grep '^"\\ec"' | sed 's/\\ec/\\C-f/')" # Rebind ATL-C to CTRL-F
 
-# Set title function
-function set_win_title(){
-    echo -ne "\033]0; terminal - $PWD \007"
-}
-starship_precmd_user_func="set_win_title"
+# Starship
+command -v starship >/dev/null 2>&1 && source <(starship init bash)
+
+# Direnv
+command -v direnv >/dev/null 2>&1 && source <(direnv hook bash)
+
+# Kubectl
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+command -v kubectl >/dev/null 2>&1 && source <(kubectl completion bash)
+
+# Enable kubectl with 'ke'
+export KUBECONFIG=/dev/null
+alias ke='export KUBECONFIG=.kube/config'
 
 # Enable vi mode
 set -o vi
