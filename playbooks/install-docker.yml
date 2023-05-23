@@ -3,6 +3,10 @@
   gather_facts: true
   tasks:
 
+  - name: Set DPKG architecture
+    set_fact:
+      dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
+
   - name: Add Docker GPG apt Key
     become: true
     apt_key:
@@ -12,7 +16,7 @@
   - name: Add Docker Apt Repository
     become: true
     apt_repository:
-      repo: "deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+      repo: "deb [arch={{ dpkg_arch }}] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
       state: present
 
   - name: Install Docker
