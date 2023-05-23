@@ -15,6 +15,7 @@ install-1password.yml
 install-apt-base.yml 
 install-asdf.yml 
 install-docker.yml 
+install-rust.yml 
 endef
 
 $(VENV): ; $(info $(M) Creating python environment)

@@ -3,4 +3,4 @@
 
 - import_playbook: install-1password.yml
 - import_playbook: install-asdf.yml
-- import_playbook: install-docker.yml
+- import_playbook: install-rust.yml
