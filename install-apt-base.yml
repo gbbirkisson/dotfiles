@@ -1,10 +1,6 @@
 ---
 - hosts: localhost
   tasks:
-  - name: Stalled? Your sudo password is wrong!
-    become: true
-    command: id -u
-
   - name: Install packages
     become: true
     apt:

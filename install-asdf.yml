@@ -18,15 +18,14 @@
 
   - name: Source asdf
     lineinfile:
-      path: ~/.bashrc
-      line: "{{ item }}"
+      path: "{{ item.path }}"
+      line: "{{ item.line }}"
     with_items:
-    - "source {{ asdf_dir }}/asdf.sh"
-    - "source {{ asdf_dir }}/completions/asdf.bash"
-
-  - name: Source asdf shims
-    lineinfile:
-      path: ~/.profile
+    - path: ~/.bashrc
+      line: "source {{ asdf_dir }}/asdf.sh"
+    - path: ~/.bashrc
+      line: "source {{ asdf_dir }}/completions/asdf.bash"
+    - path: ~/.profile
       line: "PATH={{ asdf_dir }}/shims:$PATH"
 
   - name: Get plugins

@@ -22,23 +22,24 @@ $(VENV): ; $(info $(M) Creating python environment)
 lint: $(VENV) ; $(info $(M) Linting playbooks)
 	$(Q) $(PYTHON) -m yamllint -s *.yml
 
+.PHONY: sudo
+sudo: ; $(info $(M) Make sure we can sudo)  ## Ensures we can sudo
+	$(Q) sudo true
+
 .PHONY: run
 run: $(VENV) ; $(info $(M) Running playbook '$(PLAYBOOK)')
-	$(Q) $(ANSIBLE) playbook $(PLAYBOOK) --ask-become-pass
+	$(Q) $(ANSIBLE) playbook $(PLAYBOOK)
 
 .PHONY: $(PLAYBOOKS)
 $(PLAYBOOKS): lint
 	$(Q) PLAYBOOK=$@ $(MAKE) --no-print-directory run
 
 .PHONY: install
-install: install.yml  ## Install everything
+install: sudo install.yml  ## Install everything
 
 help: ## Show help
 	@echo "Makefile targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
-
-ANSIBLE_PLAYBOOK:=$(ANSIBLE) playbook
-ANSIBLE_ADHOC:=$(ANSIBLE) adhoc localhost
 
 # .PHONY: link
 #
