@@ -25,3 +25,10 @@
       - docker-ce-cli
       - containerd.io
       - docker-compose-plugin
+
+  - name: Adding user to docker group
+    become: true
+    user:
+      name: "{{ lookup('env', 'USER') }}"
+      groups: docker
+      append: true

@@ -30,11 +30,7 @@ alias dcln='dstp; drma; drmi; drmv'                                             
 
 # kubectl aliases
 alias k='kubectl'
-alias kd='export KUBECONFIG=/dev/null'
 complete -F __start_kubectl k
-
-# git aliases
-alias gitlog='git log --graph --pretty=oneline --abbrev-commit --all'
 
 # use bat not cat
 if command -v batcat &> /dev/null ; then
@@ -49,34 +45,24 @@ if command -v exa &> /dev/null ; then
 	alias ll="exa -alF -s type"
 fi
 
-# python http server
-alias serve='python3 -m http.server'
+# serve files
+# alias serve='python3 -m http.server'
+alias serve='sfz -b 0.0.0.0 -p 8000'
 
 # Extract jwt header/payload
 alias jwth="tr '.' '\t' | awk '{print \$1}' | base64 -d 2>/dev/null | jq"
 alias jwtp="tr '.' '\t' | awk '{print \$2}' | base64 -d 2>/dev/null | jq"
 
-# Github
-alias ghpr='gh pr create --assignee gbbirkisson --draft'
-
 # Poetry
-alias venv_refresh='rm -r .venv && poetry install'
+alias poetry_refresh='rm -r .venv && poetry install'
 # alias poetry_fix='find ~/.cache/pypoetry/ -name '*.lock' -delete'
 alias poetry_fix='poetry cache clear --all . && rm -rf $(poetry config cache-dir)/artifacts'
 # alias poetry_fix='poetry cache clear --all pypi'
 alias poetry_env='poetry env use $(asdf which python)'
 
-# Songs listened to. This assumes the 'Notifications Logger' gnome extension
-# Example usage: songs | awk -F'|' '{print $3 " @ " $4}' | sort | uniq | wc -l
-alias songs='grep -R "Shown|Low" ~/.notifications/ | sed "s%/home/gbbirkisson/.notifications/%%g" | sed "s%.log:%|%g" | sed "s%Shown|Low|%%g"'
-
-# Wal
-alias wal='/home/gbbirkisson/Documents/repos/personal/TorWAL/wal/wal.py'
-
 # Oda
-alias klipy="/home/gbbirkisson/repos/oda/klipy/.venv/bin/python -m klipy"
-alias velo="/home/gbbirkisson/repos/oda/velo/.venv/bin/python /home/gbbirkisson/repos/oda/velo/velo/cli/main.py"
-alias mat='echo -e "\e[0;31mMat NY24:\033[0m" && curl -s https://www.ny24.no/api/fetch/$(date "+%u") | jq -r ".menu.no[]" | nl -s ": " -w 1'
+alias klipy="$ODA_PATH/klipy/.venv/bin/python -m klipy"
+alias velo="$ODA_PATH/velo/.venv/bin/python /home/gbbirkisson/repos/oda/velo/velo/cli/main.py"
 alias 3dprinter='vlc http://192.168.151.100/webcam/?action=stream --logfile /dev/null'
 
 # Vim
@@ -84,9 +70,6 @@ alias vim="nvim"
 alias v="poetry run nvim . || nvim ."
 alias :q="exit"
 alias vimcheat="xdg-open https://www.gbb.is/posts/2022-09-28-vim-cheatsheet/"
-
-# Code
-alias c="code . && exit"
 
 # Git
 alias gc="git commit -m"
@@ -96,6 +79,7 @@ alias gps="git push"
 alias gs="git status"
 alias ga="git add"
 alias gd="git diff"
+alias gl='git log --graph --pretty=oneline --abbrev-commit --all'
 
 # Docker compose
 alias dcup="docker compose up -d"

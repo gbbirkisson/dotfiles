@@ -2,13 +2,9 @@
 - hosts: localhost
   tasks:
 
-  - name: Find out playbook's path
-    shell: pwd
-    register: pwd
-
   - name: Set asdf dir
     set_fact:
-      asdf_dir: "{{ pwd.stdout }}/.asdf"
+      asdf_dir: "{{ dotfiles }}/.asdf"
 
   - name: Git checkout asdf
     git:

@@ -33,6 +33,10 @@ command -v direnv >/dev/null 2>&1 && source <(direnv hook bash)
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 command -v kubectl >/dev/null 2>&1 && source <(kubectl completion bash)
 
+# Enable kubectl with 'ke'
+export KUBECONFIG=/dev/null
+alias ke='export KUBECONFIG=.kube/config'
+
 # Enable vi mode
 set -o vi
 

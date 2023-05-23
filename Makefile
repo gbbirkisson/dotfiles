@@ -23,7 +23,7 @@ sudo: ; $(info $(M) Assert sudo)
 
 .PHONY: run
 run: $(VENV) ; $(info $(M) Running $(PLAYBOOK))
-	$(Q) $(ANSIBLE) playbook $(PLAYBOOK)
+	$(Q) $(ANSIBLE) playbook $(PLAYBOOK) --extra-vars "dotfiles=$(PWD)"
 
 .PHONY: $(PLAYBOOKS)
 $(PLAYBOOKS): lint
@@ -41,6 +41,3 @@ link: $(VENV) ## Link dotfiles to HOME folder
 help: ## Show help
 	@echo "Makefile targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
-
-# TODO: sudo usermod -a -G docker ${USER}
-
