@@ -31,4 +31,5 @@
       - libreadline6-dev
       - libsqlite3-dev
       - liblzma-dev
+      - libffi-dev
       - tk-dev
