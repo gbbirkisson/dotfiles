@@ -33,7 +33,8 @@
     register: plugins
 
   - name: Add asdf plugins
-    shell: "asdf plugin-add {{ item }} || true"
+    shell: "asdf plugin-add {{ item }}"
+    ignore_errors: true
     with_items: "{{ plugins.stdout.split('\n') }}"
 
   - name: Install tools
