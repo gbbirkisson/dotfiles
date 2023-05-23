@@ -26,15 +26,14 @@
     - path: ~/.bashrc
       line: "source {{ asdf_dir }}/completions/asdf.bash"
     - path: ~/.profile
-      line: "PATH={{ asdf_dir }}/shims:$PATH"
+      line: 'PATH="{{ asdf_dir }}/shims:$PATH"'
 
   - name: Get plugins
     shell: "cat .tool-versions | awk '{ print $1}'"
     register: plugins
 
-  - name: Add asdf plugins
-    shell: "asdf plugin-add {{ item }}"
-    ignore_errors: true
+  - name: Add missing asdf plugins
+    shell: "asdf plugin-list | grep {{ item }} || asdf plugin-add {{ item }}"
     with_items: "{{ plugins.stdout.split('\n') }}"
 
   - name: Install tools
