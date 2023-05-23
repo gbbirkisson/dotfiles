@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  tasks:
+
+  - name: Source files
+    lineinfile:
+      path: "{{ item.path }}"
+      line: "{{ item.line }}"
+    with_items:
+    - path: ~/.bashrc
+      line: "source $HOME/.bashrc_gbb"
+    - path: ~/.profile
+      line: "source $HOME/.profile_gbb"
