@@ -1,6 +1,5 @@
 ---
 - hosts: localhost
-  gather_facts: true
   tasks:
   - name: Check if cargo is installed
     shell: command -v cargo
