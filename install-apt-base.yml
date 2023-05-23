@@ -4,6 +4,8 @@
   - name: Install packages
     become: true
     apt:
+      state: latest
+      update_cache: true
       pkg:
       # Bare essentials
       - build-essential
