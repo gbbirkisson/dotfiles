@@ -17,7 +17,7 @@ export FZF_DEFAULT_OPTS="--height 100% --layout=reverse"
 export FZF_CTRL_T_OPTS="--preview 'gfzfpreview {}'"
 export FZF_ALT_C_OPTS="--preview 'gfzfpreview {}'"
 export FZF_ALT_C_COMMAND="command find -L . \
-    -mindepth 1 \\( -path '*target/debug/*' -o -path '*target/release/*' -o -path '*/node_modules*' -o -path './snap*' -o -path './go*' -o -path '*/__pycache__' -o -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+    -mindepth 1 \\( -path '*target/wasm32*' -o -path '*target/x86_64*' -o -path '*target/debug/*' -o -path '*target/release/*' -o -path '*/node_modules*' -o -path './snap*' -o -path './go*' -o -path '*/__pycache__' -o -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
     -o -type d -print 2> /dev/null | cut -b3-"
 export FZF_COMPLETION_OPTS="--preview 'gfzfpreview {}'"
 source /usr/share/doc/fzf/examples/key-bindings.bash
@@ -33,9 +33,10 @@ command -v direnv >/dev/null 2>&1 && source <(direnv hook bash)
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 command -v kubectl >/dev/null 2>&1 && source <(kubectl completion bash)
 
-# Enable kubectl with 'ke'
-export KUBECONFIG=/dev/null
-alias ke='export KUBECONFIG=.kube/config'
+# Enable/disable kubectl with ke/kd
+alias kd='export KUBECONFIG=/dev/null'
+alias ke='export KUBECONFIG=~/.kube/config && clear'
+kd # Disable by default
 
 # Enable vi mode
 set -o vi
