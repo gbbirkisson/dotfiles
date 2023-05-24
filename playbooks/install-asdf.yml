@@ -4,8 +4,8 @@
 
   - name: Set asdf dir
     set_fact:
-      asdf_dir: "{{ dotfiles }}/.asdf"
-      asdf_bin: "{{ dotfiles }}/.asdf/bin/asdf"
+      asdf_dir: "~/.asdf"
+      asdf_bin: "~/.asdf/bin/asdf"
 
   - name: Git checkout asdf
     git:
@@ -22,8 +22,6 @@
       line: "source {{ asdf_dir }}/asdf.sh"
     - path: ~/.bashrc
       line: "source {{ asdf_dir }}/completions/asdf.bash"
-    - path: ~/.profile
-      line: 'PATH="{{ asdf_dir }}/shims:$PATH"'
 
   - name: Get plugins
     shell: "cat {{ dotfiles }}/.tool-versions | awk '{ print $1}'"
