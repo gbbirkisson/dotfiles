@@ -4,25 +4,30 @@ Q = $(if $(filter 1,$V),,@)
 M = $(shell printf "\033[34;1m▶\033[0m")
 
 VENV:=.venv
-PYTHON:=$(VENV)/bin/python
-ANSIBLE:=ANSIBLE_LOCALHOST_WARNING=False ANSIBLE_INVENTORY_UNPARSED_WARNING=False ANSIBLE_GATHERING=explicit $(PYTHON) -m ansible
+PYTHON_OS:=/usr/bin/python3
+PYTHON_VENV:=$(VENV)/bin/python
+ANSIBLE:=ANSIBLE_LOCALHOST_WARNING=False ANSIBLE_INVENTORY_UNPARSED_WARNING=False ANSIBLE_GATHERING=explicit $(PYTHON_VENV) -m ansible
 PLAYBOOK_PATTERN:=playbooks/*.yml
 PLAYBOOKS:=$(wildcard $(PLAYBOOK_PATTERN))
 
-$(VENV): ; $(info $(M) Creating python environment)
-	$(Q) python3 -m venv $(VENV) || rm -r $(VENV)
-	$(Q) $(PYTHON) -m pip install -q ansible yamllint
+$(VENV):
+	$(info $(M) Creating python environment)
+	$(Q) $(PYTHON_OS) -m venv $(VENV) || rm -r $(VENV)
+	$(Q) $(PYTHON_VENV) -m pip install -q ansible yamllint
 
 .PHONY: lint
-lint: $(VENV) ; $(info $(M) Linting playbooks)
-	$(Q) $(PYTHON) -m yamllint -s $(PLAYBOOK_PATTERN)
+lint: $(VENV)
+	$(info $(M) Linting playbooks)
+	$(Q) $(PYTHON_VENV) -m yamllint -s $(PLAYBOOK_PATTERN)
 
 .PHONY: sudo
-sudo: ; $(info $(M) Assert sudo)
+sudo:
+	$(info $(M) Assert sudo)
 	$(Q) sudo true
 
 .PHONY: run
-run: $(VENV) ; $(info $(M) Running $(PLAYBOOK))
+run: $(VENV)
+	$(info $(M) Running $(PLAYBOOK))
 	$(Q) $(ANSIBLE) playbook $(PLAYBOOK) --extra-vars "dotfiles=$(PWD)"
 
 .PHONY: $(PLAYBOOKS)
@@ -39,5 +44,5 @@ link: $(VENV) ## Link dotfiles to HOME folder
 	$(Q) $(MAKE) --no-print-directory playbooks/source.yml
 
 help: ## Show help
-	@echo "Makefile targets:"
+	$(info $(M) Makefile targets:)
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
