@@ -15,30 +15,33 @@ $(VENV):
 	$(Q) $(PYTHON_OS) -m venv $(VENV) || rm -r $(VENV)
 	$(Q) $(PYTHON_VENV) -m pip install -q ansible yamllint
 
+.PHONY:	_sudo
+_sudo:
+	$(info $(M) Assert sudo)
+	$(Q) sudo true
+
+.PHONY: _run
+_run: $(VENV)
+	$(info $(M) Running $(PLAYBOOK))
+	$(Q) $(ANSIBLE) playbook $(PLAYBOOK) --extra-vars "dotfiles=$(PWD)"
+
 .PHONY: lint
 lint: $(VENV)
 	$(info $(M) Linting playbooks)
 	$(Q) $(PYTHON_VENV) -m yamllint -s $(PLAYBOOK_PATTERN)
 
-.PHONY: sudo
-sudo:
-	$(info $(M) Assert sudo)
-	$(Q) sudo true
-
-.PHONY: run
-run: $(VENV)
-	$(info $(M) Running $(PLAYBOOK))
-	$(Q) $(ANSIBLE) playbook $(PLAYBOOK) --extra-vars "dotfiles=$(PWD)"
-
 .PHONY: $(PLAYBOOKS)
 $(PLAYBOOKS): lint
-	$(Q) PLAYBOOK=$@ $(MAKE) --no-print-directory run
+	$(Q) PLAYBOOK=$@ $(MAKE) --no-print-directory _run
+
+.PHONY: all
+all: install link ## Do everything
 
 .PHONY: install
-install: sudo playbooks/install.yml ## Install everything
+install: _sudo playbooks/install.yml ## Install packages
 
 .PHONY: link
-link: $(VENV) ## Link dotfiles to HOME folder
+link: ## Link dotfiles to HOME folder
 	$(info $(M) Linking dotfiles)
 	$(Q) echo ./link
 	$(Q) $(MAKE) --no-print-directory playbooks/source.yml

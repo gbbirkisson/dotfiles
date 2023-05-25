@@ -3,12 +3,8 @@
 
 My dotfiles and setup notes! I use ubuntu so these files are catered to that distribution.
 
-- [Installation](#installation)
-- [Makefile help](#makefile-help)
-- [Terminal Cheatsheet](#terminal-cheatsheet)
-
 ## Installation
 
 ```console
-$ make install link
+$ make all
 ```
