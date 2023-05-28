@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  gather_facts: true
+  tasks:
+
+  - name: Set DPKG architecture
+    set_fact:
+      dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
+
+  - name: Add Regolith GPG apt Key
+    become: true
+    apt_key:
+      url: https://regolith-desktop.org/regolith.key
+      state: present
+
+  - name: Add Regolith Apt Repository
+    become: true
+    apt_repository:
+      repo: "deb [arch={{ dpkg_arch }}] https://regolith-desktop.org/release-ubuntu-{{ ansible_distribution_release }}-{{ dpkg_arch }} {{ ansible_distribution_release }} main"
+
+  - name: Install Regolith
+    become: true
+    apt:
+      state: latest
+      update_cache: true
+      pkg:
+      - regolith-desktop
+      - regolith-compositor-picom-glx
+      - regolith-look-nord
+
+  - name: Remove base launchers
+    become: true
+    ansible.builtin.apt:
+      name: regolith-i3-base-launchers
+      state: absent

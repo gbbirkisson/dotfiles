@@ -6,4 +6,5 @@
 - import_playbook: install-docker.yml
 - import_playbook: install-rust.yml
 
+- import_playbook: install-regolith.yml
 - import_playbook: install-cargo-bins.yml
