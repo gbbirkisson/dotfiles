@@ -40,6 +40,12 @@ all: install link ## Do everything
 .PHONY: install
 install: _sudo playbooks/install.yml ## Install packages
 
+.PHONY: term
+term: _sudo ## Set default terminal
+	$(info $(M) Setting default terminal)
+	$(Q) update-alternatives --list x-terminal-emulator | grep -q $(shell which alacritty) || sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which alacritty) 100
+	$(Q) # sudo update-alternatives --config x-terminal-emulator
+
 .PHONY: link
 link: ## Link dotfiles to HOME folder
 	$(info $(M) Linking dotfiles)
