@@ -1,4 +1,4 @@
-export EDITOR=/usr/bin/nvim
+export EDITOR=$(which nvim)
 
 for dir in \
     $HOME/.local/scripts \
