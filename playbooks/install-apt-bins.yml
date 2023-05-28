@@ -20,6 +20,7 @@
       - jq          # Json manipulation
       - tree        # Tree for directories
       - tmux        # Terminal good stuff
+      - ripgrep     # Modern grep
 
       - gnome-tweaks    # Tweak gnome
       - wireguard       # VPN
