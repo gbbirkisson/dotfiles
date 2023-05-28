@@ -27,6 +27,7 @@
       - regolith-desktop
       - regolith-compositor-picom-glx
       - regolith-look-nord
+      - i3xrocks-battery
 
   - name: Remove base launchers
     become: true
