@@ -16,6 +16,7 @@
 	program = /opt/1Password/op-ssh-sign
 [commit]
 	gpgsign = true
-
+[core]
+	excludesFile = ~/.gitglobalignore
 [includeIf "gitdir:~/repos/oda/**"]
 	path = .gitconfig_oda

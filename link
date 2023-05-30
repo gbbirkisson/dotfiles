@@ -47,6 +47,7 @@ link .aliases
 link .bashrc_gbb
 link .gitconfig
 link .gitconfig_oda
+link .gitglobalignore
 link .ideavimrc
 link .inputrc
 link .profile_gbb
