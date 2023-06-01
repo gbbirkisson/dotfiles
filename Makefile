@@ -49,7 +49,7 @@ term: _sudo ## Set default terminal
 .PHONY: link
 link: ## Link dotfiles to HOME folder
 	$(info $(M) Linking dotfiles)
-	$(Q) echo ./link
+	$(Q) ./link
 	$(Q) $(MAKE) --no-print-directory playbooks/source.yml
 
 help: ## Show help
