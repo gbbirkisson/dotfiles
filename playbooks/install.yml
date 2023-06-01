@@ -9,3 +9,4 @@
 - import_playbook: install-fonts.yml
 - import_playbook: install-regolith.yml
 - import_playbook: install-cargo-bins.yml
+- import_playbook: install-other.yml

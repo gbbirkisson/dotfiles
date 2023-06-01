@@ -94,6 +94,8 @@ require('packer').startup(function(use)
 
   use 'mzlogin/vim-markdown-toc'
 
+  use 'kdheepak/lazygit.nvim'
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -303,6 +305,9 @@ vim.keymap.set('n', '<leader>ag', function ()
     end
   })
 end, { desc = 'Search [A]ll by [G]rep (include dot files)' })
+
+-- Lazygit
+vim.keymap.set('n', '<leader>gg', ':LazyGit<CR>', { desc = 'Open Lazy[g]it' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`

@@ -84,3 +84,9 @@ alias gl='git log --graph --pretty=oneline --abbrev-commit --all'
 # Docker compose
 alias dcup="docker compose up -d"
 alias dcstop="docker compose stop"
+
+# Rip grep
+alias rga="rg -. --glob=!.git/"
+
+# Lazygit
+alias gg="lazygit"
