@@ -16,3 +16,23 @@
       dest: ~/.local/bin
       extra_opts:
       - lazygit
+
+  - name: Check if nvim is installed
+    command: which nvim
+    changed_when: false
+    failed_when: nvim_installed.rc not in [0,1]
+    register: nvim_installed
+
+  - name: Install nvim
+    when: nvim_installed.rc not in [ 0 ]
+    unarchive:
+      remote_src: yes
+      src: https://github.com/neovim/neovim/releases/download/v0.9.1/nvim-linux64.tar.gz
+      dest: ~/.local/bin
+
+  - name: Link nvim
+    when: nvim_installed.rc not in [ 0 ]
+    ansible.builtin.file:
+      src: ~/.local/bin/nvim-linux64/bin/nvim
+      dest: ~/.local/bin/nvim
+      state: link

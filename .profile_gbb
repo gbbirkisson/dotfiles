@@ -1,5 +1,3 @@
-export EDITOR=$(which nvim)
-
 for dir in \
     $HOME/.local/scripts \
     $HOME/.local/bin \
@@ -10,3 +8,5 @@ for dir in \
     ; do
 	[[ -r "$dir" ]] && [[ -d "$dir" ]] && PATH="$dir:$PATH"
 done
+
+export EDITOR=$(which nvim)
