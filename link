@@ -33,7 +33,7 @@ link() {
     ln -sf "$src" "$dst"
 }
 
-link .config/alacritty/alacritty.yml
+link .config/alacritty
 link .config/Code/User/keybindings.json
 link .config/Code/User/settings.json
 link .config/JetBrains/IdeaIC2022.3/keymaps/vim.xml
