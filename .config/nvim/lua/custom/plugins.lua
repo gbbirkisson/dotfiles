@@ -1,7 +1,7 @@
 local plugins = {
   {
     "jose-elias-alvarez/null-ls.nvim",
-    ft = {"python"},
+    ft = {"python", "rust"},
     opts = function ()
       return require("custom.configs.null-ls")
     end
@@ -15,6 +15,10 @@ local plugins = {
         "mypy",
         "ruff",
         "pyright",
+
+        -- Rust
+        "rust-analyzer",
+        "rustfmt",
       }
     },
   },

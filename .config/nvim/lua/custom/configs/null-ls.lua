@@ -7,6 +7,11 @@ local opts = {
     null_ls.builtins.formatting.black,
     null_ls.builtins.diagnostics.mypy,
     null_ls.builtins.diagnostics.ruff,
+
+    -- Rust
+    null_ls.builtins.formatting.rustfmt.with({
+        extra_args = { "--edition", "2021" },
+    }),
   },
   on_attach = function (client, bufnr)
     -- Auto-format on save
