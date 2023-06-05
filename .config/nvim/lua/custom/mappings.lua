@@ -10,6 +10,10 @@ M.abc = {
     },
     ["<leader>gg"] = {"<cmd> :LazyGit <CR>", "Open Lazy[g]it"},
   },
+  v = {
+    ["'"] = {"<cmd> :s/\"/'/g <CR><ESC>", "Replace \" with '"},
+    ["\""] = {"<cmd> :s/'/\"/g <CR><ESC>", "Replace ' with \""},
+  }
 }
 
 return M
