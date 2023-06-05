@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  tasks:
+
+  - name: Create tmux config dir
+    ansible.builtin.file:
+      path: ~/.config/tmux/plugins
+      state: directory
+
+  - name: Checkout TPM
+    ansible.builtin.git:
+      repo: https://github.com/tmux-plugins/tpm.git
+      dest: ~/.config/tmux/plugins/tpm
+      version: v3.1.0

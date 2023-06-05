@@ -8,6 +8,9 @@ ensure_backup() {
     # If no previous file exists, exit ...
     [ ! -f "$1" ] && [ ! -d "$1" ] && return
 
+    # Has this already been linked, exit ...
+    [[ -L "$1" ]] && return
+
     # If previous backup file exits, exit ...
     [ -f "$bak" ] || [ -d "$bak" ] && return
 
@@ -23,12 +26,15 @@ link() {
     [ ! -f "$1" ] && [ ! -d "$1" ] && echo "Not found $1" && return
 
     local src=$(realpath "$1")
-    local dst=${HOME}/$(realpath --relative-to=$PWD "$1")
+    if [ -n "$2" ]; then
+      local dst=${HOME}/${2}
+    else
+      local dst=${HOME}/$(realpath --relative-to=$PWD "$1")
+    fi
     
     echo "Link $src -> $dst"
     ensure_backup "$dst"
     ensure_parent "$dst"
-    
     rm -rf "$dst"
     ln -sf "$src" "$dst"
 }
@@ -37,6 +43,7 @@ link .config/alacritty
 link .config/lazygit/config.yml
 link .config/nvim/lua/custom
 link .config/regolith2
+link .config/tmux/tmux.conf
 link .config/starship.toml
 
 link .local/scripts
@@ -49,5 +56,4 @@ link .gitglobalignore
 link .ideavimrc
 link .inputrc
 link .profile_gbb
-link .tmux.conf
 link .tool-versions
