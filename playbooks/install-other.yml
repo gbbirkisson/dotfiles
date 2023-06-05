@@ -2,6 +2,11 @@
 - hosts: localhost
   tasks:
 
+  - name: Create local bin path
+    ansible.builtin.file:
+      path: ~/.local/bin
+      state: directory
+
   - name: Check if lazygit is installed
     command: which lazygit
     changed_when: false
