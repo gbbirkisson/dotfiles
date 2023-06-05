@@ -1,5 +1,34 @@
 local plugins = {
   {
+    -- Set project workspace root
+    "ahmedkhalf/project.nvim",
+    lazy = false,
+    config = function ()
+      require("project_nvim").setup {
+        detection_methods = {
+          "pattern",
+          "lsp",
+        },
+        patterns = {
+          ".git",
+          ".deploy",
+        },
+      }
+    end
+  },
+  {
+    -- Play nice with ahmedkhalf/project.nvim
+    "nvim-tree/nvim-tree.lua",
+    opts = {
+      sync_root_with_cwd = true,
+      respect_buf_cwd = true,
+      update_focused_file = {
+        enable = true,
+        update_root = true
+      },
+    }
+  },
+  {
     -- Leap with s/S
     "ggandor/leap.nvim",
     keys = { "s", "S" },
