@@ -1,0 +1,41 @@
+---
+- hosts: localhost
+
+  vars:
+    theme_location: /usr/share/regolith-look/catppuccin
+
+  tasks:
+
+  - name: Check if theme is installed
+    stat:
+      path: "{{ theme_location }}"
+    register: theme
+
+  - name: Download theme
+    unarchive:
+      remote_src: yes
+      src: "https://github.com/catppuccin/regolith/archive/refs/heads/main.zip"
+      dest: "/tmp"
+    when: not theme.stat.exists
+
+  - name: Install theme
+    become: true
+    ansible.builtin.copy:
+      src: /tmp/regolith-main/catppuccin/
+      dest: "{{ theme_location }}"
+      owner: root
+      group: root
+      mode: "0755"
+    when: not theme.stat.exists
+    register: theme
+
+  - name: Select flavor
+    become: true
+    command: |
+      python3 {{ theme_location }}/theme-switcher.py mocha blue
+    when: theme.changed
+
+  - name: Set theme
+    command: |
+      regolith-look set catppuccin
+    when: theme.changed

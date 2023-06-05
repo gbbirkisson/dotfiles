@@ -52,6 +52,11 @@ link: playbooks/install-nvim-nvchad.yml playbooks/install-tmux-tpm.yml ## Link d
 	$(Q) ./link
 	$(Q) $(MAKE) --no-print-directory playbooks/source.yml
 
+.PHONY: theme
+theme: ## Set regolith theme
+	$(info $(M) Setting theme)
+	$(Q) regolith-look list | fzf | xargs regolith-look set
+
 help: ## Show help
 	$(info $(M) Makefile targets:)
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'

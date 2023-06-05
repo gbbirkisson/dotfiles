@@ -1,5 +1,5 @@
 regolith.wallpaper.file: 
-regolith.wallpaper.color.primary: #373e4d
+regolith.wallpaper.color.primary: #1E1E2E
 
 gnome.terminal.font:	RobotoMono Nerd Font 11
 
@@ -16,6 +16,4 @@ i3-wm.workspace.08.name: 8:8MUSI
 i3-wm.workspace.09.name: 9:9PASS
 i3-wm.workspace.10.name: 10:10MSG
 
-!regolith.look.path: /usr/share/regolith-look/i3-default
 regolith.look.path: /usr/share/regolith-look/nord
-
