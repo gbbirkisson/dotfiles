@@ -12,6 +12,9 @@ local opts = {
     null_ls.builtins.formatting.rustfmt.with({
         extra_args = { "--edition", "2021" },
     }),
+
+    -- YAML
+    null_ls.builtins.diagnostics.yamllint,
   },
   on_attach = function (client, bufnr)
     -- Auto-format on save

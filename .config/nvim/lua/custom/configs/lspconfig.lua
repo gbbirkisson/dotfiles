@@ -26,3 +26,10 @@ lspconfig.rust_analyzer.setup({
     },
   },
 })
+
+-- YAML
+lspconfig.yamlls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {"yaml"},
+})

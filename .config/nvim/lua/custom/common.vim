@@ -6,7 +6,7 @@ nnoremap <C-d> <C-d>zz
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" Yank/Paste from clipboard
+" Yank to clipboard
 vnoremap <leader>y "+y
 nnoremap <leader>y "+y
 

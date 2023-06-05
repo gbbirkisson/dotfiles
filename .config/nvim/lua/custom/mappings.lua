@@ -8,6 +8,7 @@ M.abc = {
       end,
       "Close buffer",
     },
+    ["<leader>gg"] = {"<cmd> :LazyGit <CR>", "Open Lazy[g]it"},
   },
 }
 
