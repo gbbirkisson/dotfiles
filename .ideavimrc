@@ -1,5 +1,0 @@
-" gc to comment out code
-set commentary
-
-" Source common config
-source ~/.config/nvim/common.vim
