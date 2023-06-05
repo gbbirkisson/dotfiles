@@ -29,6 +29,32 @@ local plugins = {
     }
   },
   {
+    -- Configure live grep
+    "nvim-telescope/telescope.nvim",
+    opts = {
+        defaults = {
+          vimgrep_arguments = {
+            -- defaults
+            "rg",
+            "-L",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+
+            -- include hidden files (except .git)
+            "-.",
+            "--glob=!.git/",
+
+            -- Exclude lock files
+            "--glob=!*.lock",
+          },
+      },
+    },
+  },
+  {
     -- Leap with s/S
     "ggandor/leap.nvim",
     keys = { "s", "S" },
