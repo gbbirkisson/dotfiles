@@ -21,6 +21,7 @@
       - tree        # Tree for directories
       - tmux        # Terminal good stuff
       - ripgrep     # Modern grep
+      - entr        # Rerun stuff on file change
 
       - gnome-tweaks    # Tweak gnome
       - wireguard       # VPN
