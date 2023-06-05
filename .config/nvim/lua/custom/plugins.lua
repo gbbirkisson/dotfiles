@@ -104,7 +104,7 @@ local plugins = {
   {
     -- Markdown TOC
     "mzlogin/vim-markdown-toc",
-    cmd = { "GenTocGFM" }
+    lazy = false,
   },
   {
     -- LazyGit
