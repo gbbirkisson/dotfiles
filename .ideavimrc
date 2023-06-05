@@ -1,38 +1,5 @@
-" Basics
-set number relativenumber
-
-" gcc to comment out single line, gc4j to comment out many
+" gc to comment out code
 set commentary
 
 " Source common config
 source ~/.config/nvim/common.vim
-
-" 1 2
-" 1 2
-" 1 2
-" 1 2
-
-
-""" Enable plugs
-" set ideajoin
-" set ideastatusicon=gray
-" set idearefactormode=keep
-" set multiple-cursors
-
-""" Idea stuff
-" set visualbell
-
-""" Open hotkeys
-" map <leader>d <Action>(Debug)
-" map <leader>r <Action>(RenameElement)
-" map <leader>c <Action>(Stop)
-" map <leader>z <Action>(ToggleDistractionFreeMode)
-" map <leader>o <Action>(FileStructurePopup)
-" map <leader>g :action GotoFile<CR>
-" nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
-" nnoremap <c-p> :action GotoFile<CR>
-" nmap <leader><leader> <Action>(PreviousTab)
-" nnoremap <leader>u :action FindUsages<CR>
-
-" reload conf hotkey
-" nnoremap <leader>si :source ~/.ideavimrc<CR>
