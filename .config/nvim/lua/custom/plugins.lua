@@ -81,6 +81,7 @@ local plugins = {
         "yaml",
         "markdown",
         "terraform",
+        "make",
       }
     }
   },
