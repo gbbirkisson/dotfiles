@@ -86,14 +86,6 @@ local plugins = {
     }
   },
   {
-    -- LSP extensions
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = {"python", "rust", "yaml"},
-    opts = function ()
-      return require("custom.configs.null-ls")
-    end
-  },
-  {
     -- LSP Configuration
     "neovim/nvim-lspconfig",
     config = function ()
