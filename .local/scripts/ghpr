@@ -4,6 +4,7 @@ set -euo pipefail
 
 org="kolonialno"
 base_repo_dir="$HOME/repos/oda"
+shell_to_open_after_checkout="$SHELL" # Disable by setting it to ""
 
 # Prints the unix epoch from $1 days ago
 days-ago() {
@@ -45,7 +46,6 @@ pr-checkout() {
   # Checkout PR
   cd $repo_dir
   gh pr checkout $pr_id
-  echo
   echo "🎉 PR checked out here: $repo_dir"
 }
 
@@ -105,10 +105,11 @@ while true; do
         # Checkout PR
         pr-checkout $pr_repo $pr_id
 
-        # Open bash where the PR is
-        echo "🐚 Opening PR in shell!"
-        bash
-        exit 0
+        if [ ! -z "$shell_to_open_after_checkout" ]; then
+          # Open bash where the PR is
+          echo "🐚 Opening PR in shell!"
+          exec $shell_to_open_after_checkout
+        fi
       ;;
       "v" | "V") # View
         echo && echo "🌐 View PR in browser!"
