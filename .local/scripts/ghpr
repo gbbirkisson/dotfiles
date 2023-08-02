@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+now=$(date +%s)
+timefilter=$(( $now - (86400 * 48) )) # Max 16 week old PRs
+org="kolonialno"
+base_repo_dir="$HOME/repos/oda"
+
+gh-pr() {
+  gh pr -R ${org}/$1 "${@:2}"
+}
+
+pr-fetch() {
+  gh-pr whatever list --json url,title,createdAt,author -S "org:${org} $(echo $@)"
+}
+
+pr-view() {
+  local repo=$1
+  local id=$2
+
+  gh-pr $repo view $id "${@:3}"
+}
+
+pr-checkout() {
+  local repo=$1
+  local id=$2
+
+  local repo_dir="$base_repo_dir/$repo"
+
+  # Clone repo if needed
+  [ -d "$repo_dir" ] || gh repo clone $org/$repo $repo_dir
+
+  # Checkout PR
+  cd $repo_dir
+  gh pr checkout $pr_id
+  echo
+  echo "🎉 PR checked out here: $repo_dir"
+}
+
+pr_list=`
+{ 
+  pr-fetch 'user-review-requested:@me'
+  pr-fetch 'team-review-requested:kolonialno/reliability' 'team-review-requested:kolonialno/infrastructure-developer-experience'
+} | jq -r -s \ '
+  add
+  | group_by(.title) | map(.[-1])
+  | map(.author.type = (
+    if (.author.login | contains("renovate")) 
+    or (.author.login | contains("dependabot"))
+    then "🧰"
+    else "🧑"
+    end))
+  | sort_by(.createdAt)
+  | sort_by(.author.type)
+  | .[]
+  | select(.createdAt | fromdateiso8601 > '$timefilter')
+  | .author.type + " " + (.url | split("/") | .[-3]) + " #" + (.url | split("/") | .[-1]) + " " + .title
+'
+`
+
+while true; do
+  # Prompt user for PRs
+  pr=$(echo "$pr_list" | fzf)
+  # pr=$(echo "$pr_list" | tail -n 1)
+
+  # Bail if no PR is selected
+  [ -z "$pr" ] && return
+
+  # Extract pr_repo and id
+  pr_repo=$(echo $pr | awk '{print $2}')
+  pr_id=$(echo $pr | awk '{print $3}')
+
+  # View PR in terminal
+  clear
+  pr-view $pr_repo $pr_id
+
+  while true; do
+    # Select this PR?
+    echo # For cleaner output
+    read -p "🤔 What to do? [c | v]: " -n 1 -r
+    case $REPLY in
+      "c" | "C")
+        echo && echo # For cleaner output
+        pr-checkout $pr_repo $pr_id
+
+        # Open bash where the PR is
+        bash
+        exit 0
+      ;;
+
+      "v" | "V")
+        echo && echo # For cleaner output
+        pr-view $pr_repo $pr_id --web
+        sleep 1
+      ;;
+
+      *)
+        break
+      ;;
+    esac
+  done
+done
