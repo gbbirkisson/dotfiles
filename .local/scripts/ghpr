@@ -2,19 +2,30 @@
 
 set -euo pipefail
 
-now=$(date +%s)
-timefilter=$(( $now - (86400 * 48) )) # Max 16 week old PRs
 org="kolonialno"
 base_repo_dir="$HOME/repos/oda"
 
+# Prints the unix epoch from $1 days ago
+days-ago() {
+  local max_days=$1
+  local now=$(date +%s)
+  echo $(( $now - (86400 * $max_days) ))
+}
+
+# Wrapper for the gh command to easily pass in repo $1
 gh-pr() {
   gh pr -R ${org}/$1 "${@:2}"
 }
 
+# Fetches all PRs from $org based on filters $@
 pr-fetch() {
-  gh-pr whatever list --json url,title,createdAt,author -S "org:${org} $(echo $@)"
+  # Note:
+  #   We pass in "phony" repo, but get all PRs?! That's because we are not filtering
+  #   PRs by repo, so the "phony" repo does not even have to exist.
+  gh-pr phony list --json url,title,createdAt,author -S "org:${org} $(echo $@)"
 }
 
+# Views PR $2 from repo $1. You can specify more params to pass to the GH client
 pr-view() {
   local repo=$1
   local id=$2
@@ -22,10 +33,10 @@ pr-view() {
   gh-pr $repo view $id "${@:3}"
 }
 
+# Checks out PR $2 from repo $1 locally
 pr-checkout() {
   local repo=$1
   local id=$2
-
   local repo_dir="$base_repo_dir/$repo"
 
   # Clone repo if needed
@@ -38,10 +49,12 @@ pr-checkout() {
   echo "🎉 PR checked out here: $repo_dir"
 }
 
+# Fetch PRs, group, sort, filter and format for FZF
 pr_list=`
 { 
-  pr-fetch 'user-review-requested:@me'
-  pr-fetch 'team-review-requested:kolonialno/reliability' 'team-review-requested:kolonialno/infrastructure-developer-experience'
+  pr-fetch 'user-review-requested:@me' &
+  pr-fetch 'team-review-requested:kolonialno/reliability' 'team-review-requested:kolonialno/infrastructure-developer-experience' &
+  wait
 } | jq -r -s \ '
   add
   | group_by(.title) | map(.[-1])
@@ -54,7 +67,7 @@ pr_list=`
   | sort_by(.createdAt)
   | sort_by(.author.type)
   | .[]
-  | select(.createdAt | fromdateiso8601 > '$timefilter')
+  | select(.createdAt | fromdateiso8601 > '$(days-ago 90)')
   | .author.type + " " + (.url | split("/") | .[-3]) + " #" + (.url | split("/") | .[-1]) + " " + .title
 '
 `
@@ -76,26 +89,32 @@ while true; do
   pr-view $pr_repo $pr_id
 
   while true; do
-    # Select this PR?
-    echo # For cleaner output
-    read -p "🤔 What to do? [c | v]: " -n 1 -r
+    # Ask for command
+    read -p "🤔 What to do? [Xcv?]: " -n 1 -r
     case $REPLY in
-      "c" | "C")
-        echo && echo # For cleaner output
+      "?") # Help
+        echo && echo "🛟 Help!"
+        echo "  x => 🛑 Close PR"
+        echo "  c => 📖 Checkout PR"
+        echo "  v => 🌐 View PR in browser"
+        echo "  ? => 🛟 Show this help"
+      ;;
+      "c" | "C") # Checkout
+        echo && echo "📖 Checking out PR!"
+
+        # Checkout PR
         pr-checkout $pr_repo $pr_id
 
         # Open bash where the PR is
+        echo "🐚 Opening PR in shell!"
         bash
         exit 0
       ;;
-
-      "v" | "V")
-        echo && echo # For cleaner output
-        pr-view $pr_repo $pr_id --web
-        sleep 1
+      "v" | "V") # View
+        echo && echo "🌐 View PR in browser!"
+        pr-view $pr_repo $pr_id --web > /dev/null 2>&1
       ;;
-
-      *)
+      "x" | "X" | *) # Close
         break
       ;;
     esac
