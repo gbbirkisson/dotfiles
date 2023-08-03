@@ -74,7 +74,13 @@ pr_list=`
 
 while true; do
   # Prompt user for PRs
-  pr=$(echo "$pr_list" | fzf)
+  pr=$(echo "$pr_list" | fzf \
+    --preview-window=right:65% \
+    --preview '
+      export GH_FORCE_TTY=$FZF_PREVIEW_COLUMNS 
+      export CLICOLOR_FORCE=1 
+      gh pr view -R '$org'/{2} {3}
+  ')
   # pr=$(echo "$pr_list" | tail -n 1)
 
   # Bail if no PR is selected
@@ -84,19 +90,16 @@ while true; do
   pr_repo=$(echo $pr | awk '{print $2}')
   pr_id=$(echo $pr | awk '{print $3}')
 
-  # View PR in terminal
-  clear
-  pr-view $pr_repo $pr_id
-
   while true; do
     # Ask for command
-    read -p "🤔 What to do? [Xcv?]: " -n 1 -r
+    read -p "🤔 $pr_repo $pr_id [Xcvb?]: " -n 1 -r
     case $REPLY in
       "?") # Help
         echo && echo "🛟 Help!"
-        echo "  x => 🛑 Close PR"
+        echo "  x => 🛑 Select some other PR"
         echo "  c => 📖 Checkout PR"
-        echo "  v => 🌐 View PR in browser"
+        echo "  v => 💻 View PR in terminal"
+        echo "  b => 🌐 View PR in browser"
         echo "  ? => 🛟 Show this help"
       ;;
       "c" | "C") # Checkout
@@ -112,11 +115,15 @@ while true; do
         fi
       ;;
       "v" | "V") # View
+        echo && echo "💻 View PR in terminal!"
+        pr-view $pr_repo $pr_id --comments
+      ;;
+      "b" | "b") # View
         echo && echo "🌐 View PR in browser!"
         pr-view $pr_repo $pr_id --web > /dev/null 2>&1
       ;;
       "x" | "X" | *) # Close
-        break
+        echo && break
       ;;
     esac
   done
