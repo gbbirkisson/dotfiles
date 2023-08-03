@@ -22,7 +22,7 @@ pr-fetch() {
   # Note:
   #   We pass in "phony" repo, but get all PRs?! That's because we are not filtering
   #   PRs by repo, so the "phony" repo does not even have to exist.
-  gh-pr phony list --json url,title,createdAt,author -S "org:${org} $(echo $@)"
+  gh-pr phony list --json url,title,createdAt,author -S "org:${org} -label:autoMerged $(echo $@)"
 }
 
 # Views PR $2 from repo $1. You can specify more params to pass to the GH client
