@@ -4,7 +4,6 @@ set -euo pipefail
 
 org="kolonialno"
 base_repo_dir="$HOME/repos/oda"
-shell_to_open_after_checkout="$SHELL" # Disable by setting it to ""
 
 # Prints the unix epoch from $1 days ago
 days-ago() {
@@ -47,6 +46,12 @@ pr-checkout() {
   cd $repo_dir
   gh pr checkout $pr_id
   echo "🎉 PR checked out here: $repo_dir"
+}
+
+prompt() {
+  read -p "$@" -n 1 -r
+  echo $REPLY
+  unset $REPLY
 }
 
 # Fetch PRs, group, sort, filter and format for FZF
@@ -92,8 +97,10 @@ while true; do
 
   while true; do
     # Ask for command
-    read -p "🤔 $pr_repo $pr_id [Xcvb?]: " -n 1 -r
-    case $REPLY in
+    case $(prompt "🤔 $pr_repo $pr_id [Xcvb?]: ") in
+      "")
+        break
+      ;;
       "?") # Help
         echo && echo "🛟 Help!"
         echo "  x => 🛑 Select some other PR"
@@ -108,11 +115,14 @@ while true; do
         # Checkout PR
         pr-checkout $pr_repo $pr_id
 
-        if [ ! -z "$shell_to_open_after_checkout" ]; then
-          # Open bash where the PR is
-          echo "🐚 Opening PR in shell!"
-          exec $shell_to_open_after_checkout
-        fi
+        case $(prompt "🐚 Open PR in subshell? [Yn]: ") in
+          "n" | "N")
+            exit 0
+          ;;
+          *)
+            exec $SHELL
+          ;;
+        esac
       ;;
       "v" | "V") # View
         echo && echo "💻 View PR in terminal!"
