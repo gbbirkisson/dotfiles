@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+user=gbbirkisson
 org="kolonialno"
 base_repo_dir="$HOME/repos/oda"
 
@@ -22,7 +23,7 @@ pr-fetch() {
   # Note:
   #   We pass in "phony" repo, but get all PRs?! That's because we are not filtering
   #   PRs by repo, so the "phony" repo does not even have to exist.
-  gh-pr phony list --json url,title,createdAt,author -S "org:${org} -label:autoMerged $(echo $@)"
+  gh-pr phony list --json url,title,createdAt,author,reviewRequests -S "org:${org} -label:autoMerged $(echo $@)"
 }
 
 # Views PR $2 from repo $1. You can specify more params to pass to the GH client
@@ -69,8 +70,16 @@ pr_list=`
     then "🧰"
     else "🧑"
     end))
-  | sort_by(.createdAt)
-  | sort_by(.author.type)
+  | map(.stats = {
+      otherUserRequests: [(.reviewRequests[].login | select (. and . != "'$user'"))] | length,
+      myRequests: [.reviewRequests[].login | select(. == "'$user'")] | length
+    })
+  | sort_by(
+    .author.type, 
+    -.stats.myRequests,
+    .stats.otherUserRequests,
+    .createdAt
+  )
   | .[]
   | select(.createdAt | fromdateiso8601 > '$(days-ago 90)')
   | .author.type + " " + (.url | split("/") | .[-3]) + " #" + (.url | split("/") | .[-1]) + " " + .title
