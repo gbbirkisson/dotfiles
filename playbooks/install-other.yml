@@ -7,6 +7,24 @@
       path: ~/.local/bin
       state: directory
 
+  - name: Check if gh is installed
+    command: which gh
+    changed_when: false
+    failed_when: gh_installed.rc not in [0,1]
+    register: gh_installed
+
+  - name: Install gh
+    when: gh_installed.rc not in [ 0 ]
+    unarchive:
+      remote_src: yes
+      src: https://github.com/cli/cli/releases/download/v2.32.1/gh_2.32.1_linux_amd64.tar.gz
+      dest: ~/.local/bin
+      extra_opts:
+      - --strip-components
+      - 2
+      # - --add-file
+      - gh_2.32.1_linux_amd64/bin/gh
+
   - name: Check if lazygit is installed
     command: which lazygit
     changed_when: false
