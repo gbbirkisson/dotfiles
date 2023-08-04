@@ -18,3 +18,6 @@ assign [class="firefox"] $ws7
 for_window [class="Spotify"] move to workspace $ws8
 assign [class="1Password"] $ws9
 assign [class="Slack"] $ws10
+
+# Disable chromium titlebar
+for_window [class="*Chromium"] border pixel 1
