@@ -90,3 +90,6 @@ alias rga="rg -. --glob=!.git/"
 
 # Lazygit
 alias gg="lazygit"
+
+# GHPR
+alias ghpr="source $HOME/.local/scripts/ghpr"

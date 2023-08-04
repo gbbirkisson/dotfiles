@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 user=gbbirkisson
 org="kolonialno"
 base_repo_dir="$HOME/repos/oda"
@@ -46,7 +44,7 @@ pr-checkout() {
   # Checkout PR
   cd $repo_dir
   gh pr checkout $pr_id
-  echo "🎉 PR checked out here: $repo_dir"
+  echo "🎉 PR checked out!"
 }
 
 prompt() {
@@ -98,7 +96,7 @@ while true; do
   # pr=$(echo "$pr_list" | tail -n 1)
 
   # Bail if no PR is selected
-  [ -z "$pr" ] && return
+  [ -z "$pr" ] && break
 
   # Extract pr_repo and id
   pr_repo=$(echo $pr | awk '{print $2}')
@@ -106,12 +104,13 @@ while true; do
 
   while true; do
     # Ask for command
-    case $(prompt "🤔 $pr_repo $pr_id [Xcvb?]: ") in
+    case $(prompt "🤔 $pr_repo $pr_id [Xcvbq?]: ") in
       "")
         break
       ;;
       "?") # Help
         echo && echo "🛟 Help!"
+        echo "  q => 🚪 Exit"
         echo "  x => 🛑 Select some other PR"
         echo "  c => 📖 Checkout PR"
         echo "  v => 💻 View PR in terminal"
@@ -124,14 +123,8 @@ while true; do
         # Checkout PR
         pr-checkout $pr_repo $pr_id
 
-        case $(prompt "🐚 Open PR in subshell? [Yn]: ") in
-          "n" | "N")
-            exit 0
-          ;;
-          *)
-            exec $SHELL
-          ;;
-        esac
+        # Exit script
+        break 2
       ;;
       "v" | "V") # View
         echo && echo "💻 View PR in terminal!"
@@ -141,9 +134,29 @@ while true; do
         echo && echo "🌐 View PR in browser!"
         pr-view $pr_repo $pr_id --web > /dev/null 2>&1
       ;;
+      "q" | "Q") # Close
+        echo && break 2
+      ;;
       "x" | "X" | *) # Close
-        echo && break
+        echo && break 1
       ;;
     esac
   done
 done
+
+# Cleanup
+unset user
+unset org
+unset base_repo_dir
+
+unset -f days-ago
+unset -f gh-pr
+unset -f pr-fetch
+unset -f pr-view
+unset -f pr-checkout
+unset -f prompt
+
+unset pr_list
+unset pr
+unset pr_repo
+unset pr_id
