@@ -1,22 +1,43 @@
+; Basics
 [user]
 	name = Guðmundur Björn Birkisson
 	email = gbbirkisson@gmail.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIMOmyVFWXJ6Yrr7XCcokJdbGtNprIwcvHqWNnEv06TF
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIMOmyVFWXJ6Yrr7XCcokJdbGtNprIwcvHqWNnEv06TF
 [pull]
-	rebase = false
+  rebase = true
 [push]
 	default = simple
 [init]
-	defaultBranch = main
+  defaultBranch = main
+
+; git gone
 [alias]
-	gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
+  gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
+
+; merge tool
+[merge]
+  tool = nvimdiff
+  conflictstyle = diff3
+[mergetool]
+	keepBackup = false
+	prompt = false
+[difftool "nvimdiff"]
+  cmd = "nvim -d $LOCAL $REMOTE"
+[mergetool "nvimdiff"]
+  cmd = "nvim -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J | wincmd ='"
+
+; commit signing
 [gpg]
 	format = ssh
 [gpg "ssh"]
 	program = /opt/1Password/op-ssh-sign
 [commit]
-	gpgsign = true
+  gpgsign = true
+
+; global ignore
 [core]
-	excludesFile = ~/.gitglobalignore
+  excludesFile = ~/.gitglobalignore
+
+; oda config
 [includeIf "gitdir:~/repos/oda/**"]
 	path = .gitconfig_oda
