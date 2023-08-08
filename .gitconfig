@@ -22,9 +22,9 @@
 	keepBackup = false
 	prompt = false
 [difftool "nvimdiff"]
-  cmd = "nvim -d $LOCAL $REMOTE"
+  cmd = "nvim -n -d $LOCAL $REMOTE"
 [mergetool "nvimdiff"]
-  cmd = "nvim -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J | wincmd ='"
+  cmd = "nvim -n -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J | wincmd ='"
 
 ; commit signing
 [gpg]
