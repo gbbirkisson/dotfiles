@@ -9,6 +9,7 @@ M.abc = {
       "Close buffer",
     },
     ["<leader>gg"] = {"<cmd> :LazyGit <CR>", "Open Lazy[g]it"},
+    ["<leader>cg"] = {"<cmd> :ChatGPT <CR>", "Open [C]hat[G]PT"},
   },
   v = {
     ["'"] = {"<cmd> :s/\"/'/g <CR><ESC>", "Replace \" with '"},

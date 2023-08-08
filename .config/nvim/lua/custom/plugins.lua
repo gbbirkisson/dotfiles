@@ -103,6 +103,27 @@ local plugins = {
     "kdheepak/lazygit.nvim",
     cmd = { "LazyGit" },
   },
+  {
+    -- ChatGPT
+    "jackMort/ChatGPT.nvim",
+    cmd = {
+      "ChatGPT",
+      "ChatGPTActAs",
+      "ChatGPTCompleteCode",
+      "ChatGPTEditWithInstructions",
+      "ChatGPTRun",
+    },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    },
+    config = function()
+      require("chatgpt").setup({
+        api_key_cmd = "op read op://y46glakwqtek75fxiejq6is3qa/qnpgz2gbdyqdcp4cnrobbzttfm/key --no-newline",
+      })
+    end,
+  }
 }
 
 return plugins
