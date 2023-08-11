@@ -82,6 +82,7 @@ local plugins = {
         "markdown",
         "terraform",
         "make",
+        "proto", -- protobuffers
       }
     }
   },
@@ -123,7 +124,7 @@ local plugins = {
         api_key_cmd = "op read op://y46glakwqtek75fxiejq6is3qa/qnpgz2gbdyqdcp4cnrobbzttfm/key --no-newline",
       })
     end,
-  }
+  },
 }
 
 return plugins
