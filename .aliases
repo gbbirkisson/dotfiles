@@ -61,8 +61,8 @@ alias poetry_fix='poetry cache clear --all . && rm -rf $(poetry config cache-dir
 alias poetry_env='poetry env use $(asdf which python)'
 
 # Oda
-alias klipy="$ODA_PATH/klipy/.venv/bin/python -m klipy"
-alias velo="$ODA_PATH/velo/.venv/bin/python /home/gbbirkisson/repos/oda/velo/velo/cli/main.py"
+alias klipy="poetry -C $ODA_PATH/klipy run klipy"
+alias velo="poetry -C $ODA_PATH/velo run velo"
 alias 3dprinter='vlc http://192.168.151.100/webcam/?action=stream --logfile /dev/null'
 
 # Vim
