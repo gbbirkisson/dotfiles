@@ -1,7 +1,7 @@
 direnv 2.32.3
 gcloud 432.0.0
 java adoptopenjdk-17.0.7+7
-kubectl 1.27.2
+kubectl 1.25.2
 nodejs 20.2.0
 poetry 1.5.1
 pre-commit 3.3.2
