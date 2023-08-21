@@ -19,8 +19,8 @@
   tool = nvimdiff
   conflictstyle = diff3
 [mergetool]
-	keepBackup = false
-	prompt = false
+  keepBackup = false
+  prompt = false
 [difftool "nvimdiff"]
   cmd = "nvim -n -d $LOCAL $REMOTE"
 [mergetool "nvimdiff"]
