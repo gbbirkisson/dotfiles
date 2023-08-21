@@ -31,6 +31,12 @@ alias dcln='dstp; drma; drmi; drmv'                                             
 # kubectl aliases
 alias k='kubectl'
 complete -F __start_kubectl k
+# Enable/disable kubectl with ke/kd
+alias kd='export KUBECONFIG=/dev/null'
+alias ke='export KUBECONFIG=~/.kube/config_me'
+alias kv='export KUBECONFIG=~/.kube/config_velo'
+kd # Disable by default
+
 
 # use bat not cat
 if command -v batcat &> /dev/null ; then
