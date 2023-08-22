@@ -1,4 +1,13 @@
 ---
+shell:
+  program: /usr/bin/env
+  args:
+    - bash
+    - -l
+    - -c
+    - "tmux || bash" # Open up tmux by default! Fallback to bash
+    # - "tmux attach || tmux"
+
 env:
   TERM: xterm-256color
 

@@ -6,8 +6,8 @@ gnome.terminal.font:	RobotoMono Nerd Font 11
 i3-wm.gaps.focus_follows_mouse: yes
 
 i3-wm.workspace.01.name: 1:1BROW
-i3-wm.workspace.02.name: 2:2CODE
-i3-wm.workspace.03.name: 3:3TERM
+i3-wm.workspace.02.name: 2:2TMUX
+i3-wm.workspace.03.name: 3
 i3-wm.workspace.04.name: 4
 i3-wm.workspace.05.name: 5
 i3-wm.workspace.06.name: 6
