@@ -17,14 +17,22 @@ lspconfig.rust_analyzer.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = {"rust"},
-  root_dir = util.root_pattern("Cargo.toml"),
+  root_dir = util.root_pattern("cargo.toml"),
   settings = {
     ['rust-analyzer'] = {
       cargo = {
-        allFeatures = true,
+        allfeatures = true,
       },
     },
   },
+})
+
+-- Go
+lspconfig.gopls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {"go"},
+  root_dir = util.root_pattern("go.mod"),
 })
 
 -- YAML

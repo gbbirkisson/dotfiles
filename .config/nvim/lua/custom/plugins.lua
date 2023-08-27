@@ -54,7 +54,9 @@ local plugins = {
 
         -- Rust
         "rust-analyzer",
-        "rustfmt",
+
+        -- Go
+        "gopls",
 
         -- YAML
         "yaml-language-server",
@@ -76,6 +78,7 @@ local plugins = {
         "rust",
         "typescript",
         "bash",
+        "go",
 
         -- other,
         "yaml",
