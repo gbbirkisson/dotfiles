@@ -78,6 +78,7 @@ alias :q="exit"
 alias vimcheat="xdg-open https://www.gbb.is/posts/2022-09-28-vim-cheatsheet/"
 
 # Git
+alias gr='cd $(git rev-parse --show-toplevel)'
 alias gc="git commit -m"
 alias gcb="git checkout -b"
 alias gp="git pull"
