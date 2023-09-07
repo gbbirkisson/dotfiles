@@ -43,12 +43,11 @@ if command -v batcat &> /dev/null ; then
 	alias cat='batcat -pp'
 fi
 
-# Use exa not ls
-if command -v exa &> /dev/null ; then
-	alias ls='exa'
-	alias l="exa -lF -s type"   # List all files colorized in long format
-	alias la="exa -alF -s type" # List all files colorized in long format, including dot files
-	alias ll="exa -alF -s type"
+# Use lsd not ls
+if command -v lsd &> /dev/null ; then
+	alias ls='lsd -1'
+	alias l="lsd -l --group-directories-first"   # List files colorized in long format
+	alias ll="lsd -Al --group-directories-first" # List all files colorized in long format
 fi
 
 # serve files

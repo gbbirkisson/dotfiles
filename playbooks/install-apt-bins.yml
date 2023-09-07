@@ -14,7 +14,6 @@
       - apt-transport-https
       - git
 
-      - exa         # Better ls
       - bat         # Better cat
       - fzf         # Fuzzy finder
       - jq          # Json manipulation
