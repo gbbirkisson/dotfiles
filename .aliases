@@ -45,9 +45,10 @@ fi
 
 # Use lsd not ls
 if command -v lsd &> /dev/null ; then
-	alias ls='lsd -1'
-	alias l="lsd -l --group-directories-first"   # List files colorized in long format
+	alias ls="lsd -1 --group-directories-first"  # List files
+	alias l="lsd -1 --group-directories-first"   # List files
 	alias ll="lsd -Al --group-directories-first" # List all files colorized in long format
+  alias lt="lsd --tree"                        # List tree
 fi
 
 # serve files
