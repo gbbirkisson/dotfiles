@@ -49,6 +49,7 @@ local plugins = {
         -- Python
         "black",
         "mypy",
+        "isort",
         "ruff",
         "pyright",
 
@@ -61,6 +62,10 @@ local plugins = {
         -- YAML
         "yaml-language-server",
         "yamllint",
+        "yamlfmt",
+
+        -- Toml
+        "taplo",
       }
     },
   },
@@ -128,6 +133,13 @@ local plugins = {
       })
     end,
   },
+  {
+    "mhartington/formatter.nvim",
+    event = "VeryLazy",
+    opts = function ()
+      return require "custom.configs.formatter"
+    end
+  }
 }
 
 return plugins
