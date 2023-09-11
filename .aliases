@@ -4,12 +4,12 @@
 alias historyrm='HID=$(history | fzf | awk "{print $1}") && history -d $HID'
 
 # Set better defaults for common ops
-alias cp="cp -i"          # Confirm before overwriting something
-alias mv='mv -i'		  # Confirm before overwriting something
-alias sudo='sudo '        # Enable aliases to be sudo’ed
-alias df='df -h'          # human-readable sizes
-alias du='du -h'          # human-readable sizes
-alias free='free -m'      # show sizes in MB
+alias cp="cp -i"     # Confirm before overwriting something
+alias mv='mv -i'     # Confirm before overwriting something
+alias sudo='sudo '   # Enable aliases to be sudo’ed
+alias df='df -h'     # human-readable sizes
+alias du='du -h'     # human-readable sizes
+alias free='free -m' # show sizes in MB
 
 # IP addresses
 alias ippub="wget http://ipinfo.io/ip -qO -"
@@ -18,7 +18,7 @@ alias ips="ip addr | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]
 
 # httpie
 for method in get post put delete; do
-	alias "$method"="xh '$method'"
+  alias "$method"="xh '$method'"
 done
 
 # docker aliases
@@ -31,23 +31,22 @@ alias dcln='dstp; drma; drmi; drmv'                                             
 # kubectl aliases
 alias k='kubectl'
 complete -F __start_kubectl k
-# Enable/disable kubectl with ke/kd
 alias kd='export KUBECONFIG=/dev/null'
-alias ke='export KUBECONFIG=~/.kube/config_me'
-alias kv='export KUBECONFIG=~/.kube/config_velo'
+for f in e v m; do
+  alias "k$f"="export KUBECONFIG=~/.kube/config_$f"
+done
 kd # Disable by default
 
-
 # use bat not cat
-if command -v batcat &> /dev/null ; then
-	alias cat='batcat -pp'
+if command -v batcat &>/dev/null; then
+  alias cat='batcat -pp'
 fi
 
 # Use lsd not ls
-if command -v lsd &> /dev/null ; then
-	alias ls="lsd -1 --group-directories-first"  # List files
-	alias l="lsd -1 --group-directories-first"   # List files
-	alias ll="lsd -Al --group-directories-first" # List all files colorized in long format
+if command -v lsd &>/dev/null; then
+  alias ls="lsd -1 --group-directories-first"  # List files
+  alias l="lsd -1 --group-directories-first"   # List files
+  alias ll="lsd -Al --group-directories-first" # List all files colorized in long format
   alias lt="lsd --tree"                        # List tree
 fi
 
