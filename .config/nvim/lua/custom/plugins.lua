@@ -66,6 +66,9 @@ local plugins = {
 
         -- Toml
         "taplo",
+
+        -- sh
+        "shfmt"
       }
     },
   },
@@ -74,7 +77,7 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        -- defaults 
+        -- defaults
         "vim",
         "lua",
 
