@@ -59,3 +59,22 @@
       src: ~/.local/bin/nvim-linux64/bin/nvim
       dest: ~/.local/bin/nvim
       state: link
+
+  - name: Check if minikube is installed
+    command: which minikube
+    changed_when: false
+    failed_when: minikube_installed.rc not in [0,1]
+    register: minikube_installed
+
+  - name: Install minikube
+    when: minikube_installed.rc not in [ 0 ]
+    ansible.builtin.get_url:
+      url: https://github.com/kubernetes/minikube/releases/download/v1.31.2/minikube-linux-amd64
+      dest: ~/.local/bin/minikube
+
+  - name: Set minikube permissions
+    when: minikube_installed.rc not in [ 0 ]
+    ansible.builtin.file:
+      path: ~/.local/bin/minikube
+      state: touch
+      mode: +x
