@@ -1,20 +1,23 @@
 local M = {
   filetype = {
+    python = {
+      require("formatter.filetypes.python").isort,
+      require("formatter.filetypes.python").black,
+    },
     rust = {
       require("formatter.filetypes.rust").rustfmt
+    },
+    sh = {
+      require("formatter.filetypes.sh").shfmt
+    },
+    terraform = {
+      require("formatter.filetypes.terraform").terraformfmt
     },
     toml = {
       require("formatter.filetypes.toml").taplo
     },
     yaml = {
       require("formatter.filetypes.yaml").yamlfmt
-    },
-    python = {
-      require("formatter.filetypes.python").isort,
-      require("formatter.filetypes.python").black,
-    },
-    sh = {
-      require("formatter.filetypes.sh").shfmt
     },
     ["*"] = {
       require("formatter.filetypes.any").remove_trailing_whitespace
@@ -32,6 +35,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         return
      end
     end
+
     vim.cmd("FormatWriteLock")
   end
 })
