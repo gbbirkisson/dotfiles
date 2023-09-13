@@ -75,27 +75,8 @@ local plugins = {
   {
     -- Syntax highlighting
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        -- defaults
-        "vim",
-        "lua",
-
-        -- languages
-        "python",
-        "rust",
-        "typescript",
-        "bash",
-        "go",
-
-        -- other,
-        "yaml",
-        "markdown",
-        "terraform",
-        "make",
-        "proto", -- protobuffers
-      }
-    }
+    opts = require("custom.configs.treesitter").opts,
+    config = require("custom.configs.treesitter").config,
   },
   {
     -- LSP Configuration
