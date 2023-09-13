@@ -67,7 +67,6 @@ alias poetry_env='poetry env use $(asdf which python)'
 
 # Oda
 alias klipy="poetry -C $ODA_PATH/klipy run klipy"
-alias velo="poetry -C $ODA_PATH/velo run velo"
 alias 3dprinter='vlc http://192.168.151.100/webcam/?action=stream --logfile /dev/null'
 
 # Vim
@@ -102,3 +101,9 @@ alias ghpr="source $HOME/.local/scripts/ghpr"
 
 # Tmux cheatsheet
 alias ch="cat ~/.config/tmux/tmux.conf | grep '#c' | sed 's/#ch //g' | column -t -s ';' -o ' | '"
+
+# Velo
+for i in "dev dev" "staging staging" "prod prod" "prod infra-prod"; do
+  a=($i)
+  alias "vr-${a[1]}"="velo render -e ${a[0]} -t cluster:k8s-${a[1]}"
+done
