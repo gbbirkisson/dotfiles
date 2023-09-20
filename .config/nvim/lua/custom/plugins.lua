@@ -79,6 +79,11 @@ local plugins = {
     config = require("custom.configs.treesitter").config,
   },
   {
+    -- Treesitter playground
+    "nvim-treesitter/playground",
+    cmd = { "TSPlaygroundToggle" },
+  },
+  {
     -- LSP Configuration
     "neovim/nvim-lspconfig",
     config = function ()
