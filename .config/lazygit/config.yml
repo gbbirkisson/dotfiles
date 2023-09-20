@@ -1,1 +1,4 @@
+# yaml-language-server: $schema=https://json.schemastore.org/lazygit.json
 disableStartupPopups: true
+git:
+  autoFetch: false
