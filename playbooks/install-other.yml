@@ -78,3 +78,23 @@
       path: ~/.local/bin/minikube
       state: touch
       mode: +x
+
+  - name: Check if nats is installed
+    command: which nats
+    changed_when: false
+    failed_when: nats_installed.rc not in [0,1]
+    register: nats_installed
+
+  - name: Install nats
+    when: nats_installed.rc not in [ 0 ]
+    unarchive:
+      remote_src: yes
+      src: https://github.com/nats-io/natscli/releases/download/v0.1.0/nats-0.1.0-linux-amd64.zip
+      dest: ~/.local/bin
+
+  - name: Link nats
+    when: nats_installed.rc not in [ 0 ]
+    ansible.builtin.file:
+      src: ~/.local/bin/nats-0.1.0-linux-amd64/nats
+      dest: ~/.local/bin/nats
+      state: link
