@@ -37,6 +37,14 @@ local M = {
         requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
       },
     }
+
+    parser_config.asm = {
+        install_info = {
+            url = 'https://github.com/rush-rs/tree-sitter-asm.git',
+            files = { 'src/parser.c' },
+            branch = 'main',
+        },
+    }
   end,
 }
 
