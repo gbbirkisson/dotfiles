@@ -35,6 +35,15 @@ fetch_rss() {
     jq -c '.[] | {text: .description, attribution: .link}'
 }
 
+fetch_rss_more() {
+  curl -s $1 |
+    yq -p xml -o json '.rss.channel.item' |
+    # Remove image tags
+    sed -e "s%<img.*>\\\\n%%g" |
+    # Format as quote
+    jq -c '.[] | {text: (.title + ". " + .description), attribution: .link}'
+}
+
 fetch_code() {
   OLDIFS="$IFS"
   IFS=$'\n'
@@ -55,7 +64,7 @@ mode_news() {
   fetch_rss https://www.mbl.is/feeds/togt/ &
   fetch_rss https://www.mbl.is/feeds/helst/ &
   fetch_rss https://www.visir.is/rss/forsida/ &
-  fetch_rss http://feeds.bbci.co.uk/news/technology/rss.xml
+  fetch_rss_more http://feeds.bbci.co.uk/news/technology/rss.xml
 }
 
 mode_quotes() {
