@@ -102,4 +102,4 @@ mode_${MODE} |
   sort |
   uniq |
   jq -s '.' |
-  tt -noreport -quotes - -csv >~/.${SCRIPT_NAME}-${MODE}.csv
+  tt -noskip -noreport -quotes - -csv >~/.${SCRIPT_NAME}-${MODE}.csv
