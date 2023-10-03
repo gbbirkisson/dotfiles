@@ -98,3 +98,22 @@
       src: ~/.local/bin/nats-0.1.0-linux-amd64/nats
       dest: ~/.local/bin/nats
       state: link
+
+  - name: Check if tt is installed
+    command: which tt
+    changed_when: false
+    failed_when: tt_installed.rc not in [0,1]
+    register: tt_installed
+
+  - name: Install tt
+    when: tt_installed.rc not in [ 0 ]
+    ansible.builtin.get_url:
+      url: https://github.com/lemnos/tt/releases/download/v0.4.2/tt-linux
+      dest: ~/.local/bin/tt
+
+  - name: Set tt permissions
+    when: tt_installed.rc not in [ 0 ]
+    ansible.builtin.file:
+      path: ~/.local/bin/tt
+      state: touch
+      mode: +x
