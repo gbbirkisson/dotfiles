@@ -2,6 +2,7 @@ local M = {}
 
 M.abc = {
   n = {
+    ["æ"] = {":", "Colon shorthand"},
     ["<c-q>"] = {
       function()
         require("nvchad.tabufline").close_buffer()
