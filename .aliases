@@ -68,6 +68,7 @@ alias poetry_env='poetry env use $(asdf which python)'
 # Oda
 alias klipy="poetry -C $ODA_PATH/klipy run klipy"
 alias 3dprinter='vlc http://192.168.151.100/webcam/?action=stream --logfile /dev/null'
+alias gt="poetry -C $HOME/repos/personal/gt run gt"
 
 # Vim
 alias vim="nvim"
