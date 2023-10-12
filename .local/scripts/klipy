@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec $ODA_PATH/klipy/.venv/bin/python -m klipy "$@"
