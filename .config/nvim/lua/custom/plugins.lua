@@ -12,6 +12,8 @@ local plugins = {
         patterns = {
           ".git",
           ".deploy",
+          "pyproject.toml",
+          "Cargo.toml",
         },
       }
     end
@@ -68,7 +70,10 @@ local plugins = {
         "taplo",
 
         -- sh
-        "shfmt"
+        "shfmt",
+
+        -- Lua
+        "lua-language-server",
       }
     },
   },
