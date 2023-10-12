@@ -117,3 +117,18 @@
       path: ~/.local/bin/tt
       state: touch
       mode: +x
+
+  - name: Check if k9s is installed
+    command: which k9s
+    changed_when: false
+    failed_when: k9s_installed.rc not in [0,1]
+    register: k9s_installed
+
+  - name: Install k9s
+    when: k9s_installed.rc not in [ 0 ]
+    unarchive:
+      remote_src: yes
+      src: https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_amd64.tar.gz
+      dest: ~/.local/bin
+      extra_opts:
+      - k9s
