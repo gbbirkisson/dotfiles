@@ -14,6 +14,7 @@ M.abc = {
     ["<leader>fm"] = {"<cmd> :Format <CR>", "[F]or[m]at File"},
   },
   v = {
+    ["æ"] = {":", "Colon shorthand"},
     ["'"] = {"<cmd> :s/\"/'/g <CR><ESC>", "Replace \" with '"},
     ["\""] = {"<cmd> :s/'/\"/g <CR><ESC>", "Replace ' with \""},
   }
