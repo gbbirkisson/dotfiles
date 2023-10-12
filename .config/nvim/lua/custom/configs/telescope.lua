@@ -20,7 +20,6 @@ local opts = {
     },
     file_ignore_patterns = {
       "node_modules",
-      ".git",
       ".venv",
       "__pycache__",
       ".mypy_cache",
