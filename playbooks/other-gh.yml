@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+
+  vars:
+    version: 2.37.0
+
+  tasks:
+
+  - name: Create local bin path
+    ansible.builtin.file:
+      path: ~/.local/bin
+      state: directory
+
+  - name: Check if gh is installed
+    shell: "gh --version | grep {{ version }}"
+    changed_when: false
+    failed_when: gh_installed.rc not in [0,1]
+    register: gh_installed
+
+  - name: Install gh
+    when: gh_installed.rc not in [ 0 ]
+    unarchive:
+      remote_src: yes
+      src: "https://github.com/cli/cli/releases/download/v{{ version }}/gh_{{ version }}_linux_amd64.tar.gz"
+      dest: ~/.local/bin
+      extra_opts:
+      - --strip-components
+      - 2
+      # - --add-file
+      - "gh_{{ version }}_linux_amd64/bin/gh"

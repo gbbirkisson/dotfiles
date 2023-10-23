@@ -1,12 +1,24 @@
 ---
-- import_playbook: install-apt-bins.yml
+- import_playbook: base-apt-bins.yml
 
-- import_playbook: install-1password.yml
-- import_playbook: install-asdf.yml
-- import_playbook: install-docker.yml
-- import_playbook: install-rust.yml
+- import_playbook: base-1password.yml
+- import_playbook: base-asdf.yml
+- import_playbook: base-docker.yml
+- import_playbook: base-rust.yml
 
-- import_playbook: install-fonts.yml
-- import_playbook: install-regolith.yml
-- import_playbook: install-cargo-bins.yml
+- import_playbook: base-fonts.yml
+- import_playbook: base-regolith.yml
+- import_playbook: base-cargo-bins.yml
+
 - import_playbook: install-other.yml
+
+- import_playbook: other-gh.yml
+- import_playbook: other-k9s.yml
+- import_playbook: other-lazygit.yml
+- import_playbook: other-minikube.yml
+- import_playbook: other-nats.yml
+- import_playbook: other-nvim.yml
+- import_playbook: other-tt.yml
+- import_playbook: other-velero.yml
+
+- import_playbook: link.yml

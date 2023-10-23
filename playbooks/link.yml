@@ -1,6 +1,13 @@
 ---
+# Pull down needed config before we link
+- import_playbook: dev-nvim-nvchad.yml
+- import_playbook: dev-tmux-tpm.yml
+
 - hosts: localhost
   tasks:
+
+  - name: Link
+    command: "{{ dotfiles }}/link"
 
   - name: Source files
     lineinfile:

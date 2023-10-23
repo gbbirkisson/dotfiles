@@ -34,28 +34,24 @@ lint: $(VENV)
 $(PLAYBOOKS): lint
 	$(Q) PLAYBOOK=$@ $(MAKE) --no-print-directory _run
 
-.PHONY: all
-all: install link ## Do everything
-
 .PHONY: install
-install: _sudo playbooks/install.yml ## Install packages
+install: _sudo playbooks/install.yml ## Install everything
+
+.PHONY: update
+update: _sudo  ## Update packages
+	$(Q) sudo apt update
+	$(Q) sudo apt upgrade -y
+	$(Q) sudo snap refresh
+	$(Q) rustup update
+	$(Q) $(MAKE) --no-print-directory playbooks/base-cargo-bins.yml
+	$(Q) $(MAKE) --no-print-directory playbooks/dev-nvim-nvchad.yml
 
 .PHONY: term
-term: _sudo ## Set default terminal
+term: _sudo ## Set default terminal to alacritty
 	$(info $(M) Setting default terminal)
-	$(Q) update-alternatives --list x-terminal-emulator | grep -q $(shell which alacritty) || sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which alacritty) 100
+	$(Q) which alacritty
+	$(Q) update-alternatives --list x-terminal-emulator | grep -q alacritty || echo sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which alacritty) 100
 	$(Q) # sudo update-alternatives --config x-terminal-emulator
-
-.PHONY: link
-link: playbooks/install-nvim-nvchad.yml playbooks/install-tmux-tpm.yml ## Link dotfiles to HOME folder
-	$(info $(M) Linking dotfiles)
-	$(Q) ./link
-	$(Q) $(MAKE) --no-print-directory playbooks/source.yml
-
-.PHONY: theme
-theme: ## Set regolith theme
-	$(info $(M) Setting theme)
-	$(Q) regolith-look list | fzf | xargs regolith-look set
 
 help: ## Show help
 	$(info $(M) Makefile targets:)
