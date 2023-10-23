@@ -14,3 +14,4 @@
     - ouch            # Easy compress/decompress
     - sfz             # Simple web server for dirs
     - alacritty       # Better terminal emulator
+    - trunk           # WASM development
