@@ -31,8 +31,7 @@
       - regolith-look-nord
       - i3xrocks-battery
 
-  - name: Remove base launchers
-    become: true
-    ansible.builtin.apt:
-      name: regolith-i3-base-launchers
-      state: absent
+  - name: Set theme
+    command: |
+      regolith-look set nord
+    when: theme.changed
