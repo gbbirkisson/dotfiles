@@ -13,4 +13,4 @@ assign [class="Slack"] $ws10
 for_window [class="Chromium"] border pixel 0
 
 # Shuffle workpaces between screens
-bindsym $mod+Ctrl+less move workspace to output next
+bindsym $mod+less move workspace to output next
