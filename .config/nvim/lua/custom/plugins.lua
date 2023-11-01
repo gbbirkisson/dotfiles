@@ -13,7 +13,7 @@ local plugins = {
           ".git",
           ".deploy",
           "pyproject.toml",
-          "Cargo.toml",
+          "Cargo.lock",
         },
       }
     end
@@ -99,6 +99,11 @@ local plugins = {
   {
     -- Markdown TOC
     "mzlogin/vim-markdown-toc",
+    lazy = false,
+  },
+  {
+    -- ASM highlighting
+    "rush-rs/tree-sitter-asm",
     lazy = false,
   },
   {

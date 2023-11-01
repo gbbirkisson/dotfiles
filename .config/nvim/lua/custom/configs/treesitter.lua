@@ -11,6 +11,8 @@ local M = {
       "typescript",
       "bash",
       "go",
+      "asm",
+      "sql",
 
       -- other,
       "yaml",
@@ -18,6 +20,7 @@ local M = {
       "terraform",
       "make",
       "proto", -- protobuffers
+      "river",
     }
   },
   config = function(_, opts)
