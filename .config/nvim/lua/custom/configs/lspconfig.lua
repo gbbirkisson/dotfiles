@@ -41,3 +41,10 @@ lspconfig.yamlls.setup({
   capabilities = capabilities,
   filetypes = {"yaml"},
 })
+
+-- Javascript / Typescript
+lspconfig.tsserver.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {"javascript", "typescript", "typescriptreact"},
+}

@@ -74,6 +74,9 @@ local plugins = {
 
         -- Lua
         "lua-language-server",
+
+        -- Javascript / Typescript
+        "typescript-language-server",
       }
     },
   },
