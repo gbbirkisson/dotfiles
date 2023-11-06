@@ -7,11 +7,12 @@
       name: "{{ item }}"
       state: latest
     with_items:
-    - lsd             # Better ls
-    - drill           # HTTP stress testing
-    - xh              # HTTPie clone
-    - starship        # Fancy prompt
-    - ouch            # Easy compress/decompress
-    - sfz             # Simple web server for dirs
-    - alacritty       # Better terminal emulator
-    - trunk           # WASM development
+    - lsd               # Better ls
+    - drill             # HTTP stress testing
+    - xh                # HTTPie clone
+    - starship          # Fancy prompt
+    - ouch              # Easy compress/decompress
+    - sfz               # Simple web server for dirs
+    - alacritty         # Better terminal emulator
+    - trunk             # WASM development
+    - cargo-tarpaulin   # For code coverage
