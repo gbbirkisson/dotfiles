@@ -5,7 +5,7 @@ local function relative_file_location()
   local curr_buf = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
   local path = vim.api.nvim_buf_get_name(curr_buf)
   if path == "" then
-    return "Empty "
+    return "No Name "
   end
   local cwd = vim.fn.getcwd()
   return path:sub(cwd:len() + 2,-1)
@@ -22,7 +22,7 @@ M.ui = {
         local icon = "󰈚 "
         local name = relative_file_location()
 
-        if name ~= "Empty " then
+        if name ~= "No Name " then
           local devicons_present, devicons = pcall(require, "nvim-web-devicons")
 
           if devicons_present then
