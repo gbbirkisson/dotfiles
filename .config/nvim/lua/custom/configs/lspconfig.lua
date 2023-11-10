@@ -9,14 +9,14 @@ local util = require("lspconfig/util")
 lspconfig.pyright.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = {"python"},
+  -- filetypes = {"python"},
 })
 
 -- Rust
 lspconfig.rust_analyzer.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = {"rust"},
+  -- filetypes = {"rust"},
   root_dir = util.root_pattern("Cargo.toml"),
   settings = {
     ['rust-analyzer'] = {
@@ -31,7 +31,7 @@ lspconfig.rust_analyzer.setup({
 lspconfig.gopls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = {"go"},
+  -- filetypes = {"go"},
   root_dir = util.root_pattern("go.mod"),
 })
 
@@ -39,12 +39,22 @@ lspconfig.gopls.setup({
 lspconfig.yamlls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = {"yaml"},
+  -- filetypes = {"yaml"},
 })
 
 -- Javascript / Typescript
 lspconfig.tsserver.setup{
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = {"javascript", "typescript", "typescriptreact"},
+  -- filetypes = {"javascript", "typescript", "typescriptreact"},
+}
+
+-- C / C++
+lspconfig.clangd.setup{
+  on_attach = function (client, bufnr)
+    client.server_capabilities.signatureHelpProvider = false
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+  -- filetypes = {"c", "cpp"},
 }

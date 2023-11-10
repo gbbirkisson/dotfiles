@@ -13,6 +13,8 @@ local M = {
       "go",
       "asm",
       "sql",
+      "c",
+      "cpp",
 
       -- other,
       "yaml",

@@ -77,6 +77,9 @@ local plugins = {
 
         -- Javascript / Typescript
         "typescript-language-server",
+
+        -- C / C++
+        "clangd",
       }
     },
   },
