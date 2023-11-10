@@ -25,7 +25,7 @@ local M = {
   }
 }
 
-local disable_auto_format = { "yaml" }
+local disable_auto_format = { "yaml", "toml" }
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   pattern = "*",
