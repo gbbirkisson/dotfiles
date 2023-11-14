@@ -95,6 +95,14 @@ local plugins = {
     cmd = { "TSPlaygroundToggle" },
   },
   {
+    -- LSP extensions
+    "nvimtools/none-ls.nvim",
+    ft = {"python", "rust", "yaml"},
+    opts = function ()
+      return require("custom.configs.none-ls")
+    end
+  },
+  {
     -- LSP Configuration
     "neovim/nvim-lspconfig",
     config = function ()
@@ -148,13 +156,6 @@ local plugins = {
         },
       })
     end,
-  },
-  {
-    "mhartington/formatter.nvim",
-    event = "VeryLazy",
-    opts = function ()
-      return require "custom.configs.formatter"
-    end
   }
 }
 
