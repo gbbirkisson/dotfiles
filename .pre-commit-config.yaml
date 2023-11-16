@@ -1,10 +1,10 @@
 ---
 repos:
-- repo: local
-  hooks:
-  - id: make-lint
-    name: make lint
-    entry: make lint
-    language: system
-    types: [yaml]
-    pass_filenames: false
+  - repo: local
+    hooks:
+      - id: make-lint
+        name: make lint
+        entry: make lint
+        language: system
+        types: [yaml]
+        pass_filenames: false

@@ -6,27 +6,27 @@
 
   tasks:
 
-  - name: Create local bin path
-    ansible.builtin.file:
-      path: ~/.local/bin
-      state: directory
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
 
-  - name: Check if nvim is installed
-    shell: "nvim --version | grep {{ version }}"
-    changed_when: false
-    failed_when: nvim_installed.rc not in [0,1]
-    register: nvim_installed
+    - name: Check if nvim is installed
+      shell: "nvim --version | grep {{ version }}"
+      changed_when: false
+      failed_when: nvim_installed.rc not in [0,1]
+      register: nvim_installed
 
-  - name: Install nvim
-    when: nvim_installed.rc not in [ 0 ]
-    unarchive:
-      remote_src: yes
-      src: "https://github.com/neovim/neovim/releases/download/v{{ version }}/nvim-linux64.tar.gz"
-      dest: ~/.local/bin
+    - name: Install nvim
+      when: nvim_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/neovim/neovim/releases/download/v{{ version }}/nvim-linux64.tar.gz"
+        dest: ~/.local/bin
 
-  - name: Link nvim
-    when: nvim_installed.rc not in [ 0 ]
-    ansible.builtin.file:
-      src: ~/.local/bin/nvim-linux64/bin/nvim
-      dest: ~/.local/bin/nvim
-      state: link
+    - name: Link nvim
+      when: nvim_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        src: ~/.local/bin/nvim-linux64/bin/nvim
+        dest: ~/.local/bin/nvim
+        state: link

@@ -3,35 +3,35 @@
   gather_facts: true
   tasks:
 
-  - name: Set DPKG architecture
-    set_fact:
-      dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
+    - name: Set DPKG architecture
+      set_fact:
+        dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
 
-  - name: Add Regolith GPG apt Key
-    become: true
-    apt_key:
-      url: https://regolith-desktop.org/regolith.key
-      state: present
+    - name: Add Regolith GPG apt Key
+      become: true
+      apt_key:
+        url: https://regolith-desktop.org/regolith.key
+        state: present
 
-  - name: Add Regolith Apt Repository
-    become: true
-    apt_repository:
-      repo: "deb [arch={{ dpkg_arch }}] https://regolith-desktop.org/release-3_0-ubuntu-{{ ansible_distribution_release }}-{{ dpkg_arch }} {{ ansible_distribution_release }} main"
+    - name: Add Regolith Apt Repository
+      become: true
+      apt_repository:
+        repo: "deb [arch={{ dpkg_arch }}] https://regolith-desktop.org/release-3_0-ubuntu-{{ ansible_distribution_release }}-{{ dpkg_arch }} {{ ansible_distribution_release }} main"
 
-  - name: Install Regolith
-    become: true
-    apt:
-      state: latest
-      update_cache: true
-      pkg:
-      - regolith-desktop
-      - regolith-compositor-picom-glx
-      - regolith-session-flashback
-      - regolith-look-lascaille
-      - regolith-look-nord
-      - i3xrocks-battery
+    - name: Install Regolith
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - regolith-desktop
+          - regolith-compositor-picom-glx
+          - regolith-session-flashback
+          - regolith-look-lascaille
+          - regolith-look-nord
+          - i3xrocks-battery
 
-  - name: Set theme
-    command: |
-      regolith-look set nord
-    when: theme.changed
+    - name: Set theme
+      command: |
+        regolith-look set nord
+      when: theme.changed

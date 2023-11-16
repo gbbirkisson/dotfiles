@@ -3,44 +3,44 @@
   gather_facts: true
   tasks:
 
-  - name: Set DPKG architecture
-    set_fact:
-      dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
+    - name: Set DPKG architecture
+      set_fact:
+        dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
 
-  - name: Check if docker is installed
-    command: which docker
-    changed_when: false
-    failed_when: docker_installed.rc not in [0,1]
-    register: docker_installed
+    - name: Check if docker is installed
+      command: which docker
+      changed_when: false
+      failed_when: docker_installed.rc not in [0,1]
+      register: docker_installed
 
-  - name: Add Docker GPG apt Key
-    when: docker_installed.rc not in [ 0 ]
-    become: true
-    apt_key:
-      url: https://download.docker.com/linux/ubuntu/gpg
-      state: present
+    - name: Add Docker GPG apt Key
+      when: docker_installed.rc not in [ 0 ]
+      become: true
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
 
-  - name: Add Docker Apt Repository
-    when: docker_installed.rc not in [ 0 ]
-    become: true
-    apt_repository:
-      repo: "deb [arch={{ dpkg_arch }}] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-      state: present
+    - name: Add Docker Apt Repository
+      when: docker_installed.rc not in [ 0 ]
+      become: true
+      apt_repository:
+        repo: "deb [arch={{ dpkg_arch }}] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        state: present
 
-  - name: Install Docker
-    become: true
-    apt:
-      state: latest
-      update_cache: true
-      pkg:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-compose-plugin
+    - name: Install Docker
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
 
-  - name: Adding user to docker group
-    become: true
-    user:
-      name: "{{ lookup('env', 'USER') }}"
-      groups: docker
-      append: true
+    - name: Adding user to docker group
+      become: true
+      user:
+        name: "{{ lookup('env', 'USER') }}"
+        groups: docker
+        append: true

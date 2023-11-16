@@ -2,9 +2,9 @@
 - hosts: localhost
   tasks:
 
-  - name: Checkout Chad
-    ansible.builtin.git:
-      repo: https://github.com/NvChad/NvChad.git
-      dest: ~/.config/nvim
-      depth: 1
-      version: v2.0
+    - name: Checkout Chad
+      ansible.builtin.git:
+        repo: https://github.com/NvChad/NvChad.git
+        dest: ~/.config/nvim
+        depth: 1
+        version: v2.0

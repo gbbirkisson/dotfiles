@@ -6,27 +6,27 @@
 
   tasks:
 
-  - name: Create local bin path
-    ansible.builtin.file:
-      path: ~/.local/bin
-      state: directory
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
 
-  - name: Check if nats is installed
-    shell: "nats --version | grep {{ version }}"
-    changed_when: false
-    failed_when: nats_installed.rc not in [0,1]
-    register: nats_installed
+    - name: Check if nats is installed
+      shell: "nats --version | grep {{ version }}"
+      changed_when: false
+      failed_when: nats_installed.rc not in [0,1]
+      register: nats_installed
 
-  - name: Install nats
-    when: nats_installed.rc not in [ 0 ]
-    unarchive:
-      remote_src: yes
-      src: "https://github.com/nats-io/natscli/releases/download/v{{ version }}/nats-{{ version }}-linux-amd64.zip"
-      dest: ~/.local/bin
+    - name: Install nats
+      when: nats_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/nats-io/natscli/releases/download/v{{ version }}/nats-{{ version }}-linux-amd64.zip"
+        dest: ~/.local/bin
 
-  - name: Link nats
-    when: nats_installed.rc not in [ 0 ]
-    ansible.builtin.file:
-      src: "~/.local/bin/nats-{{ version }}-linux-amd64/nats"
-      dest: ~/.local/bin/nats
-      state: link
+    - name: Link nats
+      when: nats_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        src: "~/.local/bin/nats-{{ version }}-linux-amd64/nats"
+        dest: ~/.local/bin/nats
+        state: link

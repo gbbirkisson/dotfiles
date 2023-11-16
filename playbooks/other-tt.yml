@@ -6,26 +6,26 @@
 
   tasks:
 
-  - name: Create local bin path
-    ansible.builtin.file:
-      path: ~/.local/bin
-      state: directory
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
 
-  - name: Check if tt is installed
-    shell: "tt -v 2>&1 | grep {{ version }}"
-    changed_when: false
-    failed_when: tt_installed.rc not in [0,1]
-    register: tt_installed
+    - name: Check if tt is installed
+      shell: "tt -v 2>&1 | grep {{ version }}"
+      changed_when: false
+      failed_when: tt_installed.rc not in [0,1]
+      register: tt_installed
 
-  - name: Install tt
-    when: tt_installed.rc not in [ 0 ]
-    ansible.builtin.get_url:
-      url: "https://github.com/lemnos/tt/releases/download/v{{ version }}/tt-linux"
-      dest: ~/.local/bin/tt
+    - name: Install tt
+      when: tt_installed.rc not in [ 0 ]
+      ansible.builtin.get_url:
+        url: "https://github.com/lemnos/tt/releases/download/v{{ version }}/tt-linux"
+        dest: ~/.local/bin/tt
 
-  - name: Set tt permissions
-    when: tt_installed.rc not in [ 0 ]
-    ansible.builtin.file:
-      path: ~/.local/bin/tt
-      state: touch
-      mode: +x
+    - name: Set tt permissions
+      when: tt_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        path: ~/.local/bin/tt
+        state: touch
+        mode: +x
