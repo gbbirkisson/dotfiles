@@ -3,40 +3,40 @@
 set -e
 
 ensure_backup() {
-  local bak="$1.bak"
+	local bak="$1.bak"
 
-  # If no previous file exists, exit ...
-  [ ! -f "$1" ] && [ ! -d "$1" ] && return
+	# If no previous file exists, exit ...
+	[ ! -f "$1" ] && [ ! -d "$1" ] && return
 
-  # Has this already been linked, exit ...
-  [[ -L "$1" ]] && return
+	# Has this already been linked, exit ...
+	[[ -L "$1" ]] && return
 
-  # If previous backup file exits, exit ...
-  [ -f "$bak" ] || [ -d "$bak" ] && return
+	# If previous backup file exits, exit ...
+	[ -f "$bak" ] || [ -d "$bak" ] && return
 
-  cp -rf "$1" "$bak"
+	cp -rf "$1" "$bak"
 }
 
 ensure_parent() {
-  local parent="$(dirname "$1")"
-  [ -d "$parent" ] || mkdir -p "$parent"
+	local parent="$(dirname "$1")"
+	[ -d "$parent" ] || mkdir -p "$parent"
 }
 
 link() {
-  [ ! -f "$1" ] && [ ! -d "$1" ] && echo "Not found $1" && return
+	[ ! -f "$1" ] && [ ! -d "$1" ] && echo "Not found $1" && return
 
-  local src=$(realpath "$1")
-  if [ -n "$2" ]; then
-    local dst=${HOME}/${2}
-  else
-    local dst=${HOME}/$(realpath --relative-to=$PWD "$1")
-  fi
+	local src=$(realpath "$1")
+	if [ -n "$2" ]; then
+		local dst=${HOME}/${2}
+	else
+		local dst=${HOME}/$(realpath --relative-to=$PWD "$1")
+	fi
 
-  echo "Link $src -> $dst"
-  ensure_backup "$dst"
-  ensure_parent "$dst"
-  rm -rf "$dst"
-  ln -sf "$src" "$dst"
+	echo "Link $src -> $dst"
+	ensure_backup "$dst"
+	ensure_parent "$dst"
+	rm -rf "$dst"
+	ln -sf "$src" "$dst"
 }
 
 link .config/alacritty
@@ -47,6 +47,7 @@ link .config/nvim/queries
 link .config/regolith2
 link .config/regolith3
 link .config/tmux/tmux.conf
+link .config/yamlfmt/.yamlfmt
 link .config/starship.toml
 
 link .local/scripts

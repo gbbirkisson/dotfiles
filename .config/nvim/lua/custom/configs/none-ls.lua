@@ -15,6 +15,20 @@ local opts = {
 
     -- YAML
     null_ls.builtins.diagnostics.yamllint,
+    null_ls.builtins.formatting.yamlfmt,
+
+    -- Toml
+    null_ls.builtins.formatting.taplo,
+
+    -- Bash
+    null_ls.builtins.formatting.shfmt,
+
+    -- Other
+    null_ls.builtins.hover.printenv,
+    null_ls.builtins.hover.dictionary,
+    null_ls.builtins.diagnostics.typos,
+    null_ls.builtins.diagnostics.trail_space,
+    null_ls.builtins.diagnostics.todo_comments,
   },
   on_attach = function (client, bufnr)
     -- Auto-format on save
@@ -28,7 +42,7 @@ local opts = {
         buffer = bufnr,
         callback = function ()
           local ft = vim.bo.filetype
-          if ft == "yaml" or ft == "toml" then
+          if ft == "yaml" then
             return
           end
           vim.lsp.buf.format({ bufnr = bufnr })

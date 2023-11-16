@@ -69,9 +69,6 @@ local plugins = {
         -- Toml
         "taplo",
 
-        -- sh
-        "shfmt",
-
         -- Lua
         "lua-language-server",
 
@@ -80,6 +77,16 @@ local plugins = {
 
         -- C / C++
         "clangd",
+
+        -- Bash
+        "bash-language-server",
+        "shfmt",
+
+        -- Markdown
+        "marksman",
+
+        -- Other
+        "typos",
       }
     },
   },
@@ -97,7 +104,7 @@ local plugins = {
   {
     -- LSP extensions
     "nvimtools/none-ls.nvim",
-    ft = {"python", "rust", "yaml"},
+    lazy = false,
     opts = function ()
       return require("custom.configs.none-ls")
     end
