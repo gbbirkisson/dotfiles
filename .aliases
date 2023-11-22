@@ -18,7 +18,7 @@ alias ips="ip addr | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]
 
 # httpie
 for method in get post put delete; do
-  alias "$method"="xh '$method'"
+	alias "$method"="xh '$method'"
 done
 
 # docker aliases
@@ -33,21 +33,21 @@ alias k='kubectl'
 complete -F __start_kubectl k
 alias kd='export KUBECONFIG=/dev/null'
 for f in e v m; do
-  alias "k$f"="export KUBECONFIG=~/.kube/config_$f"
+	alias "k$f"="export KUBECONFIG=~/.kube/config_$f"
 done
 kd # Disable by default
 
 # use bat not cat
 if command -v batcat &>/dev/null; then
-  alias cat='batcat -pp'
+	alias cat='batcat -pp'
 fi
 
 # Use lsd not ls
 if command -v lsd &>/dev/null; then
-  alias ls="lsd -1 --group-directories-first"  # List files
-  alias l="lsd -1 --group-directories-first"   # List files
-  alias ll="lsd -Al --group-directories-first" # List all files colorized in long format
-  alias lt="lsd --tree"                        # List tree
+	alias ls="lsd -1 --group-directories-first"  # List files
+	alias l="lsd -1 --group-directories-first"   # List files
+	alias ll="lsd -Al --group-directories-first" # List all files colorized in long format
+	alias lt="lsd --tree"                        # List tree
 fi
 
 # serve files
@@ -69,12 +69,11 @@ alias poetry_auth='poetry config http-basic.oda-python oauth2accesstoken $(gclou
 # Oda
 alias 3dprinter='vlc http://192.168.151.100/webcam/?action=stream --logfile /dev/null'
 for i in "dev dev" "staging staging" "prod prod" "prod infra-prod"; do
-  a=($i)
-  alias "vr-${a[1]}"="velo render -e ${a[0]} -t cluster:k8s-${a[1]}"
+	a=($i)
+	alias "vr-${a[1]}"="velo render -e ${a[0]} -t cluster:k8s-${a[1]}"
 done
 # Vim
 alias vim="nvim"
-alias v="poetry run nvim . || nvim ."
 alias :q="exit"
 alias vimcheat="xdg-open https://www.gbb.is/posts/2022-09-28-vim-cheatsheet/"
 
