@@ -52,9 +52,7 @@ local plugins = {
         "black",
         "mypy",
         "ruff",
-
-        -- Rust
-        "rust-analyzer",
+        "pyright",
 
         -- Go
         "gopls",
