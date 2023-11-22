@@ -14,3 +14,8 @@ vim.api.nvim_create_user_command(
 -- Default to 100 (rust standard)
 -- Note: format selection with gq
 vim.cmd.Gl("100")
+
+-- Move mason path to the back
+local mason_path = vim.fn.stdpath "data" .. "/mason/bin"
+vim.env.PATH = vim.env.PATH:gsub(mason_path .. ":", "")
+vim.env.PATH = vim.env.PATH .. ":" .. mason_path

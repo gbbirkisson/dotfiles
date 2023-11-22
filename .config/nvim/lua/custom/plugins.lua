@@ -51,7 +51,6 @@ local plugins = {
         -- Python
         "black",
         "mypy",
-        "isort",
         "ruff",
         "pyright",
 
