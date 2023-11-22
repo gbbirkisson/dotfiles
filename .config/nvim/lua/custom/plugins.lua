@@ -52,7 +52,6 @@ local plugins = {
         "black",
         "mypy",
         "ruff",
-        "pyright",
 
         -- Rust
         "rust-analyzer",
