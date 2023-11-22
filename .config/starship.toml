@@ -12,11 +12,16 @@ $cmd_duration\
 $battery\
 $status\
 $shell\
+$python\
 $character"""
 
 # $package\
-# $python\
 #$line_break\
+
+# Only trigger when venv is activated
+[python]
+detect_extensions = []
+detect_files = []
 
 [status]
 format = '[\[$symbol$int\]$common_meaning]($style) '
