@@ -13,7 +13,6 @@ local opts = {
 
       -- include hidden files (except .git)
       "-.",
-      "--glob=!.git/",
 
       -- Exclude lock files
       "--glob=!*.lock",
