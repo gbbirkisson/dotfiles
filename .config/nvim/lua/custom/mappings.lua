@@ -2,7 +2,7 @@ local M = {}
 
 M.abc = {
   n = {
-    ["æ"] = {":", "Colon shorthand"},
+    -- ["æ"] = {":", "Colon shorthand"},
     ["<c-q>"] = {
       function()
         require("nvchad.tabufline").close_buffer()
@@ -16,9 +16,11 @@ M.abc = {
         vim.lsp.buf.format()
       end,
       "[F]or[m]at File"},
+    -- Include hidden files, but not the ones ignored by git
+    ["<leader>ff"] = { "<cmd> Telescope find_files hidden=true <CR>", "Find files" },
   },
   v = {
-    ["æ"] = {":", "Colon shorthand"},
+    -- ["æ"] = {":", "Colon shorthand"},
     ["'"] = {"<cmd> :s/\"/'/g <CR><ESC>", "Replace \" with '"},
     ["\""] = {"<cmd> :s/'/\"/g <CR><ESC>", "Replace ' with \""},
   }
