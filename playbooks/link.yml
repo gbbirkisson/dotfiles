@@ -7,7 +7,9 @@
   tasks:
 
     - name: Link
-      command: "{{ dotfiles }}/link"
+      command: "./link"
+      args:
+        chdir: "{{ dotfiles }}"
 
     - name: Source files
       lineinfile:
