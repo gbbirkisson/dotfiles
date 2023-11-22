@@ -40,11 +40,11 @@ link() {
 }
 
 link .config/alacritty
+link .config/direnv/lib
 link .config/k9s/skin.yml
 link .config/lazygit/config.yml
 link .config/nvim/lua/custom
 link .config/nvim/queries
-link .config/regolith2
 link .config/regolith3
 link .config/tmux/tmux.conf
 link .config/yamlfmt/.yamlfmt
