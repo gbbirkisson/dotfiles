@@ -5,8 +5,45 @@ local opts = {
   sources = {
     -- Python
     null_ls.builtins.formatting.black,
-    null_ls.builtins.diagnostics.mypy,
+    null_ls.builtins.formatting.ruff,
     null_ls.builtins.diagnostics.ruff,
+    null_ls.builtins.diagnostics.mypy.with({
+      command = function()
+        -- Check if we are running in a virtual env
+        local virtual = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
+
+        if virtual then
+          return virtual .. "/bin/python3"
+        else
+          return "mypy"
+        end
+      end,
+      args = function(params)
+        -- Check if we are running in a virtual env
+        local virtual = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
+
+        local mypy_args = {
+          "--hide-error-codes",
+          "--hide-error-context",
+          "--no-color-output",
+          "--show-absolute-path",
+          "--show-column-numbers",
+          "--show-error-codes",
+          "--no-error-summary",
+          "--no-pretty",
+          "--shadow-file",
+          params.bufname,
+          params.temp_path,
+          params.bufname,
+        }
+
+        if virtual then
+          return {"-m", "mypy", unpack(mypy_args)}
+        else
+          return mypy_args
+        end
+      end,
+    }),
 
     -- Rust
     null_ls.builtins.formatting.rustfmt.with({
@@ -22,6 +59,9 @@ local opts = {
 
     -- Bash
     null_ls.builtins.formatting.shfmt,
+
+    -- Terraform
+    -- null_ls.builtins.diagnostics.terraform_validate,
 
     -- Other
     null_ls.builtins.hover.printenv,
