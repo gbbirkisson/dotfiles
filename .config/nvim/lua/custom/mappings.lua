@@ -11,6 +11,7 @@ M.abc = {
     },
     ["<leader>gg"] = {"<cmd> :LazyGit <CR>", "Open Lazy[g]it"},
     ["<leader>cg"] = {"<cmd> :ChatGPT <CR>", "Open [C]hat[G]PT"},
+    ["<leader>cl"] = {"<cmd> :!gch <CR>", "[C]eatsheet for [G]love"},
     ["<leader>fm"] = {
       function()
         vim.lsp.buf.format()
