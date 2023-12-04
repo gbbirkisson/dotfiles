@@ -5,22 +5,29 @@ set -euo pipefail
 SCRIPT_NAME=$(basename $0)
 
 usage() {
-    cat 1>&2 <<EOF
+	cat 1>&2 <<EOF
 Usage: $SCRIPT_NAME [CMD ...]
 
 Examples:
   $ $SCRIPT_NAME make lint
 
 EOF
-    (log-error "")
-    echo -n "  " 1>&2
+	(log-error "")
+	echo -n "  " 1>&2
 }
 
-log-lines() { for a in "$@"; do printf "\n  $a" 1>&2 ;done ;printf "\n" 1>&2 ;}
-log-error() { printf "$(tput setaf 1)ERROR$(tput sgr0): $1" 1>&2; log-lines "${@:2}"; exit 1; }
+log-lines() {
+	for a in "$@"; do printf "\n  $a" 1>&2; done
+	printf "\n" 1>&2
+}
+log-error() {
+	printf "$(tput setaf 1)ERROR$(tput sgr0): $1" 1>&2
+	log-lines "${@:2}"
+	exit 1
+}
 
 ARGS="$@"
 {
-    git ls-files -o --exclude-standard; # Get unstaged files
-    git ls-files; # Get all the other files
-} | entr -c bash -c "set -euo pipefail; { $ARGS && { tput setaf 2; echo -e '\n!! SUCCESS !!'; tput sgr0; }; } || { tput setaf 1; echo -e '\n!! ERROR !!'; tput sgr0; }"
+	git ls-files -o --exclude-standard # Get unstaged files
+	git ls-files                       # Get all the other files
+} | entr -c bash -c "set -euo pipefail; { $ARGS && { tput bold; tput setaf 2; echo -e '\n✅ SUCCESS ✅'; tput sgr0; }; } || { tput bold; tput setaf 1; echo -e '\n💩 ERROR 💩'; tput sgr0; }"
