@@ -36,7 +36,7 @@ font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
   normal:
-    family: JetbrainsMono Nerd Font
+    family: monospace
     # style: Light
     # family: "Fira Code"
     # family: "Source Code Pro"
@@ -44,14 +44,14 @@ font:
 
   # The bold font face
   bold:
-    family: JetbrainsMono Nerd Font
+    family: monospace
     style: Bold
     # family: "Fira Code"
     # family: "Source Code Pro"
 
   # The italic font face
   italic:
-    family: JetbrainsMono Nerd Font
+    family: monospace
     style: "Italic"
     # style: "Light Oblique"
     # family: "Fira Code"
