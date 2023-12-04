@@ -101,8 +101,5 @@ alias gg="lazygit"
 # GHPR
 alias ghpr="source $HOME/.local/scripts/ghpr"
 
-# Tmux cheatsheet
-alias ch="cat ~/.config/tmux/tmux.conf | grep '#c' | sed 's/#ch //g' | column -t -s ';' -o ' | '"
-
 # Other
 alias gt="poetry -C $HOME/repos/personal/gt run gt"
