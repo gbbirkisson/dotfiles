@@ -11,10 +11,10 @@ $git_state\
 $git_metrics\
 $git_status\
 $cmd_duration\
+$python\
 $battery\
 $status\
 $shell\
-$python\
 $character"""
 
 # $package\
@@ -39,6 +39,7 @@ success_symbol = "[\\$](bold green) "
 error_symbol = "[\\$](bold red) "
 
 [kubernetes]
+symbol = '🛳️  '
 style = "blue"
 disabled = false
 
