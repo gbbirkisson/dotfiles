@@ -18,6 +18,7 @@ local opts = {
       "--glob=!*.lock",
     },
     file_ignore_patterns = {
+      ".git",
       "node_modules",
       ".venv",
       "__pycache__",
