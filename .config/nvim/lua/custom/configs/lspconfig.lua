@@ -5,6 +5,20 @@ local capabilities = config.capabilities
 local lspconfig = require("lspconfig")
 local util = require("lspconfig/util")
 
+-- GSP
+-- require("lspconfig.configs").gsp = {
+--   default_config = {
+--     cmd = {"gsp"},
+--     filetypes = {"lua"},
+--     root_dir = util.root_pattern(".git"),
+--     settings = {},
+--   };
+-- }
+-- lspconfig.gsp.setup({
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- })
+
 -- Python
 lspconfig.pyright.setup({
   on_attach = on_attach,
