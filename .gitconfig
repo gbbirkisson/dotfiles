@@ -34,10 +34,34 @@
 [commit]
   gpgsign = true
 
-; global ignore
-[core]
-  excludesFile = ~/.gitglobalignore
-
 ; oda config
 [includeIf "gitdir:~/repos/oda/**"]
 	path = .gitconfig_oda
+
+[core]
+  excludesFile = ~/.gitglobalignore
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
+[diff]
+    colorMoved = default
+
+[delta]
+  features = decorations
+  line-numbers = true
+  navigate = true
+  hyperlinks = true
+
+[delta "interactive"]
+  keep-plus-minus-markers = false
+
+[delta "decorations"]
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax

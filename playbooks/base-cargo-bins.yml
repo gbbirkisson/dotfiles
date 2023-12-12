@@ -16,3 +16,4 @@
         - alacritty  # Better terminal emulator
         - trunk  # WASM development
         - cargo-tarpaulin  # For code coverage
+        - git-delta  # Better diff
