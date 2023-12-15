@@ -11,9 +11,9 @@ vim.api.nvim_create_user_command(
   { nargs = 1 }
 )
 
--- Default to 100 (rust standard)
+-- Default to 96, because github diff view looks nice with that number
 -- Note: format selection with gq
-vim.cmd.Gl("100")
+vim.cmd.Gl("96")
 
 -- Move mason path to the back
 local mason_path = vim.fn.stdpath "data" .. "/mason/bin"
