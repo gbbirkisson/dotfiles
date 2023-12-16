@@ -83,6 +83,7 @@ local plugins = {
 
         -- Other
         "typos",
+        "tree-sitter-cli",
       }
     },
   },

@@ -30,8 +30,3 @@
           - regolith-look-lascaille
           - regolith-look-nord
           - i3xrocks-battery
-
-    - name: Set theme
-      command: |
-        regolith-look set nord
-      when: theme.changed
