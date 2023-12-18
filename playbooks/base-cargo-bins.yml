@@ -17,3 +17,4 @@
         - trunk  # WASM development
         - cargo-tarpaulin  # For code coverage
         - git-delta  # Better diff
+        - watchexec-cli  # Used for 'dev' script
