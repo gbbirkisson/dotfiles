@@ -21,6 +21,8 @@ poetry() {
 		VIRTUAL_ENV="$($POETRY_BIN env list --full-path | head -1 | awk '{print $1}')"
 	fi
 
+	$POETRY_BIN check --ansi >/dev/null || true
+
 	PATH_add "$VIRTUAL_ENV/bin"
 	export POETRY_ACTIVE=1
 	export VIRTUAL_ENV
