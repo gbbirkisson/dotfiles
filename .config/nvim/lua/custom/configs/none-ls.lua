@@ -1,6 +1,10 @@
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local null_ls = require("null-ls")
 
+local function ends_with(str, ending)
+   return ending == "" or str:sub(-#ending) == ending
+end
+
 local opts = {
   sources = {
     -- Python
@@ -49,6 +53,12 @@ local opts = {
           if ft == "yaml" then
             return
           end
+
+          local file = vim.fn.expand("%")
+          if ends_with(file, ".env") then
+            return
+          end
+
           vim.lsp.buf.format({ bufnr = bufnr })
         end
       })
