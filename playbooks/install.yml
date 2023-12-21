@@ -2,7 +2,6 @@
 - import_playbook: base-apt-bins.yml
 
 - import_playbook: base-1password.yml
-- import_playbook: base-asdf.yml
 - import_playbook: base-docker.yml
 - import_playbook: base-rust.yml
 

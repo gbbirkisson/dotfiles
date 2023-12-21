@@ -1,13 +1,10 @@
 #!/bin/bash
 
 for dir in \
-    $HOME/.local/scripts \
-    $HOME/.local/bin \
-    $HOME/.klipy/bin \
-    $HOME/.cargo/bin \
-    $HOME/go/bin \
-    $HOME/.asdf/shims \
-    ; do
+	$HOME/.local/scripts \
+	$HOME/.local/bin \
+	$HOME/.cargo/bin \
+	$HOME/go/bin; do
 	[[ -r "$dir" ]] && [[ -d "$dir" ]] && PATH="$dir:$PATH"
 done
 

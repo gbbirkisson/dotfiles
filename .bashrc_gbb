@@ -25,8 +25,13 @@ bind "$(bind -s | grep '^"\\ec"' | sed 's/\\ec/\\C-f/')" # Rebind ATL-C to CTRL-
 # Starship
 command -v starship >/dev/null 2>&1 && source <(starship init bash)
 
-# Direnv
-command -v direnv >/dev/null 2>&1 && source <(direnv hook bash)
+# RTX / direnv
+if command -v rtx >/dev/null 2>&1; then
+	source <(rtx activate bash)
+	source <(rtx completions bash)
+	rtx which direnv >/dev/null 2>&1 && source <($(rtx which direnv) hook bash)
+	rtx which gcloud >/dev/null 2>&1 && source $(dirname $(dirname $(rtx which gcloud)))/completion.bash.inc
+fi
 
 # Kubectl
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True

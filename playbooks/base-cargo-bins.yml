@@ -19,3 +19,4 @@
         - git-delta  # Better diff
         - watchexec-cli  # Used for 'dev' script
         - oha  # http stress tests
+        - rtx-cli  # asdf clone
