@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+
+  vars:
+    version: 0.9.5
+
+  tasks:
+
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if kubens is installed
+      shell: "kubectl-ns --version | grep {{ version }}"
+      changed_when: false
+      failed_when: kn_installed.rc not in [0,1]
+      register: kn_installed
+
+    - name: Install kubens
+      when: kn_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/ahmetb/kubectx/releases/download/v{{ version }}/kubens_v0.9.5_linux_x86_64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - "kubens"
+
+    - name: Rename bin
+      when: kn_installed.rc not in [ 0 ]
+      command: "mv -f ~/.local/bin/kubens ~/.local/bin/kubectl-ns"

@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+
+  vars:
+    version: 0.9.5
+
+  tasks:
+
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if kubectx is installed
+      shell: "kubectl-ctx --version | grep {{ version }}"
+      changed_when: false
+      failed_when: kc_installed.rc not in [0,1]
+      register: kc_installed
+
+    - name: Install kubectx
+      when: kc_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/ahmetb/kubectx/releases/download/v{{ version }}/kubectx_v0.9.5_linux_x86_64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - "kubectx"
+
+    - name: Rename bin
+      when: kc_installed.rc not in [ 0 ]
+      command: "mv -f ~/.local/bin/kubectx ~/.local/bin/kubectl-ctx"
