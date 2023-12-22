@@ -1,4 +1,4 @@
 RTX_BIN=$(which rtx)
 rtx() {
-	direnv_load ${RTX_BIN} direnv exec
+	PATH="$(dirname $(${RTX_BIN} which direnv)):$PATH" direnv_load ${RTX_BIN} direnv exec
 }

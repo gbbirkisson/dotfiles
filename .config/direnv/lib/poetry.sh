@@ -1,6 +1,6 @@
 #!/bin/sh
 
-POETRY_BIN=$(which poetry)
+POETRY_BIN=$(rtx which poetry)
 
 poetry() {
 	PYPROJECT_TOML="${PYPROJECT_TOML:-pyproject.toml}"

@@ -35,6 +35,7 @@ if command -v rtx >/dev/null 2>&1; then
 	rtx which gcloud >/dev/null 2>&1 && source $(dirname $(dirname $(rtx which gcloud)))/completion.bash.inc
 	rtx which kubectl >/dev/null 2>&1 && source <($(rtx which kubectl) completion bash)
 fi
+# export RTX_DEBUG=1
 
 # Enable vi mode
 set -o vi
