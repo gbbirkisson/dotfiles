@@ -167,7 +167,7 @@ local plugins = {
     opts = {
       window = {
         backdrop = 0.98,
-        width = 96,
+        width = 98,
       },
       plugins = {
         options = {
@@ -183,8 +183,8 @@ local plugins = {
         -- Disable line numbers
         vim.cmd("set nu!")
 
-        -- Set line width
-        vim.cmd("Gl 96")
+        -- Disable colorcolumn
+        vim.cmd("set colorcolumn=")
 
         -- Disable autocomplete
         require('cmp').setup.buffer { enabled = false }
@@ -195,6 +195,9 @@ local plugins = {
 
         -- Enable autocomplete
         require('cmp').setup.buffer { enabled = true }
+
+        -- Enable colorcolumn
+        vim.cmd("Gl 96")
       end,
     }
   },
