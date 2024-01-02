@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  tasks:
+
+    - name: Install latex packages
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - latexmk  # Latex
+          - texlive-full  # All the latex things!
