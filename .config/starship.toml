@@ -43,9 +43,13 @@ symbol = '🛳️  '
 style = "blue"
 disabled = false
 
-[kubernetes.context_aliases]
-"gke_.*_(?P<cluster>[\\w-]+)" = "gke-$cluster"
-"nube-k8s-(?P<cluster>[\\w-]+)" = "$cluster"
+[[kubernetes.contexts]]
+context_pattern = "gke_.*_(?P<cluster>[\\w-]+)"
+context_alias = "gke-$cluster"
+
+[[kubernetes.contexts]]
+context_pattern = "nube-k8s-(?P<cluster>[\\w-]+)"
+context_alias = "$cluster"
 
 [cmd_duration]
 disabled = false
