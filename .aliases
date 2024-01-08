@@ -63,30 +63,33 @@ alias poetry_refresh='rm -r .venv && poetry install'
 # alias poetry_fix='find ~/.cache/pypoetry/ -name '*.lock' -delete'
 alias poetry_fix='poetry cache clear --all . && rm -rf $(poetry config cache-dir)/artifacts'
 # alias poetry_fix='poetry cache clear --all pypi'
-alias poetry_env='poetry env use $(rtx which python)'
+alias poetry_env='poetry env use $(mise which python)'
 alias poetry_auth='poetry config http-basic.oda-python oauth2accesstoken $(gcloud auth print-access-token)'
 
 # Oda
-alias 3dprinter='vlc http://192.168.151.100/webcam/?action=stream --logfile /dev/null'
+alias 3dprinter='vlc http://10.2.26.80/webcam/?action=stream --logfile /dev/null'
 for i in "dev dev" "staging staging" "prod prod" "prod infra-prod"; do
 	a=($i)
 	alias "vr-${a[1]}"="velo render -e ${a[0]} -t cluster:k8s-${a[1]}"
 done
+
+# .envrc
+rcpoetry() {
+	touch README.md
+	touch .env
+	cat <<EOF >.envrc
+use mise
+layout poetry
+dotenv
+EOF
+	direnv allow
+}
+
 # Vim
 alias vim="nvim"
 alias :q="exit"
+alias :qa="exit"
 alias vimcheat="xdg-open https://www.gbb.is/posts/2022-09-28-vim-cheatsheet/"
-
-# Git
-alias gr='cd $(git rev-parse --show-toplevel)'
-alias gc="git commit -m"
-alias gcb="git checkout -b"
-alias gp="git pull"
-alias gps="git push"
-alias gs="git status"
-alias ga="git add"
-alias gd="git diff"
-alias gl='git log --graph --pretty=oneline --abbrev-commit --all'
 
 # Docker compose
 alias dcup="docker compose up -d"
