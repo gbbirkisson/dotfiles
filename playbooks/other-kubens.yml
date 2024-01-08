@@ -28,4 +28,4 @@
 
     - name: Rename bin
       when: kn_installed.rc not in [ 0 ]
-      command: "mv -f ~/.local/bin/kubens ~/.local/bin/kubectl-ns"
+      command: "ln -sf ~/.local/bin/kubens ~/.local/bin/kubectl-ns"

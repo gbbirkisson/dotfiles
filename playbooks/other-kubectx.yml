@@ -28,4 +28,4 @@
 
     - name: Rename bin
       when: kc_installed.rc not in [ 0 ]
-      command: "mv -f ~/.local/bin/kubectx ~/.local/bin/kubectl-ctx"
+      command: "ln -sf ~/.local/bin/kubectx ~/.local/bin/kubectl-ctx"
