@@ -13,6 +13,7 @@
           - cmake
           - apt-transport-https
           - git
+          - direnv
 
           - bat  # Better cat
           - fzf  # Fuzzy finder
