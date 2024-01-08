@@ -2,7 +2,8 @@
 - hosts: localhost
 
   vars:
-    version: 0.9.5
+    # renovate: datasource=github-releases depName=neovim packageName=neovim/neovim
+    version: v0.9.5
 
   tasks:
 
@@ -21,7 +22,7 @@
       when: nvim_installed.rc not in [ 0 ]
       unarchive:
         remote_src: yes
-        src: "https://github.com/neovim/neovim/releases/download/v{{ version }}/nvim-linux64.tar.gz"
+        src: "https://github.com/neovim/neovim/releases/download/{{ version }}/nvim-linux64.tar.gz"
         dest: ~/.local/bin
 
     - name: Link nvim

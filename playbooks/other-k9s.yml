@@ -2,7 +2,8 @@
 - hosts: localhost
 
   vars:
-    version: 0.30.8
+    # renovate: datasource=github-releases depName=k9s packageName=derailed/k9s
+    version: v0.30.8
 
   tasks:
 
@@ -21,7 +22,7 @@
       when: k9s_installed.rc not in [ 0 ]
       unarchive:
         remote_src: yes
-        src: https://github.com/derailed/k9s/releases/download/v{{ version }}/k9s_Linux_amd64.tar.gz
+        src: https://github.com/derailed/k9s/releases/download/{{ version }}/k9s_Linux_amd64.tar.gz
         dest: ~/.local/bin
         extra_opts:
           - k9s

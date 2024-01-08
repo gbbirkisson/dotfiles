@@ -2,7 +2,8 @@
 - hosts: localhost
 
   vars:
-    version: 0.4.2
+    # renovate: datasource=github-releases depName=tt packageName=lemnos/tt
+    version: v0.4.2
 
   tasks:
 
@@ -20,7 +21,8 @@
     - name: Install tt
       when: tt_installed.rc not in [ 0 ]
       ansible.builtin.get_url:
-        url: "https://github.com/lemnos/tt/releases/download/v{{ version }}/tt-linux"
+        force: true
+        url: "https://github.com/lemnos/tt/releases/download/{{ version }}/tt-linux"
         dest: ~/.local/bin/tt
 
     - name: Set tt permissions

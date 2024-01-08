@@ -1,0 +1,15 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  dependencyDashboard: true,
+  semanticCommitType: "fix",
+  customManagers: [
+    {
+      customType: "regex",
+      description: "Match versions in ansible files",
+      fileMatch: ["^.*.ya?ml$"],
+      matchStrings: [
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>[^\\s]+)( packageName=(?<packageName>[^\\s]+))?( versioning=(?<versioning>[^\\s]+))?\\s*.*version:\\s(?<currentValue>[^\\s]+)",
+      ],
+    },
+  ],
+}

@@ -53,6 +53,18 @@ term: _sudo ## Set default terminal to alacritty
 	$(Q) update-alternatives --list x-terminal-emulator | grep -q alacritty || echo sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which alacritty) 100
 	$(Q) # sudo update-alternatives --config x-terminal-emulator
 
+.PHONY: renovate
+renovate: ## Tests renovate configuration
+	LOG_LEVEL=debug \
+	RENOVATE_BASE_BRANCHES=main \
+	RENOVATE_CONFIG_FILE=.github/renovate.json5 renovate \
+		--token=${GITHUB_TOKEN} \
+		--schedule="" \
+		--require-config=ignored \
+		--dry-run=full \
+		gbbirkisson/dotfiles
+
+.PHONY: help
 help: ## Show help
 	$(info $(M) Makefile targets:)
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'

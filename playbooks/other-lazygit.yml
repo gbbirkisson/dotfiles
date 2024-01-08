@@ -2,7 +2,8 @@
 - hosts: localhost
 
   vars:
-    version: 0.40.2
+    # renovate: datasource=github-releases depName=lazygit packageName=jesseduffield/lazygit
+    version: v0.40.2
 
   tasks:
 
@@ -12,7 +13,7 @@
         state: directory
 
     - name: Check if lazygit is installed
-      shell: "lazygit --version | grep {{ version }}"
+      shell: "lazygit --version | grep {{ version[1:] }}"
       changed_when: false
       failed_when: lazygit_installed.rc not in [0,1]
       register: lazygit_installed
@@ -21,7 +22,7 @@
       when: lazygit_installed.rc not in [ 0 ]
       unarchive:
         remote_src: yes
-        src: "https://github.com/jesseduffield/lazygit/releases/download/v{{ version }}/lazygit_{{ version }}_Linux_x86_64.tar.gz"
+        src: "https://github.com/jesseduffield/lazygit/releases/download/{{ version }}/lazygit_{{ version[1:] }}_Linux_x86_64.tar.gz"
         dest: ~/.local/bin
         extra_opts:
           - lazygit

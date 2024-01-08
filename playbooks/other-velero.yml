@@ -2,7 +2,8 @@
 - hosts: localhost
 
   vars:
-    version: 1.12.2
+    # renovate: datasource=github-releases depName=velero packageName=vmware-tanzu/velero
+    version: v1.12.2
 
   tasks:
 
@@ -21,10 +22,10 @@
       when: velero_installed.rc not in [ 0 ]
       unarchive:
         remote_src: yes
-        src: "https://github.com/vmware-tanzu/velero/releases/download/v{{ version }}/velero-v{{ version }}-linux-amd64.tar.gz"
+        src: "https://github.com/vmware-tanzu/velero/releases/download/{{ version }}/velero-{{ version }}-linux-amd64.tar.gz"
         dest: ~/.local/bin
         extra_opts:
           - --strip-components
           - 1
           # - --add-file
-          - "velero-v{{ version }}-linux-amd64/velero"
+          - "velero-{{ version }}-linux-amd64/velero"
