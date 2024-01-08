@@ -40,7 +40,7 @@ link() {
 }
 
 link .config/alacritty
-link .config/direnv/lib
+link .config/direnv
 link .config/fontconfig/fonts.conf
 link .config/k9s/skin.yml
 link .config/lazygit/config.yml
