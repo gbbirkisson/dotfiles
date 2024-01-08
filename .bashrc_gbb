@@ -30,14 +30,14 @@ command -v direnv >/dev/null 2>&1 && source <(direnv hook bash)
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-# RTX
-if command -v rtx >/dev/null 2>&1; then
-	source <(rtx activate bash)
-	source <(rtx completions bash)
-	rtx which gcloud >/dev/null 2>&1 && source $(dirname $(dirname $(rtx which gcloud)))/completion.bash.inc
-	rtx which kubectl >/dev/null 2>&1 && source <($(rtx which kubectl) completion bash)
+# Mise
+if command -v mise >/dev/null 2>&1; then
+	source <(mise activate bash)
+	source <(mise completions bash)
+	mise which gcloud >/dev/null 2>&1 && source $(dirname $(dirname $(mise which gcloud)))/completion.bash.inc
+	mise which kubectl >/dev/null 2>&1 && source <($(mise which kubectl) completion bash)
+	# export MISE_DEBUG=1
 fi
-# export RTX_DEBUG=1
 
 # Enable vi mode
 set -o vi

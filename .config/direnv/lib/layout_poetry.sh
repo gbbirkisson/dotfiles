@@ -1,27 +1,26 @@
 #!/bin/sh
 
-POETRY_BIN=$(rtx which poetry)
-
-poetry() {
+layout_poetry() {
 	PYPROJECT_TOML="${PYPROJECT_TOML:-pyproject.toml}"
 	if [ ! -f "$PYPROJECT_TOML" ]; then
 		log_status "No pyproject.toml found. Executing \`poetry init\` to create a \`$PYPROJECT_TOML\` first."
-		$POETRY_BIN init -q
+		poetry init -q
+		poetry install --no-root
 	fi
 
 	if [ -d ".venv" ]; then
 		VIRTUAL_ENV="$(pwd)/.venv"
 	else
-		VIRTUAL_ENV="$($POETRY_BIN env list --full-path | head -1 | awk '{print $1}')"
+		VIRTUAL_ENV="$(poetry env list --full-path | head -1 | awk '{print $1}')"
 	fi
 
 	if [ -z "$VIRTUAL_ENV" ] || [ ! -d "$VIRTUAL_ENV" ]; then
 		log_status "No virtual environment exists. Executing \`poetry install\` to create one."
-		$POETRY_BIN install
-		VIRTUAL_ENV="$($POETRY_BIN env list --full-path | head -1 | awk '{print $1}')"
+		poetry install
+		VIRTUAL_ENV="$(poetry env list --full-path | head -1 | awk '{print $1}')"
 	fi
 
-	$POETRY_BIN check --ansi >/dev/null || true
+	poetry check --ansi >/dev/null || true
 
 	PATH_add "$VIRTUAL_ENV/bin"
 	export POETRY_ACTIVE=1
