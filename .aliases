@@ -84,6 +84,7 @@ dotenv
 EOF
 	direnv allow
 }
+alias rcpoetry_refresh="mise install && mise exec poetry env remove --all && mise exec poetry install"
 
 # Vim
 alias vim="nvim"
