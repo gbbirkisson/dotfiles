@@ -20,6 +20,11 @@ layout_poetry() {
 		VIRTUAL_ENV="$(poetry env list --full-path | head -1 | awk '{print $1}')"
 	fi
 
+	poetry run python -V | grep -q $(mise current python) || {
+		tput setaf 3
+		log_status "python venv version and .tool-versions does not match"
+		tput sgr0
+	}
 	poetry check --ansi >/dev/null || true
 
 	PATH_add "$VIRTUAL_ENV/bin"
