@@ -5,10 +5,19 @@
   customManagers: [
     {
       customType: "regex",
-      description: "Match versions in ansible files",
+      description: "Match versions that are tagged with comments",
       fileMatch: ["^.*.ya?ml$"],
       matchStrings: [
         "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>[^\\s]+)( packageName=(?<packageName>[^\\s]+))?( versioning=(?<versioning>[^\\s]+))?\\s*.*version:\\s(?<currentValue>[^\\s]+)",
+      ],
+    },
+    {
+      customType: "regex",
+      description: "Match versions of cargo crates",
+      datasourceTemplate: "crate",
+      fileMatch: ["^.*.ya?ml$"],
+      matchStrings: [
+        "crate_name: (?<depName>[^\\s]+), version: (?<currentValue>[^\\s]+)",
       ],
     },
   ],
