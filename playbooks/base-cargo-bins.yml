@@ -1,22 +1,21 @@
 ---
 - hosts: localhost
   tasks:
-
-    - name: Install cargo package
+    - name: Install cargo packages
       community.general.cargo:
-        name: "{{ item }}"
-        state: latest
+        name: "{{ item.crate_name }}"
+        version: "{{ item.version }}"
       with_items:
-        - lsd  # Better ls
-        - drill  # HTTP stress testing
-        - xh  # HTTPie clone
-        - starship  # Fancy prompt
-        - ouch  # Easy compress/decompress
-        - sfz  # Simple web server for dirs
-        - alacritty  # Better terminal emulator
-        - trunk  # WASM development
-        - cargo-tarpaulin  # For code coverage
-        - git-delta  # Better diff
-        - watchexec-cli  # Used for 'dev' script
-        - oha  # http stress tests
-        - mise  # asdf clone
+        - { crate_name: alacritty, version: 0.13.1 }  # Better terminal emulator
+        - { crate_name: cargo-tarpaulin, version: 0.27.2 }  # For code coverage
+        - { crate_name: drill, version: 0.8.2 }  # HTTP stress testing
+        - { crate_name: git-delta, version: 0.16.5 }  # Better diff
+        - { crate_name: lsd, version: 1.0.0 }  # Better ls
+        - { crate_name: mise, version: 2024.1.14 }  # asdf clone
+        - { crate_name: oha, version: 1.0.0 }  # http stress tests
+        - { crate_name: ouch, version: 0.5.1 }  # Easy compress/decompress
+        - { crate_name: sfz, version: 0.7.1 }  # Simple web server for dirs
+        - { crate_name: starship, version: 1.17.1 }  # Fancy prompt
+        - { crate_name: trunk, version: 0.18.4 }  # WASM development
+        - { crate_name: watchexec-cli, version: 1.25.1 }  # Used for 'dev' script
+        - { crate_name: xh, version: 0.20.1 }  # HTTPie clone
