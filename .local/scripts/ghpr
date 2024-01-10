@@ -5,8 +5,10 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 fi
 
 user=gbbirkisson
-org="kolonialno"
-base_repo_dir="$HOME/repos/oda"
+
+declare -A repo_dirs
+repo_dirs[kolonialno]="$HOME/repos/oda"
+repo_dirs[gbbirkisson]="$HOME/repos/personal"
 
 # Prints the unix epoch from $1 days ago
 days-ago() {
@@ -15,17 +17,12 @@ days-ago() {
 	echo $(($now - (86400 * $max_days)))
 }
 
-# Wrapper for the gh command to easily pass in repo $1
-gh-pr() {
-	gh pr -R ${org}/$1 "${@:2}"
-}
-
-# Fetches all PRs from $org based on filters $@
+# Fetches all PRs from org based on filters $@
 pr-fetch() {
 	# Note:
 	#   We pass in "phony" repo, but get all PRs?! That's because we are not filtering
 	#   PRs by repo, so the "phony" repo does not even have to exist.
-	gh-pr phony list --json url,title,createdAt,author,reviewRequests -S "org:${org} -label:autoMerged $(echo $@)"
+	gh pr -R ${1}/phony list --json url,title,createdAt,author,reviewRequests -S "org:${1} -label:autoMerged ${@:2}"
 }
 
 # Views PR $2 from repo $1. You can specify more params to pass to the GH client
@@ -33,29 +30,31 @@ pr-view() {
 	local repo=$1
 	local id=$2
 
-	gh-pr $repo view $id "${@:3}"
+	gh pr view -R $repo $id "${@:3}"
 }
 
 # Checks out PR $2 from repo $1 locally
 pr-checkout() {
-	local repo=$1
+	local org=$(echo $1 | awk -F'/' '{print $1}')
+	local repo=$(echo $1 | awk -F'/' '{print $2}')
 	local id=$2
-	local repo_dir="$base_repo_dir/$repo"
+	local repo_dir="${repo_dirs[$org]}/$repo"
 
 	# Clone repo if needed
 	[ -d "$repo_dir" ] || gh repo clone $org/$repo $repo_dir
 
 	# Checkout PR
 	cd $repo_dir
-	gh pr checkout $pr_id
+	gh pr checkout $id
 	echo "🎉 PR checked out!"
 }
 
 pr-list() {
 	# Fetch PRs, group, sort, filter and format for FZF
 	{
-		pr-fetch 'user-review-requested:@me' &
-		pr-fetch 'team-review-requested:kolonialno/infrastructure-developer-experience' &
+		pr-fetch gbbirkisson 'user-review-requested:@me' &
+		pr-fetch kolonialno 'user-review-requested:@me' &
+		pr-fetch kolonialno 'team-review-requested:kolonialno/infrastructure-developer-experience' &
 		wait
 	} | jq -r -s \ '
     add
@@ -73,8 +72,9 @@ pr-list() {
     | sort_by(
       .createdAt
     )
+    | reverse
     | .[]
-    | .author.type + " " + (.url | split("/") | .[-3]) + " #" + (.url | split("/") | .[-1]) + " " + .title
+    | .author.type + " " + (.url | split("/") | .[-4]) + "/" + (.url | split("/") | .[-3]) + " #" + (.url | split("/") | .[-1]) + " " + .title
   '
 }
 
@@ -91,7 +91,7 @@ while true; do
 		--preview '
       export GH_FORCE_TTY=$FZF_PREVIEW_COLUMNS
       export CLICOLOR_FORCE=1
-      gh pr view -R '$org'/{2} {3}
+      gh pr view -R {2} {3}
   ')
 
 	# Bail if no PR is selected
@@ -103,7 +103,7 @@ while true; do
 
 	while true; do
 		# Ask for command
-		case $(prompt "❔ $pr_repo $pr_id [Xcvbq?]: ") in
+		case $(prompt "❔ $PR [Xcvbq?]: ") in
 		"?") # Help
 			echo && echo "🛟 Help!"
 			echo "  q => 🚪 Exit"
@@ -146,11 +146,9 @@ done
 
 # Cleanup
 unset user
-unset org
-unset base_repo_dir
+unset repo_dirs
 
 unset -f days-ago
-unset -f gh-pr
 unset -f pr-fetch
 unset -f pr-view
 unset -f pr-checkout
