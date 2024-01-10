@@ -20,7 +20,7 @@ layout_poetry() {
 		VIRTUAL_ENV="$(poetry env list --full-path | head -1 | awk '{print $1}')"
 	fi
 
-	poetry run python -V | grep -q $(mise current python) || {
+	mise current python | sed 's/ /\n/g' | rg -q "$(poetry run python -V | rg -o '\d+\.\d+\.\d+')" || {
 		tput setaf 3
 		log_status "python venv version and .tool-versions does not match"
 		tput sgr0
