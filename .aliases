@@ -73,8 +73,11 @@ for i in "dev dev" "staging staging" "prod prod" "prod infra-prod"; do
 	alias "vr-${a[1]}"="velo render -e ${a[0]} -t cluster:k8s-${a[1]}"
 done
 
-# .envrc
-rcpoetry() {
+# Direnv
+alias da="direnv allow"
+alias dr="direnv reload"
+alias dip="mise install && mise exec poetry -- poetry env remove --all && mise exec poetry -- poetry install && direnv reload"
+dcp() {
 	touch README.md
 	touch .env
 	cat <<EOF >.envrc
@@ -82,9 +85,7 @@ use mise
 layout poetry
 dotenv
 EOF
-	direnv allow
 }
-alias rcpoetry_refresh="mise install && mise exec poetry env remove --all && mise exec poetry install"
 
 # Vim
 alias vim="nvim"
