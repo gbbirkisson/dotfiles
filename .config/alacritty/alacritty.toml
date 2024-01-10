@@ -1,0 +1,54 @@
+import = ["/home/gbbirkisson/.config/alacritty/catppuccin-mocha.toml"]
+
+[bell]
+animation = "Ease"
+color = "#1ABB9B"
+duration = 0
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[cursor]
+blink_interval = 500
+vi_mode_style = "block"
+
+[cursor.style]
+blinking = "On"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 10
+
+[font.bold]
+family = "monospace"
+style = "Bold"
+
+[font.italic]
+family = "monospace"
+style = "Italic"
+
+[font.normal]
+family = "monospace"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[shell]
+program = "/usr/bin/env"
+args = ["direnv", "exec", "/", "tmux"]
+
+[window]
+dynamic_title = true
+opacity = 1.0
+title = "terminal"
+
+[window.dimensions]
+columns = 133
+lines = 40
+
+[window.padding]
+x = 5
+y = 0
