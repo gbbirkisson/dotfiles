@@ -5,6 +5,7 @@
     ":semanticCommits"
   ],
   semanticCommitType: "fix",
+  reviewersFromCodeOwners: true,
   dependencyDashboard: true,
   customManagers: [
     {
