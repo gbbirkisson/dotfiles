@@ -1,9 +1,11 @@
 .DEFAULT_GOAL:=help
 
 Q = $(if $(filter 1,$V),,@)
+AQ = $(if $(filter 1,$V),-vv,)
 M = $(shell printf "\033[34;1m▶\033[0m")
 
-VENV:=.venv
+VENVS:=.venv
+VENV:=$(VENVS)/dotfiles
 PYTHON_OS:=/usr/bin/python3
 PYTHON_VENV:=$(VENV)/bin/python
 ANSIBLE:=ANSIBLE_LOCALHOST_WARNING=False ANSIBLE_INVENTORY_UNPARSED_WARNING=False ANSIBLE_GATHERING=explicit $(PYTHON_VENV) -m ansible
@@ -12,6 +14,7 @@ PLAYBOOKS:=$(wildcard $(PLAYBOOK_PATTERN))
 
 $(VENV):
 	$(info $(M) Creating python environment)
+	$(Q) mkdir $(VENVS)
 	$(Q) $(PYTHON_OS) -m venv $(VENV) || rm -r $(VENV)
 	$(Q) $(PYTHON_VENV) -m pip install -q ansible yamllint
 
@@ -23,7 +26,7 @@ _sudo:
 .PHONY: _run
 _run: $(VENV)
 	$(info $(M) Running $(PLAYBOOK))
-	$(Q) $(ANSIBLE) playbook $(PLAYBOOK) --extra-vars "dotfiles=$(PWD)"
+	$(Q) $(ANSIBLE) $(AQ) playbook $(PLAYBOOK) --extra-vars "dotfiles=$(PWD) venvs=$(PWD)/$(VENVS)"
 
 .PHONY: lint
 lint: $(VENV)
