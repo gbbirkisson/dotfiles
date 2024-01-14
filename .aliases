@@ -108,3 +108,4 @@ alias ghpr="source $HOME/.local/scripts/ghpr"
 
 # Other
 alias gt="poetry -C $HOME/repos/personal/gt run gt"
+alias cal="$DOTFILES/.venv/calcure/bin/calcure"

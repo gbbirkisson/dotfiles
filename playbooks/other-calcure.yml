@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=calcure packageName=anufrievroman/calcure
+    version: 3.0.1
+    venv: "{{ venvs }}/calcure"
+    python: "{{ venvs }}/calcure/bin/python"
+
+  tasks:
+    - name: Check if calcure venv exists
+      stat:
+        path: "{{ venv }}"
+      register: venv_exists
+
+    - name: Create calcure venv
+      shell: "python -m venv {{ venv }} || rm -r {{ venv }}"
+      when: not venv_exists.stat.exists
+
+    - name: Check if calcure is installed
+      shell: "{{ python }} -m pip freeze | grep calcure=={{ version }}"
+      changed_when: false
+      failed_when: calcure_installed.rc not in [0,1]
+      register: calcure_installed
+
+    - name: Install calcure
+      when: calcure_installed.rc not in [ 0 ]
+      shell: "{{ python }} -m pip install calcure=={{ version }}"
