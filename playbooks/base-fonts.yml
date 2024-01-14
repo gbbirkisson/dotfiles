@@ -10,6 +10,7 @@
     - name: JetBrainsMono exists
       shell: "ls {{ lookup('env', 'HOME') }}/.fonts/JetBrainsMonoNerdFont*"
       register: jbm_exists
+      changed_when: false
       ignore_errors: true
 
     - name: Download JetBrainsMono

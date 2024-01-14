@@ -27,6 +27,7 @@
 
     - name: Set tt permissions
       when: tt_installed.rc not in [ 0 ]
+      changed_when: false
       ansible.builtin.file:
         path: ~/.local/bin/tt
         state: touch

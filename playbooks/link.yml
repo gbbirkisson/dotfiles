@@ -8,6 +8,7 @@
 
     - name: Link
       command: "./link"
+      changed_when: false
       args:
         chdir: "{{ dotfiles }}"
 
