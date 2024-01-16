@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=cli packageName=cli/cli
-    version: v2.42.0
+    version: v2.42.1
 
   tasks:
 
