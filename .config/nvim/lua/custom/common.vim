@@ -1,3 +1,6 @@
+" map leader
+let mapleader = "æ"
+
 " Center cursor when jumping up and dovn
 nnoremap <C-u> <C-u>zz
 nnoremap <C-d> <C-d>zz
