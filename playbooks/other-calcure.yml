@@ -14,7 +14,7 @@
       register: venv_exists
 
     - name: Create calcure venv
-      shell: "python -m venv {{ venv }} || rm -r {{ venv }}"
+      shell: "/usr/bin/python3 -m venv {{ venv }} || rm -r {{ venv }}"
       when: not venv_exists.stat.exists
 
     - name: Check if calcure is installed
