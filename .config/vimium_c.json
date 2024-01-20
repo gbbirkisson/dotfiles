@@ -1,0 +1,84 @@
+{
+	"name": "Vimium C",
+	"@time": "1/20/2024, 2:33:25 PM",
+	"time": 1705757605778,
+	"environment": {
+		"extension": "1.99.994",
+		"platform": "linux",
+		"chromium": 120
+	},
+	"exclusionRules": [
+		{
+			"passKeys": "",
+			"pattern": ":https://mail.google.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": "^https?://linear\\.app/"
+		},
+		{
+			"passKeys": "",
+			"pattern": "^https?://cad\\.onshape\\.com/"
+		}
+	],
+	"keyLayout": 2,
+	"keyMappings": [
+		"#!no-check",
+		"map <c-d> scrollPageDown",
+		"unmap d",
+		"",
+		"map <c-u> scrollPageUp",
+		"unmap u",
+		"",
+		"map s LinkHints.activate",
+		"map S LinkHints.activateOpenInNewTab",
+		"unmap f",
+		"unmap F",
+		"",
+		"map h previousTab",
+		"unmap J",
+		"",
+		"map l nextTab",
+		"unmap K",
+		"",
+		"map <c-q> removeTab",
+		"map <c-t> createTab",
+		""
+	],
+	"newTabUrl": "pages/blank.html",
+	"searchEngines": [
+		"g|go|gg|google|Google: https://www.google.com/search?q=%s \\",
+		"  www.google.com re=/^(?:\\.[a-z]{2,4})?\\/search\\b.*?[#&?]q=([^#&]*)/i\\",
+		"  blank=https://www.google.com/ Google",
+		"g.m|gm|g.map|gmap: https://www.google.com/maps?q=%s \\",
+		"  blank=https://www.google.com/maps Google Maps",
+		"d|dd|ddg|duckduckgo: https://duckduckgo.com/?q=%s \\",
+		"  blank=https://duckduckgo.com/ DuckDuckGo",
+		"y|yt: https://www.youtube.com/results?search_query=%s \\",
+		"  blank=https://www.youtube.com/ YouTube",
+		"w|wiki: https://www.wikipedia.org/w/index.php?search=%s Wikipedia",
+		"",
+		"\\:i: vimium://sed/s/^//,lower\\ $S re= Lower case",
+		"v.m|math: vimium://math\\ $S re= Calculate",
+		"v.p: vimium://parse\\ $S re= Redo Search",
+		"",
+		"gh|github: https://github.com/search?q=$s \\",
+		"  blank=https://github.com/ GitHub Repo",
+		"os: https://github.com/kolonialno/?type=all&language=&sort=&view_as=public&q=%s \\",
+		"  blank=https://github.com/kolonialno/ Oda Repo Search",
+		"or: https://github.com/kolonialno/%s \\",
+		"  blank=https://github.com/kolonialno/ Oda Repo",
+		"",
+		"r|rs: https://docs.rs/releases/search?query=%s \\",
+		"  blank=https://docs.rs/ Rust Docs",
+		""
+	],
+	"userDefinedCss": [
+		".LH, .D>.LH { background: #F9E2AF; }",
+		".LH { border: /*!DPI*/ 1px solid black; }",
+		"/* #omni */",
+		"/* .s { background-color: #d8e3f3; } */",
+		""
+	],
+	"vimSync": true
+}
