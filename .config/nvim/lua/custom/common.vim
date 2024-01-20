@@ -1,4 +1,4 @@
-" map leader
+" map leader to æ
 let mapleader = "æ"
 
 " Center cursor when jumping up and dovn
