@@ -23,6 +23,7 @@ local M = {
       "make",
       "proto", -- protobuffers
       "river",
+      "html",
     }
   },
   config = function(_, opts)
