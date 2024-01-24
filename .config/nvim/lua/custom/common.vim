@@ -1,5 +1,5 @@
-" map leader to æ
-let mapleader = "æ"
+" map leader to space
+let mapleader = " "
 
 " Center cursor when jumping up and dovn
 nnoremap <C-u> <C-u>zz
