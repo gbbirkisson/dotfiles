@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Make ctrl-backspace work properly in terminal
+stty werase '^H'
+
 # Eternal bash history.
 # ---------------------
 # Undocumented feature which sets the size to "unlimited".
