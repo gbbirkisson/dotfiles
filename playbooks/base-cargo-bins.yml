@@ -18,4 +18,4 @@
         - { crate_name: starship, version: 1.17.1 }  # Fancy prompt
         - { crate_name: trunk, version: 0.18.4 }  # WASM development
         - { crate_name: watchexec-cli, version: 1.25.1 }  # Used for 'dev' script
-        - { crate_name: xh, version: 0.20.1 }  # HTTPie clone
+        - { crate_name: xh, version: 0.21.0 }  # HTTPie clone
