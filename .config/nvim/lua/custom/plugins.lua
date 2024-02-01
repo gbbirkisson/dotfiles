@@ -40,7 +40,12 @@ local plugins = {
     "ggandor/leap.nvim",
     keys = { "s", "S" },
     config = function()
-     require("leap").add_default_mappings()
+      local leap = require("leap")
+      leap.add_default_mappings()
+
+      -- Disable auto jump
+      leap.opts.safe_labels = {}
+      leap.opts.labels = 'sfnjklhodweimbuyvrgtaqpcxzæSFNJKLHODWEIMBUYVRGTAQPCXZÆ'
     end
   },
   {
