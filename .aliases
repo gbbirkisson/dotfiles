@@ -107,5 +107,5 @@ alias gg="lazygit"
 alias ghpr="source $HOME/.local/scripts/ghpr"
 
 # Other
-alias gt="poetry -C $HOME/repos/personal/gt run gt"
+alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
 alias cal="$DOTFILES/.venv/calcure/bin/calcure"
