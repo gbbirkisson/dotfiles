@@ -11,7 +11,7 @@
         - { crate_name: drill, version: 0.8.2 }  # HTTP stress testing
         - { crate_name: git-delta, version: 0.16.5 }  # Better diff
         - { crate_name: lsd, version: 1.0.0 }  # Better ls
-        - { crate_name: mise, version: 2024.1.14 }  # asdf clone
+        - { crate_name: mise, version: 2024.2.0 }  # asdf clone
         - { crate_name: oha, version: 1.0.0 }  # http stress tests
         - { crate_name: ouch, version: 0.5.1 }  # Easy compress/decompress
         - { crate_name: sfz, version: 0.7.1 }  # Simple web server for dirs
