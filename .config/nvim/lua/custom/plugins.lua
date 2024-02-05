@@ -221,7 +221,16 @@ local plugins = {
       "nvim-lua/plenary.nvim",
     },
     opts = require("custom.configs.obsidian").opts,
-  }
+  },
+  {
+    -- Nice preview while writing markdown
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
 }
 
 return plugins
