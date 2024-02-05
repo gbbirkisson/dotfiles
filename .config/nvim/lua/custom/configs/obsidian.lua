@@ -10,6 +10,9 @@ return {
       folder = "daily",
       template = "daily.md"
     },
+    attachments = {
+      img_folder = "attachments",
+    },
     templates = {
       subdir = "templates",
       date_format = "%Y-%m-%d",
