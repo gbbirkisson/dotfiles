@@ -20,6 +20,8 @@ M.abc = {
       "[F]or[m]at File"},
     -- Include hidden files, but not the ones ignored by git
     ["<leader>ff"] = { "<cmd> Telescope find_files hidden=true <CR>", "Find files" },
+
+    ["<leader>dc"] = {"<cmd> :set conceallevel=0 <CR>", "[D]isable [C]onceal Level"},
   },
   v = {
     -- ["æ"] = {":", "Colon shorthand"},
