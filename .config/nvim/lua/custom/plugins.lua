@@ -51,46 +51,7 @@ local plugins = {
   {
     -- Tool installation
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        -- Python
-        "black",
-        "mypy",
-        "ruff",
-        "pyright",
-
-        -- Go
-        "gopls",
-
-        -- YAML
-        "yaml-language-server",
-        "yamllint",
-        "yamlfmt",
-
-        -- Toml
-        "taplo",
-
-        -- Lua
-        "lua-language-server",
-
-        -- Javascript / Typescript
-        "typescript-language-server",
-
-        -- C / C++
-        "clangd",
-
-        -- Bash
-        "bash-language-server",
-        "shfmt",
-
-        -- Markdown
-        "marksman",
-
-        -- Other
-        "typos",
-        "tree-sitter-cli",
-      }
-    },
+    opts = require("custom.configs.mason").opts,
   },
   {
     -- Syntax highlighting
@@ -149,63 +110,13 @@ local plugins = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim"
     },
-    config = function()
-      require("chatgpt").setup({
-        api_key_cmd = "op read op://y46glakwqtek75fxiejq6is3qa/qnpgz2gbdyqdcp4cnrobbzttfm/key --no-newline",
-        edit_with_instructions = {
-          keymaps = {
-            use_output_as_input = "<M-y>",
-          },
-        },
-        openai_params = {
-          model = "gpt-4",
-        },
-        openai_edit_params = {
-          model = "gpt-4",
-        },
-      })
-    end,
+    config = require("custom.configs.chatgpt").config,
   },
   {
     -- ZenMode for writing
     "folke/zen-mode.nvim",
     cmd = { "ZenMode" },
-    opts = {
-      window = {
-        backdrop = 0.98,
-        width = 98,
-      },
-      plugins = {
-        options = {
-          enabled = true,
-          ruler = false,               -- disables the ruler text in the cmd line area
-          showcmd = false,             -- disables the command in the last line of the screen
-          laststatus = 0,              -- turn off the statusline in zen mode
-        },
-        gitsigns = { enabled = true }, -- disables git signs
-        tmux = { enabled = true },     -- disables the tmux statusline
-      },
-      on_open = function(win)
-        -- Disable line numbers
-        vim.cmd("set nu!")
-
-        -- Disable colorcolumn
-        vim.cmd("set colorcolumn=")
-
-        -- Disable autocomplete
-        require('cmp').setup.buffer { enabled = false }
-      end,
-      on_close = function()
-        -- Enable line numbers
-        vim.cmd("set nu")
-
-        -- Enable autocomplete
-        require('cmp').setup.buffer { enabled = true }
-
-        -- Enable colorcolumn
-        vim.cmd("Gl 96")
-      end,
-    }
+    opts = require("custom.configs.zen-mode").opts,
   },
   {
     -- Obsidian plugin for note taking
