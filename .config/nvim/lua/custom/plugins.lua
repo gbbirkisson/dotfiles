@@ -34,6 +34,9 @@ local plugins = {
     -- Configure search
     "nvim-telescope/telescope.nvim",
     opts = require("custom.configs.telescope"),
+    dependencies = {
+      "xiyaowong/telescope-emoji.nvim",
+    },
   },
   {
     -- Leap with s/S

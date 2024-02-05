@@ -9,6 +9,8 @@ M.abc = {
       end,
       "Close buffer",
     },
+    ["<leader>em"] = {"<cmd> :Telescope emoji <CR>", "[E]moji [S]elect"},
+    ["<leader>ep"] = {'"*p', "[E]moji [P]aste"},
     ["<leader>gg"] = {"<cmd> :LazyGit <CR>", "Open Lazy[g]it"},
     ["<leader>cg"] = {"<cmd> :ChatGPT <CR>", "Open [C]hat[G]PT"},
     ["<leader>cl"] = {"<cmd> :!gch <CR>", "[C]eatsheet for [G]love"},

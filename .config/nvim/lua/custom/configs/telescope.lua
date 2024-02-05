@@ -28,6 +28,7 @@ local opts = {
       ".next",
     },
   },
+  extensions_list = { "themes", "terms", "emoji" },
 }
 
 return opts
