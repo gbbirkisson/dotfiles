@@ -3,7 +3,7 @@ local plugins = {
     -- Set project workspace root
     "ahmedkhalf/project.nvim",
     lazy = false,
-    config = function ()
+    config = function()
       require("project_nvim").setup {
         detection_methods = {
           "pattern",
@@ -107,14 +107,14 @@ local plugins = {
     -- LSP extensions
     "nvimtools/none-ls.nvim",
     lazy = false,
-    opts = function ()
+    opts = function()
       return require("custom.configs.none-ls")
     end
   },
   {
     -- LSP Configuration
     "neovim/nvim-lspconfig",
-    config = function ()
+    config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
     end,
@@ -158,15 +158,16 @@ local plugins = {
           },
         },
         openai_params = {
-         model = "gpt-4",
+          model = "gpt-4",
         },
         openai_edit_params = {
-         model = "gpt-4",
+          model = "gpt-4",
         },
       })
     end,
   },
   {
+    -- ZenMode for writing
     "folke/zen-mode.nvim",
     cmd = { "ZenMode" },
     opts = {
@@ -177,12 +178,12 @@ local plugins = {
       plugins = {
         options = {
           enabled = true,
-          ruler = false, -- disables the ruler text in the cmd line area
-          showcmd = false, -- disables the command in the last line of the screen
-          laststatus = 0, -- turn off the statusline in zen mode
+          ruler = false,               -- disables the ruler text in the cmd line area
+          showcmd = false,             -- disables the command in the last line of the screen
+          laststatus = 0,              -- turn off the statusline in zen mode
         },
         gitsigns = { enabled = true }, -- disables git signs
-        tmux = { enabled = true }, -- disables the tmux statusline
+        tmux = { enabled = true },     -- disables the tmux statusline
       },
       on_open = function(win)
         -- Disable line numbers
@@ -206,6 +207,21 @@ local plugins = {
       end,
     }
   },
+  {
+    -- Obsidian plugin for note taking
+    "epwalsh/obsidian.nvim",
+    version = "*", -- use latest release instead of latest commit
+    lazy = true,
+    event = {
+      "BufReadPre " .. vim.fn.expand "~" .. "/repos/personal/notes/**.md",
+      "BufNewFile " .. vim.fn.expand "~" .. "/repos/personal/notes/**.md",
+    },
+    cmd = { "ObsidianToday" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = require("custom.configs.obsidian").opts,
+  }
 }
 
 return plugins

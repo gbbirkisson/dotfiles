@@ -16,6 +16,10 @@ local M = {
       "c",
       "cpp",
 
+      -- markdown
+      "markdown",
+      "markdown_inline",
+
       -- other,
       "yaml",
       "markdown",

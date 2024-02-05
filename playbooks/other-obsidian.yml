@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=obsidian packageName=obsidianmd/obsidian-releases
+    version: v1.5.3
+
+  tasks:
+
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if Obsidian is installed
+      shell: "which obsidian && ls ~/.local/bin/obsidian-{{ version }}.deb"
+      changed_when: false
+      failed_when: obsidian_installed.rc not in [0,1,2]
+      register: obsidian_installed
+
+    - name: Download Obsidian
+      when: obsidian_installed.rc not in [ 0 ]
+      ansible.builtin.get_url:
+        force: true
+        url: "https://github.com/obsidianmd/obsidian-releases/releases/download/{{ version }}/obsidian_{{ version[1:] }}_amd64.deb"
+        dest: "~/.local/bin/obsidian-{{ version }}.deb"
+
+    - name: Install Obsidian
+      when: obsidian_installed.rc not in [ 0 ]
+      shell: "sudo apt install ~/.local/bin/obsidian-{{ version }}.deb -y"
