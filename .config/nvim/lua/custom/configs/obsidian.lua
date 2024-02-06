@@ -7,14 +7,14 @@ return {
       },
     },
     daily_notes = {
-      folder = "daily",
+      folder = "0-daily",
       template = "daily.md"
     },
     attachments = {
-      img_folder = "attachments",
+      img_folder = "6-extras/attachments",
     },
     templates = {
-      subdir = "templates",
+      subdir = "6-extras/templates",
       date_format = "%Y-%m-%d",
       time_format = "%H:%M",
       substitutions = {

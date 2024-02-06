@@ -111,4 +111,4 @@ alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
 alias cal="$DOTFILES/.venv/calcure/bin/calcure"
 
 # Notes
-alias day='nvim -c :ObsidianToday -c :$ -c startinsert'
+alias day='nvim -c :ObsidianToday -c :$'
