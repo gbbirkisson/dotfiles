@@ -42,7 +42,7 @@ $(PLAYBOOKS): lint
 install: _sudo playbooks/install.yml ## Install everything
 
 .PHONY: update
-update: install _mise _rustup _snap ## Update everything
+update: install _tldr _mise _rustup _snap ## Update everything
 	$(Q) echo "$(M) 🎉 Update finished successfully 🎉"
 
 .PHONY: _mise
@@ -59,6 +59,11 @@ _rustup:
 _snap: _sudo
 	$(info $(M) Update snap binaries)
 	$(Q) sudo snap refresh
+
+.PHONY: _tldr
+_tldr:
+	$(info $(M) Update tldr cache)
+	$(Q) tldr --update
 
 .PHONY: term
 term: _sudo ## Set default terminal to alacritty

@@ -7,15 +7,21 @@
         version: "{{ item.version }}"
       with_items:
         - { crate_name: alacritty, version: 0.13.1 }  # Better terminal emulator
-        - { crate_name: cargo-tarpaulin, version: 0.27.2 }  # For code coverage
-        - { crate_name: drill, version: 0.8.2 }  # HTTP stress testing
+        - { crate_name: bat, version: 0.24.0 }  # Better cat
+        - { crate_name: cargo-tarpaulin, version: 0.27.2 }  # For cargo code coverage
+        - { crate_name: drill, version: 0.8.2 }  # HTTP stress testing (ansible-esqe)
+        - { crate_name: du-dust, version: 0.9.0 }  # Better du
+        - { crate_name: fd-find, version: 9.0.0 }  # Better find
         - { crate_name: git-delta, version: 0.16.5 }  # Better diff
+        - { crate_name: hyperfine, version: 1.18.0 }  # Benchmarking
         - { crate_name: lsd, version: 1.0.0 }  # Better ls
-        - { crate_name: mise, version: 2024.2.0 }  # asdf clone
-        - { crate_name: oha, version: 1.0.0 }  # http stress tests
+        - { crate_name: mise, version: 2024.2.0 }  # Better asdf
+        - { crate_name: oha, version: 1.0.0 }  # HTTP stress testing
         - { crate_name: ouch, version: 0.5.1 }  # Easy compress/decompress
+        - { crate_name: ripgrep, version: 14.1.0 }  # Better grep
         - { crate_name: sfz, version: 0.7.1 }  # Simple web server for dirs
         - { crate_name: starship, version: 1.17.1 }  # Fancy prompt
+        - { crate_name: tealdeer, version: 1.6.1 }  # Better tldr
         - { crate_name: trunk, version: 0.18.4 }  # WASM development
         - { crate_name: watchexec-cli, version: 1.25.1 }  # Used for 'dev' script
-        - { crate_name: xh, version: 0.21.0 }  # HTTPie clone
+        - { crate_name: xh, version: 0.21.0 }  # Better HTTPie
