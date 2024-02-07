@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+
+# For use in vim with !title to turn a sentence into title case, i.e:
+#   some old thing -> Some Old Thing
+
+import sys
+
+for line in sys.stdin:
+    print(line.title(), end="")

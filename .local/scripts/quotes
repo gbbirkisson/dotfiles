@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+
+# For use in vim with !quotes to swap quotes:
+#   "some 'old' thing" -> 'some "old" thing'
+
+import sys
+
+for line in sys.stdin:
+    print(line.replace("'", "#$%").replace('"', "'").replace("#$%", '"'), end="")

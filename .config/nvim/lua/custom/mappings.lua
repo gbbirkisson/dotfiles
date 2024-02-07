@@ -34,8 +34,9 @@ M.abc = {
     ["<leader>cg"] = { "<cmd> :ChatGPT <CR>", "Open [C]hat[G]PT" },
   },
   v = {
-    ["'"] = { "<cmd> :s/\"/'/g <CR><ESC>", "Replace \" with '" },
-    ["\""] = { "<cmd> :s/'/\"/g <CR><ESC>", "Replace ' with \"" },
+    ["'"] = { ":!quotes<CR>", "Swap single and double quotes" },
+    ["\""] = { ":!quotes<CR>", "Swap single and double quotes" },
+    ["t"] = { ":!title<CR>", "Change to title case" },
   }
 }
 
