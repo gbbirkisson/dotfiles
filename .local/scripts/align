@@ -1,0 +1,56 @@
+#!/usr/bin/env python
+
+# For use in vim with !align to align tables and comments, i.e:
+#
+# hello // | adfasdf | asdfasfdff |
+# howsahoing // | fff | ggg |
+# goo
+#
+# ... becomes ...
+#
+# hello      // | adfasdf | asdfasfdff |
+# howsahoing // | fff     | ggg        |
+# goo
+
+import sys
+
+delimiters = [
+    "//",
+    "#",
+    "|",
+]
+
+
+def process(lines: list[str], sym: str, start: int) -> list[str]:
+    biggest = -1
+    for line in lines:
+        t = line.find(sym, start)
+        if t > biggest:
+            biggest = t
+
+    if biggest == -1:
+        return lines
+
+    res = []
+    for line in lines:
+        t = line.find(sym, start)
+        if t > -1 and t < biggest:
+            res.append(line[:t] + (" " * (biggest - t)) + line[t:])
+        else:
+            res.append(line)
+
+    return process(res, sym, biggest + 1)
+
+
+lines = [line for line in sys.stdin]
+while True:
+    new_lines = lines
+    for sym in delimiters:
+        new_lines = process(new_lines, sym, 0)
+    if new_lines != lines:
+        lines = new_lines
+    else:
+        break
+
+for line in lines:
+    print(line, end="")

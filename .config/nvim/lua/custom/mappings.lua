@@ -37,6 +37,8 @@ M.abc = {
     ["'"] = { ":!quotes<CR>", "Swap single and double quotes" },
     ["\""] = { ":!quotes<CR>", "Swap single and double quotes" },
     ["t"] = { ":!title<CR>", "Change to title case" },
+    ["a"] = { ":!align<CR>", "Run align script" },
+    ["s"] = { ":sort<CR>", "Sort" },
   }
 }
 
