@@ -9,27 +9,27 @@
         update_cache: true
         pkg:
           # Bare essentials
+          - apt-transport-https
           - build-essential
           - cmake
-          - apt-transport-https
-          - git
           - direnv
-
-          - fzf  # Fuzzy finder
-          - jq  # Json manipulation
-          - tree  # Tree for directories
-          - tmux  # Terminal good stuff
-
-          - gnome-tweaks  # Tweak gnome
-          - wireguard  # VPN
-          - flameshot  # For screenshots
+          - git
 
           # Python dependencies
-          - libssl-dev
           - libbz2-dev
+          - libffi-dev
+          - liblzma-dev
           - libncurses-dev
           - libreadline6-dev
           - libsqlite3-dev
-          - liblzma-dev
-          - libffi-dev
+          - libssl-dev
           - tk-dev
+
+          # Other
+          - flameshot     # For screenshots
+          - fzf           # Fuzzy finder
+          - gnome-tweaks  # Tweak gnome
+          - jq            # Json manipulation
+          - tmux          # Terminal good stuff
+          - tree          # Tree for directories
+          - wireguard     # VPN
