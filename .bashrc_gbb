@@ -42,6 +42,7 @@ if command -v mise >/dev/null 2>&1; then
 
 	export MISE_NOT_FOUND_AUTO_INSTALL=false
 	export MISE_DISABLE_TOOLS=direnv
+	export MISE_PYTHON_COMPILE=1
 	# export MISE_DEBUG=1
 fi
 
