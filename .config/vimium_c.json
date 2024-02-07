@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "1/20/2024, 2:33:25 PM",
-	"time": 1705757605778,
+	"@time": "2/7/2024, 4:20:19 PM",
+	"time": 1707319219336,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "linux",
-		"chromium": 120
+		"chromium": 121
 	},
 	"exclusionRules": [
 		{
@@ -19,6 +19,14 @@
 		{
 			"passKeys": "",
 			"pattern": "^https?://cad\\.onshape\\.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": "^https://zty.pe/"
+		},
+		{
+			"passKeys": "",
+			"pattern": "^https?://play.geforcenow.com/"
 		}
 	],
 	"keyLayout": 2,
@@ -71,6 +79,9 @@
 		"",
 		"r|rs: https://docs.rs/releases/search?query=%s \\",
 		"  blank=https://docs.rs/ Rust Docs",
+		"",
+		"c|crate: https://crates.io/search?q=%s \\",
+		"  blank=https://crates.io/ Crates",
 		""
 	],
 	"userDefinedCss": [
