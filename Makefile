@@ -27,6 +27,7 @@ _sudo:
 _run: $(VENV)
 	$(info $(M) Running $(PLAYBOOK))
 	$(Q) $(ANSIBLE) $(AQ) playbook $(PLAYBOOK) --extra-vars "dotfiles=$(PWD) venvs=$(PWD)/$(VENVS)"
+	$(Q) echo "$(M) 🎉 Playbook '$(PLAYBOOK)' finished successfully 🎉"
 
 .PHONY: lint
 lint: $(VENV)
@@ -41,13 +42,23 @@ $(PLAYBOOKS): lint
 install: _sudo playbooks/install.yml ## Install everything
 
 .PHONY: update
-update: _sudo  ## Update packages
-	$(Q) sudo apt update
-	$(Q) sudo apt upgrade -y
-	$(Q) sudo snap refresh
+update: install _mise _rustup _snap ## Update everything
+	$(Q) echo "$(M) 🎉 Update finished successfully 🎉"
+
+.PHONY: _mise
+_mise:
+	$(info $(M) Update mise binaries)
+	$(Q) mise install
+
+.PHONY: _rustup
+_rustup:
+	$(info $(M) Update rustup binaries)
 	$(Q) rustup update
-	$(Q) $(MAKE) --no-print-directory playbooks/base-cargo-bins.yml
-	$(Q) $(MAKE) --no-print-directory playbooks/dev-nvim-nvchad.yml
+
+.PHONY: _snap
+_snap: _sudo
+	$(info $(M) Update snap binaries)
+	$(Q) sudo snap refresh
 
 .PHONY: term
 term: _sudo ## Set default terminal to alacritty
@@ -58,6 +69,7 @@ term: _sudo ## Set default terminal to alacritty
 
 .PHONY: renovate
 renovate: ## Tests renovate configuration
+	$(info $(M) Testing renovate configuration)
 	LOG_LEVEL=debug \
 	RENOVATE_BASE_BRANCHES=main \
 	RENOVATE_CONFIG_FILE=.github/renovate.json5 renovate \
