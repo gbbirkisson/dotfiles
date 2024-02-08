@@ -30,13 +30,15 @@ alias dcln='dstp; drma; drmi; drmv'                                             
 
 # kubectl aliases
 alias k='kubectl'
-alias ks='k9s'
 complete -F __start_kubectl k
 alias kd='export KUBECONFIG=/dev/null'
 for f in e v m; do
 	alias "k$f"="export KUBECONFIG=~/.kube/config_$f"
 done
 kd # Disable by default
+
+# k9s
+alias ks='KUBECONFIG=~/.kube/config_e k9s --context nube-k8s-dev'
 
 # use bat not cat
 if command -v bat &>/dev/null; then
