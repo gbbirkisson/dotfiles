@@ -38,8 +38,9 @@ done
 kd # Disable by default
 
 # use bat not cat
-if command -v batcat &>/dev/null; then
-	alias cat='batcat -pp'
+if command -v bat &>/dev/null; then
+	alias cat='bat -pp'
+	alias yat='bat -l yaml'
 fi
 
 # Use lsd not ls
