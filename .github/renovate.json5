@@ -7,6 +7,12 @@
   semanticCommitType: "fix",
   reviewersFromCodeOwners: true,
   dependencyDashboard: true,
+  packageRules: [
+    {
+      matchDatasources: ["asdf"],
+      minimumReleaseAge: "3 days"
+    }
+  ],
   customManagers: [
     {
       customType: "regex",

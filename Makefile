@@ -75,9 +75,16 @@ term: _sudo ## Set default terminal to alacritty
 .PHONY: renovate
 renovate: ## Tests renovate configuration
 	$(info $(M) Testing renovate configuration)
-	LOG_LEVEL=debug \
-	RENOVATE_BASE_BRANCHES=main \
-	RENOVATE_CONFIG_FILE=.github/renovate.json5 renovate \
+	$(Q) docker run -it --rm \
+		--pull always \
+		-u $(shell id -u) \
+		-e LOG_LEVEL=debug \
+		-e RENOVATE_BASE_BRANCHES=main \
+		-e RENOVATE_CONFIG_FILE=.github/renovate.json5 \
+		-v .:/project:ro \
+		-w /project \
+		ghcr.io/renovatebot/renovate \
+		renovate \
 		--token=${GITHUB_TOKEN} \
 		--schedule="" \
 		--require-config=ignored \
