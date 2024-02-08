@@ -30,6 +30,7 @@ alias dcln='dstp; drma; drmi; drmv'                                             
 
 # kubectl aliases
 alias k='kubectl'
+alias ks='k9s'
 complete -F __start_kubectl k
 alias kd='export KUBECONFIG=/dev/null'
 for f in e v m; do
