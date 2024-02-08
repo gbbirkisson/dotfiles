@@ -13,6 +13,7 @@
 # goo
 
 import sys
+import re
 
 delimiters = [
     "//",
@@ -42,11 +43,33 @@ def process(lines: list[str], sym: str, start: int) -> list[str]:
     return process(res, sym, biggest + 1)
 
 
+def trim(lines: list[str]) -> list[str]:
+    spaces = []
+    for line in lines:
+        spaces.append([m.end() for m in re.finditer(r"^\s*\S.*\s\s\S", line)])
+
+    common = list(set.intersection(*map(set, spaces)))
+    if len(common) == 0:
+        return lines
+
+    target = common[0]
+
+    res = []
+    for line in lines:
+        res.append(line[: target - 2] + line[target - 1 :])
+
+    for line in res:
+        if re.findall(r"\S\s#", line):
+            return lines
+
+    return res
+
+
 lines = [line for line in sys.stdin]
 while True:
     new_lines = lines
     for sym in delimiters:
-        new_lines = process(new_lines, sym, 0)
+        new_lines = trim(process(new_lines, sym, 0))
     if new_lines != lines:
         lines = new_lines
     else:
