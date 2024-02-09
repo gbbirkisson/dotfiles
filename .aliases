@@ -38,7 +38,7 @@ done
 kd # Disable by default
 
 # k9s
-alias ks='KUBECONFIG=~/.kube/config_e k9s --context nube-k8s-dev'
+alias ks='KUBECONFIG=~/.kube/config_e k9s --context nube-k8s-dev -n default -c pods'
 
 # use bat not cat
 if command -v bat &>/dev/null; then
