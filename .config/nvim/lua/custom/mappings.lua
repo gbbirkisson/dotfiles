@@ -29,6 +29,7 @@ M.abc = {
     ["<leader>oo"] = { "<cmd> :ObsidianOpen <CR>", "[O]pen in [O]bsidian" },
     ["<leader>on"] = { ":ObsidianNew ", "[O]bsidian [N]ew" },
     ["<leader>ot"] = { ":ObsidianTags ", "[O]bsidian [T]ags" },
+    ["<leader>oi"] = { ":ObsidianPasteImg ", "[O]bsidian Paste [I]mage" },
     -- Other
     ["<leader>gg"] = { "<cmd> :LazyGit <CR>", "Open Lazy[g]it" },
     ["<leader>cg"] = { "<cmd> :ChatGPT <CR>", "Open [C]hat[G]PT" },
