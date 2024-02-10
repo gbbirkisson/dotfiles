@@ -5,21 +5,21 @@ set -euo pipefail
 SCRIPT_NAME=$(basename $0)
 
 usage() {
-	cat 1>&2 <<EOF
+    cat 1>&2 <<EOF
 Usage: $SCRIPT_NAME
 EOF
-	(log-error "")
-	echo -n "  " 1>&2
+    (log-error "")
+    echo -n "  " 1>&2
 }
 
 log-lines() {
-	for a in "$@"; do printf "\n  $a" 1>&2; done
-	printf "\n" 1>&2
+    for a in "$@"; do printf "\n  $a" 1>&2; done
+    printf "\n" 1>&2
 }
 log-error() {
-	printf "$(tput setaf 1)ERROR$(tput sgr0): $1" 1>&2
-	log-lines "${@:2}"
-	exit 1
+    printf "$(tput setaf 1)ERROR$(tput sgr0): $1" 1>&2
+    log-lines "${@:2}"
+    exit 1
 }
 
 cat ~/.config/tmux/tmux.conf | grep '#c' | sed 's/#ch //g' | column -t -s ';' -o ' | '

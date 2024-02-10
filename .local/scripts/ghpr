@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-	echo "This script needs to be sourced"
+    echo "This script needs to be sourced"
 fi
 
 user=gbbirkisson
@@ -12,51 +12,51 @@ repo_dirs[gbbirkisson]="$HOME/repos/personal"
 
 # Prints the unix epoch from $1 days ago
 days-ago() {
-	local max_days=$1
-	local now=$(date +%s)
-	echo $(($now - (86400 * $max_days)))
+    local max_days=$1
+    local now=$(date +%s)
+    echo $(($now - (86400 * $max_days)))
 }
 
 # Fetches all PRs from org based on filters $@
 pr-fetch() {
-	# Note:
-	#   We pass in "phony" repo, but get all PRs?! That's because we are not filtering
-	#   PRs by repo, so the "phony" repo does not even have to exist.
-	gh pr -R ${1}/phony list --json url,title,createdAt,author,reviewRequests -S "org:${1} -label:autoMerged ${@:2}"
+    # Note:
+    #   We pass in "phony" repo, but get all PRs?! That's because we are not filtering
+    #   PRs by repo, so the "phony" repo does not even have to exist.
+    gh pr -R ${1}/phony list --json url,title,createdAt,author,reviewRequests -S "org:${1} -label:autoMerged ${@:2}"
 }
 
 # Views PR $2 from repo $1. You can specify more params to pass to the GH client
 pr-view() {
-	local repo=$1
-	local id=$2
+    local repo=$1
+    local id=$2
 
-	gh pr view -R $repo $id "${@:3}"
+    gh pr view -R $repo $id "${@:3}"
 }
 
 # Checks out PR $2 from repo $1 locally
 pr-checkout() {
-	local org=$(echo $1 | awk -F'/' '{print $1}')
-	local repo=$(echo $1 | awk -F'/' '{print $2}')
-	local id=$2
-	local repo_dir="${repo_dirs[$org]}/$repo"
+    local org=$(echo $1 | awk -F'/' '{print $1}')
+    local repo=$(echo $1 | awk -F'/' '{print $2}')
+    local id=$2
+    local repo_dir="${repo_dirs[$org]}/$repo"
 
-	# Clone repo if needed
-	[ -d "$repo_dir" ] || gh repo clone $org/$repo $repo_dir
+    # Clone repo if needed
+    [ -d "$repo_dir" ] || gh repo clone $org/$repo $repo_dir
 
-	# Checkout PR
-	cd $repo_dir
-	gh pr checkout $id
-	echo "🎉 PR checked out!"
+    # Checkout PR
+    cd $repo_dir
+    gh pr checkout $id
+    echo "🎉 PR checked out!"
 }
 
 pr-list() {
-	# Fetch PRs, group, sort, filter and format for FZF
-	{
-		pr-fetch gbbirkisson 'user-review-requested:@me' &
-		pr-fetch kolonialno 'user-review-requested:@me' &
-		pr-fetch kolonialno 'team-review-requested:kolonialno/infrastructure-developer-experience' &
-		wait
-	} | jq -r -s \ '
+    # Fetch PRs, group, sort, filter and format for FZF
+    {
+        pr-fetch gbbirkisson 'user-review-requested:@me' &
+        pr-fetch kolonialno 'user-review-requested:@me' &
+        pr-fetch kolonialno 'team-review-requested:kolonialno/infrastructure-developer-experience' &
+        wait
+    } | jq -r -s \ '
     add
     | group_by(.title) | map(.[-1])
     | map(.author.type = (
@@ -79,69 +79,69 @@ pr-list() {
 }
 
 prompt() {
-	read -p "$@" -n 1 -r
-	echo $REPLY
-	unset $REPLY
+    read -p "$@" -n 1 -r
+    echo $REPLY
+    unset $REPLY
 }
 
 while true; do
-	# Prompt user for PRs
-	[ -z "$PR" ] && PR=$(pr-list | fzf \
-		--preview-window=right:65% \
-		--preview '
+    # Prompt user for PRs
+    [ -z "$PR" ] && PR=$(pr-list | fzf \
+        --preview-window=right:65% \
+        --preview '
       export GH_FORCE_TTY=$FZF_PREVIEW_COLUMNS
       export CLICOLOR_FORCE=1
       gh pr view -R {2} {3}
   ')
 
-	# Bail if no PR is selected
-	[ -z "$PR" ] && break
+    # Bail if no PR is selected
+    [ -z "$PR" ] && break
 
-	# Extract pr_repo and id
-	pr_repo=$(echo $PR | awk '{print $2}')
-	pr_id=$(echo $PR | awk '{print $3}')
+    # Extract pr_repo and id
+    pr_repo=$(echo $PR | awk '{print $2}')
+    pr_id=$(echo $PR | awk '{print $3}')
 
-	while true; do
-		# Ask for command
-		case $(prompt "❔ $PR [Xcvbq?]: ") in
-		"?") # Help
-			echo && echo "🛟 Help!"
-			echo "  q => 🚪 Exit"
-			echo "  x => 🛑 Select some other PR"
-			echo "  c => 📖 Checkout PR"
-			echo "  v => 💻 View PR in terminal"
-			echo "  b => 🌐 View PR in browser"
-			echo "  ? => 🛟 Show this help"
-			;;
-		"c" | "C") # Checkout
-			echo && echo "📖 Checking out PR!"
+    while true; do
+        # Ask for command
+        case $(prompt "❔ $PR [Xcvbq?]: ") in
+        "?") # Help
+            echo && echo "🛟 Help!"
+            echo "  q => 🚪 Exit"
+            echo "  x => 🛑 Select some other PR"
+            echo "  c => 📖 Checkout PR"
+            echo "  v => 💻 View PR in terminal"
+            echo "  b => 🌐 View PR in browser"
+            echo "  ? => 🛟 Show this help"
+            ;;
+        "c" | "C") # Checkout
+            echo && echo "📖 Checking out PR!"
 
-			# Checkout PR
-			pr-checkout $pr_repo $pr_id
+            # Checkout PR
+            pr-checkout $pr_repo $pr_id
 
-			# Exit script
-			break 2
-			;;
-		"v" | "V") # View
-			echo && echo "💻 View PR in terminal!"
-			pr-view $pr_repo $pr_id --comments
-			;;
-		"b" | "b") # View
-			echo && echo "🌐 View PR in browser!"
-			pr-view $pr_repo $pr_id --web >/dev/null 2>&1
-			;;
-		"q" | "Q") # Close
-			echo && break 2
-			;;
-		"x" | "X") # Close
-			unset PR
-			echo && break 1
-			;;
-		*)
-			break
-			;;
-		esac
-	done
+            # Exit script
+            break 2
+            ;;
+        "v" | "V") # View
+            echo && echo "💻 View PR in terminal!"
+            pr-view $pr_repo $pr_id --comments
+            ;;
+        "b" | "b") # View
+            echo && echo "🌐 View PR in browser!"
+            pr-view $pr_repo $pr_id --web >/dev/null 2>&1
+            ;;
+        "q" | "Q") # Close
+            echo && break 2
+            ;;
+        "x" | "X") # Close
+            unset PR
+            echo && break 1
+            ;;
+        *)
+            break
+            ;;
+        esac
+    done
 done
 
 # Cleanup

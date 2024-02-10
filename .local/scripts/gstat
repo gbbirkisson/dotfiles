@@ -5,7 +5,7 @@ set -euo pipefail
 SCRIPT_NAME=$(basename $0)
 
 usage() {
-	cat 1>&2 <<EOF
+    cat 1>&2 <<EOF
 Usage: $SCRIPT_NAME [CMD ...]
 
 Print count of characters used in code within the current directory
@@ -14,37 +14,37 @@ Examples:
   $ $SCRIPT_NAME
 
 EOF
-	(log-error "")
-	echo -n "  " 1>&2
+    (log-error "")
+    echo -n "  " 1>&2
 }
 
 log-lines() {
-	for a in "$@"; do printf "\n  $a" 1>&2; done
-	printf "\n" 1>&2
+    for a in "$@"; do printf "\n  $a" 1>&2; done
+    printf "\n" 1>&2
 }
 
 log-error() {
-	printf "$(tput setaf 1)ERROR$(tput sgr0): $1" 1>&2
-	log-lines "${@:2}"
-	exit 1
+    printf "$(tput setaf 1)ERROR$(tput sgr0): $1" 1>&2
+    log-lines "${@:2}"
+    exit 1
 }
 
 find . \
-	-name '*.rs' \
-	-o -name '*.py' \
-	-o -name '*.toml' \
-	-o -name '*Makefile' \
-	-o -name '*.lua' |
-	grep -v '/target/' |
-	grep -v '/.venv/' |
-	xargs cat |
-	fold -w1 |
-	tr '[:upper:]' '[:lower:]' |
-	rg -v '[a-z]' |
-	rg -v '\d' |
-	rg -v '^\s?$' |
-	sort |
-	uniq -c |
-	sort -nr |
-	rg -v ' 1 ' |
-	rg -v ' 2 '
+    -name '*.rs' \
+    -o -name '*.py' \
+    -o -name '*.toml' \
+    -o -name '*Makefile' \
+    -o -name '*.lua' |
+    grep -v '/target/' |
+    grep -v '/.venv/' |
+    xargs cat |
+    fold -w1 |
+    tr '[:upper:]' '[:lower:]' |
+    rg -v '[a-z]' |
+    rg -v '\d' |
+    rg -v '^\s?$' |
+    sort |
+    uniq -c |
+    sort -nr |
+    rg -v ' 1 ' |
+    rg -v ' 2 '
