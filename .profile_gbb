@@ -1,13 +1,13 @@
 #!/bin/bash
 
 if echo $PATH | grep -vq $HOME/.local/scripts; then
-	for dir in \
-		$HOME/.local/scripts \
-		$HOME/.local/bin \
-		$HOME/.cargo/bin \
-		$HOME/go/bin; do
-		[[ -r "$dir" ]] && [[ -d "$dir" ]] && PATH="$dir:$PATH"
-	done
+    for dir in \
+        $HOME/.local/scripts \
+        $HOME/.local/bin \
+        $HOME/.cargo/bin \
+        $HOME/go/bin; do
+        [[ -r "$dir" ]] && [[ -d "$dir" ]] && PATH="$dir:$PATH"
+    done
 fi
 
 export EDITOR=$(which nvim)

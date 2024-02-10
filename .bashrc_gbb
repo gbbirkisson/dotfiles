@@ -35,16 +35,16 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # Mise
 if command -v mise >/dev/null 2>&1; then
-	source <(mise activate bash)
-	source <(mise completions bash)
-	mise which gcloud >/dev/null 2>&1 && source $(dirname $(dirname $(mise which gcloud)))/completion.bash.inc
-	mise which kubectl >/dev/null 2>&1 && source <($(mise which kubectl) completion bash)
+    source <(mise activate bash)
+    source <(mise completions bash)
+    mise which gcloud >/dev/null 2>&1 && source $(dirname $(dirname $(mise which gcloud)))/completion.bash.inc
+    mise which kubectl >/dev/null 2>&1 && source <($(mise which kubectl) completion bash)
 
-	export MISE_NOT_FOUND_AUTO_INSTALL=false
-	export MISE_DISABLE_TOOLS=direnv
-	export MISE_PYTHON_COMPILE=1
-	export MISE_EXPERIMENTAL=1
-	# export MISE_DEBUG=1
+    export MISE_NOT_FOUND_AUTO_INSTALL=false
+    export MISE_DISABLE_TOOLS=direnv
+    export MISE_PYTHON_COMPILE=1
+    export MISE_EXPERIMENTAL=1
+    # export MISE_DEBUG=1
 fi
 
 # Enable vi mode
