@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-exec $ODA_PATH/velo/.venv/bin/python -m velo.cli "$@"
