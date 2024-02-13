@@ -66,7 +66,7 @@ def trim(lines: list[str]) -> list[str]:
     return res
 
 
-lines = [line for line in sys.stdin]
+lines = [line.replace("\t", " ") for line in sys.stdin]
 while True:
     new_lines = lines
     for sym in delimiters:
