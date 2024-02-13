@@ -25,6 +25,9 @@
           - libssl-dev
           - tk-dev
 
+          # Py-Spy dependencies
+          - libunwind-dev
+
           # Other
           - flameshot     # For screenshots
           - fzf           # Fuzzy finder

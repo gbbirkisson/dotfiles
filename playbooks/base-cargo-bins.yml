@@ -18,6 +18,7 @@
         - { crate_name: mise, version: 2024.2.7 }           # Better asdf
         - { crate_name: oha, version: 1.0.0 }               # HTTP stress testing
         - { crate_name: ouch, version: 0.5.1 }              # Easy compress/decompress
+        - { crate_name: py-spy, version: 0.3.14 }           # Python profiling
         - { crate_name: ripgrep, version: 14.1.0 }          # Better grep
         - { crate_name: sfz, version: 0.7.1 }               # Simple web server for dirs
         - { crate_name: starship, version: 1.17.1 }         # Fancy prompt
