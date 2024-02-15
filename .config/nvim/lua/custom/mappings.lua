@@ -33,6 +33,7 @@ M.abc = {
         -- Other
         ["<leader>gg"] = { "<cmd> :LazyGit <CR>", "Open Lazy[g]it" },
         ["<leader>cg"] = { "<cmd> :ChatGPT <CR>", "Open [C]hat[G]PT" },
+        ["<leader>gb"] = { "<cmd> :ToggleBlame <CR>", "[G]it [B]lame" },
     },
     v = {
         ["'"] = { ":!quotes<CR>", "Swap single and double quotes" },

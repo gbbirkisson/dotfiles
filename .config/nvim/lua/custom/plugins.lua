@@ -145,6 +145,14 @@ local plugins = {
             vim.fn["mkdp#util#install"]()
         end,
     },
+    {
+        -- Git blame
+        "FabijanZulj/blame.nvim",
+        cmd = { "ToggleBlame" },
+        opts = {
+          merge_consecutive = true,
+        },
+    },
 }
 
 return plugins
