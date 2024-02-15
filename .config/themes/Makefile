@@ -9,7 +9,7 @@ BUILDER:=$(VENV)/bin/python builder.py
 
 THEME:=schemes/onedark.yaml
 
-all: alacritty k9s tmux
+all: alacritty k9s tmux fzf
 
 .PHONY: alacritty
 alacritty:
@@ -22,6 +22,10 @@ k9s:
 .PHONY: tmux
 tmux:
 	$(Q) IN=templates/tmux.tmux OUT=../tmux/colors.tmux $(MAKE) --no-print-directory _render
+
+.PHONY: fzf
+fzf:
+	$(Q) IN=templates/fzf.sh OUT=../../.fzf $(MAKE) --no-print-directory _render
 
 $(VENV):
 	$(info $(M) Creating python environment)
