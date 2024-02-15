@@ -4,7 +4,7 @@ wm.bar.background.color: #1e222a
 wm.bar.workspace.inactive.border.color: #1e222a
 wm.bar.workspace.inactive.background.color: #1e222a
 wm.bar.workspace.active.border.color: #1e222a
-wm.bar.workspace.active.background.color: #3e4451
+wm.bar.workspace.active.background.color: #353b45
 
 gnome.terminal.font:	RobotoMono Nerd Font 11
 

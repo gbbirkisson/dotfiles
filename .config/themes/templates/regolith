@@ -4,7 +4,7 @@ wm.bar.background.color: #{{base00_hex}}
 wm.bar.workspace.inactive.border.color: #{{base00_hex}}
 wm.bar.workspace.inactive.background.color: #{{base00_hex}}
 wm.bar.workspace.active.border.color: #{{base00_hex}}
-wm.bar.workspace.active.background.color: #{{base02_hex}}
+wm.bar.workspace.active.background.color: #{{base01_hex}}
 
 gnome.terminal.font:	RobotoMono Nerd Font 11
 
