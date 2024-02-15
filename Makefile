@@ -65,6 +65,10 @@ _tldr:
 	$(info $(M) Update tldr cache)
 	$(Q) tldr --update
 
+.PHONY: theme
+theme:  ## Generate theme
+	$(Q) $(MAKE) --no-print-directory -C .config/themes all
+
 .PHONY: term
 term: _sudo ## Set default terminal to alacritty
 	$(info $(M) Setting default terminal)
