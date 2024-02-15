@@ -1,4 +1,4 @@
-import = ["/home/gbbirkisson/.config/alacritty/catppuccin-mocha.toml"]
+import = ["/home/gbbirkisson/.config/alacritty/theme.toml"]
 
 [bell]
 animation = "Ease"

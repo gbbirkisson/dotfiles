@@ -1,0 +1,16 @@
+# NOTE: you can use vars with $<var> and ${<var>} as long as the str is double quoted: ""
+# WARNING: hex colors can't contain capital letters
+
+thm_bg="#1e222a"
+thm_fg="#abb2bf"
+thm_cyan="#56b6c2"
+thm_black="#1e222a"
+thm_gray="#353b45"
+thm_magenta="#c678dd"
+thm_pink="#56b6c2"
+thm_red="#e06c75"
+thm_green="#98c379"
+thm_yellow="#e5c07b"
+thm_blue="#61afef"
+thm_orange="#d19a66"
+thm_black4="#545862"

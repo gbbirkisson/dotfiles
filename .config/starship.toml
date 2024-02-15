@@ -19,6 +19,8 @@ $character"""
 
 # $package\
 #$line_break\
+[directory]
+style = "bold blue"
 
 # Only trigger when venv is activated
 [python]
@@ -30,8 +32,11 @@ symbol = '💩'
 format = '[$symbol \[$int\]]($style) '
 disabled = false
 
-[git_status]
+[git_branch]
 style = "bold yellow"
+
+[git_status]
+style = "bold fg:17"
 
 [character]
 format = "$symbol"
@@ -39,8 +44,8 @@ success_symbol = "[\\$](bold green) "
 error_symbol = "[\\$](bold red) "
 
 [kubernetes]
-symbol = '🛳️  '
-style = "blue"
+symbol = '☸  '
+style = "bold #c678dd"
 disabled = false
 
 [[kubernetes.contexts]]

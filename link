@@ -48,6 +48,9 @@ link .config/nvim/ftplugin
 link .config/nvim/lua/custom
 link .config/nvim/queries
 link .config/regolith3
+link .config/themes
+link .config/tmux/colors.tmux
+link .config/tmux/theme.tmux
 link .config/tmux/tmux.conf
 link .config/yamlfmt/.yamlfmt
 link .config/starship.toml
