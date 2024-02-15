@@ -48,6 +48,7 @@ lspconfig.rust_analyzer.setup({
                     "-A", "clippy::must-use-candidate",
                     "-A", "clippy::missing-errors-doc",
                     "-A", "clippy::needless-raw-string-hashes",
+                    "-A", "clippy::future-not-send",
                 },
             },
         },
