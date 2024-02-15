@@ -2,12 +2,12 @@
 local M = {}
 
 M.ui = {
-    theme = "onedark",
+  theme = "onedark",
 
-    statusline = {
-        theme = "vscode_colored",
-        overriden_modules = require("custom.statusline"),
-    },
+  statusline = {
+    theme = "vscode_colored",
+    overriden_modules = require("custom.statusline"),
+  },
 }
 
 M.plugins = "custom.plugins"
