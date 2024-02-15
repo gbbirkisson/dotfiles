@@ -3,5 +3,5 @@
 set -euo pipefail
 
 # export RUST_BACKTRACE=full
-cd /home/gbbirkisson/repos/personal/gsp
+cd ~/repos/personal/gsp
 tee in.txt | cargo run -q 2>&1 | tee out.txt

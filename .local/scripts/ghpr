@@ -8,7 +8,7 @@ user=gbbirkisson
 
 declare -A repo_dirs
 repo_dirs[kolonialno]="$HOME/repos/oda"
-repo_dirs[gbbirkisson]="$HOME/repos/personal"
+repo_dirs[$user]="$HOME/repos/personal"
 
 # Prints the unix epoch from $1 days ago
 days-ago() {
@@ -52,7 +52,7 @@ pr-checkout() {
 pr-list() {
     # Fetch PRs, group, sort, filter and format for FZF
     {
-        pr-fetch gbbirkisson 'user-review-requested:@me' &
+        pr-fetch $user 'user-review-requested:@me' &
         pr-fetch kolonialno 'user-review-requested:@me' &
         pr-fetch kolonialno 'team-review-requested:kolonialno/infrastructure-developer-experience' &
         wait
