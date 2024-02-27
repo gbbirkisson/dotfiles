@@ -54,7 +54,7 @@ pr-list() {
     {
         pr-fetch $user 'user-review-requested:@me' &
         pr-fetch kolonialno 'user-review-requested:@me' &
-        pr-fetch kolonialno 'team-review-requested:kolonialno/infrastructure-developer-experience' &
+        # pr-fetch kolonialno 'team-review-requested:kolonialno/infrastructure-developer-experience' &
         wait
     } | jq -r -s \ '
     add
