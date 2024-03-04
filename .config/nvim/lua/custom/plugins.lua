@@ -124,7 +124,7 @@ local plugins = {
   {
     -- Obsidian plugin for note taking
     "epwalsh/obsidian.nvim",
-    version = "*",     -- use latest release instead of latest commit
+    version = "*", -- use latest release instead of latest commit
     lazy = true,
     event = {
       "BufReadPre " .. vim.fn.expand "~" .. "/repos/personal/notes/**.md",
@@ -152,6 +152,17 @@ local plugins = {
     opts = {
       merge_consecutive = false,
     },
+  },
+  {
+    -- TODO highlighting
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = {
+      'nvim-lua/plenary.nvim'
+    },
+    opts = {
+      signs = false
+    }
   },
 }
 

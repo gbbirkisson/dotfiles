@@ -39,7 +39,7 @@ local opts = {
     null_ls.builtins.hover.dictionary,
     null_ls.builtins.diagnostics.typos,
     null_ls.builtins.diagnostics.trail_space,
-    null_ls.builtins.diagnostics.todo_comments,
+    -- null_ls.builtins.diagnostics.todo_comments,
   },
   on_attach = function(client, bufnr)
     -- Auto-format on save

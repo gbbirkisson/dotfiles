@@ -24,11 +24,14 @@ M.abc = {
     ["<leader>ct"] = { "<cmd> :!tch <CR>", "[C]eatsheet for [T]mux" },
     -- Include hidden files, but not the ones ignored by git
     ["<leader>ff"] = { "<cmd> Telescope find_files hidden=true <CR>", "[F]ind [F]iles" },
-    ["<leader>dc"] = { "<cmd> :set conceallevel=0 <CR>", "[D]isable [C]onceal Level" },
+    ["<leader>ft"] = { "<cmd> :TodoTelescope <CR>", "[F]ind [T]odo" },
+    -- Conceal Level
+    ["<leader>cd"] = { "<cmd> :set conceallevel=0 <CR>", "[C]onceal Level [D]isable" },
+    ["<leader>ce"] = { "<cmd> :set conceallevel=2 <CR>", "[C]onceal Level [E]nable" },
     -- Obsidian
     ["<leader>oo"] = { "<cmd> :ObsidianOpen <CR>", "[O]pen in [O]bsidian" },
     ["<leader>on"] = { ":ObsidianNew ", "[O]bsidian [N]ew" },
-    ["<leader>ot"] = { ":ObsidianTags ", "[O]bsidian [T]ags" },
+    ["<leader>ot"] = { "<cmd> :ObsidianTags <CR>", "[O]bsidian [T]ags" },
     ["<leader>oi"] = { ":ObsidianPasteImg ", "[O]bsidian Paste [I]mage" },
     -- Other
     ["<leader>gg"] = { "<cmd> :LazyGit <CR>", "Open Lazy[g]it" },
