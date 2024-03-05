@@ -24,7 +24,8 @@ M.abc = {
     ["<leader>ct"] = { "<cmd> :!tch <CR>", "[C]eatsheet for [T]mux" },
     -- Include hidden files, but not the ones ignored by git
     ["<leader>ff"] = { "<cmd> Telescope find_files hidden=true <CR>", "[F]ind [F]iles" },
-    ["<leader>ft"] = { "<cmd> :TodoTelescope <CR>", "[F]ind [T]odo" },
+    ["<leader>ft"] = { "<cmd> :TodoTelescope keywords=TODO,FIX <CR>", "[F]ind [T]odo" },
+    ["<leader>fn"] = { "<cmd> :TodoTelescope <CR>", "[F]ind [N]otes" },
     -- Conceal Level
     ["<leader>cd"] = { "<cmd> :set conceallevel=0 <CR>", "[C]onceal Level [D]isable" },
     ["<leader>ce"] = { "<cmd> :set conceallevel=2 <CR>", "[C]onceal Level [E]nable" },
