@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "2/7/2024, 4:20:19 PM",
-	"time": 1707319219336,
+	"@time": "3/6/2024, 9:54:17 PM",
+	"time": 1709758457017,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "linux",
-		"chromium": 121
+		"chromium": 122
 	},
 	"exclusionRules": [
 		{
@@ -55,6 +55,8 @@
 	],
 	"newTabUrl": "pages/blank.html",
 	"searchEngines": [
+		"k|kagi: https://kagi.com/search?q=%s",
+		"  blank=https://kagi.com/ Kagi",
 		"g|go|gg|google|Google: https://www.google.com/search?q=%s \\",
 		"  www.google.com re=/^(?:\\.[a-z]{2,4})?\\/search\\b.*?[#&?]q=([^#&]*)/i\\",
 		"  blank=https://www.google.com/ Google",
@@ -84,6 +86,7 @@
 		"  blank=https://crates.io/ Crates",
 		""
 	],
+	"searchUrl": "https://kagi.com/search?q=$s Kagi",
 	"userDefinedCss": [
 		".LH, .D>.LH { background: #F9E2AF; }",
 		".LH { border: /*!DPI*/ 1px solid black; }",
