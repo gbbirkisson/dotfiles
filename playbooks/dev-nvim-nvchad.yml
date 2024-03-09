@@ -8,4 +8,4 @@
         dest: ~/.config/nvim
         depth: 1
         # renovate: datasource=github-releases depName=NvChad packageName=NvChad/NvChad
-        version: v2.0
+        version: v2.5
