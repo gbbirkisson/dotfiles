@@ -116,4 +116,4 @@ alias cal="$DOTFILES/.venv/calcure/bin/calcure"
 
 # Notes
 alias day='cd $HOME/repos/personal/notes && nvim -c :ObsidianToday -c :$'
-alias not='cd $HOME/repos/personal/notes && nvim .'
+alias not='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck .'

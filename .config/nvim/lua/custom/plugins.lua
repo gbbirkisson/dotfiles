@@ -130,7 +130,7 @@ local plugins = {
       "BufReadPre " .. vim.fn.expand "~" .. "/repos/personal/notes/**.md",
       "BufNewFile " .. vim.fn.expand "~" .. "/repos/personal/notes/**.md",
     },
-    cmd = { "ObsidianToday" },
+    cmd = { "ObsidianToday", "ObsidianCheck" },
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
