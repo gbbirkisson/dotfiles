@@ -93,6 +93,7 @@ EOF
 
 # Vim
 alias vim="nvim"
+# alias nvimnew='NVIM_APPNAME="nvimnew" nvim'
 alias :q="exit"
 alias :qa="exit"
 alias vimcheat="xdg-open https://www.gbb.is/posts/2022-09-28-vim-cheatsheet/"
