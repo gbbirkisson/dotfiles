@@ -159,6 +159,7 @@ local plugins = {
   {
     -- TODO highlighting
     'folke/todo-comments.nvim',
+    version = 'v1.1.0',
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -169,6 +170,7 @@ local plugins = {
   },
   { -- Autoformat
     'stevearc/conform.nvim',
+    version = 'v5.4.0',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {
@@ -198,7 +200,7 @@ local plugins = {
   },
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
-    version = '*',
+    version = 'v0.12.0',
     lazy = false,
     config = function()
       -- Better Around/Inside textobjects
