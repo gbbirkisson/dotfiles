@@ -31,5 +31,14 @@
         "crate_name: (?<depName>[^\\s]+), version: (?<currentValue>[^\\s]+)",
       ],
     },
+    {
+      customType: "regex",
+      description: "Match versions of lazy dependencies",
+      datasourceTemplate: "github-tags",
+      fileMatch: ["^.*.lua$"],
+      matchStrings: [
+        "'(?<depName>[^\\s]+)',\\s*.*version\\s=\\s'(?<currentValue>[^\\s]+)',"
+      ],
+    },
   ],
 }
