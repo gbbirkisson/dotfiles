@@ -1,9 +1,15 @@
-local config = require("plugins.configs.lspconfig")
+local config = require 'plugins.configs.lspconfig'
 local on_attach = config.on_attach
-local capabilities = config.capabilities
 
-local lspconfig = require("lspconfig")
-local util = require("lspconfig/util")
+-- Merge capabilities with cmp
+local capabilities = vim.tbl_deep_extend(
+  'force',
+  config.capabilities,
+  require('cmp_nvim_lsp').default_capabilities()
+)
+
+local lspconfig = require 'lspconfig'
+local util = require 'lspconfig/util'
 
 -- GSP
 -- require("lspconfig.configs").gsp = {
@@ -20,53 +26,62 @@ local util = require("lspconfig/util")
 -- })
 
 -- Python
-lspconfig.pyright.setup({
+lspconfig.pyright.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-})
+}
 
 -- Rust
-lspconfig.rust_analyzer.setup({
+lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  root_dir = util.root_pattern("Cargo.toml"),
+  root_dir = util.root_pattern 'Cargo.toml',
   settings = {
     ['rust-analyzer'] = {
       cargo = {
         allfeatures = true,
       },
       check = {
-        command = "clippy",
+        command = 'clippy',
         extraArgs = {
-          "--",
-          "--no-deps",
-          "-W", "clippy::pedantic",
-          "-W", "clippy::nursery",
-          "-W", "clippy::unwrap_used",
-          "-A", "clippy::missing-const-for-fn",
-          "-A", "clippy::missing-errors-doc",
-          "-A", "clippy::must-use-candidate",
-          "-A", "clippy::missing-errors-doc",
-          "-A", "clippy::needless-raw-string-hashes",
-          "-A", "clippy::future-not-send",
+          '--',
+          '--no-deps',
+          '-W',
+          'clippy::pedantic',
+          '-W',
+          'clippy::nursery',
+          '-W',
+          'clippy::unwrap_used',
+          '-A',
+          'clippy::missing-const-for-fn',
+          '-A',
+          'clippy::missing-errors-doc',
+          '-A',
+          'clippy::must-use-candidate',
+          '-A',
+          'clippy::missing-errors-doc',
+          '-A',
+          'clippy::needless-raw-string-hashes',
+          '-A',
+          'clippy::future-not-send',
         },
       },
     },
   },
-})
+}
 
 -- Go
-lspconfig.gopls.setup({
+lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  root_dir = util.root_pattern("go.mod"),
-})
+  root_dir = util.root_pattern 'go.mod',
+}
 
 -- YAML
-lspconfig.yamlls.setup({
+lspconfig.yamlls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-})
+}
 
 -- Javascript / Typescript
 lspconfig.tsserver.setup {
@@ -93,4 +108,19 @@ lspconfig.bashls.setup {
 lspconfig.marksman.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+}
+
+-- Typos
+lspconfig.typos_lsp.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  -- Logging level of the language server. Logs appear in :LspLog. Defaults to error.
+  init_options = {
+    --   -- Custom config. Used together with any workspace config files, taking precedence for
+    --   -- settings declared in both. Equivalent to the typos `--config` cli argument.
+    --   -- config = '~/code/typos-lsp/crates/typos-lsp/tests/typos.toml',
+    --   -- How typos are rendered in the editor, eg: as errors, warnings, information, or hints.
+    --   -- Defaults to error.
+    diagnosticSeverity = 'Hint',
+  },
 }

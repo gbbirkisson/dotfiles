@@ -1,154 +1,157 @@
 local plugins = {
   {
     -- Set project workspace root
-    "ahmedkhalf/project.nvim",
+    'ahmedkhalf/project.nvim',
     lazy = false,
     config = function()
-      require("project_nvim").setup {
+      require('project_nvim').setup {
         detection_methods = {
-          "pattern",
-          "lsp",
+          'pattern',
+          'lsp',
         },
         patterns = {
-          ".git",
-          ".deploy",
-          "pyproject.toml",
-          "Cargo.lock",
+          '.git',
+          '.deploy',
+          'pyproject.toml',
+          'Cargo.lock',
         },
       }
-    end
+    end,
   },
   {
     -- Play nice with ahmedkhalf/project.nvim
-    "nvim-tree/nvim-tree.lua",
+    'nvim-tree/nvim-tree.lua',
     opts = {
       sync_root_with_cwd = true,
       respect_buf_cwd = true,
       update_focused_file = {
         enable = true,
-        update_root = true
+        update_root = true,
       },
-    }
-  },
-  {
-    -- Configure search
-    "nvim-telescope/telescope.nvim",
-    opts = require("custom.configs.telescope"),
-    dependencies = {
-      "xiyaowong/telescope-emoji.nvim",
     },
   },
   {
-    -- Leap with s/S
-    "ggandor/leap.nvim",
-    keys = { "s", "S" },
-    config = function()
-      local leap = require("leap")
-      leap.add_default_mappings()
-
-      -- Disable auto jump
-      leap.opts.safe_labels = {}
-      leap.opts.labels = 'sfnjklhodweimbuyvrgtaqpcxzæSFNJKLHODWEIMBUYVRGTAQPCXZÆ'
-    end
+    -- Configure search
+    'nvim-telescope/telescope.nvim',
+    opts = require 'custom.configs.telescope',
+    dependencies = {
+      'xiyaowong/telescope-emoji.nvim',
+    },
   },
+  -- {
+  --   -- Leap with s/S
+  --   'ggandor/leap.nvim',
+  --   keys = { 's', 'S' },
+  --   config = function()
+  --     local leap = require 'leap'
+  --     leap.add_default_mappings()
+  --
+  --     -- Disable auto jump
+  --     leap.opts.safe_labels = {}
+  --     leap.opts.labels = 'sfnjklhodweimbuyvrgtaqpcxzæSFNJKLHODWEIMBUYVRGTAQPCXZÆ'
+  --   end,
+  -- },
   {
     -- Tool installation
-    "williamboman/mason.nvim",
-    opts = require("custom.configs.mason").opts,
+    'williamboman/mason.nvim',
+    opts = require('custom.configs.mason').opts,
   },
   {
     -- Syntax highlighting
-    "nvim-treesitter/nvim-treesitter",
-    opts = require("custom.configs.treesitter").opts,
-    config = require("custom.configs.treesitter").config,
+    'nvim-treesitter/nvim-treesitter',
+    opts = require('custom.configs.treesitter').opts,
+    config = require('custom.configs.treesitter').config,
   },
   {
     -- Treesitter playground
-    "nvim-treesitter/playground",
-    cmd = { "TSPlaygroundToggle" },
+    'nvim-treesitter/playground',
+    cmd = { 'TSPlaygroundToggle' },
   },
   {
     -- LSP extensions
-    "nvimtools/none-ls.nvim",
+    'nvimtools/none-ls.nvim',
     lazy = false,
+    dependencies = {
+      'nvimtools/none-ls-extras.nvim',
+    },
     opts = function()
-      return require("custom.configs.none-ls")
-    end
+      return require 'custom.configs.none-ls'
+    end,
   },
   {
     -- LSP Configuration
-    "neovim/nvim-lspconfig",
+    'neovim/nvim-lspconfig',
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
+      require 'plugins.configs.lspconfig'
+      require 'custom.configs.lspconfig'
     end,
   },
   {
     -- Markdown TOC
-    "mzlogin/vim-markdown-toc",
+    'mzlogin/vim-markdown-toc',
     lazy = false,
   },
   {
     -- ASM highlighting
-    "rush-rs/tree-sitter-asm",
+    'rush-rs/tree-sitter-asm',
     lazy = false,
   },
   {
     -- LazyGit
-    "kdheepak/lazygit.nvim",
-    cmd = { "LazyGit" },
+    'kdheepak/lazygit.nvim',
+    cmd = { 'LazyGit' },
   },
   {
     -- ChatGPT
-    "jackMort/ChatGPT.nvim",
+    'jackMort/ChatGPT.nvim',
     cmd = {
-      "ChatGPT",
-      "ChatGPTActAs",
-      "ChatGPTCompleteCode",
-      "ChatGPTEditWithInstructions",
-      "ChatGPTRun",
+      'ChatGPT',
+      'ChatGPTActAs',
+      'ChatGPTCompleteCode',
+      'ChatGPTEditWithInstructions',
+      'ChatGPTRun',
     },
     dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
+      'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
     },
-    config = require("custom.configs.chatgpt").config,
+    config = require('custom.configs.chatgpt').config,
   },
   {
     -- ZenMode for writing
-    "folke/zen-mode.nvim",
-    cmd = { "ZenMode" },
-    opts = require("custom.configs.zen-mode").opts,
+    'folke/zen-mode.nvim',
+    cmd = { 'ZenMode' },
+    opts = require('custom.configs.zen-mode').opts,
   },
   {
     -- Obsidian plugin for note taking
-    "epwalsh/obsidian.nvim",
-    version = "*", -- use latest release instead of latest commit
+    'epwalsh/obsidian.nvim',
+    version = '*', -- use latest release instead of latest commit
     lazy = true,
     event = {
-      "BufReadPre " .. vim.fn.expand "~" .. "/repos/personal/notes/**.md",
-      "BufNewFile " .. vim.fn.expand "~" .. "/repos/personal/notes/**.md",
+      'BufReadPre ' .. vim.fn.expand '~' .. '/repos/personal/notes/**.md',
+      'BufNewFile ' .. vim.fn.expand '~' .. '/repos/personal/notes/**.md',
     },
-    cmd = { "ObsidianToday", "ObsidianCheck" },
+    cmd = { 'ObsidianToday', 'ObsidianCheck' },
     dependencies = {
-      "nvim-lua/plenary.nvim",
+      'nvim-lua/plenary.nvim',
     },
-    opts = require("custom.configs.obsidian").opts,
+    opts = require('custom.configs.obsidian').opts,
   },
   {
     -- Nice preview while writing markdown
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    ft = { 'markdown' },
     build = function()
-      vim.fn["mkdp#util#install"]()
+      vim.fn['mkdp#util#install']()
     end,
   },
   {
     -- Git blame
-    "FabijanZulj/blame.nvim",
-    cmd = { "ToggleBlame" },
+    'FabijanZulj/blame.nvim',
+    cmd = { 'ToggleBlame' },
     opts = {
       merge_consecutive = false,
     },
@@ -158,11 +161,61 @@ local plugins = {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
     dependencies = {
-      'nvim-lua/plenary.nvim'
+      'nvim-lua/plenary.nvim',
     },
     opts = {
-      signs = false
-    }
+      signs = false,
+    },
+  },
+  { -- Autoformat
+    'stevearc/conform.nvim',
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
+    keys = {
+      {
+        '<leader>fm',
+        function()
+          require('conform').format { async = true, lsp_fallback = true }
+        end,
+        mode = 'n',
+        desc = '[F]or[m]at File',
+      },
+    },
+    init = function()
+      -- If you want the formatexpr, here is the place to set it
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    end,
+    opts = require 'custom.configs.conform',
+  },
+  {
+    -- Detect tabstop and shiftwidth automatically
+    'tpope/vim-sleuth',
+    lazy = false,
+  },
+  { -- Customize CMP
+    'hrsh7th/nvim-cmp',
+    opts = require 'custom.configs.cmp',
+  },
+  { -- Collection of various small independent plugins/modules
+    'echasnovski/mini.nvim',
+    version = '*',
+    lazy = false,
+    config = function()
+      -- Better Around/Inside textobjects
+      --
+      -- Examples:
+      --  - va)  - [V]isually select [A]round [)]paren
+      --  - yinq - [Y]ank [I]nside [N]ext [']quote
+      --  - ci'  - [C]hange [I]nside [']quote
+      require('mini.ai').setup { n_lines = 500 }
+
+      -- Add/delete/replace surroundings (brackets, quotes, etc.)
+      --
+      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+      -- - sd'   - [S]urround [D]elete [']quotes
+      -- - sr)'  - [S]urround [R]eplace [)] [']
+      require('mini.surround').setup()
+    end,
   },
 }
 

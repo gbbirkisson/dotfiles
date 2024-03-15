@@ -2,41 +2,45 @@ return {
   opts = {
     ensure_installed = {
       -- Python
-      "black",
-      "mypy",
-      "ruff",
-      "pyright",
+      'isort',
+      'black',
+      'mypy',
+      'ruff',
+      'pyright',
 
       -- Go
-      "gopls",
+      'gopls',
 
       -- YAML
-      "yaml-language-server",
-      "yamllint",
-      "yamlfmt",
+      'yaml-language-server',
+      'yamllint',
+      'yamlfmt',
 
       -- Toml
-      "taplo",
+      'taplo',
 
       -- Lua
-      "lua-language-server",
+      'lua-language-server',
+      'stylua',
 
       -- Javascript / Typescript
-      "typescript-language-server",
+      'typescript-language-server',
+      'prettier',
 
       -- C / C++
-      "clangd",
+      'clangd',
 
       -- Bash
-      "bash-language-server",
-      "shfmt",
+      'bash-language-server',
+      'shfmt',
 
       -- Markdown
-      "marksman",
+      'marksman',
 
       -- Other
-      "typos",
-      "tree-sitter-cli",
-    }
+      'typos',
+      'typos-lsp',
+      'tree-sitter-cli',
+    },
   },
-};
+}
