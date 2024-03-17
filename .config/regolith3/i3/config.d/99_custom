@@ -17,3 +17,4 @@ bindsym $mod+less move workspace to output next
 
 # Hop between workspaces
 bindsym $mod+u workspace back_and_forth
+bindsym $mod+x workspace back_and_forth
