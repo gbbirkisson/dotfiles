@@ -114,13 +114,13 @@ lspconfig.marksman.setup {
 lspconfig.typos_lsp.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  -- Logging level of the language server. Logs appear in :LspLog. Defaults to error.
   init_options = {
-    --   -- Custom config. Used together with any workspace config files, taking precedence for
-    --   -- settings declared in both. Equivalent to the typos `--config` cli argument.
-    --   -- config = '~/code/typos-lsp/crates/typos-lsp/tests/typos.toml',
-    --   -- How typos are rendered in the editor, eg: as errors, warnings, information, or hints.
-    --   -- Defaults to error.
-    diagnosticSeverity = 'Hint',
+    -- Custom config. Used together with any workspace config files, taking precedence for
+    -- settings declared in both. Equivalent to the typos `--config` cli argument.
+    -- config = '~/code/typos-lsp/crates/typos-lsp/tests/typos.toml',
+    -- How typos are rendered in the editor, eg: as errors, warnings, information, or hints.
+    -- Defaults to error.
+    diagnosticSeverity = 'Information',
   },
+  single_file_support = true,
 }
