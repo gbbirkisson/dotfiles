@@ -47,6 +47,8 @@ M.abc = {
     ['<leader>on'] = { ':ObsidianNew ', '[O]bsidian [N]ew' },
     ['<leader>ot'] = { '<cmd> :ObsidianTags <CR>', '[O]bsidian [T]ags' },
     ['<leader>oi'] = { ':ObsidianPasteImg ', '[O]bsidian Paste [I]mage' },
+    ['<leader>od'] = { 'ggdG:ObsidianTemplate daily.md<CR>', '[O]bsidian Fix [D]aily' },
+    ['<leader>of'] = { 'O<ESC>jo<ESC>kgwipkdd}dd', '[O]bsidian [F]ix' },
 
     -- Other
     ['<leader>gg'] = { '<cmd> :LazyGit <CR>', 'Open Lazy[g]it' },
