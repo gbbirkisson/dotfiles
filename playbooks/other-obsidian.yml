@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=obsidian packageName=obsidianmd/obsidian-releases
-    version: v1.5.8
+    version: v1.5.11
 
   tasks:
 
