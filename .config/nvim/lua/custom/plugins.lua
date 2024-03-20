@@ -139,21 +139,6 @@ local plugins = {
     opts = require 'custom.configs.obsidian',
   },
   {
-    -- Obsidian plugin for note taking
-    'epwalsh/obsidian.nvim',
-    version = 'v3.7.3',
-    lazy = true,
-    event = {
-      'BufReadPre ' .. vim.fn.expand '~' .. '/repos/personal/notes/**.md',
-      'BufNewFile ' .. vim.fn.expand '~' .. '/repos/personal/notes/**.md',
-    },
-    cmd = { 'ObsidianToday', 'ObsidianCheck' },
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    opts = require 'custom.configs.obsidian',
-  },
-  {
     -- Nice preview while writing markdown
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
