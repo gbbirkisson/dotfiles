@@ -126,7 +126,7 @@ local plugins = {
   {
     -- Obsidian plugin for note taking
     'epwalsh/obsidian.nvim',
-    version = 'v3.7.4',
+    version = 'v3.7.6',
     lazy = true,
     event = {
       'BufReadPre ' .. vim.fn.expand '~' .. '/repos/personal/notes/**.md',
