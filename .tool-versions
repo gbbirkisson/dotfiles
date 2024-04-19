@@ -1,6 +1,6 @@
 gcloud     458.0.1
 java       21.0.1
-kubectl    1.29.3
+kubectl    1.30.0
 nodejs     21.7.3
 poetry     1.8.2
 pre-commit 3.7.0
