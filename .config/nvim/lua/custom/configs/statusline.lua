@@ -35,6 +35,7 @@ local function overridden_modules(modules)
   end)()
 
   table.remove(modules, 13) -- M.cwd()
+  table.remove(modules, 12) -- M.LSP_status()
   table.remove(modules, 11) -- M.filetype()
   table.remove(modules, 10) -- M.file_encoding()
 
@@ -95,6 +96,28 @@ local function overridden_modules(modules)
       local info = (info_nr and info_nr > 0) and ('%#St_lspInfo# ' .. info_nr .. ' ') or ''
 
       return errors .. warnings .. hints .. info
+    end)()
+  )
+
+  -- M.LSP_Status
+  table.insert(
+    modules,
+    10,
+    (function()
+      if rawget(vim, 'lsp') then
+        for _, client in ipairs(vim.lsp.get_active_clients()) do
+          if
+            client.attached_buffers[stbufnr()]
+            and client.name ~= 'null-ls'
+            and client.name ~= 'typos_lsp'
+          then
+            return (vim.o.columns > 100 and '%#St_LspStatus# 󰄭  ' .. client.name .. '  ')
+              or '%#St_LspStatus# 󰄭  LSP  '
+          end
+        end
+      end
+
+      return ''
     end)()
   )
 end
