@@ -42,7 +42,7 @@ $(PLAYBOOKS): lint
 install: _sudo playbooks/install.yml ## Install everything
 
 .PHONY: update
-update: install _tldr _mise _rustup _snap ## Update everything
+update: _sudo _rustup install _tldr _mise _snap ## Update everything
 	$(Q) echo "$(M) 🎉 Update finished successfully 🎉"
 
 .PHONY: _mise
