@@ -8,7 +8,7 @@
       with_items:
         - { crate_name: alacritty, version: 0.13.1 }        # Better terminal emulator
         - { crate_name: bat, version: 0.24.0 }              # Better cat
-        - { crate_name: cargo-tarpaulin, version: 0.28.0 }  # For cargo code coverage
+        - { crate_name: cargo-tarpaulin, version: 0.29.0 }  # For cargo code coverage
         - { crate_name: drill, version: 0.8.2 }             # HTTP stress testing (ansible-esqe)
         - { crate_name: du-dust, version: 1.0.0 }           # Better du
         - { crate_name: fd-find, version: 9.0.0 }           # Better find
