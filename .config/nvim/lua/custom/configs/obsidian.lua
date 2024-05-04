@@ -13,7 +13,7 @@ return {
     img_folder = '6-extras/attachments',
   },
   templates = {
-    subdir = '6-extras/templates',
+    folder = '6-extras/templates',
     date_format = '%Y-%m-%d',
     time_format = '%H:%M',
     substitutions = {
