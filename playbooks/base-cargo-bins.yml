@@ -11,7 +11,7 @@
         - { crate_name: cargo-tarpaulin, version: 0.29.0 }  # For cargo code coverage
         - { crate_name: drill, version: 0.8.2 }             # HTTP stress testing (ansible-esqe)
         - { crate_name: du-dust, version: 1.0.0 }           # Better du
-        - { crate_name: fd-find, version: 9.0.0 }           # Better find
+        - { crate_name: fd-find, version: 10.0.0 }           # Better find
         - { crate_name: git-delta, version: 0.17.0 }        # Better diff
         - { crate_name: hyperfine, version: 1.18.0 }        # Benchmarking
         - { crate_name: lsd, version: 1.0.0 }               # Better ls
