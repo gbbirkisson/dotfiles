@@ -3,7 +3,7 @@ java       21.0.1
 kubectl    1.30.0
 nodejs     21.7.3
 poetry     1.8.3
-pre-commit 3.7.0
+pre-commit 3.7.1
 python     3.12.3
 terraform  1.8.3
 kustomize  5.4.1
