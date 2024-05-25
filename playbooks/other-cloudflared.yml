@@ -1,0 +1,33 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=cloudflared packageName=cloudflare/cloudflared
+    version: 2024.5.0
+
+  tasks:
+
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if cloudflared is installed
+      shell: "cloudflared version | grep {{ version }}"
+      changed_when: false
+      failed_when: cloudflared_installed.rc not in [0,1]
+      register: cloudflared_installed
+
+    - name: Install cloudflared
+      when: cloudflared_installed.rc not in [ 0 ]
+      ansible.builtin.get_url:
+        force: true
+        url: "https://github.com/cloudflare/cloudflared/releases/download/{{ version }}/cloudflared-linux-amd64"
+        dest: ~/.local/bin/cloudflared
+
+    - name: Set cloudflared permissions
+      when: cloudflared_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        path: ~/.local/bin/cloudflared
+        state: touch
+        mode: +x
