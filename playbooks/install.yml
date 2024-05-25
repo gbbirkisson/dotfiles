@@ -10,6 +10,7 @@
 - import_playbook: base-cargo-bins.yml
 
 - import_playbook: other-calcure.yml
+- import_playbook: other-cloudflared.yml
 - import_playbook: other-gh.yml
 - import_playbook: other-k9s.yml
 - import_playbook: other-kubectx.yml
@@ -18,6 +19,7 @@
 - import_playbook: other-minikube.yml
 - import_playbook: other-nats.yml
 - import_playbook: other-nvim.yml
+- import_playbook: other-obsidian.yml
 - import_playbook: other-tt.yml
 - import_playbook: other-velero.yml
 
