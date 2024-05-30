@@ -42,7 +42,7 @@ $(PLAYBOOKS): lint
 install: _sudo playbooks/install.yml ## Install everything
 
 .PHONY: update
-update: _sudo _rustup install _tldr _mise _snap ## Update everything
+update: _sudo _rustup install _tldr _mise _snap _gh_ext ## Update everything
 	$(Q) echo "$(M) 🎉 Update finished successfully 🎉"
 
 .PHONY: _mise
@@ -64,6 +64,11 @@ _snap: _sudo
 _tldr:
 	$(info $(M) Update tldr cache)
 	$(Q) tldr --update
+
+.PHONY: _gh_ext
+_gh_ext:
+	$(info $(M) Update gh extensions)
+	$(Q) gh extensions upgrade --all
 
 .PHONY: theme
 theme:  ## Generate theme
