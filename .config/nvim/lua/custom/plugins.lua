@@ -214,7 +214,7 @@ local plugins = {
   },
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
-    version = 'v0.12.0',
+    version = 'v0.13.0',
     lazy = false,
     config = function()
       -- Better Around/Inside textobjects
