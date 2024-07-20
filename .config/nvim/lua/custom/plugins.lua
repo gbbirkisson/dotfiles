@@ -173,7 +173,7 @@ local plugins = {
   {
     -- TODO highlighting
     'folke/todo-comments.nvim',
-    version = 'v1.2.0',
+    version = 'v1.3.0',
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
