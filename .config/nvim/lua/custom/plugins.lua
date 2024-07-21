@@ -41,7 +41,7 @@ local plugins = {
   {
     -- Like leap, only better
     'folke/flash.nvim',
-    version = 'v1.18.3',
+    version = 'v2.1.0',
     event = 'VeryLazy',
     opts = {
       labels = 'asdfghjklqwertyuiopzxcvbnmæð',
