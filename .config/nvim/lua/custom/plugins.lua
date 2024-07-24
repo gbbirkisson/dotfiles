@@ -184,7 +184,7 @@ local plugins = {
   },
   { -- Autoformat
     'stevearc/conform.nvim',
-    version = 'v6.1.0',
+    version = 'v7.0.0',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {
