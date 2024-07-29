@@ -42,6 +42,7 @@ link() {
 link .config/alacritty
 link .config/direnv
 link .config/fontconfig/fonts.conf
+link .config/gh-dash
 link .config/k9s/skins
 link .config/lazygit/config.yml
 link .config/nvim/ftplugin
