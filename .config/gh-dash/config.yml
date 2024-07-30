@@ -11,12 +11,12 @@ prSections:
         # width: <number of columns>
         # grow: <bool> this will make the column grow in size
 issuesSections:
-  - title: Created
-    filters: is:open author:@me -user:enonic -user:kolonialno -repo:karloygard/xcomfortd-go -repo:slok/sloth -repo:jgensler8/terraform-provider-minikube
   - title: Assigned
     filters: is:open assignee:@me
   - title: Subscribed
     filters: is:open -author:@me repo:gbbirkisson/spis
+  - title: Created
+    filters: is:open author:@me -user:enonic -user:kolonialno -repo:karloygard/xcomfortd-go -repo:slok/sloth -repo:jgensler8/terraform-provider-minikube
 defaults:
   layout:
     prs:
