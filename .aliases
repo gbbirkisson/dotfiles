@@ -107,8 +107,8 @@ alias rga="rg -. --glob=!.git/"
 # Lazygit
 alias gg="lazygit"
 
-# GHPR
-alias ghpr="gh dash"
+# GH dash
+alias ghd="gh dash"
 
 # Other
 alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
