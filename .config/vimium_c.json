@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "3/6/2024, 9:54:17 PM",
-	"time": 1709758457017,
+	"@time": "7/31/2024, 11:02:20 AM",
+	"time": 1722416540256,
 	"environment": {
-		"extension": "1.99.994",
+		"extension": "1.99.997",
 		"platform": "linux",
-		"chromium": 122
+		"firefox": 128
 	},
 	"exclusionRules": [
 		{
@@ -27,6 +27,10 @@
 		{
 			"passKeys": "",
 			"pattern": "^https?://play.geforcenow.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": "^https?://mail\\.proton\\.me/"
 		}
 	],
 	"keyLayout": 2,
