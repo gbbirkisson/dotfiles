@@ -70,13 +70,6 @@ alias poetry_fix='poetry cache clear --all . && rm -rf $(poetry config cache-dir
 alias poetry_env='poetry env use $(mise which python)'
 alias poetry_auth='poetry config http-basic.oda-python oauth2accesstoken $(gcloud auth print-access-token)'
 
-# Oda
-alias 3dprinter='vlc http://10.2.26.80/webcam/?action=stream --logfile /dev/null'
-for i in "dev dev" "staging staging" "prod prod" "prod infra-prod"; do
-    a=($i)
-    alias "vr-${a[1]}"="velo render -e ${a[0]} -t cluster:k8s-${a[1]}"
-done
-
 # Direnv
 alias da="direnv allow"
 alias dr="direnv reload"
