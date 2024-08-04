@@ -22,4 +22,4 @@ fi
 EOF
 )
 
-watchexec --quiet --restart --clear --stop-timeout=0 --ignore=.null-ls* --shell=bash -- "$SCRIPT"
+watchexec --quiet --restart --clear --stop-timeout=0 --ignore=.null-ls* --ignore=*.db* --shell=bash -- "$SCRIPT"
