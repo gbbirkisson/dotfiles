@@ -6,7 +6,7 @@ assign [class="Chromium"] $ws1
 assign [class="Signal"] $ws6
 assign [class="firefox"] $ws7
 for_window [class="Spotify"] move to workspace $ws8
-assign [class="1Password"] $ws9
+# assign [class="1Password"] $ws9
 assign [class="Slack"] $ws10
 
 # Disable chromium titlebar
