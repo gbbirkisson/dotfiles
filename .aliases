@@ -106,6 +106,7 @@ alias ghd="gh dash"
 # Other
 alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
 alias cal="$DOTFILES/.venv/calcure/bin/calcure"
+alias wtf="xrandr -o normal"
 
 # Notes
 alias day='cd $HOME/repos/personal/notes && nvim -c :ObsidianToday -c :$'
