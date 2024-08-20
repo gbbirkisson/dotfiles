@@ -65,6 +65,12 @@ lspconfig.yamlls.setup {
   capabilities = capabilities,
 }
 
+-- JSON
+lspconfig.jsonls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
 -- Javascript / Typescript
 lspconfig.tsserver.setup {
   on_attach = on_attach,

@@ -16,6 +16,9 @@ return {
       'yamllint',
       'yamlfmt',
 
+      -- JSON
+      'json-lsp',
+
       -- Toml
       'taplo',
 
