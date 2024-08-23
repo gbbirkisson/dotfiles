@@ -40,6 +40,10 @@ return {
       -- Markdown
       'marksman',
 
+      -- Ruby
+      'rubyfmt',
+      'ruby-lsp',
+
       -- Other
       'typos',
       'typos-lsp',

@@ -44,6 +44,7 @@ local opts = {
     python = { 'ruff_format', 'isort', 'black' },
     sh = { 'shfmt' },
     rust = { 'rustfmt' },
+    ruby = { 'rubyfmt' },
     toml = { 'taplo' },
     yaml = { 'yamlfmt' },
     javascript = { { 'prettier', 'prettierd' } },

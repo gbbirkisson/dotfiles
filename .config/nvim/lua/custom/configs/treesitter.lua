@@ -14,6 +14,7 @@ return {
     'sql',
     'c',
     'cpp',
+    'ruby',
 
     -- markdown
     'markdown',
