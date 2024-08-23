@@ -62,7 +62,6 @@ link .aliases
 link .bashrc_gbb
 link .fzf
 link .gitconfig
-link .gitconfig_oda
 link .gitglobalignore
 link .inputrc
 link .profile_gbb

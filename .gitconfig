@@ -1,12 +1,12 @@
-; Basics
+; basics
 [user]
-	name = Guðmundur Björn Birkisson
-	email = gbb@gbb.is
+  name = Guðmundur Björn Birkisson
+  email = gbb@gbb.is
   signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIMOmyVFWXJ6Yrr7XCcokJdbGtNprIwcvHqWNnEv06TF
 [pull]
   rebase = true
 [push]
-	default = simple
+  default = simple
 [init]
   defaultBranch = main
 
@@ -28,15 +28,11 @@
 
 ; commit signing
 [gpg]
-	format = ssh
+  format = ssh
 [gpg "ssh"]
-	program = /opt/1Password/op-ssh-sign
+  program = /opt/1Password/op-ssh-sign
 [commit]
   gpgsign = true
-
-; oda config
-[includeIf "gitdir:~/repos/oda/**"]
-	path = .gitconfig_oda
 
 [core]
   excludesFile = ~/.gitglobalignore
@@ -46,7 +42,7 @@
   diffFilter = delta --color-only --features=interactive
 
 [diff]
-    colorMoved = default
+  colorMoved = default
 
 [delta]
   features = decorations
