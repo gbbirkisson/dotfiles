@@ -4,9 +4,9 @@
 alias historyrm='HID=$(history | fzf | awk "{print $1}") && history -d $HID'
 
 # Set better defaults for common ops
-alias cp="cp -i"     # Confirm before overwriting something
-alias mv='mv -i'     # Confirm before overwriting something
-alias sudo='sudo '   # Enable aliases to be sudo’ed
+alias cp="cp -i"     # confirm before overwriting something
+alias mv='mv -i'     # confirm before overwriting something
+alias sudo='sudo '   # enable aliases to be sudo’ed
 alias df='df -h'     # human-readable sizes
 alias du='du -h'     # human-readable sizes
 alias free='free -m' # show sizes in MB
@@ -32,9 +32,10 @@ alias dcln='dstp; drma; drmi; drmv'                                             
 alias k='kubectl'
 complete -F __start_kubectl k
 alias kd='export KUBECONFIG=/dev/null'
-for f in e v m; do
+for f in e m; do # multiple kubectl config files
     alias "k$f"="export KUBECONFIG=~/.kube/config_$f"
 done
+unset f
 kd # Disable by default
 
 # k9s
@@ -48,33 +49,30 @@ fi
 
 # Use lsd not ls
 if command -v lsd &>/dev/null; then
-    alias ls="lsd -1 --group-directories-first"  # List files
-    alias l="lsd -1 --group-directories-first"   # List files
-    alias ll="lsd -Al --group-directories-first" # List all files colorized in long format
-    alias lt="lsd --tree"                        # List tree
+    alias ls="lsd -1 --group-directories-first"  # list files
+    alias l="lsd -1 --group-directories-first"   # list files
+    alias ll="lsd -Al --group-directories-first" # list all files colorized in long format
+    alias lt="lsd --tree"                        # list tree
 fi
 
 # serve files
-# alias serve='python3 -m http.server'
 alias serve='sfz -b 0.0.0.0 -p 8000'
 
-# Extract jwt header/payload
+# extract jwt header/payload
 alias jwth="tr '.' '\t' | awk '{print \$1}' | base64 -d 2>/dev/null | jq"
 alias jwtp="tr '.' '\t' | awk '{print \$2}' | base64 -d 2>/dev/null | jq"
 
-# Poetry
+# poetry
 alias poetry_refresh='rm -r .venv && poetry install'
-# alias poetry_fix='find ~/.cache/pypoetry/ -name '*.lock' -delete'
 alias poetry_fix='poetry cache clear --all . && rm -rf $(poetry config cache-dir)/artifacts'
-# alias poetry_fix='poetry cache clear --all pypi'
 alias poetry_env='poetry env use $(mise which python)'
-alias poetry_auth='poetry config http-basic.oda-python oauth2accesstoken $(gcloud auth print-access-token)'
 
-# Direnv
+# direnv
 alias da="direnv allow"
 alias dr="direnv reload"
-alias dip="mise install && mise exec poetry -- poetry env remove --all && mise exec poetry -- poetry install && direnv reload"
-dcp() {
+alias dx="direnv deny"
+alias dp="mise install && mise exec poetry -- poetry env remove --all && mise exec poetry -- poetry install && direnv reload"
+dn() {
     touch README.md
     touch .env
     cat <<EOF >.envrc
@@ -84,23 +82,16 @@ dotenv
 EOF
 }
 
-# Vim
+# vim
 alias vim="nvim"
 alias :q="exit"
 alias :qa="exit"
 alias vimcheat="xdg-open https://www.gbb.is/posts/2022-09-28-vim-cheatsheet/"
 
-# Docker compose
-alias dcup="docker compose up -d"
-alias dcstop="docker compose stop"
-
-# Rip grep
-alias rga="rg -. --glob=!.git/"
-
-# Lazygit
+# lazygit
 alias gg="lazygit"
 
-# GH dash
+# gh dash
 alias ghd="gh dash"
 
 # Other
@@ -113,7 +104,7 @@ alias dev_tunnel='cloudflared --no-autoupdate tunnel run --token $(op read op://
 alias day='cd $HOME/repos/personal/notes && nvim -c :ObsidianToday -c :$'
 alias not='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck .'
 
-# US layout cheatsheet
+# us layout cheatsheet
 en() {
     cat <<EOF
 \` 1 2 3 4 5 6 7 8 9 0 - =

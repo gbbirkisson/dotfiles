@@ -52,10 +52,6 @@ disabled = false
 context_pattern = "gke_.*_(?P<cluster>[\\w-]+)"
 context_alias = "gke-$cluster"
 
-[[kubernetes.contexts]]
-context_pattern = "nube-k8s-(?P<cluster>[\\w-]+)"
-context_alias = "$cluster"
-
 [cmd_duration]
 disabled = false
 min_time = 2000

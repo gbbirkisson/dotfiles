@@ -20,8 +20,6 @@
         - path: ~/.bashrc
           line: "export DOTFILES={{ dotfiles }}"
         - path: ~/.bashrc
-          line: "export ODA_PATH=$HOME/repos/oda"
-        - path: ~/.bashrc
           line: "source $HOME/.bashrc_gbb"
         - path: ~/.profile
           line: "source $HOME/.profile_gbb"
