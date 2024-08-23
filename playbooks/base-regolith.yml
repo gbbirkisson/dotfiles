@@ -30,3 +30,12 @@
           - regolith-look-lascaille
           - regolith-look-nord
           - i3xrocks-battery
+          - i3xrocks-keyboard-layout
+          - i3xrocks-memory
+
+    - name: Remove unwanted packages
+      become: true
+      apt:
+        state: absent
+        pkg:
+          - i3xrocks-net-traffic
