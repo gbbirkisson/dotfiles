@@ -22,4 +22,9 @@ fi
 EOF
 )
 
-watchexec --quiet --restart --clear --stop-timeout=0 --ignore=.null-ls* --ignore=*.db* --shell=bash -- "$SCRIPT"
+if [ "$1" == "--debug" ]; then
+    echo DEBUG MODE
+    exec watchexec --only-emit-events --emit-events-to stdio
+fi
+
+exec watchexec --quiet --clear --restart --stop-timeout=0s --shell=bash -- "$SCRIPT"
