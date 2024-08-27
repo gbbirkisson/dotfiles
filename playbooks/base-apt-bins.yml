@@ -36,3 +36,4 @@
           - tmux          # Terminal good stuff
           - tree          # Tree for directories
           - wireguard     # VPN
+          - xclip         # For nvim clipboard
