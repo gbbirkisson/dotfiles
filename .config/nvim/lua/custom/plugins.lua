@@ -28,6 +28,15 @@ local plugins = {
         enable = true,
         update_root = true,
       },
+      git = {
+        enable = true,
+      },
+      filters = {
+        custom = {
+          '^.git$',
+        },
+        git_ignored = true,
+      },
     },
   },
   {
