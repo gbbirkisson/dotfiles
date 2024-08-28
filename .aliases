@@ -103,7 +103,8 @@ alias dev_tunnel='cloudflared --no-autoupdate tunnel run --token $(op read op://
 # Nvim shortcuts
 alias day='cd $HOME/repos/personal/notes && nvim -c :ObsidianToday -c :$'
 alias not='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck .'
-alias chad='nvim -c :ChatGPT'
+alias llmchad="nvim -c ':CodeCompanionChat openai'"
+alias llmollama="nvim -c ':CodeCompanionChat ollama'"
 
 # us layout cheatsheet
 en() {

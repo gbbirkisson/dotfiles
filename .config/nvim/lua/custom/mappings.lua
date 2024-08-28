@@ -57,6 +57,10 @@ M.abc = {
     ['<leader>od'] = { 'ggdG:ObsidianTemplate daily.md<CR>', '[O]bsidian Fix [D]aily' },
     ['<leader>of'] = { 'O<ESC>jo<ESC>kgwipkdd}dd', '[O]bsidian [F]ix' },
 
+    -- LLM
+    ['<leader>aa'] = { '<cmd> :CodeCompanionActions <CR>', '[A]I [A]ction' },
+    ['<leader>at'] = { '<cmd> :CodeCompanionToggle <CR>', '[A]I [T]oggle Window' },
+
     -- Other
     ['<leader>gg'] = { '<cmd> :LazyGit <CR>', 'Open Lazy[g]it' },
     ['<leader>cg'] = { '<cmd> :ChatGPT <CR>', 'Open [C]hat[G]PT' },
@@ -68,6 +72,14 @@ M.abc = {
     ['<leader>y'] = { '"*y' },
     ['<leader>p'] = { '"*p' },
     ['<leader>P'] = { '"*P' },
+
+    -- LLM
+    ['<leader>aa'] = { '<cmd> :CodeCompanionActions <CR>', '[A]I [A]ction' },
+    ['<leader>at'] = { '<cmd> :CodeCompanionToggle <CR>', '[A]I [T]oggle Window' },
+    ['ga'] = {
+      '<cmd> :CodeCompanionAdd <CR>',
+      'AI add visually selected chat to the current chat buffer',
+    },
 
     -- Useful formatting methods
     ["'"] = { ':!quotes<CR>', 'Swap single and double quotes' },

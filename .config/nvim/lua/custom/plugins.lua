@@ -125,21 +125,26 @@ local plugins = {
     cmd = { 'LazyGit' },
   },
   {
-    -- ChatGPT
-    'jackMort/ChatGPT.nvim',
+    -- LLM
+    'olimorris/codecompanion.nvim',
+    version = 'v1.4.0',
     cmd = {
-      'ChatGPT',
-      'ChatGPTActAs',
-      'ChatGPTCompleteCode',
-      'ChatGPTEditWithInstructions',
-      'ChatGPTRun',
+      'CodeCompanion',
+      'CodeCompanionChat',
+      'CodeCompanionToggle',
+      'CodeCompanionActions',
+      'CodeCompanionAdd',
     },
     dependencies = {
-      'MunifTanjim/nui.nvim',
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-telescope/telescope.nvim', -- Optional
+      {
+        'stevearc/dressing.nvim', -- Optional: Improves the default Neovim UI
+        opts = {},
+      },
     },
-    config = require('custom.configs.chatgpt').config,
+    config = require('custom.configs.codecompanion').config,
   },
   {
     -- ZenMode for writing

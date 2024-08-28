@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=ollama packageName=ollama/ollama
+    version: 0.3.8
+
+  tasks:
+
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if ollama is installed
+      shell: "ollama --version | grep {{ version }}"
+      changed_when: false
+      failed_when: ollama_installed.rc not in [0,1]
+      register: ollama_installed
+
+    - name: Install ollama
+      when: ollama_installed.rc not in [ 0 ]
+      become: true
+      shell: "curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION={{ version }} sh"
+      register: install
+
+    - name: Print out
+      when: ollama_installed.rc not in [ 0 ]
+      debug: var=install.stdout_lines
