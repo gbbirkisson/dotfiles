@@ -3,11 +3,11 @@ local M = {}
 M.abc = {
   n = {
     -- Interact with clipboard
-    ['<leader>y'] = { '"+y' },
-    ['<leader>yy'] = { '"+yy' },
-    ['<leader>Y'] = { '"+Y' },
-    ['<leader>p'] = { '"+p' },
-    ['<leader>P'] = { '"+P' },
+    ['<leader>y'] = { '"*y' },
+    ['<leader>yy'] = { '"*yy' },
+    ['<leader>Y'] = { '"*Y' },
+    ['<leader>p'] = { '"*p' },
+    ['<leader>P'] = { '"*P' },
 
     -- Centering
     ['<c-u>'] = { '<c-u>zz' },
@@ -65,9 +65,9 @@ M.abc = {
 
   v = {
     -- Interact with clipboard
-    ['<leader>y'] = { '"+y' },
-    ['<leader>p'] = { '"+p' },
-    ['<leader>P'] = { '"+P' },
+    ['<leader>y'] = { '"*y' },
+    ['<leader>p'] = { '"*p' },
+    ['<leader>P'] = { '"*P' },
 
     -- Useful formatting methods
     ["'"] = { ':!quotes<CR>', 'Swap single and double quotes' },
