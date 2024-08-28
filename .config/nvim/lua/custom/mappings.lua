@@ -3,9 +3,9 @@ local M = {}
 M.abc = {
   n = {
     -- Interact with clipboard
-    ['<leader>y'] = { '"*y' },
-    ['<leader>yy'] = { '"*yy' },
-    ['<leader>Y'] = { '"*Y' },
+    ['<leader>y'] = { '"+y' },
+    ['<leader>yy'] = { '"+yy' },
+    ['<leader>Y'] = { '"+Y' },
     ['<leader>p'] = { '"*p' },
     ['<leader>P'] = { '"*P' },
 
@@ -69,7 +69,7 @@ M.abc = {
 
   v = {
     -- Interact with clipboard
-    ['<leader>y'] = { '"*y' },
+    ['<leader>y'] = { '"+y' },
     ['<leader>p'] = { '"*p' },
     ['<leader>P'] = { '"*P' },
 
