@@ -6,8 +6,8 @@ M.abc = {
     ['<leader>y'] = { '"+y' },
     ['<leader>yy'] = { '"+yy' },
     ['<leader>Y'] = { '"+Y' },
-    ['<leader>p'] = { '"*p' },
-    ['<leader>P'] = { '"*P' },
+    ['<leader>p'] = { '"+p' },
+    ['<leader>P'] = { '"+P' },
 
     -- Centering
     ['<c-u>'] = { '<c-u>zz' },
@@ -70,8 +70,8 @@ M.abc = {
   v = {
     -- Interact with clipboard
     ['<leader>y'] = { '"+y' },
-    ['<leader>p'] = { '"*p' },
-    ['<leader>P'] = { '"*P' },
+    ['<leader>p'] = { '"+p' },
+    ['<leader>P'] = { '"+P' },
 
     -- LLM
     ['<leader>aa'] = { '<cmd> :CodeCompanionActions <CR>', '[A]I [A]ction' },
