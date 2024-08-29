@@ -3,13 +3,13 @@ return {
     require('codecompanion').setup {
       strategies = {
         chat = {
-          adapter = 'ollama', -- can be openai
+          adapter = vim.env.NVIM_LLM or 'openai', -- can be ollama
         },
         inline = {
-          adapter = 'ollama', -- can be openai
+          adapter = vim.env.NVIM_LLM or 'openai', -- can be ollama
         },
         agent = {
-          adapter = 'ollama', -- can be openai
+          adapter = vim.env.NVIM_LLM or 'openai', -- can be ollama
         },
       },
       adapters = {
