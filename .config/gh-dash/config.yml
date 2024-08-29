@@ -4,7 +4,7 @@ prSections:
     filters: is:open review-requested:@me -user:kolonialno
     # limit: 50  # optional limit of rows fetched for this section
   - title: My Pull Requests
-    filters: is:open author:@me -user:kolonialno -repo:slok/sloth
+    filters: is:open author:@me -user:kolonialno -repo:slok/sloth -label:release
     layout:
       author:
         hidden: true
