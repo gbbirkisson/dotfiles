@@ -83,6 +83,7 @@ EOF
 }
 
 # vim
+alias v="nvim"
 alias vim="nvim"
 alias :q="exit"
 alias :qa="exit"
