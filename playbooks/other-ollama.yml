@@ -23,7 +23,18 @@
       become: true
       shell: "curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION={{ version }} sh"
       register: install
+      notify:
+        - restart_ollama
 
     - name: Print out
       when: ollama_installed.rc not in [ 0 ]
       debug: var=install.stdout_lines
+
+  handlers:
+    - name: restart_ollama
+      become: true
+      failed_when: false
+      ansible.builtin.systemd:
+        name: ollama
+        state: restarted
+        enabled: true
