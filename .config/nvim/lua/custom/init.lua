@@ -30,7 +30,8 @@ vim.api.nvim_create_autocmd({ 'VimEnter' }, {
     -- buffer is a [No Name]
     local no_name = data.file == '' and vim.bo[data.buf].buftype == ''
 
-    if not real_file and not no_name then
+    -- If nvim opened a specific file, do not toggle it
+    if real_file and not no_name then
       return
     end
 
