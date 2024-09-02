@@ -26,6 +26,46 @@ return {
           })
         end,
       },
+      default_prompts = {
+        ['Code Help'] = {
+          strategy = 'chat',
+          description = 'Get some help from an LLM',
+          opts = {
+            modes = { 'v' },
+            slash_cmd = 'help',
+            auto_submit = false,
+            stop_context_insertion = true,
+            user_prompt = true,
+          },
+          prompts = {
+            {
+              role = 'system',
+              content = function(context)
+                return 'I want you to act as a senior '
+                  .. context.filetype
+                  .. ' developer. I will ask you specific questions and I want you to return codeblock examples. Include comments in the code about what what it does. Keep it short and concise!'
+              end,
+            },
+            {
+              role = 'user',
+              contains_code = true,
+              content = function(context)
+                local text = require('codecompanion.helpers.actions').get_code(
+                  context.start_line,
+                  context.end_line
+                )
+
+                return 'I have the following code:\n\n```'
+                  .. context.filetype
+                  .. '\n'
+                  .. text
+                  .. '\n```\n\n'
+                  .. 'How can I ...'
+              end,
+            },
+          },
+        },
+      },
     }
   end,
 }
