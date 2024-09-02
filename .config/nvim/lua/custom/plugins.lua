@@ -247,6 +247,21 @@ local plugins = {
       require('mini.surround').setup()
     end,
   },
+  {
+    'sindrets/diffview.nvim',
+    cmd = {
+      'DiffviewOpen',
+      'DiffviewClose',
+      'DiffviewToggleFiles',
+      'DiffviewFocusFiles',
+      'DiffviewRefresh',
+    },
+    config = function()
+      require('diffview').setup {
+        enhanced_diff_hl = false,
+      }
+    end,
+  },
 }
 
 return plugins

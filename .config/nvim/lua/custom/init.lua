@@ -21,22 +21,50 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Open nvim tree on certain conditions
 vim.api.nvim_create_autocmd({ 'VimEnter' }, {
   desc = 'Open NvimTree on startup',
   callback = function(data)
+    -- If a command was passed, do not open the tree
+    if vim.v.argv then
+      -- Loop through the arguments to check for "-c" or "--cmd"
+      for _, arg in ipairs(vim.v.argv) do
+        if arg == '-c' or arg == '--cmd' then
+          return
+        end
+      end
+    end
+
     -- buffer is a real file on the disk
     local real_file = vim.fn.filereadable(data.file) == 1
 
     -- buffer is a [No Name]
     local no_name = data.file == '' and vim.bo[data.buf].buftype == ''
 
-    -- If nvim opened a specific file, do not toggle it
-    if real_file and not no_name then
+    -- check if the data.file is a directory
+    local is_directory = vim.fn.isdirectory(data.file) == 1
+
+    -- If nvim opened a specific file, do not open tree
+    if (not is_directory or real_file) and not no_name then
       return
     end
 
     -- open the tree, find the file but don't focus it
     require('nvim-tree.api').tree.toggle { focus = false, find_file = true }
+  end,
+})
+
+-- Close no name buffer
+vim.api.nvim_create_autocmd({ 'VimEnter' }, {
+  desc = 'Close no name buffer when LLM chatting',
+  callback = function()
+    if vim.v.argv then
+      for _, arg in ipairs(vim.v.argv) do
+        if vim.startswith(arg, ':CodeCompanion') then
+          vim.cmd '1wincmd c'
+        end
+      end
+    end
   end,
 })
 
