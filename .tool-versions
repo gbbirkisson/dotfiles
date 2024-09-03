@@ -8,4 +8,4 @@ python     3.12.5
 terraform  1.9.5
 kustomize  5.4.3
 golang     1.23.0
-ruby       3.3.4
+ruby       3.3.5
