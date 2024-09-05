@@ -12,8 +12,9 @@ if command -v direnv >/dev/null
 
     # Add handler to play nice with fzf
     function handler --on-event fzf-cd-widget-done
-        direnv export fish | source
         if direnv status | grep -q 'Found RC path'
+            echo
+            direnv export fish | source
             echo
         end
     end
