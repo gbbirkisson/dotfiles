@@ -17,6 +17,9 @@ if command -v direnv >/dev/null
             echo
         end
     end
+
+    # Load direnv immetiatly on new shells
+    direnv export fish | source
 end
 
 if command -v mise >/dev/null
