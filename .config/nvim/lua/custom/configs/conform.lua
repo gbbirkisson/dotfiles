@@ -46,6 +46,7 @@ local opts = {
     rust = { 'rustfmt' },
     ruby = { 'rubyfmt' },
     toml = { 'taplo' },
+    fish = { 'fish_indent' },
     yaml = { 'yamlfmt' },
     javascript = { { 'prettier', 'prettierd' } },
     ['*'] = { 'trim_whitespace' },

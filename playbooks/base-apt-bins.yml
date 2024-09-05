@@ -30,7 +30,6 @@
 
           # Other
           - flameshot     # For screenshots
-          - fzf           # Fuzzy finder
           - gnome-tweaks  # Tweak gnome
           - jq            # Json manipulation
           - tmux          # Terminal good stuff

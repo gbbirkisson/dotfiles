@@ -65,6 +65,14 @@ M.abc = {
     ['<leader>gg'] = { '<cmd> :LazyGit <CR>', 'Open Lazy[g]it' },
     ['<leader>cg'] = { '<cmd> :ChatGPT <CR>', 'Open [C]hat[G]PT' },
     ['<leader>gb'] = { '<cmd> :ToggleBlame <CR>', '[G]it [B]lame' },
+
+    -- Formatting
+    ['<leader>df'] = {
+      function()
+        vim.b.disable_autoformat = true
+      end,
+      '[D]isable [F]ormatting',
+    },
   },
 
   v = {

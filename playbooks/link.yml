@@ -14,12 +14,11 @@
 
     - name: Source files
       lineinfile:
+        create: true
         path: "{{ item.path }}"
         line: "{{ item.line }}"
       with_items:
-        - path: ~/.bashrc
-          line: "export DOTFILES={{ dotfiles }}"
-        - path: ~/.bashrc
-          line: "source $HOME/.bashrc_gbb"
+        - path: "{{ dotfiles }}/.config/fish/conf.d/env.fish"
+          line: "setenv DOTFILES {{ dotfiles }}"
         - path: ~/.profile
           line: "source $HOME/.profile_gbb"

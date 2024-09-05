@@ -41,6 +41,8 @@ link() {
 
 link .config/alacritty
 link .config/direnv
+link .config/fish/conf.d
+link .config/fish/config.fish
 link .config/fontconfig/fonts.conf
 link .config/gh-dash
 link .config/k9s/skins
@@ -58,11 +60,7 @@ link .config/starship.toml
 
 link .local/scripts
 
-link .aliases
-link .bashrc_gbb
-link .fzf
 link .gitconfig
 link .gitglobalignore
-link .inputrc
 link .profile_gbb
 link .tool-versions

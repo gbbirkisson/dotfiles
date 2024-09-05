@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  gather_facts: true
+
+  vars:
+    # renovate: datasource=github-releases depName=fish-shell packageName=fish-shell/fish-shell
+    version: 3.7.1
+
+  tasks:
+
+    - name: Check if fish is installed
+      shell: "fish --version | grep {{ version }}"
+      changed_when: false
+      failed_when: fish_installed.rc not in [0,1]
+      register: fish_installed
+
+    - name: Install fish
+      when: fish_installed.rc not in [ 0 ]
+      become: true
+      ansible.builtin.apt:
+        deb: "https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish_{{ version }}-0~{{ ansible_distribution_release }}_amd64.deb"

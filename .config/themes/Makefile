@@ -25,7 +25,7 @@ tmux:
 
 .PHONY: fzf
 fzf:
-	$(Q) IN=templates/fzf.sh OUT=../../.fzf $(MAKE) --no-print-directory _render
+	$(Q) IN=templates/fzf.fish OUT=../fish/conf.d/fzf.fish $(MAKE) --no-print-directory _render
 
 .PHONY: regolith
 regolith:

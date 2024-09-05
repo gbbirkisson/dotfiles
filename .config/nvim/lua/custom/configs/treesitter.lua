@@ -9,6 +9,7 @@ return {
     'rust',
     'typescript',
     'bash',
+    'fish',
     'go',
     'asm',
     'sql',

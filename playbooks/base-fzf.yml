@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=fzf packageName=junegunn/fzf
+    version: v0.55.0
+
+  tasks:
+
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if fzf is installed
+      shell: "fzf --version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: fzf_installed.rc not in [0,1]
+      register: fzf_installed
+
+    - name: Install fzf
+      when: fzf_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/junegunn/fzf/releases/download/{{ version }}/fzf-{{ version[1:] }}-linux_amd64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - fzf
