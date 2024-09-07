@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=lazygit packageName=jesseduffield/lazygit
-    version: v0.43.1
+    version: v0.44.0
 
   tasks:
 
