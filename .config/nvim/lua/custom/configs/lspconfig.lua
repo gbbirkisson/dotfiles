@@ -98,12 +98,6 @@ lspconfig.marksman.setup {
   capabilities = capabilities,
 }
 
--- Ruby
-lspconfig.ruby_lsp.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
 -- Typos
 lspconfig.typos_lsp.setup {
   on_attach = on_attach,
