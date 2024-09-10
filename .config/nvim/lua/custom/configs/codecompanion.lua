@@ -26,7 +26,7 @@ return {
           })
         end,
       },
-      default_prompts = {
+      pre_defined_prompts = {
         ['Code Help'] = {
           strategy = 'chat',
           description = 'Get some help from an LLM',
