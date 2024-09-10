@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=ollama packageName=ollama/ollama
-    version: 0.3.9
+    version: 0.3.10
 
   tasks:
 
