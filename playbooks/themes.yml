@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Render themes
+      command: "make all"
+      changed_when: false
+      args:
+        chdir: "{{ dotfiles }}/.config/themes"

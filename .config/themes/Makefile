@@ -9,7 +9,7 @@ BUILDER:=$(VENV)/bin/python builder.py
 
 THEME:=schemes/onedark.yaml
 
-all: alacritty k9s tmux fzf regolith
+all: alacritty k9s tmux fzf regolith new-tab
 
 .PHONY: alacritty
 alacritty:
@@ -30,6 +30,10 @@ fzf:
 .PHONY: regolith
 regolith:
 	$(Q) IN=templates/regolith OUT=../regolith3/Xresources $(MAKE) --no-print-directory _render
+
+.PHONY: new-tab
+new-tab:
+	$(Q) IN=templates/new-tab.html OUT=../../new-tab.html $(MAKE) --no-print-directory _render
 
 $(VENV):
 	$(info $(M) Creating python environment)

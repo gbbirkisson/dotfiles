@@ -24,4 +24,5 @@
 - import_playbook: other-obsidian.yml
 - import_playbook: other-tt.yml
 
+- import_playbook: themes.yml
 - import_playbook: link.yml
