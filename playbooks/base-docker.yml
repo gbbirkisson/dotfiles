@@ -1,8 +1,8 @@
 ---
 - hosts: localhost
   gather_facts: true
-  tasks:
 
+  tasks:
     - name: Set DPKG architecture
       set_fact:
         dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"

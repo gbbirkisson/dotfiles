@@ -1,5 +1,3 @@
-.asdf
 .mypy_cache
 .venv
-nvim_old
 env.fish

@@ -12,8 +12,8 @@
 # howsahoing // | fff     | ggg        |
 # goo
 
-import sys
 import re
+import sys
 
 delimiters = [
     "//",

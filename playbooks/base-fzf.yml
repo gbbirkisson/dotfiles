@@ -6,7 +6,6 @@
     version: v0.55.0
 
   tasks:
-
     - name: Create local bin path
       ansible.builtin.file:
         path: ~/.local/bin

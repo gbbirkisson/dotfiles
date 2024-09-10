@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if echo $PATH | grep -vq $HOME/.local/scripts; then
     for dir in \

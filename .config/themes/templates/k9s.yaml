@@ -1,3 +1,4 @@
+---
 foreground: &foreground "#{{base05_hex}}"
 background: &background "#{{base00_hex}}"
 comment: &comment "#{{base03_hex}}"

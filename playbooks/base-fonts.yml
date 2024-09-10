@@ -1,7 +1,11 @@
 ---
 - hosts: localhost
-  tasks:
 
+  vars:
+    # renovate: datasource=github-releases depName=nerd-fonts packageName=ryanoasis/nerd-fonts
+    version: v3.2.1
+
+  tasks:
     - name: Ensure fonts directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.fonts"
@@ -16,6 +20,6 @@
     - name: Download JetBrainsMono
       when: jbm_exists is failed
       ansible.builtin.unarchive:
-        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/JetBrainsMono.zip
+        src: https://github.com/ryanoasis/nerd-fonts/releases/download/{{ version }}/JetBrainsMono.zip
         dest: "{{ lookup('env', 'HOME') }}/.fonts/"
         remote_src: true

@@ -14,7 +14,7 @@ return {
       gitsigns = { enabled = true }, -- disables git signs
       tmux = { enabled = true }, -- disables the tmux statusline
     },
-    on_open = function(win)
+    on_open = function(_)
       -- Disable line numbers
       vim.cmd 'set nu!'
 

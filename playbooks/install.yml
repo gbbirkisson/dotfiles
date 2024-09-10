@@ -19,11 +19,9 @@
 - import_playbook: other-kubectx.yml
 - import_playbook: other-kubens.yml
 - import_playbook: other-lazygit.yml
-- import_playbook: other-minikube.yml
 - import_playbook: other-nats.yml
 - import_playbook: other-nvim.yml
 - import_playbook: other-obsidian.yml
 - import_playbook: other-tt.yml
-- import_playbook: other-velero.yml
 
 - import_playbook: link.yml

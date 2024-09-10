@@ -4,8 +4,8 @@
 - import_playbook: dev-tmux-tpm.yml
 
 - hosts: localhost
-  tasks:
 
+  tasks:
     - name: Link
       command: "./link"
       changed_when: false

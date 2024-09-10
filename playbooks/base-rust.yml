@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+
   tasks:
     - name: Check if cargo is installed
       shell: command -v cargo
