@@ -69,6 +69,8 @@ alias day='cd $HOME/repos/personal/notes && nvim -c :ObsidianToday'
 alias notes='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck .'
 alias llmchad="nvim -c ':CodeCompanionChat openai'"
 alias llmollama="nvim -c ':CodeCompanionChat ollama'"
+abbr -a d day
+abbr -a n notes
 
 # git
 abbr -a g git
