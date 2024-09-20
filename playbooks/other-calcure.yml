@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=calcure packageName=anufrievroman/calcure
-    version: 3.0.2
+    version: 3.1
     venv: "{{ venvs }}/calcure"
     python: "{{ venvs }}/calcure/bin/python"
 
