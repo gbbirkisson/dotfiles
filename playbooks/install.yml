@@ -1,4 +1,6 @@
 ---
+- import_playbook: themes.yml
+
 - import_playbook: base-apt-bins.yml
 
 - import_playbook: base-fish.yml
@@ -24,5 +26,4 @@
 - import_playbook: other-obsidian.yml
 - import_playbook: other-tt.yml
 
-- import_playbook: themes.yml
 - import_playbook: link.yml

@@ -2,6 +2,10 @@
 - hosts: localhost
   gather_facts: true
 
+  vars:
+    # renovate: datasource=github-releases depName=regolith-desktop packageName=regolith-linux/regolith-desktop
+    version: r3_2
+
   tasks:
     - name: Set DPKG architecture
       set_fact:
@@ -16,7 +20,7 @@
     - name: Add Regolith Apt Repository
       become: true
       apt_repository:
-        repo: "deb [arch={{ dpkg_arch }}] https://regolith-desktop.org/release-3_0-ubuntu-{{ ansible_distribution_release }}-{{ dpkg_arch }} {{ ansible_distribution_release }} main"
+        repo: "deb [arch={{ dpkg_arch }}] https://regolith-desktop.org/release-{{ version[1:] }}-ubuntu-{{ ansible_distribution_release }}-{{ dpkg_arch }} {{ ansible_distribution_release }} main"
 
     - name: Install Regolith
       become: true
@@ -30,8 +34,10 @@
           - regolith-look-lascaille
           - regolith-look-nord
           - i3xrocks-battery
+          - i3xrocks-cpu-usage
           - i3xrocks-keyboard-layout
           - i3xrocks-memory
+          - i3xrocks-time
 
     - name: Remove unwanted packages
       become: true
@@ -39,3 +45,4 @@
         state: absent
         pkg:
           - i3xrocks-net-traffic
+          - i3xrocks-bluetooth

@@ -1,4 +1,4 @@
-regolith.wallpaper.file:
+regolith.wallpaper.file: {{ dotfiles }}/wp.png
 regolith.wallpaper.color.primary: #{{base00_hex}}
 wm.bar.background.color: #{{base00_hex}}
 wm.bar.workspace.inactive.border.color: #{{base00_hex}}
