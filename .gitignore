@@ -1,3 +1,5 @@
 .mypy_cache
 .venv
-env.fish
+
+.config/fish/conf.d/env.fish
+.config/regolith3/Xresources
