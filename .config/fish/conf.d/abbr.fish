@@ -32,7 +32,7 @@ end
 kd
 
 # k9s
-alias ks='KUBECONFIG=~/.kube/config_e k9s --context default -n default -c ns'
+alias ks='KUBECONFIG=~/.kube/config_e k9s -n default -c ns'
 
 # bat
 if command -v bat >/dev/null

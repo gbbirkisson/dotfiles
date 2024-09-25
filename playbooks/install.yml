@@ -18,8 +18,6 @@
 - import_playbook: other-cloudflared.yml
 - import_playbook: other-gh.yml
 - import_playbook: other-k9s.yml
-- import_playbook: other-kubectx.yml
-- import_playbook: other-kubens.yml
 - import_playbook: other-lazygit.yml
 - import_playbook: other-nats.yml
 - import_playbook: other-nvim.yml
