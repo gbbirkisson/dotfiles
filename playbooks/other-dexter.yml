@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=dexter packageName=gini/dexter
+    version: 0.5.2
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if dexter is installed
+      shell: "dexter version | grep {{ version }}"
+      changed_when: false
+      failed_when: dexter_installed.rc not in [0,1]
+      register: dexter_installed
+
+    - name: Install dexter
+      when: dexter_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/gini/dexter/releases/download/{{ version }}/dexter_{{ version }}_Linux_x86_64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - "dexter"
