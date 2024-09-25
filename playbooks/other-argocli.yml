@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=argo-workflows packageName=argoproj/argo-workflows
-    version: v2.12.13
+    version: v3.5.11
 
   tasks:
     - name: Create local bin path
