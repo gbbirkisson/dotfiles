@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=kubeconform packageName=yannh/kubeconform
+    version: v0.6.7
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if kubeconform is installed
+      shell: "kubeconform -v | grep {{ version }}"
+      changed_when: false
+      failed_when: kubeconform_installed.rc not in [0,1]
+      register: kubeconform_installed
+
+    - name: Install kubeconform
+      when: kubeconform_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/yannh/kubeconform/releases/download/{{ version }}/kubeconform-linux-amd64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - "kubeconform"
