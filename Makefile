@@ -78,8 +78,8 @@ theme:  ## Generate theme
 term: _sudo ## Set default terminal to alacritty
 	$(info $(M) Setting default terminal)
 	$(Q) which alacritty
-	$(Q) update-alternatives --list x-terminal-emulator | grep -q alacritty || echo sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which alacritty) 100
-	$(Q) # sudo update-alternatives --config x-terminal-emulator
+	$(Q) update-alternatives --list x-terminal-emulator | grep -q alacritty || sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which alacritty) 100
+	$(Q) sudo update-alternatives --config x-terminal-emulator
 
 .PHONY: renovate
 renovate: ## Tests renovate configuration

@@ -12,7 +12,7 @@
         - { crate_name: cargo-tarpaulin, version: 0.31.0 }  # For cargo code coverage
         - { crate_name: drill, version: 0.8.2 }             # HTTP stress testing (ansible-esqe)
         - { crate_name: du-dust, version: 1.0.0 }           # Better du
-        - { crate_name: fd-find, version: 10.0.0 }           # Better find
+        - { crate_name: fd-find, version: 10.0.0 }          # Better find
         - { crate_name: git-delta, version: 0.18.0 }        # Better diff
         - { crate_name: hyperfine, version: 1.18.0 }        # Benchmarking
         - { crate_name: lsd, version: 1.0.0 }               # Better ls
@@ -24,6 +24,6 @@
         - { crate_name: sfz, version: 0.7.1 }               # Simple web server for dirs
         - { crate_name: starship, version: 1.19.0 }         # Fancy prompt
         - { crate_name: tealdeer, version: 1.6.1 }          # Better tldr
-        - { crate_name: trunk, version: 0.20.0 }            # WASM development
-        - { crate_name: watchexec-cli, version: 2.0.0 }    # Used for 'dev' script
+        - { crate_name: trunk, version: 0.20.3 }            # WASM development
+        - { crate_name: watchexec-cli, version: 2.0.0 }     # Used for 'dev' script
         - { crate_name: xh, version: 0.22.0 }               # Better HTTPie

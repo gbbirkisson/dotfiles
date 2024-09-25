@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Check if gh dash is installed
+      shell: "gh dash --version"
+      changed_when: false
+      failed_when: gh_dash_installed.rc not in [0,1]
+      register: gh_dash_installed
+
+    - name: Install gh dash
+      when: gh_dash_installed.rc not in [ 0 ]
+      command: gh extension install dlvhdr/gh-dash
