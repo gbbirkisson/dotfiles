@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-kubectl config set-context --current --namespace=$(kubectl get ns -o name | cut -d'/' -f2- | fzf)
+if [ $# -eq 0 ]; then
+    name=$(kubectl get ns -o name | cut -d'/' -f2- | fzf)
+else
+    name=${1}
+fi
+
+kubectl config set-context --current --namespace=$name
