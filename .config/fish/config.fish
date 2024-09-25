@@ -42,6 +42,10 @@ if command -v starship >/dev/null
     starship init fish | source
 end
 
+if command -v warp-cli >/dev/null
+    warp-cli generate-completions fish | source
+end
+
 if status is-interactive
     function fish_user_key_bindings
         fish_default_key_bindings -M insert
