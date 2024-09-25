@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=argo-workflows packageName=argoproj/argo-workflows
+    version: v2.12.13
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if argo is installed
+      shell: "argo version | grep {{ version }}"
+      changed_when: false
+      failed_when: argo_installed.rc not in [0,1]
+      register: argo_installed
+
+    - name: Download argo
+      when: argo_installed.rc not in [ 0 ]
+      ansible.builtin.get_url:
+        force: true
+        url: "https://github.com/argoproj/argo-workflows/releases/download/{{ version }}/argo-linux-amd64.gz"
+        dest: /tmp/argo.gz
+
+    - name: Unzip argo
+      when: argo_installed.rc not in [ 0 ]
+      shell: "gunzip -f /tmp/argo.gz"
+
+    - name: Set argo permissions
+      when: argo_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        path: /tmp/argo
+        state: touch
+        mode: +x
+
+    - name: Move argo bin
+      when: argo_installed.rc not in [ 0 ]
+      shell: "mv /tmp/argo ~/.local/bin/argo"
