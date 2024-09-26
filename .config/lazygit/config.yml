@@ -43,7 +43,8 @@ customCommands:
       gh pr create {{if eq .Form.PRDraft "yes"}}-d{{end}} \
         -H {{.SelectedLocalBranch.Name}} \
         -a @me \
-        -t {{.Form.PRTitle|quote}}
+        -t {{.Form.PRTitle|quote}} \
+        -b ''
     subprocess: true
 
   - key: 'O'
