@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=linkerd2 packageName=linkerd/linkerd2
+    version: edge-24.9.2
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if linkerd2 is installed
+      shell: "linkerd2 version --client | grep {{ version }}"
+      changed_when: false
+      failed_when: linkerd2_installed.rc not in [0,1]
+      register: linkerd2_installed
+
+    - name: Install linkerd2
+      when: linkerd2_installed.rc not in [ 0 ]
+      ansible.builtin.get_url:
+        force: true
+        url: "https://github.com/linkerd/linkerd2/releases/download/{{ version }}/linkerd2-cli-{{ version }}-linux-amd64"
+        dest: ~/.local/bin/linkerd2
+
+    - name: Set linkerd2 permissions
+      when: linkerd2_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        path: ~/.local/bin/linkerd2
+        state: touch
+        mode: +x
