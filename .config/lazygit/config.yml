@@ -10,6 +10,7 @@ customCommands:
     context: "localBranches"
     showOutput: true
     command: "git gone"
+
   - key: "n"
     description: "New branch"
     context: "localBranches"
@@ -19,8 +20,34 @@ customCommands:
         key: "BranchName"
         initialValue: "gbbirkisson/"
     command: "git checkout -b {{.Form.BranchName}} refs/heads/{{.SelectedLocalBranch.Name}}"
+
   - key: 'o'
     description: "New PR"
+    context: 'localBranches'
+    prompts:
+      - type: "input"
+        title: "New PR: Title?"
+        key: "PRTitle"
+      - type: "menu"
+        title: "New PR: Draft?"
+        key: "PRDraft"
+        options:
+          - name: "yes"
+            value: "yes"
+          - name: "no"
+            value: "no"
+      - type: "confirm"
+        title: "New PR: Create?"
+        body: "Create a {{if eq .Form.PRDraft \"yes\"}}draft {{end}}PR '{{.Form.PRTitle}}' into 'main' from '{{.SelectedLocalBranch.Name}}'"
+    command: |
+      gh pr create {{if eq .Form.PRDraft "yes"}}-d{{end}} \
+        -H {{.SelectedLocalBranch.Name}} \
+        -a @me \
+        -t {{.Form.PRTitle|quote}}
+    subprocess: true
+
+  - key: 'O'
+    description: "New PR (conventional commit)"
     context: 'localBranches'
     prompts:
       - type: "menu"
