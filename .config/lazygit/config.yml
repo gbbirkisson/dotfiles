@@ -1,5 +1,5 @@
-# yaml-language-server: $schema=https://json.schemastore.org/lazygit.json
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/lazygit.json
 disableStartupPopups: true
 git:
   autoFetch: false
@@ -43,7 +43,10 @@ customCommands:
       gh pr create {{if eq .Form.PRDraft "yes"}}-d{{end}} \
         -H {{.SelectedLocalBranch.Name}} \
         -a @me \
-        -t {{.Form.PRTitle|quote}}
+        -t {{.Form.PRTitle|quote}} \
+        -b ''
+
+      gh pr view -w $(gh pr list -L 1 --json number --jq .[0].number) &>/dev/null &
     subprocess: true
 
   - key: 'O'
@@ -115,5 +118,8 @@ customCommands:
       gh pr create {{if eq .Form.PRDraft "yes"}}-d{{end}} \
         -H {{.SelectedLocalBranch.Name}} \
         -a @me \
-        -t {{.Form.PRTitle|quote}}
+        -t {{.Form.PRTitle|quote}} \
+        -b ''
+
+      gh pr view -w $(gh pr list -L 1 --json number --jq .[0].number) &>/dev/null &
     subprocess: true
