@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "8/23/2024, 9:49:01 AM",
-	"time": 1724399341059,
+	"@time": "9/27/2024, 11:11:07 AM",
+	"time": 1727428267832,
 	"environment": {
 		"extension": "1.99.997",
 		"platform": "linux",
-		"firefox": 129
+		"firefox": 130
 	},
 	"exclusionRules": [
 		{
@@ -31,6 +31,10 @@
 		{
 			"passKeys": "",
 			"pattern": "^https?://mail\\.proton\\.me/"
+		},
+		{
+			"passKeys": "",
+			"pattern": "^https?://accounts\\.google\\.com/"
 		}
 	],
 	"keyLayout": 2,
@@ -79,6 +83,9 @@
 		"\\:i: vimium://sed/s/^//,lower\\ $S re= Lower case",
 		"v.m|math: vimium://math\\ $S re= Calculate",
 		"v.p: vimium://parse\\ $S re= Redo Search",
+		"",
+		"am|amedia: https://github.com/amedia/%s \\",
+		"  blank=https://github.com/amedia Amedia Repos",
 		""
 	],
 	"searchUrl": "https://kagi.com/search?q=$s Kagi",
