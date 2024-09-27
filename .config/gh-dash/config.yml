@@ -9,7 +9,7 @@ prSections:
         # grow: <bool> this will make the column grow in size
 
   - title: Review (work)
-    filters: is:open review-requested:@me user:amedia
+    filters: is:open review-requested:@me user:amedia -is:draft
     # limit: 50  # optional limit of rows fetched for this section
 
   - title: Review (personal)
