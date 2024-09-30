@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "9/27/2024, 11:11:07 AM",
-	"time": 1727428267832,
+	"@time": "9/30/2024, 11:12:49 AM",
+	"time": 1727687569933,
 	"environment": {
 		"extension": "1.99.997",
 		"platform": "linux",
@@ -35,6 +35,10 @@
 		{
 			"passKeys": "",
 			"pattern": "^https?://accounts\\.google\\.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": "^https?://trello\\.com/"
 		}
 	],
 	"keyLayout": 2,
