@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=argo-cd packageName=argoproj/argo-cd
+    version: v2.12.4
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if argocd is installed
+      shell: "argocd version --client | grep {{ version }}"
+      changed_when: false
+      failed_when: argocd_installed.rc not in [0,1]
+      register: argocd_installed
+
+    - name: Install argocd
+      when: argocd_installed.rc not in [ 0 ]
+      ansible.builtin.get_url:
+        force: true
+        url: "https://github.com/argoproj/argo-cd/releases/download/{{ version }}/argocd-linux-amd64"
+        dest: ~/.local/bin/argocd
+
+    - name: Set argocd permissions
+      when: argocd_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        path: ~/.local/bin/argocd
+        state: touch
+        mode: +x
