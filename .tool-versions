@@ -6,3 +6,4 @@ pre-commit 3.8.0
 python     3.12.6
 terraform  1.9.6
 golang     1.23.1
+uv         0.4.17
