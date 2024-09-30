@@ -98,8 +98,11 @@ alias cal="$DOTFILES/.venv/calcure/bin/calcure"
 alias wtf='xrandr --output $(xrandr |grep eDP|cut -d" " -f1) --rotate normal'
 alias dev_tunnel='cloudflared --no-autoupdate tunnel run --token $(op read op://hemwnx22rvxga5v2zkicawq6sq/oy5g4ntwcf4lfom5lzzrzfl5ua/credential --no-newline)'
 
+# amedia
+alias app="/home/gbb/repos/amedia/k8s-objects/.venv/bin/python /home/gbb/repos/amedia/k8s-objects/app"
+
 # us layout cheatsheet
-function en
+function en-layout
     echo '` 1 2 3 4 5 6 7 8 9 0 - =
 ~ ! @ # $ % ^ & * ( ) _ +
 
