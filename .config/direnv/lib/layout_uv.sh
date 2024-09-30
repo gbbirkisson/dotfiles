@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 layout_uv() {
-    UV=$(which uv)
+    UV=$(which uv || true)
     if has mise; then
-        UV=$(mise which uv)
+        UV=$(mise which uv || true)
     fi
 
     if [ -z "$UV" ]; then
@@ -26,9 +26,10 @@ layout_uv() {
         $UV python install -q
         log_status "creating venv with \`uv\`"
         $UV venv .venv -q
-        log_status "syncing venv with \`uv\`"
-        $UV sync -q
     fi
+
+    log_status "syncing venv with \`uv\`"
+    $UV sync
 
     PATH_add "$VIRTUAL_ENV/bin"
 }

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 layout_poetry() {
-    POETRY=$(which poetry)
+    POETRY=$(which poetry || true)
     if has mise; then
-        POETRY=$(mise which poetry)
+        POETRY=$(mise which poetry || true)
     fi
 
     if [ -z "$POETRY" ]; then

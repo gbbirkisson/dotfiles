@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-layout_requirements() {
-    PYTHON=$(which python)
+layout_pip() {
+    PYTHON=$(which python || true)
     if has mise; then
-        PYTHON=$(mise which python)
+        PYTHON=$(mise which python || true)
     fi
 
     if [ -z "$PYTHON" ]; then
