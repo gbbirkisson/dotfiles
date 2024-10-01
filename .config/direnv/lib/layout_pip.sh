@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 layout_pip() {
-    PYTHON=$(which python || true)
+    UV=$(which uv || true)
     if has mise; then
-        PYTHON=$(mise which python || true)
+        UV=$(mise which uv || true)
     fi
 
-    if [ -z "$PYTHON" ]; then
-        log_error "bin \`python\` not found"
+    if [ -z "$UV" ]; then
+        log_error "bin \`uv\` not found"
         return
     fi
 
@@ -21,21 +21,16 @@ layout_pip() {
         touch $REQ_TXT
     fi
 
-    BIN="$VIRTUAL_ENV/bin"
-
     if [ ! -d "$VIRTUAL_ENV" ]; then
-        log_status "creating venv with \`python\`"
-        $PYTHON -m venv $VIRTUAL_ENV
-
-        log_status "installing requirements from \`$REQ_TXT\`"
-        $BIN/pip install -r $REQ_TXT
+        log_status "installing python interpreters with \`uv\`"
+        $UV python install -q
+        log_status "creating venv with \`uv\`"
+        $UV venv .venv -q
     fi
 
-    if has mise; then
-        mise current python | sed 's/ /\n/g' | rg -q "$($BIN/python -V | rg -o '\d+\.\d+\.\d+')" || {
-            log_error "python venv version and .tool-versions does not match"
-        }
-    fi
+    log_status "syncing venv with \`uv\`"
+    find . -maxdepth 2 -type f -name 'requirements*.txt' | sort | xargs -L 1 $UV pip install -r
+    # $UV pip sync $REQ_TXT
 
-    PATH_add "$BIN"
+    PATH_add "$VIRTUAL_ENV/bin"
 }
