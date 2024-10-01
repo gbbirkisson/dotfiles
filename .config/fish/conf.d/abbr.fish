@@ -61,6 +61,7 @@ abbr -a penv 'poetry env use (mise which python)'
 abbr -a da "direnv allow"
 abbr -a dr "direnv reload"
 abbr -a dx "direnv deny"
+abbr -a di "rm -r .venv && direnv reload"
 
 # nvim
 abbr -a v nvim
