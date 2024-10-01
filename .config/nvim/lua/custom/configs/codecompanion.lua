@@ -26,7 +26,7 @@ return {
           })
         end,
       },
-      pre_defined_prompts = {
+      prompt_library = {
         ['Code Help'] = {
           strategy = 'chat',
           description = 'Get some help from an LLM',
