@@ -116,3 +116,18 @@ function en-layout
  < z x c v b n m , . /
  > Z X C V B N M < > ?'
 end
+
+function trs -a source -a target -d "Translate something"
+    xh --form POST \
+        https://translate.kagi.com/ \
+        model=balanced \
+        source=$source \
+        target=$target \
+        url= \
+        text="$argv[3..-1]" \
+        | rg 'id="translation-output"' \
+        | rg '.*>(.*)</textarea>' -r '$1' --color=never
+end
+
+alias no="trs Norwegian English"
+alias en="trs English Norwegian"
