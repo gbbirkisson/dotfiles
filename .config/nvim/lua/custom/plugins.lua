@@ -131,9 +131,7 @@ local plugins = {
     cmd = {
       'CodeCompanion',
       'CodeCompanionChat',
-      'CodeCompanionToggle',
       'CodeCompanionActions',
-      'CodeCompanionAdd',
     },
     dependencies = {
       'nvim-lua/plenary.nvim',

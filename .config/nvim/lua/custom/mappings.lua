@@ -59,7 +59,7 @@ M.abc = {
 
     -- LLM
     ['<leader>aa'] = { '<cmd> :CodeCompanionActions <CR>', '[A]I [A]ction' },
-    ['<leader>at'] = { '<cmd> :CodeCompanionToggle <CR>', '[A]I [T]oggle Window' },
+    ['<leader>at'] = { '<cmd> :CodeCompanionChat Toggle <CR>', '[A]I [T]oggle Window' },
 
     -- Other
     ['<leader>gg'] = { '<cmd> :LazyGit <CR>', 'Open Lazy[g]it' },
@@ -83,7 +83,7 @@ M.abc = {
 
     -- LLM
     ['<leader>aa'] = { '<cmd> :CodeCompanionActions <CR>', '[A]I [A]ction' },
-    ['<leader>at'] = { '<cmd> :CodeCompanionToggle <CR>', '[A]I [T]oggle Window' },
+    ['<leader>at'] = { '<cmd> :CodeCompanionChat Toggle <CR>', '[A]I [T]oggle Window' },
     ['<leader>ah'] = { '<cmd> :CodeCompanion /help <CR>', '[A]I [H]elp' },
     ['ga'] = {
       '<cmd> :CodeCompanionAdd <CR>',
