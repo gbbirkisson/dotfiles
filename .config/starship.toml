@@ -15,6 +15,7 @@ $python\
 $battery\
 $status\
 $shell\
+$line_break\
 $character"""
 
 # $package\
