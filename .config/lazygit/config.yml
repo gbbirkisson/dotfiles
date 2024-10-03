@@ -40,6 +40,8 @@ customCommands:
         title: "New PR: Create?"
         body: "Create a {{if eq .Form.PRDraft \"yes\"}}draft {{end}}PR '{{.Form.PRTitle}}' into 'main' from '{{.SelectedLocalBranch.Name}}'"
     command: |
+      set -e
+
       gh pr create {{if eq .Form.PRDraft "yes"}}-d{{end}} \
         -H {{.SelectedLocalBranch.Name}} \
         -a @me \
@@ -115,6 +117,8 @@ customCommands:
         title: "New PR: Create?"
         body: "Create a {{if eq .Form.PRDraft \"yes\"}}draft {{end}}PR '{{.Form.PRTitle}}' into 'main' from '{{.SelectedLocalBranch.Name}}'"
     command: |
+      set -e
+
       gh pr create {{if eq .Form.PRDraft "yes"}}-d{{end}} \
         -H {{.SelectedLocalBranch.Name}} \
         -a @me \
