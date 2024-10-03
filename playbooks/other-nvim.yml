@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=neovim packageName=neovim/neovim
-    version: v0.10.1
+    version: v0.10.2
 
   tasks:
     - name: Create local bin path
