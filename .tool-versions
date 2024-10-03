@@ -7,3 +7,4 @@ python     3.12.7
 terraform  1.9.7
 golang     1.23.2
 uv         0.4.17
+helm       3.16.1
