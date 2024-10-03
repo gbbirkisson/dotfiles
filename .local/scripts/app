@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec ~/repos/amedia/k8s-objects/.venv/bin/python ~/repos/amedia/k8s-objects/app "$@"
