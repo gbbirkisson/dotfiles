@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=mitmproxy packageName=mitmproxy/mitmproxy
+    version: v11.0.0
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if mitmproxy is installed
+      shell: "mitmproxy --version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: mitmproxy_installed.rc not in [0,1]
+      register: mitmproxy_installed
+
+    - name: Install mitmproxy
+      when: mitmproxy_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://downloads.mitmproxy.org/{{ version[1:] }}/mitmproxy-{{ version[1:] }}-linux-x86_64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - mitmproxy
+          - mitmdump
+          - mitmweb
