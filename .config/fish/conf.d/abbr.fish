@@ -95,7 +95,6 @@ abbr -a o xdg-open
 alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
 alias cal="$DOTFILES/.venv/calcure/bin/calcure"
 alias wtf='xrandr --output $(xrandr |grep eDP|cut -d" " -f1) --rotate normal'
-alias dev_tunnel='cloudflared --no-autoupdate tunnel run --token $(op read op://hemwnx22rvxga5v2zkicawq6sq/oy5g4ntwcf4lfom5lzzrzfl5ua/credential --no-newline)'
 
 # us layout cheatsheet
 function en-layout

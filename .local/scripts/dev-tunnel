@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+upstream=${1:-"8080"}
+
+echo "Fetching token"
+token=$(op read op://hemwnx22rvxga5v2zkicawq6sq/oy5g4ntwcf4lfom5lzzrzfl5ua/credential --no-newline)
+
+echo "Starting cloudflared"
+cloudflared --no-autoupdate tunnel run --token $token &
+
+echo "Starting mitmweb"
+mitmweb --listen-host 127.0.0.1 --listen-port 4040 -m reverse:http://127.0.0.1:${upstream} 2>/dev/null
