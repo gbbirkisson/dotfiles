@@ -8,3 +8,4 @@ terraform  1.9.7
 golang     1.23.2
 uv         0.4.17
 helm       3.16.1
+kustomize  5.4.3
