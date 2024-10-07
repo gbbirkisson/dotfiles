@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=kyverno packageName=kyverno/kyverno
+    version: v1.12.6
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if kyverno is installed
+      shell: "kyverno version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: kyverno_installed.rc not in [0,1]
+      register: kyverno_installed
+
+    - name: Install kyverno
+      when: kyverno_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/kyverno/kyverno/releases/download/{{ version }}/kyverno-cli_{{ version }}_linux_x86_64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - kyverno
