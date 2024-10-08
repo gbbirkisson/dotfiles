@@ -1,44 +1,37 @@
-;; Assembly test macro in hemul
-(macro_invocation
-  macro: (identifier) @_name (#eq? @_name "asm_test")
-  (token_tree
-    (raw_string_literal) @asm
-  )
-  (#offset! @asm 0 3 0 -2)
-)
+; extends
 
-(token_tree
-  (identifier) @n1 (#eq? @n1 "asm_test")
-  (token_tree
-    (identifier) @n2 (#eq? @n2 "format")
-    (token_tree
-      (raw_string_literal) @asm
-    )
-  )
-  (#offset! @asm 0 3 0 -2)
-)
-
-;; Sql queries
-(macro_invocation
-  (scoped_identifier
-    path: (identifier) @_path (#eq? @_path "sqlx")
-    name: (identifier) @_name (#eq? @_name "query")
-  )
-  (token_tree
-    (raw_string_literal) @sql
-  )
-  (#offset! @sql 0 3 0 -2)
-)
-
-;; HTML templates
+;; river: comment in string
 (
-  (attribute_item
-    (attribute
-      arguments: (token_tree
-        (identifier) @_source (#eq? @_source "source")
-        (raw_string_literal) @html
-      )
-      (#offset! @html 0 3 0 -2)
-    )
-  )
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*river( )*\n")
+  (#set! injection.language "river")
+)
+
+;; yaml: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*yaml( )*\n")
+  (#set! injection.language "yaml")
+)
+
+;; json: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*json( )*\n")
+  (#set! injection.language "json")
+)
+
+;; sql: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*--( )*sql( )*\n")
+  (#set! injection.language "sql")
+)
+
+;; query: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*;;( )*query( )*\n")
+  (#set! injection.language "query")
+)
+
+;; asm: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*;( )*asm( )*\n")
+  (#set! injection.language "asm")
 )

@@ -1,0 +1,101 @@
+#!/usr/bin/env python
+
+from pathlib import Path
+
+injections = [
+    ("river", "//"),
+    ("yaml", "#"),
+    ("json", "//"),
+    ("sql", "--"),
+    ("query", ";;"),
+    ("asm", ";"),
+]
+
+
+def python_header():
+    return """; extends
+
+;; inspired by
+;; https://github.com/DariusCorvus/tree-sitter-language-injection.nvim
+"""
+
+
+def python_generator(language: str, comment: str):
+    return rf"""
+;; {language}: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*{comment}( )*{language}( )*\n")
+  (#set! injection.language "{language}")
+)
+
+;; {language}: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# {language}")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "{language}")
+      )
+    )
+  )
+)
+"""
+
+
+def yaml_header():
+    return """; extends
+
+;; for reference
+;; https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/yaml/injections.scm
+"""
+
+
+def yaml_generator(language: str, _: str):
+    return rf"""
+;; {language}: comment before string
+(block_mapping_pair
+  (comment) @_lang (#eq? @_lang "# {language}")
+  (block_node
+    (block_mapping
+      (block_mapping_pair
+        key: (flow_node) @_content
+        (#any-of? @_content "content")
+        value: (block_node
+          (block_scalar) @injection.content
+          (#set! injection.language "{language}")
+          (#offset! @injection.content 0 1 0 0)
+        )
+      )
+    )
+  )
+)
+"""
+
+
+def rust_header():
+    return """; extends
+"""
+
+
+def rust_generator(language: str, comment: str):
+    return rf"""
+;; {language}: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*{comment}( )*{language}( )*\n")
+  (#set! injection.language "{language}")
+)
+"""
+
+
+generators = {
+    "python": (python_header, python_generator),
+    "yaml": (yaml_header, yaml_generator),
+    "rust": (rust_header, rust_generator),
+}
+
+for name, (header, gen) in generators.items():
+    with (Path(name) / "injections.scm").open("w") as file:
+        file.write(header())
+        for language, comment in injections:
+            file.write(gen(language, comment))
