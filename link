@@ -48,7 +48,7 @@ link .config/k9s/skins
 link .config/lazygit/config.yml
 link .config/nvim/ftplugin
 link .config/nvim/lua/custom
-link .config/nvim/queries
+link .config/nvim/after
 link .config/regolith3
 link .config/themes
 link .config/tmux/colors.tmux
