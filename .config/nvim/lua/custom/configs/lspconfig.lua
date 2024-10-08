@@ -1,5 +1,5 @@
 local config = require 'plugins.configs.lspconfig'
-local on_attach = config.on_attach
+local on_attach_defualt = config.on_attach
 
 -- Merge capabilities with cmp
 local capabilities = vim.tbl_deep_extend(
@@ -10,6 +10,12 @@ local capabilities = vim.tbl_deep_extend(
 
 local lspconfig = require 'lspconfig'
 local util = require 'lspconfig/util'
+
+local on_attach = function(client, bufnr)
+  on_attach_defualt(client, bufnr)
+  --To disable semantic tokens for language injections to work
+  client.server_capabilities.semanticTokensProvider = nil
+end
 
 -- GSP
 -- require("lspconfig.configs").gsp = {
