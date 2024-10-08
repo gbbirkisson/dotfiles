@@ -1,7 +1,8 @@
-;; query
 ; extends
 
-;; Inspired by https://github.com/DariusCorvus/tree-sitter-language-injection.nvim
+;; inspired by
+;; https://github.com/DariusCorvus/tree-sitter-language-injection.nvim
+
 
 ;; Comment in string
 (
@@ -11,7 +12,46 @@
 
 ;; Comment before assignment
 (
-  (comment) @_comment (#match? @_comment "^#( )*[sS][qQ][lL]$")
+  (comment) @_lang (#eq? @_lang "# river")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "river")
+      )
+    )
+  )
+)
+
+;; Comment before assignment
+(
+  (comment) @_lang (#eq? @_lang "# yaml")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "yaml")
+      )
+    )
+  )
+)
+
+;; Comment before assignment
+(
+  (comment) @_lang (#eq? @_lang "# json")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "json")
+      )
+    )
+  )
+)
+
+;; Comment before assignment
+(
+  (comment) @_lang (#eq? @_lang "# sql")
   (expression_statement
     (assignment
       (string

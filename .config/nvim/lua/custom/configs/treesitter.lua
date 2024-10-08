@@ -39,6 +39,7 @@ return {
     'markdown_inline',
 
     -- other,
+    'json',
     'yaml',
     'markdown',
     'terraform',
