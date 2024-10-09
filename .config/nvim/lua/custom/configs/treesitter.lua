@@ -1,4 +1,6 @@
 local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+
+-- setup river: https://github.com/grafana/tree-sitter-river
 parser_config.river = {
   install_info = {
     url = '~/repos/personal/tree-sitter-river', -- local path or git repo
@@ -10,13 +12,33 @@ parser_config.river = {
   },
   filetype = 'river', -- if filetype does not match the parser name
 }
-
 vim.filetype.add {
   extension = {
     river = 'river',
     alloy = 'river',
   },
 }
+-- not installed automatically, run:
+-- :TSInstall river
+
+-- setup vcl: https://github.com/M4R7iNP/varnishls
+for _, lang in pairs { 'vcl', 'vtc' } do
+  parser_config[lang] = {
+    install_info = {
+      url = '~/repos/personal/varnishls/vendor/tree-sitter-' .. lang,
+      files = { 'src/parser.c' },
+    },
+  }
+end
+vim.filetype.add {
+  extension = {
+    vcl = 'vcl',
+    vtc = 'vtc',
+  },
+}
+-- not installed automatically, run:
+-- :TSInstallFromGrammar vcl
+-- :TSInstallFromGrammar vtc
 
 return {
   ensure_installed = {
@@ -48,7 +70,5 @@ return {
     'make',
     'proto', -- protobuffers
     'html',
-
-    'river',
   },
 }

@@ -154,3 +154,41 @@
     )
   )
 )
+
+;; vcl: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*vcl( )*\n")
+  (#set! injection.language "vcl")
+)
+
+;; vcl: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# vcl")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "vcl")
+      )
+    )
+  )
+)
+
+;; vtc: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*vtc( )*\n")
+  (#set! injection.language "vtc")
+)
+
+;; vtc: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# vtc")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "vtc")
+      )
+    )
+  )
+)

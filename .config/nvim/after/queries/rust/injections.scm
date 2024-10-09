@@ -47,3 +47,15 @@
   (string_content) @injection.content (#match? @injection.content "^\n*( )*;( )*asm( )*\n")
   (#set! injection.language "asm")
 )
+
+;; vcl: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*vcl( )*\n")
+  (#set! injection.language "vcl")
+)
+
+;; vtc: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*vtc( )*\n")
+  (#set! injection.language "vtc")
+)
