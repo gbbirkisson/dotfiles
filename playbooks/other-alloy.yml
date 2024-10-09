@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=grafana packageName=grafana/alloy
+    version: v1.4.2
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if alloy is installed
+      shell: "alloy --version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: alloy_installed.rc not in [0,1]
+      register: alloy_installed
+
+    - name: Install alloy
+      when: alloy_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/grafana/alloy/releases/download/{{ version }}/alloy-linux-amd64.zip"
+        dest: ~/.local/bin
+
+    - name: Link alloy
+      when: alloy_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        src: "~/.local/bin/alloy-linux-amd64"
+        dest: ~/.local/bin/alloy
+        state: link
