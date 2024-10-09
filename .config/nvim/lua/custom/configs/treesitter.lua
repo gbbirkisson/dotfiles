@@ -10,9 +10,11 @@ parser_config.river = {
   },
   filetype = 'river', -- if filetype does not match the parser name
 }
+
 vim.filetype.add {
   extension = {
     river = 'river',
+    alloy = 'river',
   },
 }
 
