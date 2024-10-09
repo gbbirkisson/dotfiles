@@ -22,6 +22,25 @@
   )
 )
 
+;; river: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*alloy( )*\n")
+  (#set! injection.language "river")
+)
+
+;; river: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# alloy")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "river")
+      )
+    )
+  )
+)
+
 ;; yaml: comment in string
 (
   (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*yaml( )*\n")
@@ -50,6 +69,25 @@
 ;; json: comment before string
 (
   (comment) @_lang (#eq? @_lang "# json")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "json")
+      )
+    )
+  )
+)
+
+;; json: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*yml( )*\n")
+  (#set! injection.language "json")
+)
+
+;; json: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# yml")
   (expression_statement
     (assignment
       (string

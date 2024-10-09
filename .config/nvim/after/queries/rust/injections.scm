@@ -6,6 +6,12 @@
   (#set! injection.language "river")
 )
 
+;; river: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*alloy( )*\n")
+  (#set! injection.language "river")
+)
+
 ;; yaml: comment in string
 (
   (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*yaml( )*\n")
@@ -15,6 +21,12 @@
 ;; json: comment in string
 (
   (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*json( )*\n")
+  (#set! injection.language "json")
+)
+
+;; json: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*yml( )*\n")
   (#set! injection.language "json")
 )
 
