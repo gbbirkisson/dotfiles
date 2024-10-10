@@ -11,4 +11,8 @@ if command -v mise >/dev/null
     if mise which kubectl >/dev/null
         eval (mise which kubectl) completion fish | source
     end
+
+    if mise which gcloud >/dev/null
+        setenv CLOUDSDK_PYTHON /usr/bin/python3
+    end
 end
