@@ -3,6 +3,17 @@
 ;; for reference
 ;; https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/yaml/injections.scm
 
+;; river: comment in string
+(block_mapping_pair
+  key: (flow_node) @_content
+  (#any-of? @_content "content")
+  value: (block_node
+    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*//( )river( )*\n")
+    (#set! injection.language "river")
+    (#offset! @injection.content 0 1 0 0)
+  )
+)
+
 ;; river: comment before string
 (block_mapping_pair
   (comment) @_lang (#eq? @_lang "# river")
@@ -18,6 +29,17 @@
         )
       )
     )
+  )
+)
+
+;; river: comment in string
+(block_mapping_pair
+  key: (flow_node) @_content
+  (#any-of? @_content "content")
+  value: (block_node
+    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*//( )alloy( )*\n")
+    (#set! injection.language "river")
+    (#offset! @injection.content 0 1 0 0)
   )
 )
 
@@ -39,6 +61,17 @@
   )
 )
 
+;; yaml: comment in string
+(block_mapping_pair
+  key: (flow_node) @_content
+  (#any-of? @_content "content")
+  value: (block_node
+    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*#( )yaml( )*\n")
+    (#set! injection.language "yaml")
+    (#offset! @injection.content 0 1 0 0)
+  )
+)
+
 ;; yaml: comment before string
 (block_mapping_pair
   (comment) @_lang (#eq? @_lang "# yaml")
@@ -54,6 +87,17 @@
         )
       )
     )
+  )
+)
+
+;; json: comment in string
+(block_mapping_pair
+  key: (flow_node) @_content
+  (#any-of? @_content "content")
+  value: (block_node
+    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*//( )json( )*\n")
+    (#set! injection.language "json")
+    (#offset! @injection.content 0 1 0 0)
   )
 )
 
@@ -75,6 +119,17 @@
   )
 )
 
+;; json: comment in string
+(block_mapping_pair
+  key: (flow_node) @_content
+  (#any-of? @_content "content")
+  value: (block_node
+    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*//( )yml( )*\n")
+    (#set! injection.language "json")
+    (#offset! @injection.content 0 1 0 0)
+  )
+)
+
 ;; json: comment before string
 (block_mapping_pair
   (comment) @_lang (#eq? @_lang "# yml")
@@ -90,6 +145,17 @@
         )
       )
     )
+  )
+)
+
+;; sql: comment in string
+(block_mapping_pair
+  key: (flow_node) @_content
+  (#any-of? @_content "content")
+  value: (block_node
+    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*--( )sql( )*\n")
+    (#set! injection.language "sql")
+    (#offset! @injection.content 0 1 0 0)
   )
 )
 
@@ -111,6 +177,17 @@
   )
 )
 
+;; query: comment in string
+(block_mapping_pair
+  key: (flow_node) @_content
+  (#any-of? @_content "content")
+  value: (block_node
+    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*;;( )query( )*\n")
+    (#set! injection.language "query")
+    (#offset! @injection.content 0 1 0 0)
+  )
+)
+
 ;; query: comment before string
 (block_mapping_pair
   (comment) @_lang (#eq? @_lang "# query")
@@ -126,6 +203,17 @@
         )
       )
     )
+  )
+)
+
+;; asm: comment in string
+(block_mapping_pair
+  key: (flow_node) @_content
+  (#any-of? @_content "content")
+  value: (block_node
+    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*;( )asm( )*\n")
+    (#set! injection.language "asm")
+    (#offset! @injection.content 0 1 0 0)
   )
 )
 
@@ -147,6 +235,17 @@
   )
 )
 
+;; vcl: comment in string
+(block_mapping_pair
+  key: (flow_node) @_content
+  (#any-of? @_content "content")
+  value: (block_node
+    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*//( )vcl( )*\n")
+    (#set! injection.language "vcl")
+    (#offset! @injection.content 0 1 0 0)
+  )
+)
+
 ;; vcl: comment before string
 (block_mapping_pair
   (comment) @_lang (#eq? @_lang "# vcl")
@@ -162,6 +261,17 @@
         )
       )
     )
+  )
+)
+
+;; vtc: comment in string
+(block_mapping_pair
+  key: (flow_node) @_content
+  (#any-of? @_content "content")
+  value: (block_node
+    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*//( )vtc( )*\n")
+    (#set! injection.language "vtc")
+    (#offset! @injection.content 0 1 0 0)
   )
 )
 

@@ -53,8 +53,19 @@ def yaml_header():
 """
 
 
-def yaml_generator(language: str, _: str, alias: str):
+def yaml_generator(language: str, comment: str, alias: str):
     return rf"""
+;; {language}: comment in string
+(block_mapping_pair
+  key: (flow_node) @_content
+  (#any-of? @_content "content")
+  value: (block_node
+    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*{comment}( ){alias}( )*\n")
+    (#set! injection.language "{language}")
+    (#offset! @injection.content 0 1 0 0)
+  )
+)
+
 ;; {language}: comment before string
 (block_mapping_pair
   (comment) @_lang (#eq? @_lang "# {alias}")
