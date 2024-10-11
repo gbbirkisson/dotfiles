@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+
+# For use in vim with !format [lang] to format embedded code blocks
+
+import argparse
+import re
+import sys
+from subprocess import PIPE, STDOUT, Popen
+
+indent_regex = re.compile(r"(\s*).*")
+
+
+def first_line_with_content(lines: list[str], line_default: str) -> str:
+    f = line_default
+    for line in lines:
+        if line.strip() != "":
+            f = line
+            break
+    return f
+
+
+def detect_filetype(lines: list[str]) -> str | None:
+    f = first_line_with_content(lines, "")
+    if "// alloy" in f:
+        return "alloy"
+    return None
+
+
+def detect_indent(lines: list[str]) -> str:
+    return indent_regex.match(first_line_with_content(lines, "none")).groups()[0]  # type: ignore
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("filetype", nargs="?", default=None)
+args = parser.parse_args()
+
+lines: list[str] = [line for line in sys.stdin]
+filetype = args.filetype if args.filetype else detect_filetype(lines)
+commands = {
+    "alloy": {
+        "cmd": ["alloy", "fmt"],
+        "tabs": "  ",
+    }
+}
+lang = commands.get(filetype)  # type: ignore
+indent = detect_indent(lines)
+
+if not lang:
+    sys.exit(1)
+
+p = Popen(lang["cmd"], stdout=PIPE, stdin=PIPE, stderr=STDOUT)
+fmt_out = p.communicate(input=bytes("".join(lines), "utf-8"))[0]
+
+for line in fmt_out.decode().splitlines():
+    line = line.replace("\t", lang["tabs"])  # type: ignore
+    if line.strip() == "":
+        print("")
+    else:
+        print(indent + line)
