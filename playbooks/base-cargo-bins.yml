@@ -26,4 +26,4 @@
         - { crate_name: tealdeer, version: 1.7.0 }          # Better tldr
         - { crate_name: trunk, version: 0.20.3 }            # WASM development
         - { crate_name: watchexec-cli, version: 2.0.0 }     # Used for 'dev' script
-        - { crate_name: xh, version: 0.22.0 }               # Better HTTPie
+        - { crate_name: xh, version: 0.23.0 }               # Better HTTPie
