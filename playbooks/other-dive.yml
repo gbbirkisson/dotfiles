@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=dive packageName=wagoodman/dive
+    version: v0.12.0
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if dive is installed
+      shell: "dive version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: dive_installed.rc not in [0,1]
+      register: dive_installed
+
+    - name: Install dive
+      when: dive_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/wagoodman/dive/releases/download/{{ version }}/dive_{{ version[1:] }}_linux_amd64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - dive
