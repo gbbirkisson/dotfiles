@@ -11,6 +11,8 @@ injections = [
     ("asm", ";", []),
     ("vcl", "//", []),
     ("vtc", "//", []),
+    ("python", "#", []),
+    ("nginx", "#", []),
 ]
 
 
@@ -56,14 +58,10 @@ def yaml_header():
 def yaml_generator(language: str, comment: str, alias: str):
     return rf"""
 ;; {language}: comment in string
-(block_mapping_pair
-  key: (flow_node) @_content
-  (#any-of? @_content "content")
-  value: (block_node
-    (block_scalar) @injection.content (#match? @injection.content "^\|\n*( )*{comment}( ){alias}( )*\n")
-    (#set! injection.language "{language}")
-    (#offset! @injection.content 0 1 0 0)
-  )
+(block_node
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*{comment}( ){alias}( )*\n")
+  (#set! injection.language "{language}")
+  (#offset! @injection.content 0 1 0 0)
 )
 
 ;; {language}: comment before string
@@ -73,7 +71,6 @@ def yaml_generator(language: str, comment: str, alias: str):
     (block_mapping
       (block_mapping_pair
         key: (flow_node) @_content
-        (#any-of? @_content "content")
         value: (block_node
           (block_scalar) @injection.content
           (#set! injection.language "{language}")

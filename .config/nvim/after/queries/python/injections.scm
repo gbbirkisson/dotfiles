@@ -192,3 +192,41 @@
     )
   )
 )
+
+;; python: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*python( )*\n")
+  (#set! injection.language "python")
+)
+
+;; python: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# python")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "python")
+      )
+    )
+  )
+)
+
+;; nginx: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*nginx( )*\n")
+  (#set! injection.language "nginx")
+)
+
+;; nginx: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# nginx")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "nginx")
+      )
+    )
+  )
+)

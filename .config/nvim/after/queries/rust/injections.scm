@@ -59,3 +59,15 @@
   (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*vtc( )*\n")
   (#set! injection.language "vtc")
 )
+
+;; python: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*python( )*\n")
+  (#set! injection.language "python")
+)
+
+;; nginx: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*nginx( )*\n")
+  (#set! injection.language "nginx")
+)

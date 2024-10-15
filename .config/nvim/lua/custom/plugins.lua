@@ -123,6 +123,11 @@ local plugins = {
     lazy = false,
   },
   {
+    -- Nginx highlighting
+    'dlvandenberg/nvim-treesitter-nginx',
+    lazy = false,
+  },
+  {
     -- LazyGit
     'kdheepak/lazygit.nvim',
     cmd = { 'LazyGit' },
