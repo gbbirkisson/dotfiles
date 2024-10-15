@@ -22,6 +22,18 @@ M.abc = {
       end,
       'Close buffer',
     },
+    ['<A-h>'] = {
+      function()
+        require('nvchad.tabufline').closeBufs_at_direction 'left'
+      end,
+      'Close buffer to the left',
+    },
+    ['<A-l>'] = {
+      function()
+        require('nvchad.tabufline').closeBufs_at_direction 'right'
+      end,
+      'Close buffer to the right',
+    },
     ['<leader><leader>'] = { '<c-^>', 'Buffer Rotate' },
 
     -- Search
