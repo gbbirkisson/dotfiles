@@ -28,6 +28,9 @@ local plugins = {
         enable = true,
         update_root = true,
       },
+      view = {
+        width = 50,
+      },
       git = {
         enable = true,
       },
