@@ -24,6 +24,6 @@
         - { crate_name: sfz, version: 0.7.1 }               # Simple web server for dirs
         - { crate_name: starship, version: 1.19.0 }         # Fancy prompt
         - { crate_name: tealdeer, version: 1.7.0 }          # Better tldr
-        - { crate_name: trunk, version: 0.20.3 }            # WASM development
+        - { crate_name: trunk, version: 0.21.0 }            # WASM development
         - { crate_name: watchexec-cli, version: 2.0.0 }     # Used for 'dev' script
         - { crate_name: xh, version: 0.23.0 }               # Better HTTPie
