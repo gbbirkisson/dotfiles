@@ -2,6 +2,9 @@ local M = {}
 
 M.abc = {
   n = {
+    -- insert jsonschema
+    ['<leader>is'] = { '<cmd> :Is <CR>', '[I]nsert [J]son schema' },
+
     -- Interact with clipboard
     ['<leader>y'] = { '"+y' },
     ['<leader>yy'] = { '"+yy' },

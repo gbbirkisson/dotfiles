@@ -78,6 +78,31 @@ end, { nargs = 1 })
 -- Note: format selection with gq
 vim.cmd.Gl '96'
 
+-- Add command to inject jsonschema
+vim.api.nvim_create_user_command('Is', function(opts)
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+  -- Get the full path of the current buffer
+  local filepath = vim.api.nvim_buf_get_name(0)
+
+  -- Extract the filename from the path
+  local filename_with_extension = vim.fn.fnamemodify(filepath, ':t')
+
+  -- Remove the extension
+  local filename_without_extension = filename_with_extension:match '(.+)%..+'
+
+  local schema = '# yaml-language-server: $schema='
+  if string.find(filename_without_extension, 'deployment') then
+    schema = schema
+      .. 'https://raw.githubusercontent.com/yannh/kubernetes-json-schema/refs/heads/master/v1.28.1-standalone-strict/deployment-apps-v1.json'
+  elseif string.find(filename_without_extension, 'service') then
+    schema = schema
+      .. 'https://raw.githubusercontent.com/yannh/kubernetes-json-schema/refs/heads/master/v1.28.1-standalone-strict/service-v1.json'
+  end
+
+  vim.api.nvim_buf_set_text(0, row - 1, 0, row - 1, 0, { schema })
+end, { nargs = 0 })
+
 -- Move mason path to the back
 local mason_path = vim.fn.stdpath 'data' .. '/mason/bin'
 vim.env.PATH = vim.env.PATH:gsub(mason_path .. ':', '')
