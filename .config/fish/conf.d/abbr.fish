@@ -68,6 +68,7 @@ abbr -a v nvim
 abbr -a vim nvim
 alias day='cd $HOME/repos/personal/notes && nvim -c :ObsidianToday'
 alias notes='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck .'
+alias todo='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck todo.md'
 alias llmchad="nvim -c ':CodeCompanionChat openai'"
 alias llmollama="nvim -c ':CodeCompanionChat ollama'"
 
