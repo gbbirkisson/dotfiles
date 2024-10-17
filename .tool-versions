@@ -3,7 +3,7 @@ kubectl    1.31.1
 nodejs     21.7.3
 pre-commit 4.0.1
 python     3.13.0
-terraform  1.9.7
+terraform  1.9.8
 golang     1.23.2
 uv         0.4.17
 helm       3.16.2
