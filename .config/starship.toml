@@ -62,6 +62,8 @@ format = "took [$duration]($style) "
 # Run in home folder
 [custom.todo]
 command = '''
+test ! -f /tmp/todo && \
+touch /tmp/todo && \
 cat ~/repos/personal/notes/todo.md | tail -n +10 | grep -q - && \
 cat ~/repos/personal/notes/todo.md | tail -n +8 && \
 printf \n‎
