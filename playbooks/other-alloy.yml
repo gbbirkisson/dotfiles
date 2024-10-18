@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=grafana packageName=grafana/alloy
-    version: v1.4.2
+    version: v1.4.3
 
   tasks:
     - name: Create local bin path
