@@ -28,6 +28,7 @@ customCommands:
       - type: "input"
         title: "New PR: Title?"
         key: "PRTitle"
+        initialValue: "{{ .SelectedCommit.Name }}"
       - type: "menu"
         title: "New PR: Draft?"
         key: "PRDraft"
