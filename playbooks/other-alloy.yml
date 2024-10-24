@@ -2,7 +2,7 @@
 - hosts: localhost
 
   vars:
-    # renovate: datasource=github-releases depName=grafana packageName=grafana/alloy
+    # renovate: datasource=github-releases depName=alloy packageName=grafana/alloy
     version: v1.4.3
 
   tasks:
