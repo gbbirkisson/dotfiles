@@ -1,3 +1,4 @@
+[general]
 import = ["~/.config/alacritty/theme.toml"]
 
 [bell]
@@ -36,7 +37,7 @@ family = "monospace"
 history = 10000
 multiplier = 3
 
-[shell]
+[terminal.shell]
 program = "/usr/bin/env"
 args = ["direnv", "exec", "/", "tmux"]
 
