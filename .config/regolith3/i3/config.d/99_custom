@@ -7,8 +7,8 @@ bindsym Print exec flameshot gui
 ##   WM_NAME(STRING) = "title"
 ##   WM_CLASS(STRING) ="instance", "class"
 
-# assign [class="Chromium"] $ws1
-assign [class="firefox"] $ws1
+assign [class="Chromium"] $ws1
+assign [class="firefox"] $ws7
 assign [class="Signal"] $ws6
 for_window [class="Spotify"] move to workspace $ws8
 for_window [title="Lock Screen — 1Password"] move to workspace $ws9
