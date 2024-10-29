@@ -3,7 +3,7 @@
 use_mise() {
     if ! has mise; then
         log_error "bin \`mise\` not found"
-        return
+        return 1
     fi
 
     direnv_load mise direnv exec

@@ -1,24 +1,36 @@
 #!/usr/bin/env bash
 
-layout_uv() {
-    UV=$(which uv || true)
+_get_bin() {
+    NAME=$1
+    BIN=""
+
+    # Try to find it with mise
     if has mise; then
-        UV=$(mise which uv || true)
+        BIN=$(mise which $NAME 2>/dev/null || true)
     fi
 
-    if [ -z "$UV" ]; then
-        log_error "bin \`uv\` not found"
-        return
+    # Not found yet, try to find it on system
+    if ! test -n "$BIN"; then
+        BIN=$(which $NAME || true)
     fi
 
-    VIRTUAL_ENV="$(pwd)/.venv"
-    export VIRTUAL_ENV
+    # If bin found, return it
+    if test -n "$BIN"; then
+        echo $BIN
+    else
+        log_error "bin \`$NAME\` not found"
+        return 1
+    fi
+}
+
+_uv_regular() {
+    UV=$1
+    VIRTUAL_ENV=$2
 
     PYPROJECT_TOML="${PYPROJECT_TOML:-pyproject.toml}"
     if [ ! -f "$PYPROJECT_TOML" ]; then
         log_error "no \`$PYPROJECT_TOML\` found"
-        log_status "creating a \`$PYPROJECT_TOML\` with \`uv\`"
-        $UV init
+        return 1
     fi
 
     if [ ! -d "$VIRTUAL_ENV" ]; then
@@ -30,6 +42,41 @@ layout_uv() {
 
     log_status "syncing venv with \`uv\`"
     $UV sync
+}
+
+_uv_pip() {
+    UV=$1
+    VIRTUAL_ENV=$2
+    REQ_FILES=${@:3}
+
+    if [ ! -d "$VIRTUAL_ENV" ]; then
+        log_status "installing python interpreters with \`uv\`"
+        $UV python install -q
+        log_status "creating venv with \`uv\`"
+        $UV venv .venv -q
+    fi
+
+    CMD=""
+    for req in "${@:3}"; do
+        CMD="$CMD -r $req"
+    done
+
+    log_status "syncing venv with \`uv\`"
+    $UV pip install $CMD
+}
+
+layout_uv() {
+    UV=$(_get_bin uv)
+
+    VIRTUAL_ENV="${VIRTUAL_ENV:-$(pwd)/.venv}"
+    export VIRTUAL_ENV
+
+    REQ_FILES="$@"
+    if ! test -n "$REQ_FILES"; then
+        _uv_regular $UV $VIRTUAL_ENV
+    else
+        _uv_pip $UV $VIRTUAL_ENV "$@"
+    fi
 
     PATH_add "$VIRTUAL_ENV/bin"
 }
