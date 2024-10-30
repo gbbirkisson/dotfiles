@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=gopass packageName=gopasspw/gopass
+    version: v1.15.14
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if gopass is installed
+      shell: "gopass version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: gopass_installed.rc not in [0,1]
+      register: gopass_installed
+
+    - name: Install gopass
+      when: gopass_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: https://github.com/gopasspw/gopass/releases/download/{{ version }}/gopass-{{ version[1:] }}-linux-amd64.tar.gz
+        dest: ~/.local/bin
+        extra_opts:
+          - gopass
