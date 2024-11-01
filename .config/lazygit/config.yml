@@ -1,8 +1,14 @@
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/lazygit.json
 disableStartupPopups: true
+
 git:
   autoFetch: false
+
+gui:
+  theme:
+    selectedLineBgColor:
+      - "#353b45"
 
 customCommands:
   - key: "G"
