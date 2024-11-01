@@ -23,17 +23,6 @@ function dcln --description "clean all the docker things"
     drmv
 end
 
-# kubectl
-abbr -a k kubectl
-alias kd="setenv KUBECONFIG /dev/null"
-for f in e m
-    alias "k$f"="setenv KUBECONFIG ~/.kube/config_$f"
-end
-kd
-
-# k9s
-alias ks='KUBECONFIG=~/.kube/config_e k9s -n default -c ns'
-
 # bat
 if command -v bat >/dev/null
     alias cat='bat -pp'
