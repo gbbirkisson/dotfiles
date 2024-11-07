@@ -4,7 +4,7 @@ nodejs     22.11.0
 pre-commit 4.0.1
 python     3.13.0
 terraform  1.9.8
-golang     1.23.2
+golang     1.23.3
 uv         0.4.17
 helm       3.16.2
 kustomize  5.5.0
