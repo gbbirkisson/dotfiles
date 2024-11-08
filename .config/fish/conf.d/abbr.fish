@@ -115,3 +115,5 @@ end
 
 alias no="trs Norwegian English"
 alias en="trs English Norwegian"
+
+abbr -a lgtm docker run --pull always -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm -ti grafana/otel-lgtm
