@@ -41,7 +41,7 @@ _uv_regular() {
     fi
 
     log_status "syncing venv with \`uv\`"
-    $UV sync
+    $UV sync --all-extras
 }
 
 _uv_pip() {
