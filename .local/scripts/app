@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-exec ~/repos/amedia/apptool/.venv/bin/python ~/repos/amedia/apptool/app.py "$@"
+exec ~/repos/amedia/apptool/.venv/bin/python ~/repos/amedia/apptool/apptool/app.py "$@"
