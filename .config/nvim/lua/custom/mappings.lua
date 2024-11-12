@@ -99,7 +99,12 @@ M.abc = {
     -- LLM
     ['<leader>aa'] = { '<cmd> :CodeCompanionActions <CR>', '[A]I [A]ction' },
     ['<leader>at'] = { '<cmd> :CodeCompanionChat Toggle <CR>', '[A]I [T]oggle Window' },
-    ['<leader>ah'] = { '<cmd> :CodeCompanion /help <CR>', '[A]I [H]elp' },
+    ['<leader>ah'] = {
+      function()
+        require('codecompanion').prompt 'help'
+      end,
+      '[A]I [H]elp',
+    },
     ['ga'] = {
       '<cmd> :CodeCompanionAdd <CR>',
       'AI add visually selected chat to the current chat buffer',

@@ -33,13 +33,15 @@ return {
           opts = {
             modes = { 'v' },
             slash_cmd = 'help',
-            auto_submit = false,
+            short_name = 'help',
             stop_context_insertion = true,
-            user_prompt = true,
           },
           prompts = {
             {
               role = 'system',
+              opts = {
+                visible = false,
+              },
               content = function(context)
                 return 'I want you to act as a senior '
                   .. context.filetype
@@ -48,7 +50,9 @@ return {
             },
             {
               role = 'user',
-              contains_code = true,
+              opts = {
+                contains_code = true,
+              },
               content = function(context)
                 local text = require('codecompanion.helpers.actions').get_code(
                   context.start_line,
