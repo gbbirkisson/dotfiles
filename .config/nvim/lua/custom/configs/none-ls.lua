@@ -3,8 +3,8 @@ local builtins = require('null-ls').builtins
 local opts = {
   sources = {
     -- Python
-    require 'none-ls.diagnostics.ruff',
-    builtins.diagnostics.mypy,
+    -- require 'none-ls.diagnostics.ruff',
+    -- builtins.diagnostics.mypy,
 
     -- YAML
     builtins.diagnostics.yamllint,
