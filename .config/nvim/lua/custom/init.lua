@@ -1,3 +1,6 @@
+-- Markdown preview theme
+vim.g.mkdp_theme = 'dark'
+
 -- Enable break indent
 vim.opt.breakindent = true
 
