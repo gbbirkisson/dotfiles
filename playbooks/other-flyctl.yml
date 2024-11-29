@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=flyctl packageName=superfly/flyctl
+    version: v0.3.44
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if flyctl is installed
+      shell: "flyctl version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: flyctl_installed.rc not in [0,1]
+      register: flyctl_installed
+
+    - name: Install flyctl
+      when: flyctl_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/superfly/flyctl/releases/download/{{ version }}/flyctl_{{ version[1:] }}_Linux_x86_64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - flyctl
