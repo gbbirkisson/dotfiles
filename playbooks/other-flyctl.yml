@@ -12,7 +12,7 @@
         state: directory
 
     - name: Check if flyctl is installed
-      shell: "flyctl version | grep {{ version[1:] }}"
+      shell: "fly version | grep {{ version[1:] }}"
       changed_when: false
       failed_when: flyctl_installed.rc not in [0,1]
       register: flyctl_installed
@@ -25,3 +25,10 @@
         dest: ~/.local/bin
         extra_opts:
           - flyctl
+
+    - name: Link flyctl
+      when: flyctl_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        src: ~/.local/bin/flyctl
+        dest: ~/.local/bin/fly
+        state: link
