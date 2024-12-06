@@ -1,30 +1,24 @@
 ---
 prSections:
-  - title: Mine (work)
-    filters: is:open author:@me user:amedia -repo:slok/sloth -label:release
+  - title: Mine
+    filters: is:open author:@me -label:release -repo:slok/sloth
     layout:
       author:
         hidden: true
-        # width: <number of columns>
-        # grow: <bool> this will make the column grow in size
 
   - title: Review (work)
-    filters: is:open review-requested:@me user:amedia -is:draft
-    # limit: 50  # optional limit of rows fetched for this section
+    filters: is:open review-requested:@me -label:release user:amedia -is:draft
 
-  - title: Review (personal)
-    filters: is:open review-requested:@me -user:amedia
-    # limit: 50  # optional limit of rows fetched for this section
-
-  - title: Mine (personal)
-    filters: is:open author:@me -user:amedia -repo:slok/sloth -label:release
+  - title: Releases (work)
+    filters: is:open user:amedia label:release
     layout:
       author:
         hidden: true
-        # width: <number of columns>
-        # grow: <bool> this will make the column grow in size
 
-  - title: Releases
+  - title: Review (personal)
+    filters: is:open review-requested:@me -label:release -user:amedia
+
+  - title: Releases (personal)
     filters: is:open user:@me label:release
     layout:
       author:
@@ -33,10 +27,10 @@ prSections:
 issuesSections:
   - title: Assigned
     filters: is:open assignee:@me
-  - title: Subscribed
-    filters: is:open -author:@me repo:gbbirkisson/spis
+  - title: Mentions
+    filters: is:open mentions:@me -user:enonic
   - title: Created
-    filters: is:open author:@me -user:enonic -user:kolonialno -repo:karloygard/xcomfortd-go -repo:slok/sloth -repo:jgensler8/terraform-provider-minikube
+    filters: is:open author:@me -user:enonic -repo:karloygard/xcomfortd-go
 
 defaults:
   layout:
