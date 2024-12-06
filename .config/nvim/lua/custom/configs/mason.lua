@@ -16,8 +16,11 @@ return {
       'yamllint',
       'yamlfmt',
 
-      -- JSON
+      -- vscode-langservers-extracted
       'json-lsp',
+      'html-lsp',
+      'css-lsp',
+      'eslint-lsp',
 
       -- Toml
       'taplo',

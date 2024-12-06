@@ -62,6 +62,12 @@ lspconfig.rust_analyzer.setup {
   },
 }
 
+-- HTML -- Needs: npm i -g vscode-langservers-extracted
+lspconfig.html.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
 -- Go
 lspconfig.gopls.setup {
   on_attach = on_attach,
