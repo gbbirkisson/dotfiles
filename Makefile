@@ -23,6 +23,12 @@ _sudo:
 	$(info $(M) Assert sudo)
 	$(Q) sudo true
 
+.PHONY:	_apt
+_apt:
+	$(info $(M) Update apt)
+	$(Q) sudo apt update
+	$(Q) sudo apt upgrade -y
+
 .PHONY: _run
 _run: $(VENV)
 	$(info $(M) Running $(PLAYBOOK))
@@ -42,7 +48,7 @@ $(PLAYBOOKS): lint
 install: _sudo playbooks/install.yml ## Install everything
 
 .PHONY: update
-update: _sudo _rustup install _tldr _mise _snap _gh_ext ## Update everything
+update: _sudo _apt _rustup install _tldr _mise _snap _gh_ext ## Update everything
 	$(Q) echo "$(M) 🎉 Update finished successfully 🎉"
 
 .PHONY: _mise
