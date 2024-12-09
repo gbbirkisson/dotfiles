@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=tree-sitter packageName=tree-sitter/tree-sitter
+    version: v0.24.5
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if treesitter is installed
+      shell: "tree-sitter -V | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: treesitter_installed.rc not in [0,1]
+      register: treesitter_installed
+
+    - name: Download treesitter
+      when: treesitter_installed.rc not in [ 0 ]
+      ansible.builtin.get_url:
+        force: true
+        url: "https://github.com/tree-sitter/tree-sitter/releases/download/{{ version }}/tree-sitter-linux-x64.gz"
+        dest: /tmp/treesitter.gz
+
+    - name: Unzip treesitter
+      when: treesitter_installed.rc not in [ 0 ]
+      shell: "gunzip -f /tmp/treesitter.gz"
+
+    - name: Set treesitter permissions
+      when: treesitter_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        path: /tmp/treesitter
+        state: touch
+        mode: +x
+
+    - name: Move treesitter bin
+      when: treesitter_installed.rc not in [ 0 ]
+      shell: "mv /tmp/treesitter ~/.local/bin/tree-sitter"
