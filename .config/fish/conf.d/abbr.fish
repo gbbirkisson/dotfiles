@@ -61,6 +61,8 @@ alias todo='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck todo.md'
 alias llmchad="nvim -c ':CodeCompanionChat openai'"
 alias llmollama="nvim -c ':CodeCompanionChat ollama'"
 
+alias lvim='NVIM_APPNAME=nvim-lazyvim nvim'
+
 # git
 abbr -a g git
 abbr -a gd gh dash

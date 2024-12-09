@@ -9,7 +9,11 @@ BUILDER:=$(VENV)/bin/python builder.py
 
 THEME:=schemes/onedark.yaml
 
-all: alacritty k9s tmux fzf regolith new-tab
+all: nvim alacritty k9s tmux fzf regolith new-tab
+
+.PHONY: nvim
+nvim:
+	$(Q) IN=templates/nvim.lua OUT=../nvim-lazyvim/lua/plugins/theme.lua $(MAKE) --no-print-directory _render
 
 .PHONY: alacritty
 alacritty:
