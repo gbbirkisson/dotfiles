@@ -72,3 +72,4 @@ printf \n‎
 style = "bold #565c64"
 detect_files = ['.profile']
 format = '$symbol[$output]($style)'
+ignore_timeout = true
