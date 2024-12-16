@@ -135,7 +135,7 @@ local plugins = {
   {
     -- LLM
     'olimorris/codecompanion.nvim',
-    version = 'v10.5.1',
+    version = 'v10.7.0',
     cmd = {
       'CodeCompanion',
       'CodeCompanionChat',
