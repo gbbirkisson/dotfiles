@@ -1,7 +1,6 @@
 return {
   {
-    -- LLM
-    version = "v10.5.0",
+    "olimorris/codecompanion.nvim",
     cmd = {
       "CodeCompanion",
       "CodeCompanionChat",
