@@ -3,3 +3,6 @@
 
 .config/fish/conf.d/env.fish
 .config/regolith3/Xresources
+
+.config/nvim/lazy-lock.json
+.config/nvim/lazyvim.json
