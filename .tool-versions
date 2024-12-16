@@ -6,6 +6,6 @@ python     3.13.1
 terraform  1.10.2
 golang     1.23.4
 uv         0.5.9
-helm       3.16.3
+helm       3.16.4
 kustomize  5.5.0
 pipx       1.7.1
