@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason.nvim",
     opts = {
       ensure_installed = {
         -- Python
