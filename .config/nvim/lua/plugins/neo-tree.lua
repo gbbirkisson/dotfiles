@@ -16,6 +16,13 @@ return {
         end,
         desc = "Explorer NeoTree (cwd)",
       },
+      {
+        "<CR>",
+        function()
+          -- Disable opening neo-tree when pressing enter
+        end,
+        desc = "NOOP",
+      },
     },
     opts = {
       renderer = {
