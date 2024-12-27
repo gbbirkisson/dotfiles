@@ -17,11 +17,9 @@ return {
         desc = "Explorer NeoTree (cwd)",
       },
       {
+        -- Remap enter to enter again
         "<CR>",
-        function()
-          -- Disable opening neo-tree when pressing enter
-        end,
-        desc = "NOOP",
+        "<CR>",
       },
     },
     opts = {
