@@ -1,1 +1,1 @@
-setenv BAT_THEME base16-256
+setenv BAT_THEME base16
