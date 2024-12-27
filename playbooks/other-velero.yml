@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=velero packageName=vmware-tanzu/velero
-    version: v1.15.0
+    version: v1.15.1
 
   tasks:
     - name: Create local bin path
