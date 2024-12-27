@@ -22,10 +22,10 @@ keybind = ctrl+space>ctrl+j=goto_split:bottom
 keybind = ctrl+space>ctrl+k=goto_split:top
 keybind = ctrl+space>ctrl+l=goto_split:right
 
-keybind = alt+h=resize_split:left,100
-keybind = alt+j=resize_split:down,100
-keybind = alt+k=resize_split:up,100
-keybind = alt+l=resize_split:right,100
+keybind = alt+shift+h=resize_split:left,100
+keybind = alt+shift+j=resize_split:down,100
+keybind = alt+shift+k=resize_split:up,100
+keybind = alt+shift+l=resize_split:right,100
 
 # Tabs
 keybind = ctrl+space>c=new_tab
@@ -38,4 +38,5 @@ keybind = ctrl+shift+j=scroll_page_lines:10
 keybind = ctrl+shift+k=scroll_page_lines:-10
 
 # Other
-keybind = ctrl+shift+o=write_scrollback_file:open
+keybind = ctrl+space>o=write_scrollback_file:open
+keybind = ctrl+space>i=inspector:toggle
