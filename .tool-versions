@@ -9,3 +9,4 @@ uv         0.5.12
 helm       3.16.4
 kustomize  5.5.0
 pipx       1.7.1
+zig        0.13.0

@@ -2,7 +2,9 @@
 .venv
 
 .config/fish/conf.d/env.fish
-.config/regolith3/Xresources
+.config/ghostty/themes/theme
 
 .config/nvim/lazy-lock.json
 .config/nvim/lazyvim.json
+
+.config/regolith3/Xresources

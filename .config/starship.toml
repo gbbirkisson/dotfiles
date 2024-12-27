@@ -38,7 +38,7 @@ disabled = false
 style = "bold yellow"
 
 [git_status]
-style = "bold fg:17"
+style = "bold fg:red"
 
 [character]
 format = "$symbol"

@@ -1,0 +1,41 @@
+# Set font
+font-family = monospace
+
+# Run fish
+command = /usr/bin/fish
+
+# Look
+window-decoration = false
+mouse-hide-while-typing = true
+unfocused-split-opacity = 0.8
+
+# Set custom theme
+theme = theme
+
+# Splits
+keybind = ctrl+space>shift+5=new_split:right
+keybind = ctrl+space>shift+'=new_split:down
+
+keybind = ctrl+space>ctrl+space=goto_split:next
+keybind = ctrl+space>ctrl+h=goto_split:left
+keybind = ctrl+space>ctrl+j=goto_split:bottom
+keybind = ctrl+space>ctrl+k=goto_split:top
+keybind = ctrl+space>ctrl+l=goto_split:right
+
+keybind = alt+h=resize_split:left,100
+keybind = alt+j=resize_split:down,100
+keybind = alt+k=resize_split:up,100
+keybind = alt+l=resize_split:right,100
+
+# Tabs
+keybind = ctrl+space>c=new_tab
+keybind = ctrl+space>h=previous_tab
+keybind = ctrl+space>l=next_tab
+keybind = ctrl+space>s=toggle_tab_overview
+
+# Scrolling
+keybind = ctrl+shift+j=scroll_page_lines:10
+keybind = ctrl+shift+k=scroll_page_lines:-10
+
+# Other
+keybind = ctrl+shift+o=write_scrollback_file:open

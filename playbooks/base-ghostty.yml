@@ -1,0 +1,41 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-tags depName=ghostty packageName=ghostty-org/ghostty
+    version: v1.0.0
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if ghostty is installed
+      shell: "ghostty version 2>&1 | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: ghostty_installed.rc not in [0,1]
+      register: ghostty_installed
+
+    - name: Install dev dependencies
+      when: ghostty_installed.rc not in [ 0 ]
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - libgtk-4-dev
+          - libadwaita-1-dev
+
+    - name: Download ghostty source
+      when: ghostty_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://release.files.ghostty.org/{{ version[1:] }}/ghostty-source.tar.gz"
+        dest: "/tmp"
+
+    - name: Build ghostty
+      when: ghostty_installed.rc not in [ 0 ]
+      shell: "zig build -p $HOME/.local -Doptimize=ReleaseFast"
+      args:
+        chdir: /tmp/ghostty-source

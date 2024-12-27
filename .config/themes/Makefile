@@ -9,7 +9,11 @@ BUILDER:=$(VENV)/bin/python builder.py
 
 THEME:=schemes/onedark.yaml
 
-all: alacritty k9s tmux fzf regolith new-tab
+all: ghostty alacritty k9s tmux fzf regolith new-tab
+
+.PHONY: ghostty
+ghostty:
+	$(Q) IN=templates/ghostty OUT=../ghostty/themes/theme $(MAKE) --no-print-directory _render
 
 .PHONY: alacritty
 alacritty:

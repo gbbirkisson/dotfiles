@@ -81,10 +81,12 @@ theme:  ## Generate theme
 	$(Q) $(MAKE) --no-print-directory -C .config/themes all
 
 .PHONY: term
-term: _sudo ## Set default terminal to alacritty
+term: _sudo ## Set default terminal
 	$(info $(M) Setting default terminal)
-	$(Q) which alacritty
-	$(Q) update-alternatives --list x-terminal-emulator | grep -q alacritty || sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which alacritty) 100
+	# $(Q) which alacritty
+	# $(Q) update-alternatives --list x-terminal-emulator | grep -q alacritty || sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which alacritty) 100
+	$(Q) which ghostty
+	$(Q) update-alternatives --list x-terminal-emulator | grep -q ghostty || sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which ghostty) 101
 	$(Q) sudo update-alternatives --config x-terminal-emulator
 
 .PHONY: renovate
