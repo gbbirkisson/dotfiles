@@ -3,11 +3,16 @@ font-family = monospace
 
 # Run fish
 command = /usr/bin/fish
+shell-integration = fish
 
 # Look
 window-decoration = false
 mouse-hide-while-typing = true
 unfocused-split-opacity = 0.8
+unfocused-split-fill = #0e0f13
+window-theme = ghostty
+resize-overlay = never
+adw-toolbar-style = flat
 
 # Set custom theme
 theme = theme
