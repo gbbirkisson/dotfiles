@@ -13,6 +13,7 @@ all: ghostty alacritty k9s tmux fzf regolith new-tab
 
 .PHONY: ghostty
 ghostty:
+	$(Q) mkdir ../ghostty/themes
 	$(Q) IN=templates/ghostty OUT=../ghostty/themes/theme $(MAKE) --no-print-directory _render
 
 .PHONY: alacritty
