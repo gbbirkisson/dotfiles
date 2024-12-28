@@ -33,7 +33,9 @@ return {
         varnishls = {},
         bashls = {},
         gopls = {},
-        html = {},
+        html = {
+          filetypes = { "html", "templ", "htmldjango" },
+        },
         jsonls = {},
         marksman = {},
         pyright = {},
