@@ -12,7 +12,7 @@
         state: directory
 
     - name: Check if ghostty is installed
-      shell: "ghostty version 2>&1 | grep {{ version[1:] }}"
+      shell: "ghostty +version 2>&1 | grep {{ version[1:] }}"
       changed_when: false
       failed_when: ghostty_installed.rc not in [0,1]
       register: ghostty_installed
