@@ -16,7 +16,7 @@
         - { crate_name: git-delta, version: 0.18.0 }        # Better diff
         - { crate_name: hyperfine, version: 1.18.0 }        # Benchmarking
         - { crate_name: lsd, version: 1.0.0 }               # Better ls
-        - { crate_name: mise, version: 2025.0.0 }           # Better asdf
+        - { crate_name: mise, version: 2025.1.0 }           # Better asdf
         - { crate_name: oha, version: 1.0.0 }               # HTTP stress testing
         - { crate_name: ouch, version: 0.5.1 }              # Easy compress/decompress
         - { crate_name: py-spy, version: 0.4.0 }           # Python profiling
