@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-releases depName=protobuf packageName=protocolbuffers/protobuf
+    version: v29.2
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin/protobuf
+        state: directory
+
+    - name: Check if protoc is installed
+      shell: "protoc --version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: protoc_installed.rc not in [0,1]
+      register: protoc_installed
+
+    - name: Install protoc
+      when: protoc_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/protocolbuffers/protobuf/releases/download/{{ version }}/protoc-{{ version[1:] }}-linux-x86_64.zip"
+        dest: ~/.local/bin/protobuf
+
+    - name: Link protoc
+      when: protoc_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        src: "~/.local/bin/protobuf/bin/protoc"
+        dest: ~/.local/bin/protoc
+        state: link
