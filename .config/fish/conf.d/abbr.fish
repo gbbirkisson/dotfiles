@@ -81,6 +81,7 @@ end
 abbr -a m make
 abbr -a c cargo
 abbr -a o xdg-open
+abbr -a a a2l
 
 # other
 alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
