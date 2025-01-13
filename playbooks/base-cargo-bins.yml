@@ -7,7 +7,7 @@
         name: "{{ item.crate_name }}"
         version: "{{ item.version }}"
       with_items:
-        - { crate_name: alacritty, version: 0.14.0 }        # Better terminal emulator
+        - { crate_name: alacritty, version: 0.15.0 }        # Better terminal emulator
         - { crate_name: bat, version: 0.25.0 }              # Better cat
         - { crate_name: cargo-tarpaulin, version: 0.31.0 }  # For cargo code coverage
         - { crate_name: drill, version: 0.8.2 }             # HTTP stress testing (ansible-esqe)
