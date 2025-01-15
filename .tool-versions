@@ -7,6 +7,6 @@ terraform  1.10.4
 golang     1.23.4
 uv         0.5.18
 helm       3.16.4
-kustomize  5.5.0
+kustomize  5.6.0
 pipx       1.7.1
 zig        0.13.0
