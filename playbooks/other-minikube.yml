@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=minikube packageName=kubernetes/minikube
-    version: v1.34.0
+    version: v1.35.0
 
   tasks:
     - name: Create local bin path
