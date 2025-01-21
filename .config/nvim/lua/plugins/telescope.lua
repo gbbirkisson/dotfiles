@@ -6,7 +6,7 @@ return {
     },
     keys = {
       { "<leader>fw", "<Cmd>Telescope live_grep<CR>", desc = "Find Word" },
-      { "<leader>fe", "<Cmd>Telescope emoji<CR>", desc = "Find Emoji" },
+      { "<leader>fm", "<Cmd>Telescope emoji<CR>", desc = "Find Emoji" },
       { "<leader>ff", "<Cmd>Telescope find_files hidden=true<CR>", desc = "Find Files" },
       { "<leader>ft", "<Cmd>TodoTelescope keywords=TODO,FIX<CR>", desc = "Find Todo" },
       { "<leader>fn", "<Cmd>TodoTelescope<CR>", desc = "Find Notes" },
