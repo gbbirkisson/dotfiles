@@ -11,9 +11,6 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
--- Do not copy when pasting over
-map("v", "p", '"_dP')
-
 -- Interact with clipboard
 map("n", "<leader>y", '"+y')
 map("n", "<leader>yy", '"+yy')
