@@ -4,7 +4,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=regolith-desktop packageName=regolith-linux/regolith-desktop
-    version: r3_2
+    version: v4.9.0
 
   tasks:
     - name: Set DPKG architecture
