@@ -21,12 +21,12 @@
       when: nvim_installed.rc not in [ 0 ]
       unarchive:
         remote_src: yes
-        src: "https://github.com/neovim/neovim/releases/download/{{ version }}/nvim-linux64.tar.gz"
+        src: "https://github.com/neovim/neovim/releases/download/{{ version }}/nvim-linux-x86_64.tar.gz"
         dest: ~/.local/bin
 
     - name: Link nvim
       when: nvim_installed.rc not in [ 0 ]
       ansible.builtin.file:
-        src: ~/.local/bin/nvim-linux64/bin/nvim
+        src: ~/.local/bin/nvim-linux-x86_64/bin/nvim
         dest: ~/.local/bin/nvim
         state: link
