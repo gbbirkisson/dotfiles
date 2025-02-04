@@ -33,7 +33,8 @@ return {
         "yaml",
       }
 
-      if vim.fn.isdirectory("~/repos/personal/tree-sitter-river") == 0 then
+      local river_path = vim.fn.expand("~/repos/personal/tree-sitter-river")
+      if vim.fn.isdirectory(river_path) == 1 then
         -- setup river: https://github.com/grafana/tree-sitter-river
         parser_config.river = {
           install_info = {
