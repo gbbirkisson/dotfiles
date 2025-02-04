@@ -1,43 +1,51 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    "config:base",
-    ":semanticCommits"
+    'config:recommended',
+    ':semanticCommits',
   ],
-  semanticCommitType: "fix",
+  semanticCommitType: 'fix',
   reviewersFromCodeOwners: true,
   dependencyDashboard: true,
   packageRules: [
     {
-      matchDatasources: ["asdf"],
-      minimumReleaseAge: "3 days"
-    }
+      matchDatasources: [
+        'asdf',
+      ],
+      minimumReleaseAge: '3 days',
+    },
   ],
   customManagers: [
     {
-      customType: "regex",
-      description: "Match versions that are tagged with comments",
-      fileMatch: ["^.*.ya?ml$"],
+      customType: 'regex',
+      description: 'Match versions that are tagged with comments',
+      fileMatch: [
+        '^.*.ya?ml$',
+      ],
       matchStrings: [
-        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>[^\\s]+)( packageName=(?<packageName>[^\\s]+))?( versioning=(?<versioning>[^\\s]+))?\\s*.*version:\\s(?<currentValue>[^\\s]+)",
+        '# renovate: datasource=(?<datasource>.*?) depName=(?<depName>[^\\s]+)( packageName=(?<packageName>[^\\s]+))?( versioning=(?<versioning>[^\\s]+))?\\s*.*version:\\s(?<currentValue>[^\\s]+)',
       ],
     },
     {
-      customType: "regex",
-      description: "Match versions of cargo crates",
-      datasourceTemplate: "crate",
-      fileMatch: ["^.*.ya?ml$"],
+      customType: 'regex',
+      description: 'Match versions of cargo crates',
+      datasourceTemplate: 'crate',
+      fileMatch: [
+        '^.*.ya?ml$',
+      ],
       matchStrings: [
-        "crate_name: (?<depName>[^\\s]+), version: (?<currentValue>[^\\s]+)",
+        'crate_name: (?<depName>[^\\s]+), version: (?<currentValue>[^\\s]+)',
       ],
     },
     {
-      customType: "regex",
-      description: "Match versions of lazy dependencies",
-      datasourceTemplate: "github-tags",
-      fileMatch: ["^.*.lua$"],
+      customType: 'regex',
+      description: 'Match versions of lazy dependencies',
+      datasourceTemplate: 'github-tags',
+      fileMatch: [
+        '^.*.lua$',
+      ],
       matchStrings: [
-        "'(?<depName>[^\\s]+)',\\s*.*version\\s=\\s'(?<currentValue>[^\\s]+)',"
+        "'(?<depName>[^\\s]+)',\\s*.*version\\s=\\s'(?<currentValue>[^\\s]+)',",
       ],
     },
   ],
