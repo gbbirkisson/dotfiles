@@ -8,6 +8,15 @@ return {
     end,
     config = function()
       require("base46").load_all_highlights()
+
+      -- Telescope
+      vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#abb2bf" })
+      vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#abb2bf" })
+
+      vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = "#e06c75", bold = true })
+      vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = "#565c64" })
+      vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = "#565c64" })
+      vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = "#565c64" })
     end,
   },
   {

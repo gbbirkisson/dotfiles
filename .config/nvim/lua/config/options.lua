@@ -2,6 +2,9 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+-- Use telescope as picker
+vim.g.lazyvim_picker = "telescope"
+
 -- Use treesitter instead of semantic tokens
 -- :h vim.highlight.priorities
 vim.highlight.priorities.semantic_tokens = 95

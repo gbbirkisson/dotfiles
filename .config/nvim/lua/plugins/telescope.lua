@@ -24,7 +24,21 @@ return {
       },
     },
     opts = {
+      pickers = {
+        live_grep = {
+          prompt_title = "Find Word",
+        },
+      },
       defaults = {
+        sorting_strategy = "ascending",
+        layout_config = {
+          prompt_position = "top",
+          preview_cutoff = 200,
+          preview_width = 0.4,
+          horizontal = {
+            width = 0.95,
+          },
+        },
         vimgrep_arguments = {
           -- defaults
           "rg",
