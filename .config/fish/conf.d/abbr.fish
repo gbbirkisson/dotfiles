@@ -87,6 +87,7 @@ abbr -a a a2l
 alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
 alias cal="$DOTFILES/.venv/calcure/bin/calcure"
 alias wtf='xrandr --output $(xrandr |grep eDP|cut -d" " -f1) --rotate normal'
+alias icat="timg -p kitty"
 
 # us layout cheatsheet
 function en-layout

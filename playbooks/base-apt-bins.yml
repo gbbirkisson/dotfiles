@@ -36,3 +36,4 @@
           - tree          # Tree for directories
           - wireguard     # VPN
           - xclip         # For nvim clipboard
+          - timg          # Cat images in terminal
