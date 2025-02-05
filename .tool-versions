@@ -1,8 +1,8 @@
-gcloud     458.0.1
+gcloud     509.0.0
 kubectl    1.32.1
 nodejs     22.13.1
 pre-commit 4.1.0
-python     3.12
+python     3.13
 terraform  1.10.5
 golang     1.23.6
 uv         0.5.27
