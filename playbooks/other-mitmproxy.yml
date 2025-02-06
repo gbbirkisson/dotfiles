@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=mitmproxy packageName=mitmproxy/mitmproxy
-    version: v11.1.0
+    version: v11.1.2
 
   tasks:
     - name: Create local bin path
