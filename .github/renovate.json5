@@ -15,10 +15,10 @@
       minimumReleaseAge: '3 days',
     },
     {
-      matchPackagePatterns: [
-        'regolith-desktop',
+      allowedVersions: '!/v4.9.0$/',
+      matchPackageNames: [
+        '/regolith-desktop/',
       ],
-      allowedVersions: '!/v4\.9\.0$/',
     },
   ],
   customManagers: [
