@@ -15,4 +15,8 @@ if command -v mise >/dev/null
     if mise which gcloud >/dev/null
         setenv CLOUDSDK_PYTHON /usr/bin/python3
     end
+
+    if mise which just >/dev/null
+        just --completions fish | source
+    end
 end

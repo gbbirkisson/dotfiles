@@ -14,6 +14,7 @@ return {
         "jsdoc",
         "json",
         "jsonc",
+        "just",
         "lua",
         "luadoc",
         "luap",
