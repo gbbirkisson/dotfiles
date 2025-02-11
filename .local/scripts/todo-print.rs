@@ -7,8 +7,8 @@
 //! ```
 
 use chrono::Local;
-use std::fs::File;
 use std::fs::read_to_string;
+use std::fs::File;
 use std::path::Path;
 
 fn main() {
@@ -18,7 +18,7 @@ fn main() {
     let todo_trigger = format!("/tmp/TODO-{}", hour);
 
     if Path::new(&todo_trigger).exists() {
-        //return;
+        return;
     }
 
     let todo = dirs::home_dir()
