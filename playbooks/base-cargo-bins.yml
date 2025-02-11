@@ -20,8 +20,9 @@
         - { crate_name: mise, version: 2025.1.0 }           # Better asdf
         - { crate_name: oha, version: 1.0.0 }               # HTTP stress testing
         - { crate_name: ouch, version: 0.5.1 }              # Easy compress/decompress
-        - { crate_name: py-spy, version: 0.4.0 }           # Python profiling
+        - { crate_name: py-spy, version: 0.4.0 }            # Python profiling
         - { crate_name: ripgrep, version: 14.1.0 }          # Better grep
+        - { crate_name: rust-script, version: 0.35.0 }      # Create rust "scripts"
         - { crate_name: sfz, version: 0.7.1 }               # Simple web server for dirs
         - { crate_name: starship, version: 1.19.0 }         # Fancy prompt
         - { crate_name: tealdeer, version: 1.7.0 }          # Better tldr

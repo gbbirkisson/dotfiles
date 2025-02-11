@@ -60,16 +60,9 @@ min_time = 2000
 format = "took [$duration]($style) "
 
 # Run in home folder
-# [custom.todo]
-# command = '''
-# export FILE=/tmp/todo$(date +%H);
-# test ! -f $FILE && \
-# touch $FILE && \
-# cat ~/repos/personal/notes/todo.md | tail -n +10 | grep -q - && \
-# cat ~/repos/personal/notes/todo.md | tail -n +8 && \
-# printf \n‎
-# '''
-# style = "bold #565c64"
-# detect_files = ['.profile']
-# format = '$symbol[$output]($style)'
-# ignore_timeout = true
+[custom.todo]
+command = "todo-print.rs"
+style = "bold #d19a66"
+detect_files = ['.profile']
+format = '$symbol[$output]($style)'
+ignore_timeout = true
