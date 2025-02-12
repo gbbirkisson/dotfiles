@@ -56,7 +56,7 @@ abbr -a di "rm -r .venv && direnv reload"
 abbr -a v nvim
 abbr -a vim nvim
 alias day='cd $HOME/repos/personal/notes && nvim -c :ObsidianToday'
-alias notes='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck .'
+alias notes='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck'
 alias todo='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck todo.md'
 alias llmchad="nvim -c ':CodeCompanionChat openai'"
 alias llmclaude="nvim -c ':CodeCompanionChat anthropic'"
@@ -84,6 +84,7 @@ abbr -a o xdg-open
 abbr -a a a2l
 
 # other
+alias gopass="PASSWORD_STORE_DIR=$HOME/repos/amedia/apass $HOME/.local/bin/gopass"
 alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
 alias cal="$DOTFILES/.venv/calcure/bin/calcure"
 alias wtf='xrandr --output $(xrandr |grep eDP|cut -d" " -f1) --rotate normal'
