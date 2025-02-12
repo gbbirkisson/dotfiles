@@ -61,5 +61,6 @@ link .local/scripts
 link .gitconfig
 link .gitconfig_amedia
 link .gitglobalignore
+link .gitglobalignore_amedia
 link .profile_gbb
 link .tool-versions

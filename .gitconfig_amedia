@@ -1,2 +1,5 @@
 [user]
 	email = gudmundur.birkisson@amedia.no
+
+[core]
+  excludesFile = "~/.gitglobalignore_amedia"

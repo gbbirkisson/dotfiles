@@ -64,4 +64,4 @@
 
 ; amedia config
 [includeIf "gitdir:~/repos/amedia/**"]
-	path = .gitconfig_amedia
+  path = .gitconfig_amedia
