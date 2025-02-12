@@ -12,7 +12,7 @@
         state: directory
 
     - name: Check if gopass is installed
-      shell: "gopass version | grep {{ version[1:] }}"
+      shell: "gopass version | head -n 1 | grep {{ version[1:] }}"
       changed_when: false
       failed_when: gopass_installed.rc not in [0,1]
       register: gopass_installed
