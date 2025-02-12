@@ -48,6 +48,7 @@ return {
           },
           never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
             ".git",
+            ".obsidian",
           },
           never_show_by_pattern = { -- uses glob style patterns
             --".null-ls_*",
