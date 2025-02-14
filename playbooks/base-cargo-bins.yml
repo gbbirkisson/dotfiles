@@ -10,7 +10,7 @@
         - { crate_name: alacritty, version: 0.15.0 }        # Better terminal emulator
         - { crate_name: bat, version: 0.25.0 }              # Better cat
         - { crate_name: cargo-dist, version: 0.28.0 }       # For rust distribution
-        - { crate_name: cargo-tarpaulin, version: 0.31.0 }  # For cargo code coverage
+        - { crate_name: cargo-tarpaulin, version: 0.32.0 }  # For cargo code coverage
         - { crate_name: drill, version: 0.8.2 }             # HTTP stress testing (ansible-esqe)
         - { crate_name: du-dust, version: 1.0.0 }           # Better du
         - { crate_name: fd-find, version: 10.0.0 }          # Better find
