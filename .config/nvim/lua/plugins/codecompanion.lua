@@ -46,13 +46,13 @@ return {
     opts = {
       strategies = {
         chat = {
-          adapter = vim.env.NVIM_LLM or "anthropic", -- can be ollama, openai, anthropic
+          adapter = vim.env.NVIM_LLM or "deepseek", -- can be ollama, openai, anthropic, deepseek
         },
         inline = {
-          adapter = vim.env.NVIM_LLM or "anthropic", -- can be ollama, openai, anthropic
+          adapter = vim.env.NVIM_LLM or "deepseek", -- can be ollama, openai, anthropic, deepseek
         },
         agent = {
-          adapter = vim.env.NVIM_LLM or "anthropic", -- can be ollama, openai, anthropic
+          adapter = vim.env.NVIM_LLM or "deepseek", -- can be ollama, openai, anthropic, deepseek
         },
       },
       adapters = {
@@ -72,6 +72,21 @@ return {
           return require("codecompanion.adapters").extend("anthropic", {
             env = {
               api_key = "cmd:op read op://hemwnx22rvxga5v2zkicawq6sq/7epubtpoeq4rdyrpsrzqydbnqu/credential --no-newline",
+            },
+          })
+        end,
+        deepseek = function()
+          return require("codecompanion.adapters").extend("openai_compatible", {
+            name = "deepseek",
+            env = {
+              api_key = "cmd:op read op://hemwnx22rvxga5v2zkicawq6sq/q5apc3d4wqw3wbdbkh3w4mf2xm/credential --no-newline",
+              url = "https://api.together.xyz",
+              chat_url = "/v1/chat/completions",
+            },
+            schema = {
+              model = {
+                default = "deepseek-ai/DeepSeek-R1",
+              },
             },
           })
         end,

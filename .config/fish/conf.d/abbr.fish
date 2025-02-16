@@ -60,6 +60,7 @@ alias notes='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck'
 alias todo='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck todo.md'
 alias llmchad="nvim -c ':CodeCompanionChat openai'"
 alias llmclaude="nvim -c ':CodeCompanionChat anthropic'"
+alias llmdeepseek="nvim -c ':CodeCompanionChat deepseek'"
 alias llmollama="nvim -c ':CodeCompanionChat ollama'"
 
 # git
