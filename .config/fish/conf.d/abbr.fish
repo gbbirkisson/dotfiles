@@ -107,18 +107,14 @@ function en-layout
 end
 
 function trs -a source -a target -d "Translate something"
-    xh --form POST \
-        https://translate.kagi.com/ \
-        model=balanced \
-        source=$source \
-        target=$target \
-        url= \
-        text="$argv[3..-1]" \
-        | rg 'id="translation-output"' \
-        | rg '.*>(.*)</textarea>' -r '$1' --color=never
+    xh 'https://lingva.ml/api/v1/'$source'/'$target'/'"$argv[3..-1]" | jq -r .translation
 end
 
-alias no="trs Norwegian English"
-alias en="trs English Norwegian"
+alias no="trs no en"
+alias en="trs en no"
+
+function noc -d "Check norwegian"
+    trs en no (trs no en $argv)
+end
 
 abbr -a lgtm docker run --pull always -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm -ti grafana/otel-lgtm
