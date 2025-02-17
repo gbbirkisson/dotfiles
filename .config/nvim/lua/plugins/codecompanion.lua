@@ -46,16 +46,19 @@ return {
     opts = {
       strategies = {
         chat = {
-          adapter = vim.env.NVIM_LLM or "deepseek", -- can be ollama, openai, anthropic, deepseek
+          adapter = vim.env.NVIM_LLM or "openai", -- can be ollama, openai, anthropic, deepseek
         },
         inline = {
-          adapter = vim.env.NVIM_LLM or "deepseek", -- can be ollama, openai, anthropic, deepseek
+          adapter = vim.env.NVIM_LLM or "openai", -- can be ollama, openai, anthropic, deepseek
         },
         agent = {
-          adapter = vim.env.NVIM_LLM or "deepseek", -- can be ollama, openai, anthropic, deepseek
+          adapter = vim.env.NVIM_LLM or "openai", -- can be ollama, openai, anthropic, deepseek
         },
       },
       adapters = {
+        opts = {
+          show_defaults = false,
+        },
         ollama = function()
           return require("codecompanion.adapters").extend("ollama", {
             model = "mistral:instruct",

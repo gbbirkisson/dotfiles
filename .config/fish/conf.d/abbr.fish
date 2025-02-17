@@ -58,10 +58,10 @@ abbr -a vim nvim
 alias day='cd $HOME/repos/personal/notes && nvim -c :ObsidianToday'
 alias notes='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck'
 alias todo='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck todo.md'
-alias llmchad="nvim -c ':CodeCompanionChat openai'"
-alias llmclaude="nvim -c ':CodeCompanionChat anthropic'"
-alias llmdeepseek="nvim -c ':CodeCompanionChat deepseek'"
-alias llmollama="nvim -c ':CodeCompanionChat ollama'"
+alias llmchad="nvim -c ':CodeCompanionChat openai' -c ':on'"
+alias llmclaude="nvim -c ':CodeCompanionChat anthropic' -c ':on'"
+alias llmdeepseek="nvim -c ':CodeCompanionChat deepseek' -c ':on'"
+alias llmollama="nvim -c ':CodeCompanionChat ollama' -c ':on'"
 
 # git
 abbr -a g git
