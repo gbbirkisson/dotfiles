@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=tree-sitter packageName=tree-sitter/tree-sitter
-    version: v0.25.1
+    version: v0.25.2
 
   tasks:
     - name: Create local bin path
