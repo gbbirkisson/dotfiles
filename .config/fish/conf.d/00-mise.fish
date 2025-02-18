@@ -6,7 +6,7 @@ if command -v mise >/dev/null
     # setenv MISE_DEBUG 1
 
     mise activate fish | source
-    mise completions fish | tail -n +9 | source
+    mise completions fish | source
 
     if mise which kubectl >/dev/null
         eval (mise which kubectl) completion fish | source
@@ -17,6 +17,10 @@ if command -v mise >/dev/null
     end
 
     if mise which just >/dev/null
-        just --completions fish | source
+        eval (mise which just) --completions fish | source
+    end
+
+    if mise which hk >/dev/null
+        eval (mise which hk) completion fish | source
     end
 end
