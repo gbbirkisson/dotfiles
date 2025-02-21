@@ -102,4 +102,4 @@ function noc -d "Check norwegian"
 end
 
 # easy grafana stack
-abbr -a lgtm docker run --add-host hyper:(ip addr show wlp0s20f3 | rg '.*inet (\d+\.\d+\.\d+\.\d+).*' -r '$1') --pull always -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm --name lgtm -ti grafana/otel-lgtm
+abbr -a lgtm 'docker run --add-host hyper:(ip addr show wlp0s20f3 | rg ".*inet (\d+\.\d+\.\d+\.\d+).*" -r "$1") --pull always -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm --name lgtm -ti grafana/otel-lgtm'
