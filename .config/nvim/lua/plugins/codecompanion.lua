@@ -47,6 +47,23 @@ return {
       strategies = {
         chat = {
           adapter = vim.env.NVIM_LLM or "openai", -- can be ollama, openai, anthropic, deepseek
+          slash_commands = {
+            ["buffer"] = {
+              opts = {
+                provider = "telescope",
+              },
+            },
+            ["file"] = {
+              opts = {
+                provider = "telescope",
+              },
+            },
+            ["symbols"] = {
+              opts = {
+                provider = "telescope",
+              },
+            },
+          },
         },
         inline = {
           adapter = vim.env.NVIM_LLM or "openai", -- can be ollama, openai, anthropic, deepseek
