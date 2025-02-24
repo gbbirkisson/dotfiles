@@ -57,10 +57,26 @@ abbr -a n nvim
 alias day='cd $HOME/repos/personal/notes && nvim -c :ObsidianToday'
 alias notes='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck'
 alias todo='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck todo.md'
+
+# ai
 alias llmchad="nvim -c ':CodeCompanionChat openai' -c ':on'"
 alias llmclaude="nvim -c ':CodeCompanionChat anthropic' -c ':on'"
 alias llmdeepseek="nvim -c ':CodeCompanionChat deepseek' -c ':on'"
 alias llmollama="nvim -c ':CodeCompanionChat ollama' -c ':on'"
+
+function dalle
+    curl https://api.openai.com/v1/images/generations \
+        -H "Authorization: Bearer $(op read op://hemwnx22rvxga5v2zkicawq6sq/l6mbqk77zt62hrdxahozqi6uom/key --no-newline)" \
+        -H "Content-Type: application/json" \
+        -d '{
+        "prompt": "'"$argv"'",
+        "num_images":1,
+        "model":"dall-e-3",
+        "quality":"standard",
+        "size":"1024x1024",
+        "response_format":"url"
+    }' | tee /dev/stderr | jq .data[0].url | xargs open
+end
 
 # git
 abbr -a g git
