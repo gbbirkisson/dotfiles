@@ -17,7 +17,7 @@
 ; merge tool
 [merge]
   tool = nvimdiff
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 [mergetool]
   keepBackup = false
   prompt = false
@@ -34,33 +34,56 @@
 [commit]
   gpgsign = true
 
+; delta pager
 [core]
   excludesFile = ~/.gitglobalignore
   pager = delta
-
 [interactive]
   diffFilter = delta --color-only --features=interactive
-
-[diff]
-  colorMoved = default
-
 [delta]
-  features = decorations
-  line-numbers = true
+  features = theme
   navigate = true
   hyperlinks = true
-
-[delta "interactive"]
   keep-plus-minus-markers = false
+  line-numbers = true
 
-[delta "decorations"]
-  commit-decoration-style = blue ol
-  commit-style = raw
-  file-style = omit
-  hunk-header-decoration-style = blue box
-  hunk-header-file-style = red
-  hunk-header-line-number-style = "#067a00"
-  hunk-header-style = file line-number syntax
+[delta "theme"]
+    dark = true
+    commit-style = "#949494"
+    file-style = omit
+    syntax-theme = none
+    hunk-header-decoration-style = "#949494" ul
+    hunk-header-file-style = "#949494"
+    hunk-header-file-style = olive
+    hunk-header-style = file line-number purple
+    line-numbers = true
+    line-numbers-left-style = "#949494"
+    line-numbers-right-style = "#949494"
+    line-numbers-left-format = "{nm:>2}|"
+    line-numbers-right-format = "{np:>3} "
+    line-numbers-plus-style = "green"
+    line-numbers-minus-style = bold "darkred"
+    plus-style = "green"
+    plus-emph-style = bold "green"
+    plus-non-emph-style = dim "green"
+    minus-style = normal "darkred"
+    minus-emph-style = normal "darkred"
+    minus-non-emph-style = bold "darkred"
+    blame-code-style = omit
+    blame-format = "{author:<18} {commit:<6} {timestamp:<15}"
+    blame-palette = "#000000" "#343434"
+    zero-style = dim
+
+; https://blog.gitbutler.com/how-git-core-devs-configure-git/
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
 
 ; amedia config
 [includeIf "gitdir:~/repos/amedia/**"]
