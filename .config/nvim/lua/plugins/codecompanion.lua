@@ -46,7 +46,7 @@ return {
     opts = {
       strategies = {
         chat = {
-          adapter = vim.env.NVIM_LLM or "openai", -- can be ollama, openai, anthropic, deepseek
+          adapter = vim.env.NVIM_LLM or "anthropic", -- can be ollama, openai, anthropic, deepseek
           slash_commands = {
             ["buffer"] = {
               opts = {
@@ -66,10 +66,10 @@ return {
           },
         },
         inline = {
-          adapter = vim.env.NVIM_LLM or "openai", -- can be ollama, openai, anthropic, deepseek
+          adapter = vim.env.NVIM_LLM or "anthropic", -- can be ollama, openai, anthropic, deepseek
         },
         agent = {
-          adapter = vim.env.NVIM_LLM or "openai", -- can be ollama, openai, anthropic, deepseek
+          adapter = vim.env.NVIM_LLM or "anthropic", -- can be ollama, openai, anthropic, deepseek
         },
       },
       adapters = {
