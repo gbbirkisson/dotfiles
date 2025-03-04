@@ -11,17 +11,6 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
--- Interact with clipboard
-map("n", "<leader>y", '"+y')
-map("n", "<leader>yy", '"+yy')
-map("n", "<leader>Y", '"+Y')
-map("n", "<leader>p", '"+p')
-map("n", "<leader>P", '"+P')
-
-map("v", "<leader>y", '"+y')
-map("v", "<leader>p", '"+p')
-map("v", "<leader>P", '"+P')
-
 -- Centering
 map("n", "<c-u>", "<c-u>zz")
 map("n", "<c-d>", "<c-d>zz")
