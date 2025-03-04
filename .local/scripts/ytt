@@ -13,7 +13,7 @@ import sys
 import textwrap
 
 from youtube_transcript_api import YouTubeTranscriptApi
-from youtube_transcript_api.formatters import TextFormatter as Fmt
+from youtube_transcript_api.formatters import WebVTTFormatter as Fmt
 
 
 def extract_video_id(url):
@@ -29,31 +29,59 @@ def get_transcript(video_id, languages=["en"]):
     return YouTubeTranscriptApi.get_transcript(video_id, languages=languages)
 
 
+def fmt_time(time: float) -> str:
+    hours_float, remainder = divmod(time, 3600)
+    mins_float, secs_float = divmod(remainder, 60)
+    hours, mins, secs = int(hours_float), int(mins_float), int(secs_float)
+    return "{:02d}:{:02d}:{:02d}".format(hours, mins, secs)
+
+
 def main():
     for line in sys.stdin:
         if line:
-            transcript = get_transcript(extract_video_id(line))
-            transcript_text = (
-                Fmt()
-                .format_transcript(transcript)
-                .replace("WebVVT\n\n", "")
-                .replace("\n\n", "\n")
-            )
-            # transcript_text = transcript_text.replace("\n", " ")
-            transcript_text = textwrap.fill(transcript_text, 96)
+            chunks = {}
+            chunk_step = 60
+            chunk_id = chunk_step
+            for entry in get_transcript(extract_video_id(line)):
+                start = entry["start"]
+                duration = entry["duration"]
+                text = entry["text"]
+
+                chunk = chunks.get(chunk_id, {})
+                if "start" not in chunk:
+                    chunk["start"] = start
+                chunk["end"] = start + duration
+                chunk["text"] = chunk.get("text", "") + text + " "
+                chunks[chunk_id] = chunk
+
+                if start > chunk_id:
+                    chunk_id += chunk_step
+
+            for v in chunks.values():
+                v["text"] = textwrap.fill(v["text"], 86).strip()
+                v["start_fmt"] = fmt_time(v["start"])
+                v["end_fmt"] = fmt_time(v["end"])
+
+            transcript_text = [
+                f"[{c['start_fmt']}]({line.strip()}&t={int(c['start'])}): \n{c['text']}".replace(
+                    "\n", "\n          "
+                )
+                for c in chunks.values()
+            ]
             print(
                 f"""## Transcript
 
 <details>
 <summary>Show transcript</summary>
-<blockquote>
-{line.strip()}
-</blockquote>
 <br/>
-{transcript_text}
+{line.strip()}
+<br/><br/>
+{"\n<br/><br/>\n".join(transcript_text)}
 </details>"""
             )
 
 
 if __name__ == "__main__":
     main()
+
+# https://youtu.be/4Pc_von1wS4?t=45
