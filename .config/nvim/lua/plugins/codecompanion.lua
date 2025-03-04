@@ -23,6 +23,12 @@ return {
         desc = "AI Action",
       },
       {
+        "<leader>as",
+        "<Cmd>CodeCompanion /summarize<CR>",
+        mode = { "v" },
+        desc = "AI Summarize",
+      },
+      {
         "<leader>at",
         "<Cmd>CodeCompanionChat Toggle<CR>",
         mode = { "n", "v" },
@@ -150,6 +156,57 @@ return {
                   .. text
                   .. "\n```\n\n"
                   .. "How can I ..."
+              end,
+            },
+          },
+        },
+        ["Summarize"] = {
+          strategy = "chat",
+          description = "Get a summary from an LLM",
+          opts = {
+            modes = { "v" },
+            slash_cmd = "summarize",
+            short_name = "summarize",
+            stop_context_insertion = true,
+          },
+          prompts = {
+            {
+              role = "system",
+              opts = {
+                visible = true,
+              },
+              content = function(context)
+                return "Can you provide a comprehensive summary of the given text? The summary "
+                  .. "should cover all the key points and main ideas presented in the original "
+                  .. "text, while also condensing the information into a concise and "
+                  .. "easy-to-understand format. Please ensure that the summary includes "
+                  .. "relevant details and examples that support the main ideas, while "
+                  .. "avoiding any unnecessary information or repetition. The length of the "
+                  .. "summary should be appropriate for the length and complexity of the "
+                  .. "original text, providing a clear and accurate overview without omitting "
+                  .. "any important information."
+                  .. "\n\n"
+                  .. "Make sure to output the summary in a markdown format, with appropriate "
+                  .. "headings, tables and other elements that help keep the summary easy to "
+                  .. "read."
+                  .. "\n"
+              end,
+            },
+            {
+              role = "user",
+              opts = {
+                contains_code = false,
+              },
+              content = function(context)
+                local text = require("codecompanion.helpers.actions").get_code(
+                  context.start_line,
+                  context.end_line
+                )
+
+                return "I have the following text:\n\n```"
+                  .. text
+                  .. "\n```\n\n"
+                  .. "Can you summarize it for me?"
               end,
             },
           },

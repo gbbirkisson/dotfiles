@@ -1,0 +1,59 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "youtube-transcript-api==0.6.*",
+# ]
+# ///
+
+# For use in vim with !ytt to fetch transcripts:
+
+import re
+import sys
+import textwrap
+
+from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api.formatters import TextFormatter as Fmt
+
+
+def extract_video_id(url):
+    regex = r"(?:v=|\/)([0-9A-Za-z_-]{11}).*"
+    match = re.search(regex, url)
+    if match:
+        return match.group(1)
+    else:
+        raise ValueError("Invalid YouTube URL or video ID")
+
+
+def get_transcript(video_id, languages=["en"]):
+    return YouTubeTranscriptApi.get_transcript(video_id, languages=languages)
+
+
+def main():
+    for line in sys.stdin:
+        if line:
+            transcript = get_transcript(extract_video_id(line))
+            transcript_text = (
+                Fmt()
+                .format_transcript(transcript)
+                .replace("WebVVT\n\n", "")
+                .replace("\n\n", "\n")
+            )
+            # transcript_text = transcript_text.replace("\n", " ")
+            transcript_text = textwrap.fill(transcript_text, 96)
+            print(
+                f"""## Transcript
+
+<details>
+<summary>Show transcript</summary>
+<blockquote>
+{line.strip()}
+</blockquote>
+<br/>
+{transcript_text}
+</details>"""
+            )
+
+
+if __name__ == "__main__":
+    main()

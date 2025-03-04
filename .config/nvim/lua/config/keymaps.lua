@@ -25,6 +25,7 @@ map("n", "<leader>ce", "<Cmd>set conceallevel=2<CR>", { desc = "Conceal Level En
 map("v", "'", "!quotes<CR>", { desc = "Swap single and double quotes" })
 map("v", '"', "!quotes<CR>", { desc = "Swap single and double quotes" })
 map("v", "a", "!align<CR>", { desc = "Run align script" })
+map("v", "<leader>yt", "!ytt<CR>", { desc = "Fetch youtube transcript" })
 
 -- For vim diff mode
 if vim.opt.diff:get() then
