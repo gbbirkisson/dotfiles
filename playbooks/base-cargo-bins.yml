@@ -29,3 +29,4 @@
         - { crate_name: trunk, version: 0.21.0 }            # WASM development
         - { crate_name: watchexec-cli, version: 2.2.0 }     # Used for 'dev' script
         - { crate_name: xh, version: 0.24.0 }               # Better HTTPie
+        - { crate_name: loc, version: 0.5.0 }               # Count loc
