@@ -1,6 +1,6 @@
 <h1>
   <p align="center">
-    <a href="https://github.com/gbbirkisson/whispy">
+    <a href="https://github.com/gbbirkisson/dotfiles">
       <img src="logo.png" alt="Logo" height="128">
     </a>
     <br>dotfiles
