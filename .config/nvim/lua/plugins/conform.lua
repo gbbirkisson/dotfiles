@@ -8,7 +8,7 @@ return {
         },
         rustfmt = {
           options = {
-            default_edition = "2021",
+            default_edition = "2024",
           },
         },
       },
