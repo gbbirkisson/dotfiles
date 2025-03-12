@@ -100,6 +100,7 @@ abbr -a o xdg-open
 abbr -a j just
 
 # other
+alias whispy='OPENAI_API_KEY=$(op read op://hemwnx22rvxga5v2zkicawq6sq/l6mbqk77zt62hrdxahozqi6uom/key --no-newline) $HOME/repos/personal/whispy/.venv/bin/whispy'
 alias pa='cd $HOME/repos/personal/pa && just pa'
 alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
 alias cal="$DOTFILES/.venv/calcure/bin/calcure"
