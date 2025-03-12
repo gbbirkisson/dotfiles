@@ -3,6 +3,10 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters = {
+        taplo = {
+          -- https://taplo.tamasfe.dev/configuration/formatter-options.html
+          args = { "format", "-o", "array_auto_collapse=false", "-" },
+        },
         shfmt = {
           prepend_args = { "-i", "4" },
         },
