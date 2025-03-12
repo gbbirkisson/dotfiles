@@ -8,8 +8,17 @@
 </h1>
 
 <p align="center">
-  My dotfiles
+  My humble dotfiles
 </p>
+
+<!-- vim-markdown-toc GFM -->
+
+* [About](#about)
+* [Installation](#installation)
+
+<!-- vim-markdown-toc -->
+
+## About
 
 I use ubuntu so these files are catered to that distribution.
 
