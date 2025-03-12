@@ -100,6 +100,7 @@ abbr -a o xdg-open
 abbr -a j just
 
 # other
+alias pa='cd $HOME/repos/personal/pa && just claude'
 alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
 alias cal="$DOTFILES/.venv/calcure/bin/calcure"
 alias wtf='xrandr --output $(xrandr |grep eDP|cut -d" " -f1) --rotate normal'
