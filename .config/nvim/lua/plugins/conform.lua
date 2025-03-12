@@ -14,7 +14,7 @@ return {
       },
       formatters_by_ft = {
         lua = { "stylua" },
-        python = { "ruff_format", "isort", "black" },
+        python = { "isort", "ruff_format", "ruff_organize_imports" },
         sh = { "shfmt" },
         rust = { "rustfmt" },
         toml = { "taplo" },
