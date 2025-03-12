@@ -38,6 +38,7 @@
           - i3xrocks-keyboard-layout
           - i3xrocks-memory
           - i3xrocks-time
+          - dunst  # Notification popups
 
     - name: Remove unwanted packages
       become: true
@@ -46,3 +47,4 @@
         pkg:
           - i3xrocks-net-traffic
           - i3xrocks-bluetooth
+          - regolith-rofication  # Default notification system

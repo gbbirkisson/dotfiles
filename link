@@ -41,6 +41,7 @@ link() {
 
 link .config/alacritty
 link .config/direnv
+link .config/dunst
 link .config/fish/conf.d
 link .config/fontconfig/fonts.conf
 link .config/gh-dash

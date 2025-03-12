@@ -1,0 +1,31 @@
+# dev "killall dunst;notify-send foo"
+
+[global]
+  follow = keyboard
+  width = 500
+  origin = top-right
+  offset = 40x40
+  transparency = 5
+  format=<b>%a</b>\n<b>%s</b>\n%b
+  corner_radius = 5
+  gap_size = 10
+  frame_width = 1
+
+[urgency_low]
+    msg_urgency = low
+    background = "#1e222a"
+		foreground = "#c8ccd4"
+
+[urgency_normal]
+    msg_urgency = normal
+    background = "#1e222a"
+		foreground = "#c8ccd4"
+
+[urgency_critical]
+    msg_urgency = critical
+    background = "#be5046"
+		foreground = "#c8ccd4"
+
+[skip-rule]
+  appname=Spotify
+  skip_display=true
