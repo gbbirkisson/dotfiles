@@ -1,7 +1,17 @@
-<img align="right" width="128" height="128" src="logo.png">
-<h1>dotfiles</h1>
+<h1>
+  <p align="center">
+    <a href="https://github.com/gbbirkisson/whispy">
+      <img src="logo.png" alt="Logo" height="128">
+    </a>
+    <br>dotfiles
+  </p>
+</h1>
 
-My dotfiles! I use ubuntu so these files are catered to that distribution.
+<p align="center">
+  My dotfiles
+</p>
+
+I use ubuntu so these files are catered to that distribution.
 
 ## Installation
 
