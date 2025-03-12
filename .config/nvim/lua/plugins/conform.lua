@@ -11,8 +11,14 @@ return {
             default_edition = "2024",
           },
         },
+        alloy = {
+          command = "alloy",
+          args = { "fmt" },
+          stdin = true,
+        },
       },
       formatters_by_ft = {
+        river = { "alloy" },
         lua = { "stylua" },
         python = { "isort", "ruff_format", "ruff_organize_imports" },
         sh = { "shfmt" },
