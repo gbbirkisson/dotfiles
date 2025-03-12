@@ -7,11 +7,11 @@ kp   kubectl port-forward
 kl   kubectl logs
 
 # pickers
-kzp  fzf pods
-kzd  fzf deployment
-kzm  fzf daemonset
-kzs  fzf service
-kzc  fzf configmap
+klp  fzf pods
+kld  fzf deployment
+klm  fzf daemonset
+kls  fzf service
+klc  fzf configmap
 
 # output
 kat  output yaml
@@ -27,6 +27,8 @@ end
 
 abbr -a k kubectl
 abbr -a kg kubectl get
+abbr -a kc kubectl ctx
+abbr -a kn kubectl ns
 abbr -a kd --set-cursor=! "kubectl describe ! | bat --style plain --color never"
 
 function k_portf
@@ -46,27 +48,27 @@ end
 function k_fzf_pod
     k_fzf pod
 end
-abbr -a kzp --position anywhere --function k_fzf_pod
+abbr -a klp --position anywhere --function k_fzf_pod
 
 function k_fzf_deployment
     k_fzf deployment
 end
-abbr -a kzd --position anywhere --function k_fzf_deployment
+abbr -a kld --position anywhere --function k_fzf_deployment
 
 function k_fzf_daemon
     k_fzf daemonset
 end
-abbr -a kzm --position anywhere --function k_fzf_daemon
+abbr -a klm --position anywhere --function k_fzf_daemon
 
 function k_fzf_service
     k_fzf service
 end
-abbr -a kzs --position anywhere --function k_fzf_service
+abbr -a kls --position anywhere --function k_fzf_service
 
 function k_fzf_config
     k_fzf configmap
 end
-abbr -a kzc --position anywhere --function k_fzf_config
+abbr -a klc --position anywhere --function k_fzf_config
 
 function k_bat
     echo "-o yaml | bat -l yaml --style plain"
