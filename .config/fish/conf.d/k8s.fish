@@ -5,6 +5,7 @@ kg   kubectl get
 kd   kubectl describe
 kp   kubectl port-forward
 kl   kubectl logs
+ke   kubectl exec
 
 # pickers
 klp  fzf pods
@@ -40,6 +41,11 @@ function k_logs
     echo kubectl logs -f --all-containers=true (k_fzf_pod)
 end
 abbr -a kl --function k_logs
+
+function k_exec
+    echo kubectl exec (k_fzf_pod) --
+end
+abbr -a ke --function k_exec
 
 function k_fzf
     kubectl get $argv[1] | fzf --header-lines=1 --bind "enter:become(echo $argv[1]/{1})" --header="Pick your $argv[1]!"
