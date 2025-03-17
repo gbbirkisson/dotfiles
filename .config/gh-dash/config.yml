@@ -19,7 +19,7 @@ prSections:
     filters: is:open review-requested:@me -label:release -user:amedia
 
   - title: Releases (personal)
-    filters: is:open user:@me label:release
+    filters: is:open user:@me label:release -user:amedia
     layout:
       author:
         hidden: true
