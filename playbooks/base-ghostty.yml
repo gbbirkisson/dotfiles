@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=ghostty packageName=ghostty-org/ghostty
-    version: v1.1.2
+    version: v1.1.3
 
   tasks:
     - name: Create local bin path
