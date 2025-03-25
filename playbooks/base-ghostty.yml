@@ -26,16 +26,18 @@
         pkg:
           - libgtk-4-dev
           - libadwaita-1-dev
+          - blueprint-compiler
+          - gettext
 
     - name: Download ghostty source
       when: ghostty_installed.rc not in [ 0 ]
       unarchive:
         remote_src: yes
-        src: "https://release.files.ghostty.org/{{ version[1:] }}/ghostty-source.tar.gz"
+        src: "https://release.files.ghostty.org/{{ version[1:] }}/ghostty-{{ version[1:] }}.tar.gz"
         dest: "/tmp"
 
     - name: Build ghostty
       when: ghostty_installed.rc not in [ 0 ]
       shell: "zig build -p $HOME/.local -Doptimize=ReleaseFast"
       args:
-        chdir: /tmp/ghostty-source
+        chdir: /tmp/ghostty-{{ version[1:] }}
