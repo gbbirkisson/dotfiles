@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+REC=$(mktemp -u rec-XXX)
+
+if [[ $# -eq 0 ]]; then
+    set -- "fish"
+fi
+
+asciinema rec -c "$@" /tmp/${REC}
+agg /tmp/${REC} ${REC}.gif --cols 80 --rows 20

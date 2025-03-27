@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Check if asciinema is installed
+      shell: "asciinema --version"
+      changed_when: false
+      failed_when: false
+      register: asciinema_installed
+
+    - name: Install asciinema
+      when: asciinema_installed.rc not in [ 0 ]
+      shell: "cargo install --locked --git https://github.com/asciinema/asciinema"
+
+    - name: Check if agg is installed
+      shell: "agg --version"
+      changed_when: false
+      failed_when: false
+      register: agg_installed
+
+    - name: Install agg
+      when: agg_installed.rc not in [ 0 ]
+      shell: "cargo install --locked --git https://github.com/asciinema/agg"
