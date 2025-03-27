@@ -33,3 +33,15 @@ end, { nargs = 1 })
 -- Default to 96, because github diff view looks nice with that number
 -- Note: format selection with gq
 vim.cmd.Gl("96")
+
+-- Enable diagnostics virtual lines
+vim.diagnostic.config({
+  -- Use the default configuration
+  virtual_lines = true,
+
+  -- Alternatively, customize specific options
+  -- virtual_lines = {
+  --  -- Only show virtual line diagnostics for the current cursor line
+  --  current_line = true,
+  -- },
+})

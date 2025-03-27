@@ -29,6 +29,9 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       document_highlight = { enabled = false },
+      diagnostics = {
+        virtual_text = false,
+      },
       servers = {
         varnishls = {},
         bashls = {},
