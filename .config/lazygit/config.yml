@@ -9,6 +9,10 @@ git:
     pager: delta --dark --paging=never
 
 gui:
+  showCommandLog: false
+  showBottomLine: false
+  showPanelJumps: false
+  nerdFontsVersion: "3"
   theme:
     selectedLineBgColor:
       - "#353b45"
@@ -49,6 +53,7 @@ customCommands:
       - type: "confirm"
         title: "New PR: Create?"
         body: "Create a {{if eq .Form.PRDraft \"yes\"}}draft {{end}}PR '{{.Form.PRTitle}}' into 'main' from '{{.SelectedLocalBranch.Name}}'"
+    subprocess: true
     command: |
       set -e
 
@@ -58,82 +63,9 @@ customCommands:
         -t {{.Form.PRTitle|quote}} \
         -b ''
 
-      gh pr view -w $(gh pr list -L 1 --json number --jq .[0].number) &>/dev/null &
-    subprocess: true
+      gh pr view -w $(gh pr list -H {{.SelectedLocalBranch.Name}} --json number --jq .[0].number) &>/dev/null &
 
   - key: 'O'
-    description: "New PR (conventional commit)"
     context: 'localBranches'
-    prompts:
-      - type: "menu"
-        title: "New PR: Conventional commit type?"
-        key: "PRType"
-        options:
-          - name: "fix"
-            description: "Patches a bug in your codebase"
-            value: "fix"
-          - name: "feat"
-            description: "Introduces a new feature to the codebase"
-            value: "feat"
-          - name: "chore"
-            description: "General chore like a dependency update"
-            value: "chore"
-          - name: "refactor"
-            description: "Neither fixes a bug nor adds a feature"
-            value: "refactor"
-          - name: "perf"
-            description: "Improves performance"
-            value: "perf"
-          - name: "test"
-            description: "Adds missing tests or corrects existing tests"
-            value: "test"
-          - name: "docs"
-            description: "Documentation change"
-            value: "docs"
-          - name: "build"
-            description: "Change to the build system"
-            value: "build"
-          - name: "ci"
-            description: "Change to the CI configuration"
-            value: "ci"
-          - name: "style"
-            description: "Change that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)"
-            value: "style"
-      - type: "input"
-        title: "New PR: Conventional commit scope? (optional)"
-        key: "PRScope"
-        initialValue: ''
-      - type: "menu"
-        title: "New PR: Conventional commit breaking change?"
-        key: "PRBreaking"
-        options:
-          - name: "no"
-            value: "no"
-          - name: "yes"
-            value: "yes"
-      - type: "input"
-        title: "New PR: Title?"
-        key: "PRTitle"
-        initialValue: '{{.Form.PRType}}{{if ne .Form.PRScope ""}}({{.Form.PRScope}}){{end}}{{if eq .Form.PRBreaking "yes"}}!{{end}}: '
-      - type: "menu"
-        title: "New PR: Draft?"
-        key: "PRDraft"
-        options:
-          - name: "yes"
-            value: "yes"
-          - name: "no"
-            value: "no"
-      - type: "confirm"
-        title: "New PR: Create?"
-        body: "Create a {{if eq .Form.PRDraft \"yes\"}}draft {{end}}PR '{{.Form.PRTitle}}' into 'main' from '{{.SelectedLocalBranch.Name}}'"
     command: |
-      set -e
-
-      gh pr create {{if eq .Form.PRDraft "yes"}}-d{{end}} \
-        -H {{.SelectedLocalBranch.Name}} \
-        -a @me \
-        -t {{.Form.PRTitle|quote}} \
-        -b ''
-
-      gh pr view -w $(gh pr list -L 1 --json number --jq .[0].number) &>/dev/null &
-    subprocess: true
+      gh pr view -w $(gh pr list -H {{.SelectedLocalBranch.Name}} --json number --jq .[0].number) &>/dev/null &
