@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=dive packageName=wagoodman/dive
-    version: v0.13.0
+    version: v0.13.1
 
   tasks:
     - name: Create local bin path
