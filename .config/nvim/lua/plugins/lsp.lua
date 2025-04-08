@@ -31,6 +31,7 @@ return {
       document_highlight = { enabled = false },
       servers = {
         varnishls = {},
+        clangd = {},
         bashls = {},
         gopls = {},
         html = {
