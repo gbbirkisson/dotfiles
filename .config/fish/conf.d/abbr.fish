@@ -59,10 +59,10 @@ alias notes='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck'
 alias todo='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck todo.md'
 
 # ai
-alias llmchad="nvim -c ':CodeCompanionChat openai' -c ':on'"
-alias llmclaude="nvim -c ':CodeCompanionChat anthropic' -c ':on'"
-alias llmdeepseek="nvim -c ':CodeCompanionChat deepseek' -c ':on'"
-alias llmollama="nvim -c ':CodeCompanionChat ollama' -c ':on'"
+alias llmchad="nvim -c ':CL' -c ':CodeCompanionChat openai' -c ':on'"
+alias llmclaude="nvim -c ':CL' -c ':CodeCompanionChat anthropic' -c ':on'"
+alias llmdeepseek="nvim -c ':CL' -c ':CodeCompanionChat deepseek' -c ':on'"
+alias llmollama="nvim -c ':CL' -c ':CodeCompanionChat ollama' -c ':on'"
 
 function dalle
     curl https://api.openai.com/v1/images/generations \

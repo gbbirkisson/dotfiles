@@ -2,6 +2,7 @@ return {
   {
     "olimorris/codecompanion.nvim",
     cmd = {
+      "CL",
       "CodeCompanion",
       "CodeCompanionChat",
       "CodeCompanionActions",
