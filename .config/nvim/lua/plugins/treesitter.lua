@@ -59,6 +59,29 @@ return {
         table.insert(ensure, "river")
       end
 
+      local vcl_path = vim.fn.expand("~/repos/personal/varnishls")
+      if vim.fn.isdirectory(river_path) == 1 then
+        for _, lang in pairs({ "vcl", "vtc" }) do
+          parser_config[lang] = {
+            install_info = {
+              url = "~/repos/personal/varnishls/vendor/tree-sitter-" .. lang,
+              files = { "src/parser.c" },
+            },
+            filetype = lang,
+          }
+        end
+
+        vim.filetype.add({
+          extension = {
+            vcl = "vcl",
+            vtc = "vtc",
+          },
+        })
+        -- not installed automatically, run:
+        -- :TSInstallFromGrammar vcl
+        -- :TSInstallFromGrammar vtc
+      end
+
       return {
         ensure_installed = ensure,
 
