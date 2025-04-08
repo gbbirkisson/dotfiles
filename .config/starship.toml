@@ -61,7 +61,7 @@ format = "took [$duration]($style) "
 
 # Run in home folder
 [custom.todo]
-command = "todo-print.rs"
+command = "todo-print"
 style = "bold #d19a66"
 detect_files = ['.profile']
 format = '$symbol[$output]($style)'

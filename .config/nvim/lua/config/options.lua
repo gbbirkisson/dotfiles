@@ -33,3 +33,20 @@ end, { nargs = 1 })
 -- Default to 96, because github diff view looks nice with that number
 -- Note: format selection with gq
 vim.cmd.Gl("96")
+
+-- Match strange shebang lines
+vim.filetype.add({
+  pattern = {
+    ["[%a-_]*"] = function(path, bufnr)
+      local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, true)[1]
+      vim.notify(first_line)
+      if string.find(first_line, "uv run") then
+        return "python"
+      elseif string.find(first_line, "rust%-script") then
+        return "rust"
+      else
+        return nil
+      end
+    end,
+  },
+})
