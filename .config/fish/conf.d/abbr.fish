@@ -57,6 +57,7 @@ abbr -a n nvim
 alias day='cd $HOME/repos/personal/notes && nvim -c :ObsidianToday'
 alias notes='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck'
 alias todo='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck todo.md'
+setenv MANPAGER "nvim +Man!"
 
 # ai
 alias llmchad="nvim -c ':CL' -c ':CodeCompanionChat openai' -c ':on'"
