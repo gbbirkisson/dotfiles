@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=natscli packageName=nats-io/natscli
-    version: v0.2.0
+    version: v0.2.1
 
   tasks:
     - name: Create local bin path
