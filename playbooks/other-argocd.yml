@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=argo-cd packageName=argoproj/argo-cd
-    version: v2.14.9
+    version: v2.14.10
 
   tasks:
     - name: Create local bin path
