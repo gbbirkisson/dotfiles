@@ -1,11 +1,6 @@
 return {
   "mistricky/codesnap.nvim",
   build = "make build_generator",
-  cmd = {
-    "CodeCompanion",
-    "CodeCompanionChat",
-    "CodeCompanionActions",
-  },
   keys = {
     {
       "<leader>cc",
