@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=k9s packageName=derailed/k9s
-    version: v0.50.3
+    version: v0.50.4
 
   tasks:
     - name: Create local bin path
