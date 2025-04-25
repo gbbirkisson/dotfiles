@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=nerd-fonts packageName=ryanoasis/nerd-fonts
-    version: v3.3.0
+    version: v3.4.0
 
   tasks:
     - name: Ensure fonts directory
