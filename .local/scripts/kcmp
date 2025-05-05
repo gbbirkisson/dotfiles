@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+BASE="master"
+APP=${1:?"<- parameter missing $(exit 1)"}
+
+BRANCH=$(git branch --show-current)
+
+function file() {
+    echo /tmp/$(echo $1 | sed 's%/%-%g')
+}
+
+for c in $(fd --full-path "kustomize/.*/${APP}/kustomization.yaml" | xargs dirname); do
+    f=$(file $BRANCH/$c)
+    # echo Generating: $f
+    kustomize build $c >$f
+    b=$(file $BASE/$c)
+    # echo Comparing $b and $f
+    delta $b $f --paging never --keep-plus-minus-markers || true
+done
