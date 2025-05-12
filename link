@@ -39,6 +39,8 @@ link() {
     ln -sf "$src" "$dst"
 }
 
+link .claude/commands
+link .claude/CLAUDE.md
 link .config/alacritty
 link .config/direnv
 link .config/dunst

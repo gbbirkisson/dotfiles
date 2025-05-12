@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+DIR=$HOME/repos/personal/mcp
+
+exec just -d $DIR --justfile $DIR/Justfile $@

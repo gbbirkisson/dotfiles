@@ -64,6 +64,8 @@ alias llmchad="nvim -c ':CL' -c ':CodeCompanionChat openai' -c ':on'"
 alias llmclaude="nvim -c ':CL' -c ':CodeCompanionChat anthropic' -c ':on'"
 alias llmdeepseek="nvim -c ':CL' -c ':CodeCompanionChat deepseek' -c ':on'"
 alias llmollama="nvim -c ':CL' -c ':CodeCompanionChat ollama' -c ':on'"
+alias pa='cd $HOME/repos/personal/notes && op item list > /dev/null && claude'
+alias c='op item list > /dev/null && claude'
 
 function dalle
     curl https://api.openai.com/v1/images/generations \
@@ -96,13 +98,11 @@ end
 
 # tools
 abbr -a m make
-abbr -a c cargo
 abbr -a o xdg-open
 abbr -a j just
 
 # other
 alias whispy='OPENAI_API_KEY=$(op read op://hemwnx22rvxga5v2zkicawq6sq/l6mbqk77zt62hrdxahozqi6uom/key --no-newline) $HOME/repos/personal/whispy/.venv/bin/whispy'
-alias pa='cd $HOME/repos/personal/pa && just pa'
 alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
 alias cal="$DOTFILES/.venv/calcure/bin/calcure"
 alias wtf='xrandr --output $(xrandr |grep eDP|cut -d" " -f1) --rotate normal'
