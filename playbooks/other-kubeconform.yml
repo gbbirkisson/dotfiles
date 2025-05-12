@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=kubeconform packageName=yannh/kubeconform
-    version: v0.6.7
+    version: v0.7.0
 
   tasks:
     - name: Create local bin path
