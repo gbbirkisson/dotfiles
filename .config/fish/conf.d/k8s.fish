@@ -37,8 +37,17 @@ function k_portf
 end
 abbr -a kp --function k_portf
 
+function k_pod_logs
+    set pod (k_fzf_pod)
+    set container (k_fzf_container_single $pod)
+    echo kubectl logs -f --container=$container $pod
+end
+abbr -a kpl --function k_pod_logs
+
 function k_logs
-    echo kubectl logs -f --all-containers=true (k_fzf_pod)
+    set label (k_fzf_label)
+    set container (k_fzf_container pods -l $label)
+    echo kubectl logs -f --container=$container --prefix=true -l $label --max-log-requests 20
 end
 abbr -a kl --function k_logs
 
@@ -49,6 +58,18 @@ abbr -a ke --function k_exec
 
 function k_fzf
     kubectl get $argv[1] | fzf --header-lines=1 --bind "enter:become(echo $argv[1]/{1})" --header="Pick your $argv[1]!"
+end
+
+function k_fzf_label
+    kubectl get pods -o json | jq -r '.items[].metadata.labels | to_entries[] | "\(.key)=\(.value)"' | sort | uniq | rg app | fzf --header="Pick your label!"
+end
+
+function k_fzf_container
+    kubectl get $argv -o json | jq -r '.items[].spec.containers[].name' | sort | uniq | fzf --header="Pick your container!" -1
+end
+
+function k_fzf_container_single
+    kubectl get $argv -o json | jq -r '.spec.containers[].name' | sort | uniq | fzf --header="Pick your container!" -1
 end
 
 function k_fzf_pod
