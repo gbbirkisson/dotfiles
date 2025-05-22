@@ -36,7 +36,7 @@ end
 
 abbr -a kd --function k_describe
 function k_describe -a selector -a container
-    echo "kubectl describe (k_fzf_res deployment,statefulset,daemonset,pod,svc,configmap,secret) | | bat --style plain --color never"
+    echo "kubectl describe (k_fzf_res deployment,statefulset,daemonset,pod,svc,configmap,secret) | bat --style plain --color never"
 end
 
 abbr -a kl --function k_logs
