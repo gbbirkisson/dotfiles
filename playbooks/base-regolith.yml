@@ -4,7 +4,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=regolith-desktop packageName=regolith-linux/regolith-desktop
-    version: r3_2
+    version: v3.2
 
   tasks:
     - name: Set DPKG architecture
@@ -14,13 +14,13 @@
     - name: Add Regolith GPG apt Key
       become: true
       apt_key:
-        url: https://regolith-desktop.org/regolith.key
+        url: https://archive.regolith-desktop.com/regolith.key
         state: present
 
     - name: Add Regolith Apt Repository
       become: true
       apt_repository:
-        repo: "deb [arch={{ dpkg_arch }}] https://regolith-desktop.org/release-{{ version[1:] }}-ubuntu-{{ ansible_distribution_release }}-{{ dpkg_arch }} {{ ansible_distribution_release }} main"
+        repo: "deb [arch={{ dpkg_arch }}] https://archive.regolith-desktop.com/ubuntu/stable noble {{ version }}"
 
     - name: Install Regolith
       become: true
