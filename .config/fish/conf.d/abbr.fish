@@ -1,3 +1,7 @@
+if set -q FISH_DEBUG
+    echo (status --current-filename)
+end
+
 # xh
 for method in get post put delete
     abbr -a $method xh $method

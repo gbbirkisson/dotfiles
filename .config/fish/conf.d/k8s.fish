@@ -1,123 +1,107 @@
+if set -q FISH_DEBUG
+    echo (status --current-filename)
+end
+
 function kh
     echo '# basic
 k    kubectl
 kg   kubectl get
 kd   kubectl describe
-kp   kubectl port-forward
 kl   kubectl logs
+kp   kubectl port-forward
 ke   kubectl exec
-
-# pickers
-klp  fzf pods
-kld  fzf deployment
-klm  fzf daemonset
-kls  fzf service
-klc  fzf configmap
 
 # output
 kat  output yaml
-kjq  output json
-kon  output only names
 
 # config
-kxe  enable e config
-kxm  enable m config
-kxd  disable config
-'
+kx   kubectl config (pick file, context, namespace)
+
+kc   kubectl config (pick context)
+kn   kubectl config (pick namespace)
+
+kxf  kubectl config (pick config file)
+kxc  kubectl config (create new config file)
+kxd  kubectl config (disable config file)'
 end
+
+# ... basic ...
 
 abbr -a k kubectl
-abbr -a kg kubectl get
-abbr -a kc kubectl ctx
-abbr -a kn kubectl ns
-abbr -a kd --set-cursor=! "kubectl describe ! | bat --style plain --color never"
 
-function k_portf
-    echo kubectl port-forward (k_fzf_pod)
+abbr -a kg --function k_get
+function k_get -a selector -a container
+    echo kubectl get (k_fzf_res deployment,statefulset,daemonset,pod,svc,configmap,secret)
 end
-abbr -a kp --function k_portf
 
-function k_pod_logs
-    set pod (k_fzf_pod)
-    set container (k_fzf_container_single $pod)
-    echo kubectl logs -f --container=$container $pod
+abbr -a kd --function k_describe
+function k_describe -a selector -a container
+    echo "kubectl describe (k_fzf_res deployment,statefulset,daemonset,pod,svc,configmap,secret) | | bat --style plain --color never"
 end
-abbr -a kpl --function k_pod_logs
 
-function k_logs
-    set label (k_fzf_label)
-    set container (k_fzf_container pods -l $label)
-    echo kubectl logs -f --container=$container --prefix=true -l $label --max-log-requests 20
-end
 abbr -a kl --function k_logs
-
-function k_exec
-    echo kubectl exec (k_fzf_pod) --
+function k_logs -a selector -a container
+    set selector (k_fzf_selector)
+    echo kubectl logs -f -c (k_fzf_container $selector) $selector --max-log-requests 20 --since=15m --prefix=true
 end
+
+abbr -a kp --function k_portf
+function k_portf
+    echo kubectl port-forward (k_fzf_res deployment,statefulset,daemonset,pod,svc)
+end
+
 abbr -a ke --function k_exec
-
-function k_fzf
-    kubectl get $argv[1] | fzf --header-lines=1 --bind "enter:become(echo $argv[1]/{1})" --header="Pick your $argv[1]!"
+function k_exec
+    set p (k_fzf_res pod)
+    echo kubectl exec -it -c (k_fzf_container "pod/$p") $p --
 end
 
-function k_fzf_label
-    kubectl get pods -o json | jq -r '.items[].metadata.labels | to_entries[] | "\(.key)=\(.value)"' | sort | uniq | rg app | fzf --header="Pick your label!"
-end
+# ... output ...
 
-function k_fzf_container
-    kubectl get $argv -o json | jq -r '.items[].spec.containers[].name' | sort | uniq | fzf --header="Pick your container!" -1
-end
-
-function k_fzf_container_single
-    kubectl get $argv -o json | jq -r '.spec.containers[].name' | sort | uniq | fzf --header="Pick your container!" -1
-end
-
-function k_fzf_pod
-    k_fzf pod
-end
-abbr -a klp --position anywhere --function k_fzf_pod
-
-function k_fzf_deployment
-    k_fzf deployment
-end
-abbr -a kld --position anywhere --function k_fzf_deployment
-
-function k_fzf_daemon
-    k_fzf daemonset
-end
-abbr -a klm --position anywhere --function k_fzf_daemon
-
-function k_fzf_service
-    k_fzf service
-end
-abbr -a kls --position anywhere --function k_fzf_service
-
-function k_fzf_config
-    k_fzf configmap
-end
-abbr -a klc --position anywhere --function k_fzf_config
-
+abbr -a kat --position anywhere --function k_bat
 function k_bat
     echo "-o yaml | bat -l yaml --style plain"
 end
-abbr -a kat --position anywhere --function k_bat
 
-function k_jq
-    echo "-o json | jq '.!'"
+# ... config ...
+
+alias kx="kxf; kc; kn"
+
+alias kxf="setenv KUBECONFIG (ls ~/.kube/config_* | fzf -1 --header=FILE)"
+function kxc -a name
+    setenv KUBECONFIG ~/.kube/config_$name
 end
-abbr -a kjq --position anywhere --function k_jq --set-cursor=!
-
-function k_name
-    echo "-o name --no-headers=true"
-end
-abbr -a kon --position anywhere --function k_name
-
-# config management
 alias kxd="setenv KUBECONFIG /dev/null"
-for f in e m
-    alias "kx$f"="setenv KUBECONFIG ~/.kube/config_$f"
-end
-kxd
 
-# k9s
-alias ks='KUBECONFIG=~/.kube/config_e k9s -n default -c ns'
+alias kc="kubectl config use-context (kubectl config get-contexts -o name | fzf --header=CONTEXT)"
+alias kn="kubectl config set-context --current --namespace=(kubectl get ns --no-headers | fzf --header=NAMESPACE --bind 'enter:become(echo {1})')"
+
+# ... fzf helpers ...
+
+function k_fzf_res -a include
+    kubectl get $include | fzf -1 --bind 'enter:become(echo {1})'
+end
+
+function k_fzf_selector
+    set pick (k_fzf_res deployment,statefulset,daemonset,pod)
+    switch $pick
+        case "pod/*"
+            echo $pick
+        case '*'
+            kubectl describe $pick | rg Selector: | awk '{print "-l " $2}'
+    end
+end
+
+function k_fzf_container
+    set ignore '(config-reloader|-exporter|linkerd-proxy)'
+    switch "$argv"
+        case "pod/*"
+            set containers (kubectl get $argv -o json | jq -r '.spec.containers[].name')
+        case '*'
+            set containers (kubectl get pods $argv -o json | jq -r '.items[].spec.containers[].name')
+    end
+    echo $containers | tr " " "\n" | rg -v $ignore | sort | uniq | fzf --header="Pick your container!" -1
+end
+
+# always disable kubeconfig on fish startup
+kxd

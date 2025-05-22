@@ -1,3 +1,7 @@
+if set -q FISH_DEBUG
+    echo (status --current-filename)
+end
+
 if status is-interactive
     if command -v fzf >/dev/null
         # Send event to play nice with direnv

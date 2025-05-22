@@ -1,3 +1,7 @@
+if set -q FISH_DEBUG
+    echo (status --current-filename)
+end
+
 if status is-interactive
     function fish_user_key_bindings
         fish_default_key_bindings -M insert

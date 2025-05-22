@@ -1,3 +1,7 @@
+if set -q FISH_DEBUG
+    echo (status --current-filename)
+end
+
 if status is-interactive
     setenv FZF_DEFAULT_OPTS "--height 100% --layout=reverse"
     setenv FZF_CTRL_T_OPTS "--preview 'gfzfpreview {}'"

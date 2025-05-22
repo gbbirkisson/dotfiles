@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-if [ $# -eq 0 ]; then
-    name=$(kubectl config get-contexts -o name | fzf)
-else
-    name=${1}
-fi
-
-kubectl config use-context $name
