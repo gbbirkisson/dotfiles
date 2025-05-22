@@ -30,30 +30,32 @@ end
 abbr -a k kubectl
 
 abbr -a kg --function k_get
-function k_get -a selector -a container
+function k_get
     echo kubectl get (k_fzf_res deployment,statefulset,daemonset,pod,svc,configmap,secret)
 end
 
 abbr -a kd --function k_describe
-function k_describe -a selector -a container
+function k_describe
     echo "kubectl describe (k_fzf_res deployment,statefulset,daemonset,pod,svc,configmap,secret) | bat --style plain --color never"
 end
 
 abbr -a kl --function k_logs
-function k_logs -a selector -a container
+function k_logs
     set selector (k_fzf_selector)
     echo kubectl logs -f -c (k_fzf_container $selector) $selector --max-log-requests 20 --since=15m --prefix=true
 end
 
 abbr -a kp --function k_portf
 function k_portf
-    echo kubectl port-forward (k_fzf_res deployment,statefulset,daemonset,pod,svc)
+    set res (k_fzf_res deployment,statefulset,daemonset,pod,svc)
+    set port (k_fzf_port $res)
+    echo kubectl port-forward $res $port
 end
 
 abbr -a ke --function k_exec
 function k_exec
-    set p (k_fzf_res pod)
-    echo kubectl exec -it -c (k_fzf_container "pod/$p") $p --
+    set pod (k_fzf_res pod)
+    echo kubectl exec -it -c (k_fzf_container "pod/$pod") $pod --
 end
 
 # ... output ...
@@ -78,30 +80,42 @@ alias kn="kubectl config set-context --current --namespace=(kubectl get ns --no-
 
 # ... fzf helpers ...
 
-function k_fzf_res -a include
-    kubectl get $include | fzf -1 --bind 'enter:become(echo {1})'
+function k_fzf_res -a resources
+    kubectl get $resources | fzf -1 --bind 'enter:become(echo {1})' --header="RESOURCE"
 end
 
 function k_fzf_selector
-    set pick (k_fzf_res deployment,statefulset,daemonset,pod)
-    switch $pick
+    set resource (k_fzf_res deployment,statefulset,daemonset,pod)
+    switch $resource
         case "pod/*"
-            echo $pick
+            echo $resource
         case '*'
-            kubectl describe $pick | rg Selector: | awk '{print "-l " $2}'
+            kubectl describe $resource | rg Selector: | awk '{print "-l " $2}'
     end
 end
 
 function k_fzf_container
-    set ignore '(config-reloader|-exporter|linkerd-proxy)'
+    set ignore '(config-reloader|-exporter|linkerd-proxy|heimdal|andvare)'
     switch "$argv"
         case "pod/*"
             set containers (kubectl get $argv -o json | jq -r '.spec.containers[].name')
         case '*'
             set containers (kubectl get pods $argv -o json | jq -r '.items[].spec.containers[].name')
     end
-    echo $containers | tr " " "\n" | rg -v $ignore | sort | uniq | fzf --header="Pick your container!" -1
+    echo $containers | tr " " "\n" | rg -v $ignore | sort | uniq | fzf --header="CONTAINER" -1
+end
+
+function k_fzf_port -a resource
+    switch "$resource"
+        case "pod/*"
+            set ports (kubectl get $resource -o json | jq -r '.spec.containers[].ports[] | "\(.name):\(.containerPort)"')
+        case "service/*"
+            set ports (kubectl get $resource -o json | jq -r '.spec.ports[] | "\(.name):\(.port)"')
+        case '*'
+            set ports (kubectl get pods (kubectl describe $resource | rg Selector: | awk '{print "-l " $2}') -o json | jq -r '.items[].spec.containers[].ports[] | "\(.name):\(.containerPort)"')
+    end
+    echo $ports | tr " " "\n" | sort | uniq | column -s: -t | fzf --header="PORT" -1 --bind 'enter:become(echo {2})'
 end
 
 # always disable kubeconfig on fish startup
-kxd
+# kxd
