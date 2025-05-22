@@ -5,8 +5,8 @@ set -euo pipefail
 REC=$(mktemp -u rec-XXX)
 
 if [[ $# -eq 0 ]]; then
-    set -- "fish"
+    set -- "fish -C 'set fish_autosuggestion_enabled 0'"
 fi
 
 asciinema rec -c "$@" /tmp/${REC}
-agg /tmp/${REC} ${REC}.gif --cols 80 --rows 20
+agg /tmp/${REC} ${REC}.gif --cols 80 --rows 30
