@@ -13,6 +13,7 @@ ke   kubectl exec
 
 # output
 kat  output yaml
+kjq  output filtered with jq
 
 # config
 kx   kubectl config (pick file, context, namespace)
@@ -64,6 +65,11 @@ end
 abbr -a kat --position anywhere --function k_bat
 function k_bat
     echo "-o yaml | bat -l yaml --style plain"
+end
+
+abbr -a kjq --set-cursor=! --position anywhere --function k_jq
+function k_jq
+    echo "-o json | jq -r '.items[]!'"
 end
 
 # ... config ...
