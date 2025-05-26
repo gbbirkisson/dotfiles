@@ -10,6 +10,7 @@ kd   kubectl describe
 kl   kubectl logs
 kp   kubectl port-forward
 ke   kubectl exec
+kw   kubectl get pods watch
 
 # output
 kat  output yaml
@@ -58,6 +59,17 @@ abbr -a ke --function k_exec
 function k_exec
     set pod (k_fzf_res pod)
     echo kubectl exec -it -c (k_fzf_container "pod/$pod") $pod --
+end
+
+abbr -a kw --function k_watch
+function k_watch
+    set selector (k_fzf_selector)
+    switch "$selector"
+        case "pod/*"
+            echo kubectl get $selector -w
+        case '*'
+            echo kubectl get pods $selector -w
+    end
 end
 
 # ... output ...
