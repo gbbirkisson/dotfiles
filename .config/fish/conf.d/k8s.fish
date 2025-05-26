@@ -33,42 +33,43 @@ abbr -a k kubectl
 
 abbr -a kg --function k_get
 function k_get
-    echo kubectl get (k_fzf_res deployment,statefulset,daemonset,pod,svc,configmap,secret)
+    echo kubectl (k_scope) get (k_fzf_res deployment,statefulset,daemonset,pod,svc,configmap,secret)
 end
 
 abbr -a kd --function k_describe
 function k_describe
-    set res (k_fzf_res deployment,statefulset,daemonset,pod,svc)
-    echo "kubectl describe $res | bat --style plain --color never"
+    set -f res (k_fzf_res deployment,statefulset,daemonset,pod,svc)
+    set -f scope (k_scope)
+    echo "kubectl $scope describe $res | bat --style plain --color never"
 end
 
 abbr -a kl --function k_logs
 function k_logs
-    set selector (k_fzf_selector)
-    echo kubectl logs -f -c (k_fzf_container $selector) $selector --max-log-requests 20 --since=15m --prefix=true
+    set -f selector (k_fzf_selector)
+    echo kubectl (k_scope) logs -f -c (k_fzf_container $selector) $selector --max-log-requests 20 --since=15m --prefix=true
 end
 
 abbr -a kp --function k_portf
 function k_portf
-    set res (k_fzf_res deployment,statefulset,daemonset,pod,svc)
-    set port (k_fzf_port $res)
-    echo kubectl port-forward $res $port
+    set -f res (k_fzf_res deployment,statefulset,daemonset,pod,svc)
+    set -f port (k_fzf_port $res)
+    echo kubectl (k_scope) port-forward $res $port
 end
 
 abbr -a ke --function k_exec
 function k_exec
-    set pod (k_fzf_res pod)
-    echo kubectl exec -it -c (k_fzf_container "pod/$pod") $pod --
+    set -f pod (k_fzf_res pod)
+    echo kubectl (k_scope) exec -it -c (k_fzf_container "pod/$pod") $pod --
 end
 
 abbr -a kw --function k_watch
 function k_watch
-    set selector (k_fzf_selector)
+    set -f selector (k_fzf_selector)
     switch "$selector"
         case "pod/*"
-            echo kubectl get $selector -w
+            echo kubectl (k_scope) get $selector -w
         case '*'
-            echo kubectl get pods $selector -w
+            echo kubectl (k_scope) get pods $selector -w
     end
 end
 
@@ -97,6 +98,10 @@ alias kxd="setenv KUBECONFIG /dev/null"
 alias kc="kubectl config use-context (kubectl config get-contexts -o name | fzf --header=CONTEXT)"
 alias kn="kubectl config set-context --current --namespace=(kubectl get ns --no-headers | fzf --header=NAMESPACE --bind 'enter:become(echo {1})')"
 
+function k_scope
+    kubectl config view --minify -o jsonpath='--context {.current-context} --namespace {..namespace}'
+end
+
 # ... fzf helpers ...
 
 function k_fzf_res -a resources
@@ -104,7 +109,7 @@ function k_fzf_res -a resources
 end
 
 function k_fzf_selector
-    set resource (k_fzf_res deployment,statefulset,daemonset,pod)
+    set -f resource (k_fzf_res deployment,statefulset,daemonset,pod)
     switch $resource
         case "pod/*"
             echo $resource
@@ -114,12 +119,12 @@ function k_fzf_selector
 end
 
 function k_fzf_container
-    set ignore '(config-reloader|-exporter|linkerd-proxy|heimdal|andvare)'
+    set -f ignore '(config-reloader|-exporter|linkerd-proxy|heimdal|andvare)'
     switch "$argv"
         case "pod/*"
-            set containers (kubectl get $argv -o json | jq -r '.spec.containers[].name')
+            set -f containers (kubectl get $argv -o json | jq -r '.spec.containers[].name')
         case '*'
-            set containers (kubectl get pods $argv -o json | jq -r '.items[].spec.containers[].name')
+            set -f containers (kubectl get pods $argv -o json | jq -r '.items[].spec.containers[].name')
     end
     echo $containers | tr " " "\n" | rg -v $ignore | sort | uniq | fzf --header="CONTAINER" -1
 end
@@ -127,14 +132,14 @@ end
 function k_fzf_port -a resource
     switch "$resource"
         case "pod/*"
-            set ports (kubectl get $resource -o json | jq -r '.spec.containers[].ports[] | "\(.name):\(.containerPort)"')
+            set -f ports (kubectl get $resource -o json | jq -r '.spec.containers[].ports[] | "\(.name):\(.containerPort)"')
         case "service/*"
-            set ports (kubectl get $resource -o json | jq -r '.spec.ports[] | "\(.name):\(.port)"')
+            set -f ports (kubectl get $resource -o json | jq -r '.spec.ports[] | "\(.name):\(.port)"')
         case '*'
-            set ports (kubectl get pods (kubectl describe $resource | rg Selector: | awk '{print "-l " $2}') -o json | jq -r '.items[].spec.containers[].ports[] | "\(.name):\(.containerPort)"')
+            set -f ports (kubectl get pods (kubectl describe $resource | rg Selector: | awk '{print "-l " $2}') -o json | jq -r '.items[].spec.containers[].ports[] | "\(.name):\(.containerPort)"')
     end
     echo $ports | tr " " "\n" | sort | uniq | column -s: -t | fzf --header="PORT" -1 | awk '{print $2}'
 end
 
 # always disable kubeconfig on fish startup
-# kxd
+kxd
