@@ -1,13 +1,10 @@
----
 # yaml-language-server: $schema=https://json.schemastore.org/lazygit.json
 disableStartupPopups: true
-
 git:
   autoFetch: false
   paging:
     colorArg: always
     pager: delta --dark --paging=never
-
 gui:
   showCommandLog: false
   showBottomLine: false
@@ -16,14 +13,12 @@ gui:
   theme:
     selectedLineBgColor:
       - "#353b45"
-
 customCommands:
   - key: "G"
     description: "Cleanup local branches"
     context: "localBranches"
-    showOutput: true
     command: "git gone"
-
+    output: popup
   - key: "n"
     description: "New branch"
     context: "localBranches"
@@ -33,7 +28,6 @@ customCommands:
         key: "BranchName"
         initialValue: "gbbirkisson/"
     command: "git checkout -b {{.Form.BranchName}} refs/heads/{{.SelectedLocalBranch.Name}}"
-
   - key: 'o'
     description: "New PR"
     context: 'localBranches'
@@ -53,7 +47,6 @@ customCommands:
       - type: "confirm"
         title: "New PR: Create?"
         body: "Create a {{if eq .Form.PRDraft \"yes\"}}draft {{end}}PR '{{.Form.PRTitle}}' into 'main' from '{{.SelectedLocalBranch.Name}}'"
-    subprocess: true
     command: |
       set -e
 
@@ -64,7 +57,7 @@ customCommands:
         -b ''
 
       gh pr view -w $(gh pr list -H {{.SelectedLocalBranch.Name}} --json number --jq .[0].number) &>/dev/null &
-
+    output: terminal
   - key: 'O'
     context: 'localBranches'
     command: |
