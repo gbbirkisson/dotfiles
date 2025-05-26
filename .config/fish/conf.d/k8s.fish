@@ -114,7 +114,7 @@ function k_fzf_port -a resource
         case '*'
             set ports (kubectl get pods (kubectl describe $resource | rg Selector: | awk '{print "-l " $2}') -o json | jq -r '.items[].spec.containers[].ports[] | "\(.name):\(.containerPort)"')
     end
-    echo $ports | tr " " "\n" | sort | uniq | column -s: -t | fzf --header="PORT" -1 --bind 'enter:become(echo {2})'
+    echo $ports | tr " " "\n" | sort | uniq | column -s: -t | fzf --header="PORT" -1 | awk '{print $2}'
 end
 
 # always disable kubeconfig on fish startup
