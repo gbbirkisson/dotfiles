@@ -2,6 +2,9 @@ return {
   {
     "stevearc/conform.nvim",
     opts = {
+      default_format_opts = {
+        lsp_format = "first",
+      },
       formatters = {
         taplo = {
           -- https://taplo.tamasfe.dev/configuration/formatter-options.html
@@ -30,8 +33,8 @@ return {
         toml = { "taplo" },
         fish = { "fish_indent" },
         yaml = { "yamlfmt" },
-        javascript = { "prettier", "prettierd" },
-        html = { "prettier", "prettierd" },
+        -- javascript = { "prettier", "prettierd" },
+        -- html = { "prettier", "prettierd" },
         css = { "prettier", "prettierd" },
         ["*"] = { "trim_whitespace" },
       },
