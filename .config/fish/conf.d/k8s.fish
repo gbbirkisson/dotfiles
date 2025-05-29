@@ -24,7 +24,10 @@ kn   kubectl config (pick namespace)
 
 kxf  kubectl config (pick config file)
 kxc  kubectl config (create new config file)
-kxd  kubectl config (disable config file)'
+kxd  kubectl config (disable config file)
+
+# other
+ki   init kubectl at the start of the day'
 end
 
 # ... basic ...
@@ -101,6 +104,10 @@ alias kn="kubectl config set-context --current --namespace=(kubectl get ns --no-
 function k_scope
     kubectl config view --minify -o jsonpath='--context {.current-context} --namespace {..namespace}'
 end
+
+# ... config ...
+
+alias ki="kxf; a2l auth"
 
 # ... fzf helpers ...
 
