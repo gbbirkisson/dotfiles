@@ -7,8 +7,8 @@
 //! ```
 
 use chrono::Local;
-use std::fs::read_to_string;
 use std::fs::File;
+use std::fs::read_to_string;
 use std::path::Path;
 
 fn main() {
@@ -23,7 +23,7 @@ fn main() {
 
     let todo = dirs::home_dir()
         .expect("Could not find home directory")
-        .join("repos/personal/notes/todo.md");
+        .join("repos/personal/notes/1-projects/1709554659-todo.md");
     for line in read_to_string(&todo).unwrap().lines() {
         if line.starts_with("- [ ") {
             println!("{}", &line[2..line.len()]);
