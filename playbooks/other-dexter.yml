@@ -21,7 +21,7 @@
       when: dexter_installed.rc not in [ 0 ]
       unarchive:
         remote_src: yes
-        src: "https://github.com/gini/dexter/releases/download/{{ version }}/dexter_{{ version }}_Linux_x86_64.tar.gz"
+        src: "https://github.com/gini/dexter/releases/download/{{ version }}/dexter_Linux_x86_64.tar.gz"
         dest: ~/.local/bin
         extra_opts:
           - "dexter"
