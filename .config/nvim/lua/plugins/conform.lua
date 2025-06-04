@@ -33,6 +33,7 @@ return {
         toml = { "taplo" },
         fish = { "fish_indent" },
         yaml = { "yamlfmt" },
+        terraform = { "tofu_fmt" },
         -- javascript = { "prettier", "prettierd" },
         -- html = { "prettier", "prettierd" },
         css = { "prettier", "prettierd" },
