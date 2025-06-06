@@ -77,7 +77,6 @@ function dalle
         -H "Content-Type: application/json" \
         -d '{
         "prompt": "'"$argv"'",
-        "num_images":1,
         "model":"dall-e-3",
         "quality":"standard",
         "size":"1024x1024",
