@@ -41,6 +41,7 @@ link() {
 
 link .claude/commands
 link .claude/CLAUDE.md
+link .claude/settings.json
 link .config/alacritty
 link .config/direnv
 link .config/dunst

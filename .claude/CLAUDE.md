@@ -1,5 +1,10 @@
 # General instructions
 
+## Finishing a task
+
+Every time you finish a big task and you need input from me, end by running this command:
+`notify <message to sent me>`
+
 ## Searching for information
 
 It is good, when trying to solve tricky problems to search the internet, fetch the relevant
