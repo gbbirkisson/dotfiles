@@ -22,7 +22,7 @@ kx   kubectl config (pick file, context, namespace)
 kc   kubectl config (pick context)
 kn   kubectl config (pick namespace)
 
-kxf  kubectl config (pick config file)
+kf   kubectl config (pick config file)
 kxc  kubectl config (create new config file)
 kxd  kubectl config (disable config file)
 
@@ -90,9 +90,9 @@ end
 
 # ... config ...
 
-alias kx="kxf; kc; kn"
+alias kx="kf; kc; kn"
 
-alias kxf="setenv KUBECONFIG (ls ~/.kube/config_* | fzf -1 --header=FILE)"
+alias kf="setenv KUBECONFIG (ls ~/.kube/config_* | fzf -1 --header=FILE)"
 function kxc -a name
     setenv KUBECONFIG ~/.kube/config_$name
 end
@@ -107,7 +107,7 @@ end
 
 # ... config ...
 
-alias ki="kxf; a2l auth"
+alias ki="kf; a2l auth"
 
 # ... fzf helpers ...
 
