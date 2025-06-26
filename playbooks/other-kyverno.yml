@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=kyverno packageName=kyverno/kyverno
-    version: v1.14.3
+    version: v1.14.4
 
   tasks:
     - name: Create local bin path
