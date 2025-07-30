@@ -7,7 +7,7 @@ opentofu   1.10.2
 golang     1.24.5
 uv         0.7.19
 helm       3.18.4
-kustomize  5.7.0
+kustomize  5.7.1
 pipx       1.7.1
 zig        0.14.0
 just       1.41.0
