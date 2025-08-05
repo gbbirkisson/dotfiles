@@ -84,6 +84,12 @@ function dalle
     }' | tee /dev/stderr | jq .data[0].url | xargs open
 end
 
+function gemini
+    # Install gemini with: npm install -g @google/gemini-cli
+    set -f BIN "$(mise bin-paths node)/gemini"
+    GEMINI_API_KEY="$(op read op://hemwnx22rvxga5v2zkicawq6sq/ld4ypfwlvf44j2xx5g7ylb2wgi/credential --no-newline)" $BIN $argv
+end
+
 # git
 abbr -a g git
 abbr -a gd gh dash
