@@ -4,23 +4,33 @@
 
   vars:
     # renovate: datasource=github-releases depName=regolith-desktop packageName=regolith-linux/regolith-desktop
-    version: v3.2
+    version: v3.3
 
   tasks:
     - name: Set DPKG architecture
       set_fact:
         dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
 
+    - name: Check if regolith is installed
+      command: which regolith-look
+      changed_when: false
+      failed_when: regolith_installed.rc not in [0,1]
+      register: regolith_installed
+
     - name: Add Regolith GPG apt Key
+      when: regolith_installed.rc not in [ 0 ]
       become: true
-      apt_key:
-        url: https://archive.regolith-desktop.com/regolith.key
-        state: present
+      shell: "wget -qO - https://archive.regolith-desktop.com/regolith.key | gpg --dearmor -o /usr/share/keyrings/regolith-archive-keyring.gpg"
+      args:
+        creates: /usr/share/keyrings/regolith-archive-keyring.gpg
 
     - name: Add Regolith Apt Repository
+      when: regolith_installed.rc not in [ 0 ]
       become: true
       apt_repository:
-        repo: "deb [arch={{ dpkg_arch }}] https://archive.regolith-desktop.com/ubuntu/stable noble {{ version }}"
+        repo: "deb [arch={{ dpkg_arch }} signed-by=/usr/share/keyrings/regolith-archive-keyring.gpg] https://archive.regolith-desktop.com/ubuntu/stable noble {{ version }}"
+        state: present
+        filename: regolith
 
     - name: Install Regolith
       become: true
