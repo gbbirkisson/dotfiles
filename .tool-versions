@@ -6,7 +6,7 @@ python     3.13
 opentofu   1.10.2
 golang     1.25.0
 uv         0.8.9
-helm       3.18.4
+helm       3.18.5
 kustomize  5.7.1
 pipx       1.7.1
 zig        0.14.0
