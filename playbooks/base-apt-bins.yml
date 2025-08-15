@@ -37,3 +37,12 @@
           - wireguard     # VPN
           - xclip         # For nvim clipboard
           - timg          # Cat images in terminal
+
+          # Dicts
+          - dictd
+          - dict-devil   # "The Devil's Dictionary" by Ambrose Bierce
+          - dict-foldoc  # FOLDOC dictionary database
+          - dict-gcide   # Comprehensive English Dictionary
+          - dict-jargon  # dict package for The Jargon Lexicon
+          - dict-vera    # Dictionary of computer related acronyms -- dict format
+          - dict-wn      # electronic lexical database of English language for dict
