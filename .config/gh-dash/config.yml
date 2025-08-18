@@ -1,7 +1,7 @@
 ---
 prSections:
   - title: Mine
-    filters: is:open author:@me -label:release -repo:slok/sloth
+    filters: is:open author:@me -label:release
     layout:
       author:
         hidden: true
