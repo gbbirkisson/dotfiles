@@ -130,4 +130,4 @@ function noc -d "Check norwegian"
 end
 
 # easy grafana stack
-abbr -a lgtm 'docker run --add-host host.docker.internal:host-gateway --pull always -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm --name lgtm -ti grafana/otel-lgtm'
+abbr -a lgtm 'sudo docker run --add-host host.docker.internal:host-gateway --pull always -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm --name lgtm -ti grafana/otel-lgtm'
