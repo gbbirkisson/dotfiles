@@ -49,7 +49,7 @@ end
 abbr -a kl --function k_logs
 function k_logs
     set -f selector (k_fzf_selector)
-    echo kubectl (k_scope) logs -f -c (k_fzf_container $selector) $selector --max-log-requests 20 --since=15m --prefix=true
+    echo kubectl (k_scope) logs -f -c (k_fzf_container $selector) $selector --max-log-requests 20 --since=15m --tail=1000 --prefix=true
 end
 
 abbr -a kp --function k_portf
