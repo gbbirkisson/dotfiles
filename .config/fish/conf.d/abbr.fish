@@ -9,16 +9,16 @@ end
 
 # docker
 function dstp --description "stop all containers"
-    docker stop (docker ps -q)
+    sudo docker stop (sudo docker ps -q)
 end
 function drma --description "remove all docker containers"
-    docker rm (docker ps -aq --filter status=exited --filter status=created)
+    sudo docker rm (sudo docker ps -aq --filter status=exited --filter status=created)
 end
 function drmi --description "remove all untagged images"
-    docker rmi -f (docker images -f "dangling=true" -q)
+    sudo docker rmi -f (sudo docker images -f "dangling=true" -q)
 end
 function drmv --description "remove all untagged images"
-    docker volume rm (docker volume ls -f dangling=true -q)
+    sudo docker volume rm (sudo docker volume ls -f dangling=true -q)
 end
 function dcln --description "clean all the docker things"
     dstp
