@@ -1,8 +1,9 @@
 # Set font
 font-family = monospace
+font-size = 10
 
 # Run fish
-command = /usr/bin/fish
+command = exec /usr/bin/fish
 shell-integration = fish
 
 # Look
@@ -11,40 +12,39 @@ mouse-hide-while-typing = true
 unfocused-split-opacity = 0.9
 unfocused-split-fill = #0e0f13
 resize-overlay = never
-adw-toolbar-style = flat
 
 # Speed
-gtk-single-instance = true
+# gtk-single-instance = true
 gtk-adwaita = false
 
 # Set custom theme
 theme = theme
 
 # Splits
-keybind = ctrl+space>shift+5=new_split:right
-keybind = ctrl+space>shift+'=new_split:down
-
-keybind = ctrl+space>ctrl+space=goto_split:next
-keybind = ctrl+space>ctrl+h=goto_split:left
-keybind = ctrl+space>ctrl+j=goto_split:bottom
-keybind = ctrl+space>ctrl+k=goto_split:top
-keybind = ctrl+space>ctrl+l=goto_split:right
-
-keybind = alt+shift+h=resize_split:left,100
-keybind = alt+shift+j=resize_split:down,100
-keybind = alt+shift+k=resize_split:up,100
-keybind = alt+shift+l=resize_split:right,100
+# keybind = ctrl+space>shift+5=new_split:right
+# keybind = ctrl+space>shift+'=new_split:down
+#
+# keybind = ctrl+space>ctrl+space=goto_split:next
+# keybind = ctrl+space>ctrl+h=goto_split:left
+# keybind = ctrl+space>ctrl+j=goto_split:bottom
+# keybind = ctrl+space>ctrl+k=goto_split:top
+# keybind = ctrl+space>ctrl+l=goto_split:right
+#
+# keybind = alt+shift+h=resize_split:left,100
+# keybind = alt+shift+j=resize_split:down,100
+# keybind = alt+shift+k=resize_split:up,100
+# keybind = alt+shift+l=resize_split:right,100
 
 # Tabs
-keybind = ctrl+space>c=new_tab
-keybind = ctrl+space>h=previous_tab
-keybind = ctrl+space>l=next_tab
-keybind = ctrl+space>s=toggle_tab_overview
+# keybind = ctrl+space>c=new_tab
+# keybind = ctrl+space>h=previous_tab
+# keybind = ctrl+space>l=next_tab
+# keybind = ctrl+space>s=toggle_tab_overview
 
 # Scrolling
-keybind = ctrl+shift+j=scroll_page_lines:10
-keybind = ctrl+shift+k=scroll_page_lines:-10
+keybind = ctrl+alt+j=scroll_page_lines:10
+keybind = ctrl+alt+k=scroll_page_lines:-10
 
 # Other
-keybind = ctrl+space>o=write_scrollback_file:open
-keybind = ctrl+space>i=inspector:toggle
+# keybind = ctrl+space>o=write_scrollback_file:open
+# keybind = ctrl+space>i=inspector:toggle

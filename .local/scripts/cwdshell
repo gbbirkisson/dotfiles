@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+if ! command -v ghostty >/dev/null; then
+  exec x-terminal-emulator
+fi
+
+if command -v hyprctl >/dev/null; then
+  pid=$(hyprctl activewindow -j | jq '.pid')
+else
+  pid=$(xprop -id $(xdotool getwindowfocus) | grep '_NET_WM_PID' | grep -oE '[[:digit:]]*$')
+fi
+
+ppid=$(pgrep --newest --parent "$pid")
+
+exec ghostty --working-directory=$(readlink /proc/"$ppid"/cwd || echo "$HOME")
