@@ -25,8 +25,8 @@
     {
       customType: 'regex',
       description: 'Match versions that are tagged with comments',
-      fileMatch: [
-        '^.*.ya?ml$',
+      managerFilePatterns: [
+        '/^.*.ya?ml$/',
       ],
       matchStrings: [
         '# renovate: datasource=(?<datasource>.*?) depName=(?<depName>[^\\s]+)( packageName=(?<packageName>[^\\s]+))?( versioning=(?<versioning>[^\\s]+))?\\s*.*version:\\s(?<currentValue>[^\\s]+)',
@@ -36,8 +36,8 @@
       customType: 'regex',
       description: 'Match versions of cargo crates',
       datasourceTemplate: 'crate',
-      fileMatch: [
-        '^.*.ya?ml$',
+      managerFilePatterns: [
+        '/^.*.ya?ml$/',
       ],
       matchStrings: [
         'crate_name: (?<depName>[^\\s]+), version: (?<currentValue>[^\\s]+)',
@@ -47,8 +47,8 @@
       customType: 'regex',
       description: 'Match versions of lazy dependencies',
       datasourceTemplate: 'github-tags',
-      fileMatch: [
-        '^.*.lua$',
+      managerFilePatterns: [
+        '/^.*.lua$/',
       ],
       matchStrings: [
         "'(?<depName>[^\\s]+)',\\s*.*version\\s=\\s'(?<currentValue>[^\\s]+)',",
