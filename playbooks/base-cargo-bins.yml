@@ -19,7 +19,7 @@
         - { crate_name: lsd, version: 1.0.0, locked: true }               # Better ls
         - { crate_name: mise, version: 2025.3.0, locked: true }           # Better asdf
         - { crate_name: oha, version: 1.0.0, locked: true }               # HTTP stress testing
-        - { crate_name: ouch, version: 0.5.1, locked: true }              # Easy compress/decompress
+        - { crate_name: ouch, version: 0.6.0 locked: true }              # Easy compress/decompress
         - { crate_name: py-spy, version: 0.4.0, locked: true }            # Python profiling
         - { crate_name: ripgrep, version: 14.1.0, locked: true }          # Better grep
         - { crate_name: rust-script, version: 0.36.0 locked: true }      # Create rust "scripts"
