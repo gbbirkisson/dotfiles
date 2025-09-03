@@ -7,25 +7,25 @@
         name: "{{ item.crate_name }}"
         version: "{{ item.version }}"
       with_items:
-        - { crate_name: alacritty, locked: true, version: 0.15.0 }        # Better terminal emulator
-        - { crate_name: bat, locked: true, version: 0.25.0 }              # Better cat
-        - { crate_name: cargo-tarpaulin, locked: true, version: 0.32.0 }  # For cargo code coverage
-        - { crate_name: drill, locked: true, version: 0.8.2 }             # HTTP stress testing (ansible-esqe)
-        - { crate_name: du-dust, locked: true, version: 1.0.0 }           # Better du
-        - { crate_name: fd-find, locked: true, version: 10.0.0 }          # Better find
-        - { crate_name: git-delta, locked: true, version: 0.18.0 }        # Better diff
-        - { crate_name: hyperfine, locked: true, version: 1.18.0 }        # Benchmarking
-        - { crate_name: lsd, locked: true, version: 1.0.0 }               # Better ls
-        - { crate_name: mise, locked: true, version: 2025.3.0 }           # Better asdf
-        - { crate_name: oha, locked: true, version: 1.0.0 }               # HTTP stress testing
-        - { crate_name: ouch, locked: true, version: 0.5.1 }              # Easy compress/decompress
-        - { crate_name: py-spy, locked: true, version: 0.4.0 }            # Python profiling
-        - { crate_name: ripgrep, locked: true, version: 14.1.0 }          # Better grep
-        - { crate_name: rust-script, locked: true, version: 0.35.0 }      # Create rust "scripts"
-        - { crate_name: sfz, locked: true, version: 0.7.1 }               # Simple web server for dirs
-        - { crate_name: starship, locked: true, version: 1.19.0 }         # Fancy prompt
-        - { crate_name: tealdeer, locked: true, version: 1.7.0 }          # Better tldr
-        - { crate_name: trunk, locked: true, version: 0.21.0 }            # WASM development
-        - { crate_name: watchexec-cli, locked: true, version: 2.2.0 }     # Used for 'dev' script
-        - { crate_name: xh, locked: true, version: 0.24.0 }               # Better HTTPie
-        - { crate_name: loc, locked: true, version: 0.5.0 }               # Count loc
+        - { crate_name: bat, version: 0.25.0, locked: true }              # Better cat
+        - { crate_name: cargo-tarpaulin, version: 0.32.0, locked: true }  # For cargo code coverage
+        - { crate_name: drill, version: 0.8.2, locked: true }             # HTTP stress testing (ansible-esqe)
+        - { crate_name: du-dust, version: 1.0.0, locked: true }           # Better du
+        - { crate_name: fd-find, version: 10.0.0, locked: true }          # Better find
+        - { crate_name: git-delta, version: 0.18.0, locked: true }        # Better diff
+        - { crate_name: gittype, version: 0.3.0, locked: true }           # Practice typing
+        - { crate_name: hyperfine, version: 1.18.0, locked: true }        # Benchmarking
+        - { crate_name: loc, version: 0.5.0, locked: true }               # Count loc
+        - { crate_name: lsd, version: 1.0.0, locked: true }               # Better ls
+        - { crate_name: mise, version: 2025.3.0, locked: true }           # Better asdf
+        - { crate_name: oha, version: 1.0.0, locked: true }               # HTTP stress testing
+        - { crate_name: ouch, version: 0.5.1, locked: true }              # Easy compress/decompress
+        - { crate_name: py-spy, version: 0.4.0, locked: true }            # Python profiling
+        - { crate_name: ripgrep, version: 14.1.0, locked: true }          # Better grep
+        - { crate_name: rust-script, version: 0.35.0, locked: true }      # Create rust "scripts"
+        - { crate_name: sfz, version: 0.7.1, locked: true }               # Simple web server for dirs
+        - { crate_name: starship, version: 1.19.0, locked: true }         # Fancy prompt
+        - { crate_name: tealdeer, version: 1.7.0, locked: true }          # Better tldr
+        - { crate_name: trunk, version: 0.21.0, locked: true }            # WASM development
+        - { crate_name: watchexec-cli, version: 2.2.0, locked: true }     # Used for 'dev' script
+        - { crate_name: xh, version: 0.24.0, locked: true }               # Better HTTPie
