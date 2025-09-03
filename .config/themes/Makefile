@@ -1,11 +1,7 @@
 M = $(shell printf "\033[34;1m▶\033[0m")
 Q = $(if $(filter 1,$V),,@)
 
-VENVS:=../../.venv
-VENV:=$(VENVS)/themes
-PYTHON_OS:=/usr/bin/python3
-PYTHON_VENV:=$(VENV)/bin/python
-BUILDER:=$(VENV)/bin/python builder.py
+BUILDER:=./builder
 
 THEME:=schemes/onedark.yaml
 
@@ -40,13 +36,7 @@ regolith:
 new-tab:
 	$(Q) IN=templates/new-tab.html OUT=../../new-tab.html $(MAKE) --no-print-directory _render
 
-$(VENV):
-	$(info $(M) Creating python environment)
-	$(Q) mkdir -p $(VENVS)
-	$(Q) $(PYTHON_OS) -m venv $(VENV) || rm -r $(VENV)
-	$(Q) $(PYTHON_VENV) -m pip install -q pyyaml jinja2
-
 .PHONY: _render
-_render: $(VENV)
+_render:
 	$(info $(M) Rendering $(IN) to $(OUT))
 	$(Q) $(BUILDER) -t $(IN) -c $(THEME) > $(OUT)

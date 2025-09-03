@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+IFS=$'\n'
+
+run() {
+    echo "‼️" $@
+    $@
+}
+
+# Update everything
+run sudo pacman -Syu
+
+# Install packages
+PACKAGES=$(
+    cat <<EOF
+    bat             # Better cat
+    dictd           # Dictionary
+    direnv          # Manage environment
+    dunst           # System Messages
+    fd              # Better find
+    fish            # You know, the shell
+    flameshot       # For screenshots
+    fzf             # Fuzzy finder
+    ghostty         # Terminal emulator
+    git-delta       # Better diff
+    hyperfine       # Benchmarking
+    hyprlock        # Lock screen for hyprland
+    jq              # JSON manipulation
+    just            # Modern "makefile" runner
+    lazygit         # Git TUI
+    lsd             # Better ls
+    mise            # Dependency management
+    neovim          # Text editor
+    ouch            # Easy compress/decompress
+    python-pipx     # Install pip packages
+    ripgrep         # Better grep
+    rustup          # Manage rust toolchains
+    signal-desktop  # Signal messenger
+    starship        # Nice terminal prompts
+    tealdeer        # Better tldr
+    trunk           # WASM development
+    uv              # Python dependency manager
+    watchexec       # Watch files and run commands
+    xh              # Nice "curl"-ish client
+EOF
+)
+for p in $PACKAGES; do
+    p=$(echo $p | awk '{print $1}')
+    pacman -Qi $p >/dev/null || (run sudo pacman -S $p)
+done
+
+# TODO: Install aur dependencies
+
+# curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
+# git clone https://aur.archlinux.org/1password.git
+# cd 1password
+# makepkg -si
+
+# Set default rust toolchain
+run rustup default stable
+
+# Cargo bins
+BINS=$(
+    cat <<EOF
+    loc     # Count loc
+EOF
+)
+for b in $BINS; do
+    b=$(echo $b | awk '{print $1}')
+    run cargo install $b
+done
+
+echo ✅ DONE!

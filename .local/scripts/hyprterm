@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+pid=$(hyprctl activewindow -j | jq '.pid')
+ppid=$(pgrep --newest --parent "$pid")
+dir=$(readlink /proc/"$ppid"/cwd || echo "$HOME")
+if [ -d "$dir" ]; then
+  exec ghostty -e env -C "$dir" fish
+  # exec ghostty --env FISH_CWD="$dir" # TODO: Waiting for 1.2.0
+else
+  exec ghostty
+fi
