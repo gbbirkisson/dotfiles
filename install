@@ -18,7 +18,6 @@ PACKAGES=$(
     bat             # Better cat
     dictd           # Dictionary
     direnv          # Manage environment
-    dunst           # System Messages
     fd              # Better find
     fish            # You know, the shell
     flameshot       # For screenshots
@@ -51,13 +50,6 @@ for p in $PACKAGES; do
     pacman -Qi $p >/dev/null || (run sudo pacman -S $p)
 done
 
-# TODO: Install aur dependencies
-
-# curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
-# git clone https://aur.archlinux.org/1password.git
-# cd 1password
-# makepkg -si
-
 # Set default rust toolchain
 run rustup default stable
 
@@ -72,4 +64,24 @@ for b in $BINS; do
     run cargo install $b
 done
 
+# TODO: Install aur dependencies
+
+AUR=$HOME/repos/aur
+mkdir -p $AUR
+
+aur() {
+	git clone https://aur.archlinux.org/$1.git $AUR/$1 || true 
+	pushd $AUR/$1
+	makepkg -si
+	popd
+}
+
+curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
+run aur 1password
+
 echo ✅ DONE!
+
+# curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
+# git clone https://aur.archlinux.org/1password.git $AUR/1password
+# cd $AUR/1password
+# makepkg -si

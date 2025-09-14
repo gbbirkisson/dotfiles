@@ -1,7 +1,11 @@
 #!/usr/bin/env sh
 
 if ! command -v ghostty >/dev/null; then
-  exec x-terminal-emulator
+  if command -v $TERM >/dev/null; then
+    exec $TERM
+  else
+    exec x-terminal-emulator
+  fi
 fi
 
 if command -v hyprctl >/dev/null; then

@@ -1,1 +1,63 @@
-/* https://raw.githubusercontent.com/Alexays/Waybar/refs/heads/master/resources/style.css */
+* {
+    font-family: "Fira Sans Semibold", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 12px;  /* Slightly smaller font size */
+    font-weight: 900;
+    margin: 0;
+    padding: 0;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+}
+
+/* Reset all styles */
+* {
+    border: none;
+    border-radius: 3px;
+    min-height: 0;
+    margin: 0.2em 0.3em 0.2em 0.3em;
+}
+
+/* The whole bar */
+#waybar {
+    background-color: transparent;
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    border-radius: 0px;
+    margin: 0px 0px;
+}
+
+#language {
+
+}
+
+#waybar > * > * {
+    /* background-color: #eb4d4b; */
+}
+
+#waybar > * > * > * {
+    background-color: #111827;
+    padding: 2px 6px;
+    border-radius: 14px;
+}
+
+#workspaces button {
+    color: @foreground;
+    background-color: #111827;
+}
+
+#workspaces button.active {
+    color: @foreground;
+    background: #025939;
+}
+
+#workspaces button:hover {
+    background: #333333;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#workspaces {
+    background-color: #111827;
+}
