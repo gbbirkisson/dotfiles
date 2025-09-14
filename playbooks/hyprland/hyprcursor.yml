@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+
+  # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/hyprcursor.sh
+
+  vars:
+    # renovate: datasource=github-tags depName=hyprcursor packageName=hyprwm/hyprcursor
+    version: v0.1.13
+    dir: "/tmp/hyprwm-hyprcursor"
+
+  tasks:
+    - name: Install hyprcursor dependencies
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - libzip-dev
+          - librsvg2-dev
+
+    - name: Checkout hyprcursor
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/hyprcursor.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+
+    - name: Build hyprcursor
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
+          cmake --build ./build --config Release --target all -j `nproc`
+
+    - name: Install hyprcursor
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo cmake --install ./build

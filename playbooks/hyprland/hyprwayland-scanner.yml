@@ -1,0 +1,39 @@
+---
+- hosts: localhost
+
+  # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/hyprwayland-scanner.sh
+
+  vars:
+    # renovate: datasource=github-tags depName=hyprwayland-scanner packageName=hyprwm/hyprwayland-scanner
+    version: v0.4.5
+    dir: "/tmp/hyprwm-hyprwayland-scanner"
+
+  tasks:
+    - name: Install hyprwayland-scanner dependencies
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - libpugixml-dev
+
+    - name: Checkout hyprwayland-scanner
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/hyprwayland-scanner.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+
+    - name: Build hyprwayland-scanner
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          cmake -DCMAKE_INSTALL_PREFIX=/usr -B build
+          cmake --build build -j `nproc`
+
+    - name: Install hyprwayland-scanner
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo cmake --install build

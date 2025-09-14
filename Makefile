@@ -9,8 +9,9 @@ VENV:=$(VENVS)/dotfiles
 PYTHON_OS:=/usr/bin/python3
 PYTHON_VENV:=$(VENV)/bin/python
 ANSIBLE:=ANSIBLE_NOCOWS=1 ANSIBLE_LOCALHOST_WARNING=False ANSIBLE_INVENTORY_UNPARSED_WARNING=False ANSIBLE_GATHERING=explicit $(PYTHON_VENV) -m ansible
-PLAYBOOK_PATTERN:=playbooks/*.yml
-PLAYBOOKS:=$(wildcard $(PLAYBOOK_PATTERN))
+PLAYBOOKS:=$(shell find playbooks/ -name "*.yml")
+
+# build-essential git curl
 
 $(VENV):
 	$(info $(M) Creating python environment)
@@ -32,13 +33,13 @@ _apt:
 .PHONY: _run
 _run: $(VENV)
 	$(info $(M) Running $(PLAYBOOK))
-	$(Q) $(ANSIBLE) $(AQ) playbook $(PLAYBOOK) --extra-vars "dotfiles=$(PWD) venvs=$(PWD)/$(VENVS)"
+	$(Q) $(ANSIBLE) $(AQ) playbook $(PLAYBOOK) --ask-become-pass --extra-vars "dotfiles=$(PWD) venvs=$(PWD)/$(VENVS)"
 	$(Q) echo "$(M) 🎉 Playbook '$(PLAYBOOK)' finished successfully 🎉"
 
 .PHONY: lint
 lint: $(VENV)
 	$(info $(M) Linting playbooks)
-	$(Q) $(PYTHON_VENV) -m yamllint -s $(PLAYBOOK_PATTERN)
+	$(Q) $(PYTHON_VENV) -m yamllint -s $(PLAYBOOKS)
 
 .PHONY: $(PLAYBOOKS)
 $(PLAYBOOKS): lint

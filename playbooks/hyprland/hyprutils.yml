@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+
+  # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/hyprutils.sh
+
+  vars:
+    # renovate: datasource=github-tags depName=hyprutils packageName=hyprwm/hyprutils
+    version: v0.8.2
+    dir: "/tmp/hyprwm-hyprutils"
+
+  tasks:
+    - name: Checkout hyprutils
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/hyprutils.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+
+    - name: Build hyprutils
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
+          cmake --build ./build --config Release --target all -j `nproc`
+
+    - name: Install hyprutils
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo cmake --install build
