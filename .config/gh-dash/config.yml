@@ -16,7 +16,7 @@ prSections:
         hidden: true
 
   - title: Review (personal)
-    filters: is:open review-requested:@me -label:release -user:amedia
+    filters: is:open review-requested:@me -label:release -user:amedia -user:BerlingskeMedia
 
   - title: Releases (personal)
     filters: is:open user:@me label:release -user:amedia
