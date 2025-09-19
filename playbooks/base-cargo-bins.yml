@@ -13,7 +13,7 @@
         - { crate_name: du-dust, version: 1.0.0, locked: true }           # Better du
         - { crate_name: fd-find, version: 10.0.0, locked: true }          # Better find
         - { crate_name: git-delta, version: 0.18.0, locked: true }        # Better diff
-        - { crate_name: gittype, version: 0.6.0, locked: true }           # Practice typing
+        - { crate_name: gittype, version: 0.7.0 locked: true }           # Practice typing
         - { crate_name: hyperfine, version: 1.18.0, locked: true }        # Benchmarking
         - { crate_name: loc, version: 0.5.0, locked: true }               # Count loc
         - { crate_name: lsd, version: 1.0.0, locked: true }               # Better ls
