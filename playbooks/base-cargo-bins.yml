@@ -13,16 +13,16 @@
         - { crate_name: du-dust, version: 1.0.0, locked: true }           # Better du
         - { crate_name: fd-find, version: 10.0.0, locked: true }          # Better find
         - { crate_name: git-delta, version: 0.18.0, locked: true }        # Better diff
-        - { crate_name: gittype, version: 0.6.0 locked: true }           # Practice typing
+        - { crate_name: gittype, version: 0.6.0, locked: true }           # Practice typing
         - { crate_name: hyperfine, version: 1.18.0, locked: true }        # Benchmarking
         - { crate_name: loc, version: 0.5.0, locked: true }               # Count loc
         - { crate_name: lsd, version: 1.0.0, locked: true }               # Better ls
         - { crate_name: mise, version: 2025.3.0, locked: true }           # Better asdf
         - { crate_name: oha, version: 1.0.0, locked: true }               # HTTP stress testing
-        - { crate_name: ouch, version: 0.6.0 locked: true }              # Easy compress/decompress
+        - { crate_name: ouch, version: 0.6.0, locked: true }              # Easy compress/decompress
         - { crate_name: py-spy, version: 0.4.0, locked: true }            # Python profiling
         - { crate_name: ripgrep, version: 14.1.0, locked: true }          # Better grep
-        - { crate_name: rust-script, version: 0.36.0 locked: true }      # Create rust "scripts"
+        - { crate_name: rust-script, version: 0.36.0, locked: true }      # Create rust "scripts"
         - { crate_name: sfz, version: 0.7.1, locked: true }               # Simple web server for dirs
         - { crate_name: starship, version: 1.19.0, locked: true }         # Fancy prompt
         - { crate_name: tealdeer, version: 1.7.0, locked: true }          # Better tldr
