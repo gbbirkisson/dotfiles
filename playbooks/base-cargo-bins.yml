@@ -28,4 +28,4 @@
         - { crate_name: tealdeer, version: 1.7.0, locked: true }          # Better tldr
         - { crate_name: trunk, version: 0.21.0, locked: true }            # WASM development
         - { crate_name: watchexec-cli, version: 2.2.0, locked: true }     # Used for 'dev' script
-        - { crate_name: xh, version: 0.24.0, locked: true }               # Better HTTPie
+        - { crate_name: xh, version: 0.25.0 locked: true }               # Better HTTPie
