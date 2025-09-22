@@ -40,7 +40,7 @@
         '/^.*.ya?ml$/',
       ],
       matchStrings: [
-        'crate_name: (?<depName>[^\\s]+), version: (?<currentValue>[^\\s]+)',
+        'crate_name: (?<depName>[^\\s]+), version: (?<currentValue>[^\\s]+),',
       ],
     },
     {
