@@ -8,7 +8,16 @@ return {
       formatters = {
         taplo = {
           -- https://taplo.tamasfe.dev/configuration/formatter-options.html
-          args = { "format", "-o", "array_auto_collapse=false", "-" },
+          args = {
+            "format",
+            -- "-o",
+            -- "array_auto_collapse=false",
+            -- "-o",
+            -- "array_auto_expand=false",
+            "-o",
+            "column_width=120",
+            "-",
+          },
         },
         shfmt = {
           prepend_args = { "-i", "4" },
