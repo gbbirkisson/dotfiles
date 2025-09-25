@@ -1,0 +1,12 @@
+---
+# Basics
+- import_playbook: deps.yml
+- import_playbook: hyprwayland-scanner.yml
+- import_playbook: hyprutils.yml
+- import_playbook: aquamarine.yml
+- import_playbook: hyprlang.yml
+- import_playbook: hyprcursor.yml
+- import_playbook: hyprland-qtutils.yml
+- import_playbook: hyprland.yml
+
+# Needed

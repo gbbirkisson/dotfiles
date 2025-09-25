@@ -1,0 +1,37 @@
+---
+- hosts: localhost
+  gather_facts: true
+
+  tasks:
+    - name: Set DPKG architecture
+      set_fact:
+        dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
+
+    - name: Check if signal-desktop is installed
+      command: which signal-desktop
+      changed_when: false
+      failed_when: signal_desktop_installed.rc not in [0,1]
+      register: signal_desktop_installed
+
+    - name: Add signal-desktop GPG apt Key
+      when: signal_desktop_installed.rc not in [ 0 ]
+      become: true
+      shell: "curl -sS https://updates.signal.org/desktop/apt/keys.asc | sudo gpg --dearmor --output /usr/share/keyrings/signal-desktop-keyring.gpg"
+      args:
+        creates: /usr/share/keyrings/signal-desktop-keyring.gpg
+
+    - name: Add signal-desktop Apt Repository
+      when: signal_desktop_installed.rc not in [ 0 ]
+      become: true
+      apt_repository:
+        repo: "deb [arch={{ dpkg_arch }} signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main"
+        state: present
+        filename: signal-desktop
+
+    - name: Install signal-desktop
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - signal-desktop

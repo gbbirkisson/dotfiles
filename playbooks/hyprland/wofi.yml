@@ -1,0 +1,46 @@
+---
+- hosts: localhost
+
+  vars:
+    # renovate: datasource=github-tags depName=wofi packageName=SimplyCEO/wofi
+    version: 8af24fa2b13ed87ea009aec19342a458039fcd12
+    dir: "/tmp/simplyCEO-wofi"
+
+  tasks:
+    # - name: Install hyprland-qtutils dependencies
+    #   become: true
+    #   apt:
+    #     state: latest
+    #     update_cache: true
+    #     pkg:
+    #       - libqt6core5compat6
+    #       - qt6-base-dev
+    #       - qt6-wayland-dev
+    #       - qt6-wayland
+    #       - qt6-declarative-dev
+    #       - qml6-module-qtcore
+    #       - qt6-3d-dev
+    #       - qt6-5compat-dev
+    #       - libqt6waylandclient6
+    #       - qml6-module-qtwayland-client-texturesharing
+
+    - name: Checkout wofi
+      ansible.builtin.git:
+        repo: https://github.com/SimplyCEO/wofi.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+
+    - name: Build wofi
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/usr -DENABLE_RUN=1 -DENABLE_DRUN=1 -DENABLE_DMENU=1
+          cmake --build build
+
+    - name: Install wofi
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo cmake --install build
