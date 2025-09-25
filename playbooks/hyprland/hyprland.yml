@@ -1,0 +1,55 @@
+---
+- hosts: localhost
+
+  # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/hyprland.sh
+
+  vars:
+    # renovate: datasource=github-tags depName=hyprland packageName=hyprwm/Hyprland
+    version: v0.50.1
+    dir: "/tmp/hyprwm-hyprland"
+
+  tasks:
+    - name: Install hyprland dependencies
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - clang
+          - llvm
+          - libxcb-errors-dev
+          - libre2-dev
+          # - libglaze-dev
+          - libudis86-dev
+          - libinotify-ocaml-dev
+
+    - name: Install libglaze-dev
+      become: true
+      apt:
+        deb: https://mirror.arizona.edu/ubuntu/ubuntu/pool/universe/g/glaze/libglaze-dev_5.5.4-1_all.deb
+
+    - name: Checkout hyprland
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/Hyprland.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+
+    - name: Create a file with specific content
+      ansible.builtin.copy:
+        src: 0001-fix-hyprland-compile-issue.patch
+        dest: "{{ dir }}/0001-fix-hyprland-compile-issue.patch"
+
+    - name: Build hyprland
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          patch -p1 < 0001-fix-hyprland-compile-issue.patch
+          CXX=clang++ CXXFLAGS=-std=gnu++26 make all
+
+    - name: Install hyprland
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo make install

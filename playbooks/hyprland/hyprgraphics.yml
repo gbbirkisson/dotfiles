@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+
+  # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/hyprgraphics.sh
+
+  vars:
+    # renovate: datasource=github-tags depName=hyprgraphics packageName=hyprwm/hyprgraphics
+    version: v0.1.5
+    dir: "/tmp/hyprwm-hyprgraphics"
+
+  tasks:
+    - name: Checkout hyprgraphics
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/hyprgraphics.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+
+    - name: Build hyprgraphics
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
+          cmake --build ./build --config Release --target hyprgraphics -j `nproc`
+
+    - name: Install hyprgraphics
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo cmake --install ./build

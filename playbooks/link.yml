@@ -1,6 +1,4 @@
 ---
-- import_playbook: dev-tmux-tpm.yml
-
 - hosts: localhost
 
   tasks:

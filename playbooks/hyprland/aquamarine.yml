@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+
+  # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/aquamarine.sh
+
+  vars:
+    # renovate: datasource=github-tags depName=aquamarine packageName=hyprwm/aquamarine
+    version: v0.9.2
+    dir: "/tmp/hyprwm-aquamarine"
+
+  tasks:
+    - name: Checkout aquamarine
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/aquamarine.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+
+    - name: Build aquamarine
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
+          cmake --build ./build --config Release --target all -j `nproc`
+
+    - name: Install aquamarine
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo cmake --install ./build
