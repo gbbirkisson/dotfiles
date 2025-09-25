@@ -39,6 +39,6 @@
 
     - name: Build ghostty
       when: ghostty_installed.rc not in [ 0 ]
-      shell: "mise exec zig@0.14.0 -- zig build -p $HOME/.local -Doptimize=ReleaseFast"
+      shell: "mise install zig@0.14.0 && mise exec zig@0.14.0 -- zig build -p $HOME/.local -Doptimize=ReleaseFast"
       args:
         chdir: /tmp/ghostty-{{ version[1:] }}
