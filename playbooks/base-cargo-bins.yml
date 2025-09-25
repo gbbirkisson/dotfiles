@@ -1,7 +1,14 @@
 ---
 - hosts: localhost
-
   tasks:
+    - name: Install dependencies
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - libssl-dev
+
     - name: Install cargo packages
       community.general.cargo:
         name: "{{ item.crate_name }}"

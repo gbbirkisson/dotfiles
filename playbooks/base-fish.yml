@@ -12,7 +12,8 @@
     - name: Add fish shell PPA GPG key
       when: fish_installed.rc not in [ 0 ]
       become: true
-      shell: "curl -sS 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x88421E703EDC7AF54967DED473C9FCC9E2BB48DA' | gpg --dearmor --output /usr/share/keyrings/fish.gpg"
+      # shell: "curl -sS 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x88421E703EDC7AF54967DED473C9FCC9E2BB48DA' | gpg --dearmor --output /usr/share/keyrings/fish.gpg"
+      shell: "curl -fsSL 'https://download.opensuse.org/repositories/shells:fish:release:4/Debian_13/Release.key' | sudo gpg --dearmor --output /usr/share/keyrings/fish.gpg"
       args:
         creates: /usr/share/keyrings/fish.gpg
 
@@ -20,7 +21,8 @@
       when: fish_installed.rc not in [ 0 ]
       become: true
       apt_repository:
-        repo: "deb [signed-by=/usr/share/keyrings/fish.gpg] https://ppa.launchpadcontent.net/fish-shell/release-4/ubuntu {{ ansible_distribution_release }} main"
+        # repo: "deb [signed-by=/usr/share/keyrings/fish.gpg] https://ppa.launchpadcontent.net/fish-shell/release-4/ubuntu {{ ansible_distribution_release }} main"
+        repo: "deb [signed-by=/usr/share/keyrings/fish.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/4/Debian_13/ /"
         state: present
         filename: fish
 
