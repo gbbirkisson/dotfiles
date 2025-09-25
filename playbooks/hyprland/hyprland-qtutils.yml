@@ -5,7 +5,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=hyprland-qtutils packageName=hyprwm/hyprland-qtutils
-    version: v0.1.4
+    version: v0.1.5
     dir: "/tmp/hyprwm-hyprland-qtutils"
 
   tasks:
