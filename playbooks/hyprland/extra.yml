@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+
+  # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/01-hypr-pkgs.sh
+
+  tasks:
+    - name: Install extra dependencies
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - brightnessctl
+          - flameshot
+          - playerctl
+          - waybar
+          - wl-clipboard  # For nvim clipboard

@@ -9,11 +9,9 @@
         update_cache: true
         pkg:
           # Bare essentials
-          - apt-transport-https
           - build-essential
           - cmake
           - direnv
-          - git
 
           # Python dependencies
           - libbz2-dev
@@ -25,17 +23,10 @@
           - libssl-dev
           - tk-dev
 
-          # Py-Spy dependencies
-          - libunwind-dev
-
           # Other
-          - flameshot     # For screenshots
-          - gnome-tweaks  # Tweak gnome
           - jq            # Json manipulation
-          - tmux          # Terminal good stuff
           - tree          # Tree for directories
           - wireguard     # VPN
-          - xclip         # For nvim clipboard
           - timg          # Cat images in terminal
 
           # Dicts
@@ -46,3 +37,8 @@
           - dict-jargon  # dict package for The Jargon Lexicon
           - dict-vera    # Dictionary of computer related acronyms -- dict format
           - dict-wn      # electronic lexical database of English language for dict
+
+          # X11
+          # - gnome-tweaks  # Tweak gnome
+          # - tmux          # Terminal good stuff
+          # - xclip         # For nvim clipboard

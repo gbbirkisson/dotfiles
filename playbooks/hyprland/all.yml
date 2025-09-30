@@ -8,3 +8,4 @@
 - import_playbook: hyprland-qtutils.yml
 - import_playbook: hyprland.yml
 - import_playbook: xdg-desktop-portal-hyprland.yml
+- import_playbook: extra.yml
