@@ -1,0 +1,45 @@
+---
+- hosts: localhost
+
+  # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/xdph.sh
+
+  vars:
+    # renovate: datasource=github-tags depName=xdg-desktop-portal-hyprland packageName=hyprwm/xdg-desktop-portal-hyprland
+    version: v1.3.10
+    dir: "/tmp/hyprwm-xdg-desktop-portal-hyprland"
+
+  tasks:
+    - name: Install xdg-desktop-portal-hyprland dependencies
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - libdrm-dev
+          - libpipewire-0.3-dev
+          - libspa-0.2-dev
+          - libsdbus-c++-dev
+          - libwayland-client0
+          - wayland-protocols
+          - xdg-desktop-portal-gtk
+
+    - name: Checkout xdg-desktop-portal-hyprland
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/xdg-desktop-portal-hyprland.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+
+    - name: Build xdg-desktop-portal-hyprland
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build
+          cmake --build build
+
+    - name: Install xdg-desktop-portal-hyprland
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo cmake --install build

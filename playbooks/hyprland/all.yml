@@ -1,5 +1,4 @@
 ---
-# Basics
 - import_playbook: deps.yml
 - import_playbook: hyprwayland-scanner.yml
 - import_playbook: hyprutils.yml
@@ -8,5 +7,4 @@
 - import_playbook: hyprcursor.yml
 - import_playbook: hyprland-qtutils.yml
 - import_playbook: hyprland.yml
-
-# Needed
+- import_playbook: xdg-desktop-portal-hyprland.yml
