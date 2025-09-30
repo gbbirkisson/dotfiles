@@ -12,6 +12,7 @@
         pkg:
           - brightnessctl
           - flameshot
+          - network-manager-applet
           - playerctl
           - waybar
           - wl-clipboard  # For nvim clipboard
