@@ -1,5 +1,5 @@
 # Set font
-font-family = monospace
+# font-family = monospace
 font-size = 10
 
 # Run fish
@@ -14,8 +14,7 @@ unfocused-split-fill = #0e0f13
 resize-overlay = never
 
 # Speed
-# gtk-single-instance = true
-gtk-adwaita = false
+gtk-single-instance = false
 
 # Set custom theme
 theme = theme

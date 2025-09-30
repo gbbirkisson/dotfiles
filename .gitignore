@@ -2,7 +2,6 @@
 .venv
 
 .config/fish/conf.d/00-env.fish
-.config/ghostty/themes/theme
 
 .config/nvim/lazy-lock.json
 .config/nvim/lazyvim.json
