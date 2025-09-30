@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+
+  vars:
+    dir: "{{ lookup('ansible.builtin.env', 'WALLPAPERS') }}"
+
+  tasks:
+    - name: Create wallpaper dir
+      ansible.builtin.file:
+        path: "{{ dir }}"
+        state: directory
+
+    - name: Download wallpaper
+      ansible.builtin.get_url:
+        url: "{{ item.url }}"
+        dest: "{{ dir }}/{{ item.name }}"
+      loop:
+        - name: blackhole.jpg
+          url: https://w.wallhaven.cc/full/og/wallhaven-og3qjp.jpg
+        - name: galaxy.jpg
+          url: https://w.wallhaven.cc/full/w5/wallhaven-w5qppr.jpg
+        - name: space-clouds.jpg
+          url: https://w.wallhaven.cc/full/lm/wallhaven-lmdxdq.jpg
+        - name: europe.jpg
+          url: https://w.wallhaven.cc/full/0w/wallhaven-0w5ev6.jpg

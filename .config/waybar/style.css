@@ -45,8 +45,8 @@
 }
 
 #workspaces button.active {
-    color: @foreground;
-    background: #025939;
+    color: #1e222a;
+    background: #61afef;
 }
 
 #workspaces button:hover {

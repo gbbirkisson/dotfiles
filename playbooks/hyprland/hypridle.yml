@@ -1,0 +1,39 @@
+---
+- hosts: localhost
+
+  # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/hypridle.sh
+
+  vars:
+    # renovate: datasource=github-tags depName=hypridle packageName=hyprwm/hypridle
+    version: v0.1.6
+    dir: "/tmp/hyprwm-hypridle"
+
+  tasks:
+    - name: Install hypridle dependencies
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - libsdbus-c++-dev
+
+    - name: Checkout hypridle
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/hypridle.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+
+    - name: Build hypridle
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build
+          cmake --build ./build --config Release --target hypridle -j `nproc 2`
+
+    - name: Install hypridle
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo cmake --install ./build

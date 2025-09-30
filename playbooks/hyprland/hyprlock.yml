@@ -1,0 +1,51 @@
+---
+- hosts: localhost
+
+  # https://github.com/JaKooLit/Debian-hyprlock/blob/main/install-scripts/hyprlock.sh
+
+  vars:
+    # renovate: datasource=github-tags depName=hyprlock packageName=hyprwm/hyprlock
+    version: v0.9.1
+    dir: "/tmp/hyprwm-hyprlock"
+
+  tasks:
+    - name: Install hyprlock dependencies
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - libpam0g-dev
+          - libgbm-dev
+          - libdrm-dev
+          - libmagic-dev
+          - libaudit-dev
+          - libsdbus-c++-dev
+
+    - name: Install hyprlock build dependencies
+      become: true
+      apt:
+        state: build-dep
+        pkg:
+          - pam
+
+    - name: Checkout hyprlock
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/hyprlock.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+
+    - name: Build hyprlock
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build
+          cmake --build ./build --config Release --target hyprlock -j `nproc 2`
+
+    - name: Install hyprlock
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo cmake --install build

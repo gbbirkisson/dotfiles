@@ -1,0 +1,38 @@
+---
+- hosts: localhost
+
+  # https://github.com/JaKooLit/Debian-hyprland-protocols/blob/main/install-scripts/hyprland-protocols.sh
+
+  vars:
+    # renovate: datasource=github-tags depName=hyprland-protocols packageName=hyprwm/hyprland-protocols
+    version: v0.6.4
+    dir: "/tmp/hyprwm-hyprland-protocols"
+
+  tasks:
+    - name: Install hyprland-protocols dependencies
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - libsdbus-c++-dev
+
+    - name: Checkout hyprland-protocols
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/hyprland-protocols.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+
+    - name: Build hyprland-protocols
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          meson setup build
+
+    - name: Install hyprland-protocols
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo meson install -C build

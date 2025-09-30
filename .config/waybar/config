@@ -16,11 +16,15 @@
     "modules-right": [
         "hyprland/submap",
         "hyprland/language",
-        "pulseaudio",
-        "battery",
-        "clock",
+        "custom/separator",
         "bluetooth",
-        "tray"
+        "tray",
+        "custom/separator",
+        "pulseaudio",
+        "custom/separator",
+        "battery",
+        "custom/separator",
+        "clock"
     ],
     "battery": {
         "interval": 2,
@@ -52,7 +56,7 @@
         "today-format": "<b>{}</b>"
     },
     "hyprland/workspaces": {
-        "all-outputs": true,
+        "all-outputs": false,
         "format": "{icon}",
         "format-icons": {
             "1": "1BROW",
@@ -128,5 +132,10 @@
     "tray": {
         "icon-size": 15,
         "spacing": 5
+    },
+    "custom/separator": {
+        "format": "|",
+        "interval": "once",
+        "tooltip": false
     }
 }

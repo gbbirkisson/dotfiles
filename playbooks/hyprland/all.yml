@@ -1,4 +1,5 @@
 ---
+# Essential
 - import_playbook: deps.yml
 - import_playbook: hyprwayland-scanner.yml
 - import_playbook: hyprutils.yml
@@ -7,5 +8,10 @@
 - import_playbook: hyprcursor.yml
 - import_playbook: hyprland-qtutils.yml
 - import_playbook: hyprland.yml
-- import_playbook: xdg-desktop-portal-hyprland.yml
+- import_playbook: hyprland-protocols.yml
+
+# # Extra
 - import_playbook: extra.yml
+- import_playbook: hypridle.yml
+- import_playbook: hyprlock.yml
+- import_playbook: xdg-desktop-portal-hyprland.yml
