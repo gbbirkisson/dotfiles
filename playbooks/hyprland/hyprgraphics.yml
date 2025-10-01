@@ -5,7 +5,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=hyprgraphics packageName=hyprwm/hyprgraphics
-    version: v0.1.5
+    version: v0.1.6
     dir: "/tmp/hyprwm-hyprgraphics"
 
   tasks:
