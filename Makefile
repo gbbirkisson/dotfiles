@@ -1,5 +1,6 @@
 .DEFAULT_GOAL:=help
 
+SU = $(if $(filter 1,$S),--ask-become-pass,)
 Q = $(if $(filter 1,$V),,@)
 AQ = $(if $(filter 1,$V),-vv,)
 M = $(shell printf "\033[34;1m▶\033[0m")
@@ -31,7 +32,7 @@ _apt:
 .PHONY: _run
 _run: $(VENV)
 	$(info $(M) Running $(PLAYBOOK))
-	$(Q) $(ANSIBLE) $(AQ) playbook $(PLAYBOOK) --become-method=su --extra-vars "dotfiles=$(PWD) venvs=$(PWD)/$(VENVS)"
+	$(Q) $(ANSIBLE) $(AQ) playbook $(PLAYBOOK) --extra-vars "dotfiles=$(PWD) venvs=$(PWD)/$(VENVS)" $(SU)
 	$(Q) echo "$(M) 🎉 Playbook '$(PLAYBOOK)' finished successfully 🎉"
 
 .PHONY: lint

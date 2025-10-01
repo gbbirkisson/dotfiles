@@ -48,6 +48,7 @@ link .config/lazygit/config.yml
 link .config/nvim
 link .config/regolith3
 link .config/starship.toml
+link .config/yamlfmt/.yamlfmt
 
 link .local/scripts
 

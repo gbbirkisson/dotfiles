@@ -10,7 +10,7 @@ BUILDER:=$(VENV)/bin/python builder.py
 
 THEME:=schemes/onedark.yaml
 
-all: ghostty fzf regolith new-tab
+all: ghostty fzf regolith
 
 .PHONY: ghostty
 ghostty:
@@ -24,10 +24,6 @@ fzf:
 .PHONY: regolith
 regolith:
 	$(Q) IN=templates/regolith OUT=$(CONFIGS)/regolith3/Xresources $(MAKE) --no-print-directory _render
-
-.PHONY: new-tab
-new-tab:
-	$(Q) IN=templates/new-tab.html OUT=../../new-tab.html $(MAKE) --no-print-directory _render
 
 $(VENV):
 	$(info $(M) Creating python environment)
