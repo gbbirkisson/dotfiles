@@ -5,7 +5,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=hyprutils packageName=hyprwm/hyprutils
-    version: v0.8.2
+    version: v0.8.4
     dir: "/tmp/hyprwm-hyprutils"
 
   tasks:
