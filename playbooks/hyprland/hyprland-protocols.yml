@@ -23,6 +23,7 @@
         dest: "{{ dir }}"
         recursive: true
         version: "{{ version }}"
+        force: true
 
     - name: Build hyprland-protocols
       shell:

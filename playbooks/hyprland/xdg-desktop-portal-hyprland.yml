@@ -29,6 +29,7 @@
         dest: "{{ dir }}"
         recursive: true
         version: "{{ version }}"
+        force: true
 
     - name: Build xdg-desktop-portal-hyprland
       shell:
