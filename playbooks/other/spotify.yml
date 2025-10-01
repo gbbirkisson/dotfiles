@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+  gather_facts: true
+
+  tasks:
+    - name: Check if spotify is installed
+      command: which spotify
+      changed_when: false
+      failed_when: spotify_installed.rc not in [0,1]
+      register: spotify_installed
+
+    - name: Add spotify shell PPA GPG key
+      when: spotify_installed.rc not in [ 0 ]
+      become: true
+      shell: "curl -sS https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --output /usr/share/keyrings/spotify.gpg"
+      args:
+        creates: /usr/share/keyrings/spotify.gpg
+
+    - name: Add spotify repo
+      when: spotify_installed.rc not in [ 0 ]
+      become: true
+      apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free"
+        state: present
+        filename: spotify
+
+    - name: Install spotify
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg: spotify-client

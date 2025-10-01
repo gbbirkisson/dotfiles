@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Install slack
+      become: true
+      apt:
+        # https://slack.com/downloads/instructions/linux?ddl=1&build=deb
+        deb: https://downloads.slack-edge.com/desktop-releases/linux/x64/4.46.99/slack-desktop-4.46.99-amd64.deb
