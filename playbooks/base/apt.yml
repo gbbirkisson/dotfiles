@@ -12,6 +12,7 @@
           - build-essential
           - cmake
           - direnv
+          - htop
 
           # Python dependencies
           - libbz2-dev

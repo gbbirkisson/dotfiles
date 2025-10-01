@@ -15,10 +15,10 @@
     ],
     "modules-right": [
         "hyprland/submap",
-        "hyprland/language",
-        "custom/separator",
-        "bluetooth",
         "tray",
+        "bluetooth",
+        "custom/separator",
+        "hyprland/language",
         "custom/separator",
         "pulseaudio",
         "custom/separator",
@@ -73,10 +73,10 @@
         "active-only": false
     },
     "hyprland/window": {
-        "max-length": 300,
+        "max-length": 120,
         "format": "{}",
         "rewrite": {
-            "(.*) — Mozilla Firefox": "🌎 $1",
+            "(.*) — Mozilla Firefox": "🌐 $1",
             "(.*) - fish": "🐟 : $1",
             "([^:]+):\\s(.*)\\s-\\s(\\S*)": "🐟 $1 : $2"
         },
