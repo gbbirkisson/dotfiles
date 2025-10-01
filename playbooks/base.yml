@@ -1,0 +1,16 @@
+---
+- import_playbook: base/1password.yml
+- import_playbook: base/apt.yml
+- import_playbook: base/fish.yml
+- import_playbook: base/fzf.yml
+# - import_playbook: base/ghostty.yml
+- import_playbook: base/mise.yml
+
+- import_playbook: base/rust.yml
+- import_playbook: base/cargo.yml
+
+- import_playbook: base/nvim.yml
+- import_playbook: base/lazygit.yml
+
+- import_playbook: themes/themes.yml
+- import_playbook: base/link.yml

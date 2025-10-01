@@ -1,0 +1,25 @@
+regolith.wallpaper.file:
+regolith.wallpaper.color.primary: #{{base00_hex}}
+wm.bar.background.color: #{{base00_hex}}
+wm.bar.workspace.inactive.border.color: #{{base00_hex}}
+wm.bar.workspace.inactive.background.color: #{{base00_hex}}
+wm.bar.workspace.active.border.color: #{{base00_hex}}
+wm.bar.workspace.active.background.color: #{{base01_hex}}
+
+wm.gaps.focus_follows_mouse: yes
+wm.gaps.inner.size: 2
+
+wm.workspace.01.name: 1:1BROW
+wm.workspace.02.name: 2:2TMUX
+wm.workspace.03.name: 3
+wm.workspace.04.name: 4
+wm.workspace.05.name: 5
+wm.workspace.06.name: 6
+wm.workspace.07.name: 7:7PRIV
+wm.workspace.08.name: 8:8MUSI
+wm.workspace.09.name: 9:9PASS
+wm.workspace.10.name: 10:10MSG
+
+wm.binding.terminal: alt+Return
+
+regolith.look.path: /usr/share/regolith-look/nord

@@ -3,38 +3,27 @@ Q = $(if $(filter 1,$V),,@)
 
 VENVS:=../../.venv
 VENV:=$(VENVS)/themes
+CONFIGS:=../../.config
 PYTHON_OS:=/usr/bin/python3
 PYTHON_VENV:=$(VENV)/bin/python
 BUILDER:=$(VENV)/bin/python builder.py
 
 THEME:=schemes/onedark.yaml
 
-all: ghostty alacritty k9s tmux fzf regolith new-tab
+all: ghostty fzf regolith new-tab
 
 .PHONY: ghostty
 ghostty:
-	$(Q) mkdir -p ../ghostty/themes
-	$(Q) IN=templates/ghostty OUT=../ghostty/themes/theme $(MAKE) --no-print-directory _render
-
-.PHONY: alacritty
-alacritty:
-	$(Q) IN=templates/alacritty.toml OUT=../alacritty/theme.toml $(MAKE) --no-print-directory _render
-
-.PHONY: k9s
-k9s:
-	$(Q) IN=templates/k9s.yaml OUT=../k9s/skins/theme.yaml $(MAKE) --no-print-directory _render
-
-.PHONY: tmux
-tmux:
-	$(Q) IN=templates/tmux.tmux OUT=../tmux/colors.tmux $(MAKE) --no-print-directory _render
+	$(Q) mkdir -p $(CONFIGS)/ghostty/themes
+	$(Q) IN=templates/ghostty OUT=$(CONFIGS)/ghostty/themes/theme $(MAKE) --no-print-directory _render
 
 .PHONY: fzf
 fzf:
-	$(Q) IN=templates/fzf.fish OUT=../fish/conf.d/fzf-theme.fish $(MAKE) --no-print-directory _render
+	$(Q) IN=templates/fzf.fish OUT=$(CONFIGS)/fish/conf.d/fzf-theme.fish $(MAKE) --no-print-directory _render
 
 .PHONY: regolith
 regolith:
-	$(Q) IN=templates/regolith OUT=../regolith3/Xresources $(MAKE) --no-print-directory _render
+	$(Q) IN=templates/regolith OUT=$(CONFIGS)/regolith3/Xresources $(MAKE) --no-print-directory _render
 
 .PHONY: new-tab
 new-tab:

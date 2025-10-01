@@ -1,9 +1,5 @@
 .mypy_cache
 .venv
 
-.config/fish/conf.d/00-env.fish
-
 .config/nvim/lazy-lock.json
 .config/nvim/lazyvim.json
-
-.config/regolith3/Xresources

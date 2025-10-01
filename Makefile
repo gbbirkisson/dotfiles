@@ -11,8 +11,6 @@ PYTHON_VENV:=$(VENV)/bin/python
 ANSIBLE:=ANSIBLE_NOCOWS=1 ANSIBLE_LOCALHOST_WARNING=False ANSIBLE_INVENTORY_UNPARSED_WARNING=False ANSIBLE_GATHERING=explicit $(PYTHON_VENV) -m ansible
 PLAYBOOKS:=$(shell find playbooks/ -name "*.yml")
 
-# build-essential git curl
-
 $(VENV):
 	$(info $(M) Creating python environment)
 	$(Q) mkdir $(VENVS)
@@ -33,7 +31,7 @@ _apt:
 .PHONY: _run
 _run: $(VENV)
 	$(info $(M) Running $(PLAYBOOK))
-	$(Q) $(ANSIBLE) $(AQ) playbook $(PLAYBOOK) --ask-become-pass --extra-vars "dotfiles=$(PWD) venvs=$(PWD)/$(VENVS)"
+	$(Q) $(ANSIBLE) $(AQ) playbook $(PLAYBOOK) --become-method=su --extra-vars "dotfiles=$(PWD) venvs=$(PWD)/$(VENVS)"
 	$(Q) echo "$(M) 🎉 Playbook '$(PLAYBOOK)' finished successfully 🎉"
 
 .PHONY: lint
@@ -46,10 +44,10 @@ $(PLAYBOOKS): lint
 	$(Q) PLAYBOOK=$@ $(MAKE) --no-print-directory _run
 
 .PHONY: install
-install: _sudo playbooks/install.yml ## Install everything
+install: _sudo playbooks/base.yml ## Install everything
 
 .PHONY: update
-update: _sudo _apt _rustup install _tldr _mise _snap _gh_ext ## Update everything
+update: _sudo _apt _rustup install _tldr _mise _gh_ext ## Update everything
 	$(Q) echo "$(M) 🎉 Update finished successfully 🎉"
 
 .PHONY: _mise
@@ -63,32 +61,32 @@ _rustup:
 	$(Q) rustup update
 
 .PHONY: _snap
-_snap: _sudo
+update_snap: _sudo
 	$(info $(M) Update snap binaries)
 	$(Q) sudo snap refresh
 
 .PHONY: _tldr
-_tldr:
+update_tldr:
 	$(info $(M) Update tldr cache)
 	$(Q) tldr --update
 
 .PHONY: _gh_ext
-_gh_ext:
+update_gh_ext:
 	$(info $(M) Update gh extensions)
 	$(Q) gh extensions upgrade --all
 
 .PHONY: theme
 theme:  ## Generate theme
-	$(Q) $(MAKE) --no-print-directory -C .config/themes all
+	$(Q) $(MAKE) --no-print-directory -C playbooks/themes all
 
-.PHONY: term
-term: _sudo ## Set default terminal
-	$(info $(M) Setting default terminal)
-	# $(Q) which alacritty
-	# $(Q) update-alternatives --list x-terminal-emulator | grep -q alacritty || sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which alacritty) 100
-	$(Q) which ghostty
-	$(Q) update-alternatives --list x-terminal-emulator | grep -q ghostty || sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which ghostty) 101
-	$(Q) sudo update-alternatives --config x-terminal-emulator
+# .PHONY: term
+# term: _sudo ## Set default terminal
+# 	$(info $(M) Setting default terminal)
+# 	# $(Q) which alacritty
+# 	# $(Q) update-alternatives --list x-terminal-emulator | grep -q alacritty || sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which alacritty) 100
+# 	$(Q) which ghostty
+# 	$(Q) update-alternatives --list x-terminal-emulator | grep -q ghostty || sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(shell which ghostty) 101
+# 	$(Q) sudo update-alternatives --config x-terminal-emulator
 
 .PHONY: renovate
 renovate: ## Tests renovate configuration

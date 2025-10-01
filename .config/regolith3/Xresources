@@ -1,12 +1,10 @@
 regolith.wallpaper.file:
-regolith.wallpaper.color.primary: #{{base00_hex}}
-wm.bar.background.color: #{{base00_hex}}
-wm.bar.workspace.inactive.border.color: #{{base00_hex}}
-wm.bar.workspace.inactive.background.color: #{{base00_hex}}
-wm.bar.workspace.active.border.color: #{{base00_hex}}
-wm.bar.workspace.active.background.color: #{{base01_hex}}
-
-gnome.terminal.font:	RobotoMono Nerd Font 11
+regolith.wallpaper.color.primary: #1e222a
+wm.bar.background.color: #1e222a
+wm.bar.workspace.inactive.border.color: #1e222a
+wm.bar.workspace.inactive.background.color: #1e222a
+wm.bar.workspace.active.border.color: #1e222a
+wm.bar.workspace.active.background.color: #353b45
 
 wm.gaps.focus_follows_mouse: yes
 wm.gaps.inner.size: 2

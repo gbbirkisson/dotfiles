@@ -1,0 +1,17 @@
+---
+# Essential
+- import_playbook: hyprland/deps.yml
+- import_playbook: hyprland/hyprwayland-scanner.yml
+- import_playbook: hyprland/hyprutils.yml
+- import_playbook: hyprland/aquamarine.yml
+- import_playbook: hyprland/hyprlang.yml
+- import_playbook: hyprland/hyprcursor.yml
+- import_playbook: hyprland/hyprland-qtutils.yml
+- import_playbook: hyprland/hyprland.yml
+- import_playbook: hyprland/hyprland-protocols.yml
+
+# # Extra
+- import_playbook: hyprland/extra.yml
+- import_playbook: hyprland/hypridle.yml
+- import_playbook: hyprland/hyprlock.yml
+- import_playbook: hyprland/xdg-desktop-portal-hyprland.yml

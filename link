@@ -39,25 +39,14 @@ link() {
     ln -sf "$src" "$dst"
 }
 
-link .claude/commands
-link .claude/CLAUDE.md
-link .claude/settings.json
-link .config/alacritty
 link .config/direnv
 link .config/dunst
 link .config/fish/conf.d
-link .config/fontconfig/fonts.conf
 link .config/gh-dash
 link .config/ghostty
-link .config/k9s/skins
 link .config/lazygit/config.yml
 link .config/nvim
 link .config/regolith3
-link .config/themes
-link .config/tmux/colors.tmux
-link .config/tmux/theme.tmux
-link .config/tmux/tmux.conf
-link .config/yamlfmt/.yamlfmt
 link .config/starship.toml
 
 link .local/scripts

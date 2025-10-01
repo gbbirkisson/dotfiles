@@ -6,4 +6,4 @@
       command: "make all"
       changed_when: false
       args:
-        chdir: "{{ dotfiles }}/.config/themes"
+        chdir: "{{ dotfiles }}/playbooks/themes"
