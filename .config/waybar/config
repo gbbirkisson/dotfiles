@@ -16,7 +16,7 @@
     "modules-right": [
         "hyprland/submap",
         "tray",
-        "bluetooth",
+        // "bluetooth",
         "custom/separator",
         "hyprland/language",
         "custom/separator",
@@ -103,7 +103,8 @@
                 "",
                 ""
             ]
-        }
+        },
+        "on-click": "ghostty --command=bluetui"
         // "on-click": "pavucontrol",
         // "on-click-right": "amixer sset Master toggle"
     },
