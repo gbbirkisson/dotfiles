@@ -1,0 +1,15 @@
+/* @import /etc/xdg/swaync/style.css; */
+
+@define-color cc-bg #1e222a;
+@define-color noti-border-color #61afef;
+@define-color noti-bg #1e222a;
+@define-color noti-bg-opaque #1e222a;
+@define-color noti-bg-darker #1e222a;
+@define-color noti-bg-hover #1e222a;
+@define-color noti-bg-hover-opaque #1e222a;
+@define-color noti-bg-focus #1e222a;
+@define-color noti-close-bg #545862;
+@define-color noti-close-bg-hover #abb2bf;
+@define-color text-color #c8ccd4;
+@define-color text-color-disabled #c8ccd4;
+@define-color bg-selected #61afef;

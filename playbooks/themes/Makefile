@@ -10,12 +10,16 @@ BUILDER:=$(VENV)/bin/python builder.py
 
 THEME:=schemes/onedark.yaml
 
-all: ghostty fzf regolith
+all: ghostty fzf regolith swaync
 
 .PHONY: ghostty
 ghostty:
 	$(Q) mkdir -p $(CONFIGS)/ghostty/themes
 	$(Q) IN=templates/ghostty OUT=$(CONFIGS)/ghostty/themes/theme $(MAKE) --no-print-directory _render
+
+.PHONY: swaync
+swaync:
+	$(Q) IN=templates/swaync.style.css OUT=$(CONFIGS)/swaync/style.css $(MAKE) --no-print-directory _render
 
 .PHONY: fzf
 fzf:
