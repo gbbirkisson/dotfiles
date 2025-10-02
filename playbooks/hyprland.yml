@@ -15,3 +15,4 @@
 - import_playbook: hyprland/hypridle.yml
 - import_playbook: hyprland/hyprlock.yml
 - import_playbook: hyprland/xdg-desktop-portal-hyprland.yml
+- import_playbook: hyprland/batsignal.yml

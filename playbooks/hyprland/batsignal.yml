@@ -1,0 +1,41 @@
+---
+- hosts: "{{ host }}"
+
+  vars:
+    # renovate: datasource=github-tags depName=batsignal packageName=electrickite/batsignal
+    version: 1.8.0
+    dir: "/tmp/electrickite-batsignal"
+
+  tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
+    - name: Install batsignal dependencies
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - libnotify-dev
+
+    - name: Checkout batsignal
+      ansible.builtin.git:
+        repo: https://github.com/electrickite/batsignal.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+        force: true
+
+    - name: Build batsignal
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          make
+
+    - name: Install batsignal
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo make install

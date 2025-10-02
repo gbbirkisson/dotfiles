@@ -16,7 +16,6 @@
     "modules-right": [
         "hyprland/submap",
         "tray",
-        // "bluetooth",
         "custom/separator",
         "hyprland/language",
         "custom/separator",
@@ -26,7 +25,8 @@
         "custom/separator",
         "clock",
         "custom/separator",
-        "custom/notification",
+        "bluetooth",
+        "custom/notification"
     ],
     "battery": {
         "interval": 2,
@@ -106,7 +106,7 @@
                 ""
             ]
         },
-        "on-click": "ghostty --command=bluetui"
+        // "on-click": "ghostty --command=bluetui"
         // "on-click": "pavucontrol",
         // "on-click-right": "amixer sset Master toggle"
     },
@@ -146,14 +146,14 @@
         "tooltip": false,
         "format": "{icon}",
         "format-icons": {
-            "notification": " <span foreground='red'><sup>❗</sup></span>",
+            "notification": "<span foreground='red'></span>",
             "none": "",
-            "dnd-notification": " <span foreground='red'><sup>❗</sup></span>",
+            "dnd-notification": "<span foreground='red'></span>",
             "dnd-none": "",
-            "inhibited-notification": " <span foreground='red'><sup>❗</sup></span>",
+            "inhibited-notification": "<span foreground='red'></span>",
             "inhibited-none": "",
-            "dnd-inhibited-notification": " <span foreground='red'><sup>❗</sup></span>",
-            "dnd-inhibited-none": ""
+            "dnd-inhibited-notification": "<span foreground='red'></span>",
+            "dnd-inhibited-none": "",
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
