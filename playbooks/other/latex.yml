@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
   tasks:
 
     - name: Install latex packages

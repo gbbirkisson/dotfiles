@@ -1,10 +1,14 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
 
   vars:
     dir: "{{ lookup('ansible.builtin.env', 'WALLPAPERS') }}"
 
   tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
     - name: Create wallpaper dir
       ansible.builtin.file:
         path: "{{ dir }}"

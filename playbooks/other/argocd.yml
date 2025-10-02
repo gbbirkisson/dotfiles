@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
 
   vars:
     # renovate: datasource=github-releases depName=argo-cd packageName=argoproj/argo-cd

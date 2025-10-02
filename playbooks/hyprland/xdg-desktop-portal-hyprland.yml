@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
 
   # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/xdph.sh
 
@@ -9,6 +9,10 @@
     dir: "/tmp/hyprwm-xdg-desktop-portal-hyprland"
 
   tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
     - name: Install xdg-desktop-portal-hyprland dependencies
       become: true
       apt:

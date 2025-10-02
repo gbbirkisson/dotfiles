@@ -1,8 +1,8 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
 
   vars:
-    # renovate: datasource=github-releases depName=cli packageName=cli/cli
+    # renovate: datasource=github-releases depName=gh-cli packageName=cli/cli
     version: v2.81.0
 
   tasks:

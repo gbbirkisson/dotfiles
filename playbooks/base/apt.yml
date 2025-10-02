@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
 
   tasks:
     - name: Install packages
@@ -38,8 +38,3 @@
           - dict-jargon  # dict package for The Jargon Lexicon
           - dict-vera    # Dictionary of computer related acronyms -- dict format
           - dict-wn      # electronic lexical database of English language for dict
-
-          # X11
-          # - gnome-tweaks  # Tweak gnome
-          # - tmux          # Terminal good stuff
-          # - xclip         # For nvim clipboard

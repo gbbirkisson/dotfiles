@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
   gather_facts: true
 
   vars:
@@ -7,6 +7,10 @@
     version: v3.3
 
   tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"regolith" in skip'
+
     - name: Set DPKG architecture
       set_fact:
         dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
@@ -48,7 +52,9 @@
           - i3xrocks-keyboard-layout
           - i3xrocks-memory
           - i3xrocks-time
-          - dunst  # Notification popups
+          - dunst         # Notification popups
+          - gnome-tweaks  # Tweak gnome
+          - xclip         # For nvim clipboard
 
     - name: Remove unwanted packages
       become: true

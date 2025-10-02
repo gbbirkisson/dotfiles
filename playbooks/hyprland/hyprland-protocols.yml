@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
 
   # https://github.com/JaKooLit/Debian-hyprland-protocols/blob/main/install-scripts/hyprland-protocols.sh
 
@@ -9,6 +9,10 @@
     dir: "/tmp/hyprwm-hyprland-protocols"
 
   tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
     - name: Install hyprland-protocols dependencies
       become: true
       apt:

@@ -1,15 +1,14 @@
 .DEFAULT_GOAL:=help
 
-SU = $(if $(filter 1,$S),--ask-become-pass,)
 Q = $(if $(filter 1,$V),,@)
 AQ = $(if $(filter 1,$V),-vv,)
 M = $(shell printf "\033[34;1m▶\033[0m")
 
-VENVS:=.venv
+VENVS:=$(shell realpath .venv)
 VENV:=$(VENVS)/dotfiles
 PYTHON_OS:=/usr/bin/python3
 PYTHON_VENV:=$(VENV)/bin/python
-ANSIBLE:=ANSIBLE_NOCOWS=1 ANSIBLE_LOCALHOST_WARNING=False ANSIBLE_INVENTORY_UNPARSED_WARNING=False ANSIBLE_GATHERING=explicit $(PYTHON_VENV) -m ansible
+ANSIBLE:=ANSIBLE_NOCOWS=1 ANSIBLE_GATHERING=explicit $(PYTHON_VENV) -m ansible
 PLAYBOOKS:=$(shell find playbooks/ -name "*.yml")
 
 $(VENV):
@@ -32,7 +31,7 @@ _apt:
 .PHONY: _run
 _run: $(VENV)
 	$(info $(M) Running $(PLAYBOOK))
-	$(Q) $(ANSIBLE) $(AQ) playbook $(PLAYBOOK) --extra-vars "dotfiles=$(PWD) venvs=$(PWD)/$(VENVS)" $(SU)
+	$(Q) $(ANSIBLE) $(AQ) playbook $(PLAYBOOK) -i inventory --extra-vars "ansible_python_interpreter=$(PYTHON_VENV) ansible_connection=local dotfiles=$(PWD) venvs=$(PWD)/$(VENVS) host=$(shell hostname)" $(shell cat .ansible_params 2>/dev/null || true)
 	$(Q) echo "$(M) 🎉 Playbook '$(PLAYBOOK)' finished successfully 🎉"
 
 .PHONY: lint
@@ -48,7 +47,7 @@ $(PLAYBOOKS): lint
 install: _sudo playbooks/base.yml ## Install everything
 
 .PHONY: update
-update: _sudo _apt _rustup install _tldr _mise _gh_ext ## Update everything
+update: _sudo _apt _rustup playbooks/update.yml _mise _gh_ext ## Update everything
 	$(Q) echo "$(M) 🎉 Update finished successfully 🎉"
 
 .PHONY: _mise

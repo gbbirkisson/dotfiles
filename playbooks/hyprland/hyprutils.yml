@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
 
   # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/hyprutils.sh
 
@@ -9,6 +9,10 @@
     dir: "/tmp/hyprwm-hyprutils"
 
   tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
     - name: Checkout hyprutils
       ansible.builtin.git:
         repo: https://github.com/hyprwm/hyprutils.git

@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
 
   vars:
     # renovate: datasource=github-releases depName=obsidian packageName=obsidianmd/obsidian-releases

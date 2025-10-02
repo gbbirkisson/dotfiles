@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
 
   # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/hyprwayland-scanner.sh
 
@@ -9,6 +9,10 @@
     dir: "/tmp/hyprwm-hyprwayland-scanner"
 
   tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
     - name: Install hyprwayland-scanner dependencies
       become: true
       apt:

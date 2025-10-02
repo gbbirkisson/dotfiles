@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
 
   vars:
     # renovate: datasource=github-tags depName=wofi packageName=SimplyCEO/wofi
@@ -7,6 +7,10 @@
     dir: "/tmp/simplyCEO-wofi"
 
   tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
     - name: Checkout wofi
       ansible.builtin.git:
         repo: https://github.com/SimplyCEO/wofi.git

@@ -1,24 +1,30 @@
 ---
-- hosts: localhost
-  tasks:
-    - name: Install dependencies
-      become: true
-      apt:
-        state: latest
-        update_cache: true
-        pkg:
-          # General dependencies
-          - libssl-dev
+- hosts: "{{ host }}"
 
-          # Py-Spy dependencies
-          - libunwind-dev
+  tasks:
+    # - name: Install dependencies
+    #   become: true
+    #   apt:
+    #     state: latest
+    #     update_cache: true
+    #     pkg:
+    #       # General dependencies
+    #       - libssl-dev
+    #
+    #       # Py-Spy dependencies
+    #       - libunwind-dev
+    #
+    #       # Bluetui dependiencies
+    #       - libdbus-1-dev
+    #       - pkg-config
 
     - name: Install cargo packages
+      when: 'item.crate_name not in skip_cargo'
       community.general.cargo:
         name: "{{ item.crate_name }}"
         version: "{{ item.version }}"
       with_items:
-        # - { crate_name: bluetui, version: 0.6.0, locked: true }         # Bluetooth TUI
+        - { crate_name: bluetui, version: 0.6.0, locked: true }           # Bluetooth TUI
         - { crate_name: bat, version: 0.25.0, locked: true }              # Better cat
         - { crate_name: cargo-tarpaulin, version: 0.32.0, locked: true }  # For cargo code coverage
         - { crate_name: drill, version: 0.8.2, locked: true }             # HTTP stress testing (ansible-esqe)
@@ -31,7 +37,7 @@
         - { crate_name: lsd, version: 1.0.0, locked: true }               # Better ls
         - { crate_name: oha, version: 1.0.0, locked: true }               # HTTP stress testing
         - { crate_name: ouch, version: 0.6.0, locked: true }              # Easy compress/decompress
-        # - { crate_name: py-spy, version: 0.4.0, locked: true }          # Python profiling
+        - { crate_name: py-spy, version: 0.4.1, locked: true }            # Python profiling
         - { crate_name: ripgrep, version: 14.1.0, locked: true }          # Better grep
         - { crate_name: rust-script, version: 0.36.0, locked: true }      # Create rust "scripts"
         - { crate_name: sfz, version: 0.7.1, locked: true }               # Simple web server for dirs

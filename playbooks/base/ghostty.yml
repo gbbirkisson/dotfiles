@@ -1,11 +1,15 @@
 ---
-- hosts: localhost
+- hosts: "{{ host }}"
 
   vars:
     # renovate: datasource=github-tags depName=ghostty packageName=ghostty-org/ghostty
     version: v1.2.0
 
   tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"ghostty" in skip'
+
     - name: Create local bin path
       ansible.builtin.file:
         path: ~/.local/bin
