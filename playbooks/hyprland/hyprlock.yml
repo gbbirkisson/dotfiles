@@ -5,7 +5,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=hyprlock packageName=hyprwm/hyprlock
-    version: v0.9.1
+    version: v0.9.2
     dir: "/tmp/hyprwm-hyprlock"
 
   tasks:
