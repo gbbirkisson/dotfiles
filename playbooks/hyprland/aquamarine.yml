@@ -5,7 +5,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=aquamarine packageName=hyprwm/aquamarine
-    version: v0.9.4
+    version: v0.9.5
     dir: "/tmp/hyprwm-aquamarine"
 
   tasks:
