@@ -30,6 +30,7 @@ return {
     opts = {
       document_highlight = { enabled = false },
       servers = {
+        zls = {},
         varnishls = {},
         clangd = {},
         bashls = {},
