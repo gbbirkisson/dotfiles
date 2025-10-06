@@ -24,10 +24,8 @@
       groupName: 'hyprland dependencies',
       groupSlug: 'hyprland-dep',
       matchPackageNames: [
-        'hypr**',
-        '!hyprland',
-        'aquamarine',
-        'xdg-desktop-portal-hyprland',
+        'hyprwm/**',
+        '!hyprwm/hyprland',
       ],
     },
   ],
