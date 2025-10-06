@@ -22,7 +22,7 @@
     },
     {
       groupName: 'hyprland packages',
-      groupSlug: 'hyprland'
+      groupSlug: 'hyprland',
       matchPackageNames: [
         'hypr**',
         'aquamarine',
