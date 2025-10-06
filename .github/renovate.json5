@@ -21,10 +21,11 @@
       ],
     },
     {
-      groupName: 'hyprland packages',
-      groupSlug: 'hyprland',
+      groupName: 'hyprland dependencies',
+      groupSlug: 'hyprland-dep',
       matchPackageNames: [
         'hypr**',
+        '!hyprland',
         'aquamarine',
         'xdg-desktop-portal-hyprland',
       ],
