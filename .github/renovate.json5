@@ -21,9 +21,9 @@
       ],
     },
     {
-      "groupName": "hyprland packages",
-      "groupSlug": "hyprland"
-      "matchPackageNames": [
+      groupName: 'hyprland packages',
+      groupSlug: 'hyprland'
+      matchPackageNames: [
         'hypr**',
         'aquamarine',
         'xdg-desktop-portal-hyprland',
