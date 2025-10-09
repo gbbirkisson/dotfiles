@@ -28,9 +28,9 @@ customCommands:
         key: "BranchName"
         initialValue: "gbbirkisson/"
     command: "git checkout -b {{.Form.BranchName}} refs/heads/{{.SelectedLocalBranch.Name}}"
-  - key: 'o'
+  - key: "O"
     description: "New PR"
-    context: 'localBranches'
+    context: "localBranches"
     prompts:
       - type: "input"
         title: "New PR: Title?"
@@ -46,7 +46,7 @@ customCommands:
             value: "no"
       - type: "confirm"
         title: "New PR: Create?"
-        body: "Create a {{if eq .Form.PRDraft \"yes\"}}draft {{end}}PR '{{.Form.PRTitle}}' into 'main' from '{{.SelectedLocalBranch.Name}}'"
+        body: 'Create a {{if eq .Form.PRDraft "yes"}}draft {{end}}PR ''{{.Form.PRTitle}}'' into ''main'' from ''{{.SelectedLocalBranch.Name}}'''
     command: |
       set -e
 
@@ -58,7 +58,7 @@ customCommands:
 
       gh pr view -w $(gh pr list -H {{.SelectedLocalBranch.Name}} --json number --jq .[0].number) &>/dev/null &
     output: terminal
-  - key: 'O'
-    context: 'localBranches'
+  - key: "o"
+    context: "localBranches"
     command: |
       gh pr view -w $(gh pr list -H {{.SelectedLocalBranch.Name}} --json number --jq .[0].number) &>/dev/null &
