@@ -10,7 +10,7 @@ uv         0.9.0
 helm       3.19.0
 kustomize  5.7.1
 pipx       1.7.1
-zig        0.15.1
+zig        0.15.2
 just       1.43.0
 hk         0.2.3
 pkl        0.27.2
