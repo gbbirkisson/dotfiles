@@ -30,6 +30,12 @@ return {
         desc = "AI Summarize",
       },
       {
+        "<leader>ae",
+        "<Cmd>CodeCompanion /explain<CR>",
+        mode = { "v" },
+        desc = "AI Explain",
+      },
+      {
         "<leader>at",
         "<Cmd>CodeCompanionChat Toggle<CR>",
         mode = { "n", "v" },
@@ -53,7 +59,7 @@ return {
     opts = {
       strategies = {
         chat = {
-          adapter = vim.env.NVIM_LLM or "anthropic", -- can be ollama, openai, anthropic, deepseek
+          adapter = vim.env.NVIM_LLM or "gemini", -- can be ollama, openai, anthropic, deepseek
           slash_commands = {
             ["buffer"] = {
               opts = {
@@ -73,50 +79,71 @@ return {
           },
         },
         inline = {
-          adapter = vim.env.NVIM_LLM or "anthropic", -- can be ollama, openai, anthropic, deepseek
+          adapter = vim.env.NVIM_LLM or "gemini", -- can be ollama, openai, anthropic, deepseek
         },
         agent = {
-          adapter = vim.env.NVIM_LLM or "anthropic", -- can be ollama, openai, anthropic, deepseek
+          adapter = vim.env.NVIM_LLM or "gemini", -- can be ollama, openai, anthropic, deepseek
         },
       },
       adapters = {
         opts = {
           show_defaults = false,
         },
-        ollama = function()
-          return require("codecompanion.adapters").extend("ollama", {
-            model = "mistral:instruct",
-          })
-        end,
-        openai = function()
-          return require("codecompanion.adapters").extend("openai", {
-            env = {
-              api_key = "cmd:op read op://hemwnx22rvxga5v2zkicawq6sq/l6mbqk77zt62hrdxahozqi6uom/key --no-newline",
-            },
-          })
-        end,
-        anthropic = function()
-          return require("codecompanion.adapters").extend("anthropic", {
-            env = {
-              api_key = "cmd:op read op://hemwnx22rvxga5v2zkicawq6sq/7epubtpoeq4rdyrpsrzqydbnqu/credential --no-newline",
-            },
-          })
-        end,
-        deepseek = function()
-          return require("codecompanion.adapters").extend("openai_compatible", {
-            name = "deepseek",
-            env = {
-              api_key = "cmd:op read op://hemwnx22rvxga5v2zkicawq6sq/q5apc3d4wqw3wbdbkh3w4mf2xm/credential --no-newline",
-              url = "https://api.together.xyz",
-              chat_url = "/v1/chat/completions",
-            },
-            schema = {
-              model = {
-                default = "deepseek-ai/DeepSeek-R1",
+        http = {
+          ollama = function()
+            return require("codecompanion.adapters").extend("ollama", {
+              model = "mistral:instruct",
+            })
+          end,
+          openai = function()
+            return require("codecompanion.adapters").extend("openai", {
+              env = {
+                api_key = "cmd:op read op://hemwnx22rvxga5v2zkicawq6sq/l6mbqk77zt62hrdxahozqi6uom/key --no-newline",
               },
-            },
-          })
-        end,
+            })
+          end,
+          anthropic = function()
+            return require("codecompanion.adapters").extend("anthropic", {
+              env = {
+                api_key = "cmd:op read op://hemwnx22rvxga5v2zkicawq6sq/7epubtpoeq4rdyrpsrzqydbnqu/credential --no-newline",
+              },
+            })
+          end,
+          gemini = function()
+            return require("codecompanion.adapters").extend("gemini", {
+              env = {
+                api_key = "cmd:op read op://hemwnx22rvxga5v2zkicawq6sq/ld4ypfwlvf44j2xx5g7ylb2wgi/credential --no-newline",
+              },
+            })
+          end,
+          deepseek = function()
+            return require("codecompanion.adapters").extend("openai_compatible", {
+              name = "deepseek",
+              env = {
+                api_key = "cmd:op read op://hemwnx22rvxga5v2zkicawq6sq/q5apc3d4wqw3wbdbkh3w4mf2xm/credential --no-newline",
+                url = "https://api.together.xyz",
+                chat_url = "/v1/chat/completions",
+              },
+              schema = {
+                model = {
+                  default = "deepseek-ai/DeepSeek-R1",
+                },
+              },
+            })
+          end,
+        },
+        acp = {
+          gemini_cli = function()
+            return require("codecompanion.adapters").extend("gemini_cli", {
+              defaults = {
+                auth_method = "gemini-api-key",
+              },
+              env = {
+                GEMINI_API_KEY = "cmd:op read op://hemwnx22rvxga5v2zkicawq6sq/ld4ypfwlvf44j2xx5g7ylb2wgi/credential --no-newline",
+              },
+            })
+          end,
+        },
       },
       prompt_library = {
         ["Code Help"] = {
