@@ -33,6 +33,11 @@ if command -v bat >/dev/null
     alias yat='bat -l yaml'
 end
 
+# curlie
+if command -v curlie >/dev/null
+    alias curl='curlie'
+end
+
 # lsd
 if command -v lsd >/dev/null
     alias ls="lsd -1 --group-directories-first" # list files

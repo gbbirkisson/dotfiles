@@ -1,0 +1,25 @@
+---
+- hosts: "{{ host }}"
+
+  vars:
+    # renovate: datasource=github-releases depName=curlie packageName=rs/curlie
+    version: v1.8.2
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if curlie is installed
+      shell: "curlie -V | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: curlie_installed.rc not in [0,1]
+      register: curlie_installed
+
+    - name: Install curlie
+      when: curlie_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/rs/curlie/releases/download/{{ version }}/curlie_{{ version[1:] }}_linux_amd64.tar.gz"
+        dest: ~/.local/bin
