@@ -5,7 +5,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=hyprpaper packageName=hyprwm/hyprpaper
-    version: v0.7.5
+    version: v0.7.6
     dir: "/tmp/hyprwm-hyprpaper"
 
   tasks:
