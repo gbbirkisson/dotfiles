@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=gh-cli packageName=cli/cli
-    version: v2.81.0
+    version: v2.82.0
 
   tasks:
     - name: Create local bin path
