@@ -38,6 +38,22 @@ if command -v curlie >/dev/null
     alias curl='curlie'
 end
 
+function aka
+    curlie -v https://$argv[1]
+end
+
+function akc
+    set -f host $argv[1]
+
+    if test -n "$argv[3]"
+        set -f ip "$argv[3]"
+    else
+        set -f ip "104.18.30.162"
+    end
+
+    curlie -v --resolve $host:443:$ip https://$host
+end
+
 # lsd
 if command -v lsd >/dev/null
     alias ls="lsd -1 --group-directories-first" # list files
