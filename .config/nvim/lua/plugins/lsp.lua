@@ -38,6 +38,7 @@ return {
         html = {
           filetypes = { "html", "templ", "htmldjango" },
         },
+        terraformls = {},
         jsonls = {},
         marksman = {},
         pyright = {},
