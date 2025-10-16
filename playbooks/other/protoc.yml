@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=protobuf packageName=protocolbuffers/protobuf
-    version: v32.1
+    version: v33.0
 
   tasks:
     - name: Create local bin path
