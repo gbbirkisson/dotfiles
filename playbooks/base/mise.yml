@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=mise packageName=jdx/mise
-    version: v2025.10.8
+    version: v2025.10.12
 
   tasks:
     - name: Create local bin path
