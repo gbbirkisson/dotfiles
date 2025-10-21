@@ -39,19 +39,11 @@ if command -v curlie >/dev/null
 end
 
 function aka
-    curlie -v https://$argv[1]
+    mig --cdn aka $argv
 end
 
 function akc
-    set -f host $argv[1]
-
-    if test -n "$argv[3]"
-        set -f ip "$argv[3]"
-    else
-        set -f ip "104.18.30.162"
-    end
-
-    curlie -v --resolve $host:443:$ip https://$host
+    mig --cdn cf $argv
 end
 
 # lsd

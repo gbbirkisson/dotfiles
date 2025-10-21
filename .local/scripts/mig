@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+CURL_BIN="curl"
+if command -v curlie >/dev/null 2>&1; then
+    CURL_BIN="curlie --pretty"
+fi
+
+R_CDN=aka
+R_BYTES=6000
+
+SCRIPT_NAME=$(basename $0)
+
+log-lines() {
+    for a in "$@"; do printf "\n  $a" 1>&2; done
+    printf "\n" 1>&2
+}
+log-error() {
+    printf "$(tput setaf 1)ERROR$(tput sgr0): $1" 1>&2
+    log-lines "${@:2}"
+    exit 1
+}
+
+usage() {
+    cat 1>&2 <<EOF
+Usage: $SCRIPT_NAME [OPTIONS] R_HOST R_PATH
+
+Options:
+  --cdn        CDN to use [aka or cf, defaults to $R_CDN]
+  --bytes      Number of bytes to output [defaults to $R_BYTES]
+  -h, --help   Print this dialog
+
+Examples:
+  $ $SCRIPT_NAME some.host.dk
+  $ $SCRIPT_NAME --cdn cf some.host.dk /bmtech/flipme.js
+EOF
+    if [ ! -z $1 ]; then
+        echo "" 1>&2
+        (log-error "")
+        echo -n "  " 1>&2
+    fi
+    exit 1
+}
+
+while [ "$#" -gt 0 ]; do
+    case $1 in
+    -h | --help)
+        usage ""
+        ;;
+    --cdn)
+        shift
+        R_CDN="$1"
+        ;;
+    --bytes)
+        shift
+        R_BYTES="$1"
+        ;;
+    *)
+        if [ "${R_HOST:-unset}" == "unset" ]; then
+            R_HOST=$1
+        elif [ "${R_PATH:-unset}" == "unset" ]; then
+            R_PATH=$1
+        fi
+        ;;
+    esac
+    shift
+done
+
+if [ "${R_PATH:-unset}" == "unset" ]; then
+    R_PATH=/
+fi
+
+R_HOST=${R_HOST:?"<- parameter missing $(usage R_HOST)"}
+
+case $R_CDN in
+aka)
+    $CURL_BIN -s -v https://$R_HOST$R_PATH 2>&1 | head -c $R_BYTES
+    ;;
+cf)
+    $CURL_BIN -s -v --resolve $R_HOST:443:104.18.30.162 https://$R_HOST$R_PATH 2>&1 | head -c $R_BYTES
+    ;;
+*)
+    log-error "Invalid CDN '$R_CDN'"
+    ;;
+esac
