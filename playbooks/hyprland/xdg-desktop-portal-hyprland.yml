@@ -5,7 +5,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=xdg-desktop-portal-hyprland packageName=hyprwm/xdg-desktop-portal-hyprland
-    version: v1.3.10
+    version: v1.3.11
     dir: "/tmp/hyprwm-xdg-desktop-portal-hyprland"
 
   tasks:
