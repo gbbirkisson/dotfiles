@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=ghostty packageName=ghostty-org/ghostty
-    version: v1.2.2
+    version: v1.2.3
 
   tasks:
     - name: Check if skip
