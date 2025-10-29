@@ -81,10 +81,10 @@ R_HOST=${R_HOST:?"<- parameter missing $(usage R_HOST)"}
 
 case $R_CDN in
 aka)
-    $R_DEBUG $CURL_BIN -s -v https://$R_HOST$R_PATH 2>&1 | head -c $R_BYTES
+    $R_DEBUG $CURL_BIN -v https://$R_HOST$R_PATH 2>&1 | head -c $R_BYTES
     ;;
 cf)
-    $R_DEBUG $CURL_BIN -s -v --resolve $R_HOST:443:104.18.30.162 https://$R_HOST$R_PATH 2>&1 | head -c $R_BYTES
+    $R_DEBUG $CURL_BIN -v --resolve $R_HOST:443:104.18.30.162 https://$R_HOST$R_PATH 2>&1 | head -c $R_BYTES
     ;;
 *)
     log-error "Invalid CDN '$R_CDN'"
