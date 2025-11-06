@@ -47,7 +47,7 @@ $(PLAYBOOKS): lint
 install: _sudo playbooks/base.yml ## Install everything
 
 .PHONY: update
-update: _sudo _apt _rustup playbooks/update.yml _mise _gh_ext ## Update everything
+update: _sudo _apt _rustup playbooks/update.yml _mise update_gh_ext ## Update everything
 	$(Q) echo "$(M) 🎉 Update finished successfully 🎉"
 
 .PHONY: _mise
@@ -73,7 +73,7 @@ update_tldr:
 .PHONY: _gh_ext
 update_gh_ext:
 	$(info $(M) Update gh extensions)
-	$(Q) gh extensions upgrade --all
+	$(Q) gh extensions upgrade --all || true
 
 .PHONY: theme
 theme:  ## Generate theme
