@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://gh-dash.dev/schema.json
 ---
 prSections:
   - title: Mine
@@ -40,21 +41,21 @@ defaults:
         width: 10
         hidden: false
         # issues: same structure as prs
-  prsLimit: 20  # global limit
-  issuesLimit: 20  # global limit
+  prsLimit: 20 # global limit
+  issuesLimit: 20 # global limit
   preview:
-    open: true  # whether to have the preview pane open by default
-    width: 90  # width in columns
-  refetchIntervalMinutes: 30  # will refetch all sections every 30 minutes
+    open: true # whether to have the preview pane open by default
+    width: 90 # width in columns
+  refetchIntervalMinutes: 30 # will refetch all sections every 30 minutes
 
-repoPaths:  # configure where to locate repos when checking out PRs
+repoPaths: # configure where to locate repos when checking out PRs
   gbbirkisson/*: ~/repos/personal/*
   :owner/:repo: ~/repos/:owner/:repo
 
 pager:
-  diff: less  # or delta for example
+  diff: less # or delta for example
 
-confirmQuit: false  # show prompt on quit or not
+confirmQuit: false # show prompt on quit or not
 
 keybindings:
   issues:
