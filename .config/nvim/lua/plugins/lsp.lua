@@ -2,11 +2,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function()
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-
-      -- NOTE: https://github.com/nvim-telescope/telescope.nvim/issues/2768
-      keys[#keys + 1] = { "gd", vim.lsp.buf.definition }
-
       local lspconfig = require("lspconfig")
       local lsp_configs = require("lspconfig.configs")
 
@@ -30,6 +25,12 @@ return {
     opts = {
       document_highlight = { enabled = false },
       servers = {
+        ["*"] = {
+          -- NOTE: https://github.com/nvim-telescope/telescope.nvim/issues/2768
+          keys = {
+            { "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", has = "definition" },
+          },
+        },
         zls = {},
         varnishls = {},
         clangd = {},
