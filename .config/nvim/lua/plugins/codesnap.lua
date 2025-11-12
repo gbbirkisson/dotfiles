@@ -3,7 +3,7 @@ return {
   build = "make build_generator",
   keys = {
     {
-      "<leader>cc",
+      "<leader>cs",
       "<Esc><Cmd>CodeSnap<CR>",
       mode = "x",
       desc = "Save selected code snapshot into clipboard",
