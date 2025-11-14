@@ -24,7 +24,7 @@
         name: "{{ item.crate_name }}"
         version: "{{ item.version }}"
       with_items:
-        - { crate_name: bluetui, version: 0.7.1, locked: true }           # Bluetooth TUI
+        - { crate_name: bluetui, version: 0.8.0, locked: true }           # Bluetooth TUI
         - { crate_name: bat, version: 0.26.0, locked: true }              # Better cat
         - { crate_name: cargo-tarpaulin, version: 0.34.0, locked: true }  # For cargo code coverage
         - { crate_name: drill, version: 0.8.2, locked: true }             # HTTP stress testing (ansible-esqe)
