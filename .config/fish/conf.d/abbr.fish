@@ -37,6 +37,7 @@ end
 if command -v curlie >/dev/null
     alias curl='curlie'
 end
+abbr -a --set-cursor=! c "curl https://!"
 
 function aka
     mig --cdn aka $argv
@@ -82,7 +83,6 @@ alias llmclaude="nvim -c ':CL' -c ':CodeCompanionChat anthropic' -c ':on'"
 alias llmdeepseek="nvim -c ':CL' -c ':CodeCompanionChat deepseek' -c ':on'"
 alias llmollama="nvim -c ':CL' -c ':CodeCompanionChat ollama' -c ':on'"
 alias pa='cd $HOME/repos/personal/notes && op item list > /dev/null && claude'
-alias c='op item list > /dev/null && claude'
 
 function dalle
     curl https://api.openai.com/v1/images/generations \
