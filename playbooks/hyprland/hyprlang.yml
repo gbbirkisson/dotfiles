@@ -4,7 +4,7 @@
   # https://github.com/JaKooLit/Debian-Hyprland/blob/main/install-scripts/hyprlang.sh
 
   vars:
-    # renovate: datasource=github-tags depName=hyprutils packageName=hyprwm/hyprlang
+    # renovate: datasource=github-tags depName=hyprlang packageName=hyprwm/hyprlang
     version: v0.6.4
     dir: "/tmp/hyprwm-hyprlang"
 
