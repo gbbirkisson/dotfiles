@@ -20,7 +20,7 @@
 
 ## About
 
-I use ubuntu so these files are catered to that distribution.
+I use debian based systems so these files are catered to those distributions.
 
 ## Installation
 
