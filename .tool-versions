@@ -11,7 +11,7 @@ helm       3.19.2
 kustomize  5.8.0
 pipx       1.7.1
 zig        0.15.2
-just       1.43.1
+just       1.44.0
 hk         0.2.3
 pkl        0.27.2
 usage      latest
