@@ -42,7 +42,7 @@ return {
         terraformls = {},
         jsonls = {},
         marksman = {},
-        pyright = {},
+        ty = {},
         ruff_lsp = {},
         rust_analyzer = {
           mason = false,
