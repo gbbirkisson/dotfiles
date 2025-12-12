@@ -7,7 +7,7 @@ opentofu   1.9.0
 terraform  1.14.1
 golang     1.25.5
 uv         0.9.17
-helm       3.19.2
+helm       3.19.3
 kustomize  5.8.0
 pipx       1.7.1
 zig        0.15.2
