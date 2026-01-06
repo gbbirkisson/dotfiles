@@ -1,7 +1,7 @@
 // vi: ft=jsonc
 {
-    "layer": "top",
-    "position": "top",
+    "layer": "bottom",
+    "position": "bottom",
     "height": 40,
     "margin-left": 1,
     "margin-bottom": -5,
@@ -10,9 +10,9 @@
     "modules-left": [
         "hyprland/workspaces"
     ],
-    "modules-center": [
-        "hyprland/window"
-    ],
+    // "modules-center": [
+    //     "hyprland/window"
+    // ],
     "modules-right": [
         "hyprland/submap",
         "tray",
