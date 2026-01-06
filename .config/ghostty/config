@@ -1,6 +1,6 @@
 # Set font
 # font-family = monospace
-font-size = 11
+font-size = 11.5
 
 # Run fish
 command = exec /usr/bin/fish
