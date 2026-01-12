@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=obsidian packageName=obsidianmd/obsidian-releases
-    version: v1.10.6
+    version: v1.11.4
 
   tasks:
     - name: Create local bin path
