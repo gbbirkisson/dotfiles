@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+size=1272 # Must be divisible by 4
+while ping -s $size -M do -c1 $1 >/dev/null 2>&1; do
+    ((size += 4))
+done
+
+echo "Max MTU size: $((size - 4 + 28))"
