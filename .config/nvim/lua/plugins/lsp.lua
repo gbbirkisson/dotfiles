@@ -36,6 +36,7 @@ return {
         clangd = {},
         bashls = {},
         gopls = {},
+        taplo = {},
         html = {
           filetypes = { "html", "templ", "htmldjango" },
         },
