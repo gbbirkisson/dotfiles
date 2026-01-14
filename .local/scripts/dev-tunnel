@@ -11,4 +11,5 @@ echo "Starting cloudflared"
 cloudflared --no-autoupdate tunnel run --token $token &
 
 echo "Starting mitmweb"
+# socat tcp-l:4040,fork,reuseaddr tcp:127.0.0.1:${upstream}
 mitmweb --set keep_host_header=true --listen-host 127.0.0.1 --listen-port 4040 -m reverse:http://127.0.0.1:${upstream} 2>/dev/null
