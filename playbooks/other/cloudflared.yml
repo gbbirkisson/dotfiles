@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=cloudflared packageName=cloudflare/cloudflared
-    version: 2025.11.1
+    version: 2026.1.1
 
   tasks:
     - name: Create local bin path
