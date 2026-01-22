@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=ollama packageName=ollama/ollama
-    version: 0.14.2
+    version: 0.14.3
 
   tasks:
     - name: Create local bin path
