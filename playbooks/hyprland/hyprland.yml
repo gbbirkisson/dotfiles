@@ -5,7 +5,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=hyprland packageName=hyprwm/Hyprland
-    version: v0.53.3 # Cannot be updated because trixie has old version of wayland-protocols: https://packages.debian.org/search?keywords=wayland-protocols
+    version: v0.50.1 # Cannot be updated because trixie has old version of wayland-protocols: https://packages.debian.org/search?keywords=wayland-protocols
     dir: "/tmp/hyprwm-hyprland"
 
   tasks:
