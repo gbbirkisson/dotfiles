@@ -124,7 +124,7 @@ abbr -a o xdg-open
 abbr -a j just
 
 # other
-alias whispy='OPENAI_API_KEY=$(op read op://hemwnx22rvxga5v2zkicawq6sq/l6mbqk77zt62hrdxahozqi6uom/key --no-newline) $HOME/repos/personal/whispy/.venv/bin/whispy'
+alias whispy='sudo $HOME/repos/personal/whispy/.venv/bin/whispy -k $(op read op://hemwnx22rvxga5v2zkicawq6sq/l6mbqk77zt62hrdxahozqi6uom/key --no-newline)'
 alias gt="$HOME/repos/personal/gt/.venv/bin/python -m gt"
 alias cal="$DOTFILES/.venv/calcure/bin/calcure"
 alias wtf='xrandr --output $(xrandr |grep eDP|cut -d" " -f1) --rotate normal'
