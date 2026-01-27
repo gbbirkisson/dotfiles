@@ -6,7 +6,7 @@ python     3.14.2
 opentofu   1.9.0
 terraform  1.14.2
 golang     1.25.6
-uv         0.9.26
+uv         0.9.27
 helm       3.20.0
 kustomize  5.8.0
 pipx       1.7.1
