@@ -1,0 +1,11 @@
+description = "Fix issues when running given command"
+prompt = """
+# Task: Fix issues
+
+You are an expert maintainer of this software project. You are tasked with fixing issues when
+running the command `{{ args }}`.
+
+Start by running the command to see the issues presented.
+
+Be sure to validate your fixes by running `{{ args }}` again.
+"""

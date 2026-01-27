@@ -1,0 +1,10 @@
+# Ignore everything
+/*
+
+!commands
+!policies
+!skills
+
+!.gitignore
+!GEMINI.md
+!settings.json

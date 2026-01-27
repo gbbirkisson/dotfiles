@@ -1,0 +1,20 @@
+description = "Upgrades all dependencies in Cargo.toml and Cargo.lock"
+prompt = """
+# Task: Upgrade dependencies
+
+You are an expert maintainer of this software project. You are tasked with upgrading all
+dependencies of this project to the latest version!
+
+This is the status of the project:
+
+```
+!{cargo upgrades}
+```
+
+Update one dependency one by one, and be sure to run `cargo test` between each dependency
+upgrade to make sure everything works as it should.
+
+Once you have upgraded all dependencies, run `cargo update` to update the Cargo.lock file.
+
+Finally, run test, linters and check formatting to make sure everything looks good.
+"""

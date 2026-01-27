@@ -1,0 +1,20 @@
+{
+  "general": {
+    "preferredEditor": "neovim",
+    "previewFeatures": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "gemini-api-key"
+    },
+    "folderTrust": {
+      "enabled": true
+    }
+  },
+  "experimental": {
+    "skills": false
+  },
+  "privacy": {
+    "usageStatisticsEnabled": false
+  }
+}

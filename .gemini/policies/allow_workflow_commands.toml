@@ -1,0 +1,29 @@
+[[rule]]
+toolName = "run_shell_command"
+argsPattern = '"command":"(make|just)'
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+argsPattern = '"command":"(cargo|rustc)'
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+argsPattern = '"command":"git (status|diff)'
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+argsPattern = '"command":"(grep|rg|find|ls)'
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
+argsPattern = '"command":"find.*-exec'
+decision = "ask_user"
+priority = 101

@@ -50,6 +50,7 @@ link .config/regolith3
 link .config/swaync
 link .config/starship.toml
 
+link .gemini
 link .local/scripts
 
 link .gitconfig
