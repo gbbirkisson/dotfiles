@@ -1,4 +1,11 @@
 {
+  "ui": {
+    "hideTips": true,
+    "hideBanner": true,
+    "footer": {
+      "hideContextPercentage": false
+    }
+  },
   "general": {
     "preferredEditor": "neovim",
     "previewFeatures": true
