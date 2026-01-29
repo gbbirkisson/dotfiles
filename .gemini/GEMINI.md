@@ -1,5 +1,23 @@
 # Gemini Agent Guidelines
 
+## Creating scripts to solve problems
+
+When solving problems, you should know that you have the entire python ecosystem at your
+fingertips. You can always create a script that has dependencies like this:
+
+```python
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.12"
+# dependencies = []
+# ///
+
+# YOUR CODE
+```
+
+Always prefix your script names with `GEMINI_`.
+
 ## Critical Environment Directives
 
 1.  **DIRENV/ENVRC Handling:** I use `direnv` and `.envrc` files extensively. **YOU MUST ASSUME** that if a `.envrc` file exists, its environment variables are **ALREADY LOADED** in your current context. **DO NOT** attempt to manually source or load these files.

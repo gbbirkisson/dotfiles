@@ -18,6 +18,12 @@ priority = 100
 
 [[rule]]
 toolName = "run_shell_command"
+argsPattern = '"command":"chmod +x GEMINI_'
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
 argsPattern = '"command":"(grep|rg|find|ls)'
 decision = "allow"
 priority = 100
