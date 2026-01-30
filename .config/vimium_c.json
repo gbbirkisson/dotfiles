@@ -1,12 +1,13 @@
 {
 	"name": "Vimium C",
-	"@time": "9/30/2024, 11:12:49 AM",
-	"time": 1727687569933,
+	"@time": "1/30/2026, 4:08:32 PM",
+	"time": 1769785712969,
 	"environment": {
-		"extension": "1.99.997",
+		"extension": "2.12.2",
 		"platform": "linux",
-		"firefox": 130
+		"chromium": 142
 	},
+	"autoDarkMode": 1,
 	"exclusionRules": [
 		{
 			"passKeys": "",
@@ -35,10 +36,6 @@
 		{
 			"passKeys": "",
 			"pattern": "^https?://accounts\\.google\\.com/"
-		},
-		{
-			"passKeys": "",
-			"pattern": "^https?://trello\\.com/"
 		}
 	],
 	"keyLayout": 2,
@@ -90,6 +87,9 @@
 		"",
 		"am|amedia: https://github.com/amedia/%s \\",
 		"  blank=https://github.com/amedia Amedia Repos",
+		"argo: https://argocd-%s.amedia.cloud/ Amedia ArgoCD",
+		"jira: https://amedia-jira.atlassian.net/jira/software/c/projects/SRE/boards/1084?search=%s Amedia Jira",
+		"graf: https://amedia.grafana.net/dashboards?query=%s Amedia Grafana",
 		""
 	],
 	"searchUrl": "https://kagi.com/search?q=$s Kagi",
