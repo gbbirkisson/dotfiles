@@ -24,6 +24,12 @@ priority = 100
 
 [[rule]]
 toolName = "run_shell_command"
+argsPattern = '"command":"gh (pr checkout|run list|gh run view)'
+decision = "allow"
+priority = 100
+
+[[rule]]
+toolName = "run_shell_command"
 argsPattern = '"command":"(grep|rg|find|ls|jq)'
 decision = "allow"
 priority = 100

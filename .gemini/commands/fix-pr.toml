@@ -1,0 +1,25 @@
+description = "Fix failed GitHub Actions checks for a specific PR"
+prompt = """
+# Task: Fix PR Build Failures
+
+You are an expert software engineer. You are tasked with fixing the CI failures for GitHub PR #{{ args }}.
+
+## Steps
+
+1.  **Checkout PR:**
+    Check out the pull request locally using the GitHub CLI:
+    ```bash
+    gh pr checkout {{ args }}
+    ```
+
+2.  **Analyze Failures:**
+    Use the `gh` CLI to identify which checks failed and retrieve their logs to understand the root cause.
+    - Check status: `gh pr checks {{ args }}`
+    - Get logs: Identify the failed run/job and use `gh run view ... --log-failed` to see the errors.
+
+3.  **Fix the Code:**
+    Based on the analysis of the logs, locate the problematic code and implement the necessary fixes.
+
+4.  **Verify Locally:**
+    Run local checks (tests, linters, build) to ensure the fix works. Inspect the project structure (e.g., `Makefile`, `package.json`, `Cargo.toml`) to find the appropriate verification commands.
+"""
