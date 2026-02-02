@@ -24,7 +24,7 @@ priority = 100
 
 [[rule]]
 toolName = "run_shell_command"
-argsPattern = '"command":"gh (pr checkout|run list|gh run view)'
+argsPattern = '"command":"gh (pr checkout|pr checks|run list|run view)'
 decision = "allow"
 priority = 100
 
