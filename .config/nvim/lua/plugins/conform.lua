@@ -32,9 +32,15 @@ return {
           args = { "fmt" },
           stdin = true,
         },
+        gherkin = {
+          command = "uvx",
+          args = { "reformat-gherkin@3.0.1", "--tab-width", "4", "-" },
+          stdin = true,
+        },
       },
       formatters_by_ft = {
         river = { "alloy" },
+        cucumber = { "gherkin" },
         lua = { "stylua" },
         python = { "isort", "ruff_format", "ruff_organize_imports" },
         sh = { "shfmt" },
