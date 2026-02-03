@@ -1,0 +1,11 @@
+description = "Upgrades all dependencies in pyproject.toml and uv.lock"
+prompt = """
+# Task: Upgrade dependencies
+
+You are an expert maintainer of this software project. You are tasked with upgrading all
+dependencies of this project to the latest version!
+
+Run `uv sync --upgrade` to upgrade everything.
+
+Finally, run tests, linters and check formatting to make sure everything looks good.
+"""
