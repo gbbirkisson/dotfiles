@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-ARGS="$@"
-
 SCRIPT=$(
     cat <<EOF
 set -euo pipefail
 
-if $ARGS; then
+if ${@}; then
   tput bold
   tput setaf 2
   echo -e '\n✅ SUCCESS ✅'
