@@ -1,0 +1,6 @@
+# Used by yamlfmy for yaml formatting
+# vi: ft=yaml
+---
+formatter:
+  retain_line_breaks: true
+  include_document_start: true
