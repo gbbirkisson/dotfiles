@@ -59,3 +59,4 @@ link .gitglobalignore
 link .gitglobalignore_amedia
 link .profile_gbb
 link .tool-versions
+link .taplo.toml

@@ -1,0 +1,7 @@
+[formatting]
+# Do not automatically collapse arrays to a single line
+array_auto_collapse = false
+# Automatically expand arrays to multiple lines if they exceed column width
+array_auto_expand = true
+# Use trailing commas in multiline arrays
+array_trailing_comma = true
