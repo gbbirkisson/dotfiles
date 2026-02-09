@@ -15,6 +15,6 @@ just       1.46.0
 hk         0.2.3
 pkl        0.27.2
 usage      latest
-java       openjdk-25.0.1
+java       openjdk-21.0.1
 gradle     8.13.0
 maven      3.9.12
