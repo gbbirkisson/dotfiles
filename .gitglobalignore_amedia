@@ -2,5 +2,4 @@
 .null-ls*
 .venv
 TODO.md
-Justfile
 GEMINI_*
