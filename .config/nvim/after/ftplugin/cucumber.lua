@@ -1,1 +1,1 @@
-vim.cmd.Gl("120")
+vim.cmd.Gl("140")
