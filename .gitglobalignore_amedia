@@ -3,3 +3,5 @@
 .venv
 TODO.md
 GEMINI_*
+.claude
+docs/plans
