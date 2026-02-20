@@ -4,6 +4,8 @@
   vars:
     # renovate: datasource=github-releases depName=natscli packageName=nats-io/natscli
     version: v0.3.1
+    # renovate: datasource=github-releases depName=nsc packageName=nats-io/nsc
+    nsc_version: v2.12.0
 
   tasks:
     - name: Create local bin path
@@ -30,3 +32,16 @@
         src: "~/.local/bin/nats-{{ version[1:] }}-linux-amd64/nats"
         dest: ~/.local/bin/nats
         state: link
+
+    - name: Check if nsc is installed
+      shell: "nsc --version | grep {{ nsc_version[1:] }}"
+      changed_when: false
+      failed_when: nsc_installed.rc not in [0,1]
+      register: nsc_installed
+
+    - name: Install nsc
+      when: nsc_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/nats-io/nsc/releases/download/{{ nsc_version }}/nsc-linux-amd64.zip"
+        dest: ~/.local/bin
