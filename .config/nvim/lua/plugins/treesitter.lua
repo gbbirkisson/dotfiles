@@ -8,6 +8,7 @@ return {
         "diff",
         "go",
         "html",
+        "http",
         "javascript",
         "jsdoc",
         "json",
