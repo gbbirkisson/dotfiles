@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=flyctl packageName=superfly/flyctl
-    version: v0.4.14
+    version: v0.4.15
 
   tasks:
     - name: Create local bin path
