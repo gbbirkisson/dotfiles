@@ -1,5 +1,5 @@
 gcloud     509.0.0
-kubectl    1.35.1
+kubectl    1.35.2
 nodejs     24.14.0
 pre-commit 4.5.1
 python     3.14.3
