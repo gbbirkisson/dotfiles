@@ -8,7 +8,12 @@
   },
   "general": {
     "preferredEditor": "neovim",
-    "previewFeatures": true
+    "previewFeatures": true,
+    "sessionRetention": {
+      "warningAcknowledged": true,
+      "enabled": true,
+      "maxAge": "30d"
+    }
   },
   "security": {
     "auth": {
@@ -19,7 +24,9 @@
     }
   },
   "experimental": {
-    "skills": false
+    "skills": false,
+    "enableAgents": true,
+    "plan": true
   },
   "privacy": {
     "usageStatisticsEnabled": false
