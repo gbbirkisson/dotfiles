@@ -39,6 +39,8 @@ link() {
     ln -sf "$src" "$dst"
 }
 
+link .claude/CLAUDE.md
+link .claude/skills
 link .config/direnv
 link .config/dunst
 link .config/fish/conf.d
