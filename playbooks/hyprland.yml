@@ -1,11 +1,15 @@
 ---
 # Essential
 - import_playbook: hyprland/deps.yml
+- import_playbook: hyprland/wayland-protocols.yml
+- import_playbook: hyprland/xkbcommon.yml
 - import_playbook: hyprland/hyprwayland-scanner.yml
 - import_playbook: hyprland/hyprutils.yml
+- import_playbook: hyprland/hyprwire.yml
 - import_playbook: hyprland/aquamarine.yml
 - import_playbook: hyprland/hyprlang.yml
 - import_playbook: hyprland/hyprcursor.yml
+- import_playbook: hyprland/hyprgraphics.yml
 - import_playbook: hyprland/hyprland-qtutils.yml
 - import_playbook: hyprland/hyprland.yml
 - import_playbook: hyprland/hyprland-protocols.yml

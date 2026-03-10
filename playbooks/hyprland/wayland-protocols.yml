@@ -1,0 +1,33 @@
+---
+- hosts: "{{ host }}"
+
+  vars:
+    # renovate: datasource=gitlab-tags depName=wayland-protocols packageName=wayland/wayland-protocols registryUrl=https://gitlab.freedesktop.org
+    version: "1.45"
+    dir: "/tmp/wayland-protocols"
+
+  tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
+    - name: Checkout wayland-protocols
+      ansible.builtin.git:
+        repo: https://gitlab.freedesktop.org/wayland/wayland-protocols.git
+        dest: "{{ dir }}"
+        version: "{{ version }}"
+        force: true
+
+    - name: Build wayland-protocols
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          meson setup build --prefix=/usr/local
+          ninja -C build
+
+    - name: Install wayland-protocols to /usr/local
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          ninja -C build install

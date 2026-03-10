@@ -1,0 +1,49 @@
+---
+- hosts: "{{ host }}"
+
+  vars:
+    # renovate: datasource=github-tags depName=hyprwire packageName=hyprwm/hyprwire
+    version: v0.3.0
+    dir: "/tmp/hyprwm-hyprwire"
+
+  tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
+    - name: Install hyprwire dependencies
+      become: true
+      apt:
+        state: latest
+        pkg:
+          - libffi-dev
+          - libpugixml-dev
+
+    - name: Checkout hyprwire
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/hyprwire.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+        force: true
+
+    # We can potentially drop this when GCC15 is available on debian
+    - name: Copy hyprwire patch
+      ansible.builtin.copy:
+        src: 0001-fix-hyprwire-compile-issue.patch
+        dest: "{{ dir }}/0001-fix-hyprwire-compile-issue.patch"
+
+    - name: Build hyprwire
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          patch -p1 < 0001-fix-hyprwire-compile-issue.patch
+          CXX=clang++ cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_CXX_FLAGS="-std=gnu++26" -S . -B ./build
+          cmake --build ./build --config Release --target hyprwire hyprwire-scanner -j `nproc`
+
+    - name: Install hyprwire
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo cmake --install ./build

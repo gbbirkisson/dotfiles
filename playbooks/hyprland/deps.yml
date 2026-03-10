@@ -15,6 +15,7 @@
         update_cache: true
         pkg:
           # packages needed
+          - bison
           - build-essential
           - cmake
           - cmake-extras
@@ -122,6 +123,7 @@
           - libjpeg-dev
           - libjxl-dev
           - libmagic-dev
+          - libmuparser-dev
           - libpixman-1-dev
           - libpugixml-dev
           - libre2-dev

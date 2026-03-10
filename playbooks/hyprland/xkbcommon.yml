@@ -1,0 +1,33 @@
+---
+- hosts: "{{ host }}"
+
+  vars:
+    # renovate: datasource=github-tags depName=xkbcommon packageName=xkbcommon/libxkbcommon
+    version: xkbcommon-1.11.0
+    dir: "/tmp/xkbcommon-libxkbcommon"
+
+  tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
+    - name: Checkout libxkbcommon
+      ansible.builtin.git:
+        repo: https://github.com/xkbcommon/libxkbcommon.git
+        dest: "{{ dir }}"
+        version: "{{ version }}"
+        force: true
+
+    - name: Build libxkbcommon
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          meson setup build --prefix=/usr/local
+          ninja -C build
+
+    - name: Install libxkbcommon to /usr/local
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          ninja -C build install

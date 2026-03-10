@@ -18,7 +18,7 @@
 
 /* The whole bar */
 #waybar {
-    background-color: transparent;
+    background-color: #1e222a;
     color: #ffffff;
     transition-property: background-color;
     transition-duration: 0.5s;
