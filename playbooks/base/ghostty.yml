@@ -4,6 +4,10 @@
   vars:
     # renovate: datasource=github-tags depName=ghostty packageName=ghostty-org/ghostty
     version: v1.3.0
+    zig_version: 0.15.2
+
+    # version: v1.1.3
+    # zig_version: 0.13.0
 
   tasks:
     - name: Check if skip
@@ -16,7 +20,7 @@
         state: directory
 
     - name: Check if ghostty is installed
-      shell: "ghostty +version 2>&1 | grep {{ version[1:] }}"
+      shell: "ghostty +version 2>&1 | grep aa{{ version[1:] }}"
       changed_when: false
       failed_when: ghostty_installed.rc not in [0,1]
       register: ghostty_installed
@@ -44,36 +48,38 @@
             pkg:
               - libgtk4-layer-shell-dev
       rescue:
-        - name: Install gtk4-layer-shell build dependencies
-          become: true
-          apt:
-            state: latest
-            pkg:
-              - meson
-              - ninja-build
-              - libgtk-4-dev
-              - gobject-introspection
-              - libgirepository1.0-dev
-
-        - name: Download gtk4-layer-shell source
-          unarchive:
-            remote_src: yes
-            src: "https://github.com/wmww/gtk4-layer-shell/archive/refs/tags/v1.1.1.tar.gz"
-            dest: "/tmp"
-
-        - name: Build gtk4-layer-shell
-          shell:
-            chdir: /tmp/gtk4-layer-shell-1.1.1
-            cmd: |
-              meson setup build -Dprefix=/usr/local -Dexamples=false -Ddocs=false -Dtests=false -Dvapi=false
-              ninja -C build
-
-        - name: Install gtk4-layer-shell
-          become: true
-          shell:
-            chdir: /tmp/gtk4-layer-shell-1.1.1
-            cmd: |
-              ninja -C build install
+        - debug:
+            msg: skipping
+      #   - name: Install gtk4-layer-shell build dependencies
+      #     become: true
+      #     apt:
+      #       state: latest
+      #       pkg:
+      #         - meson
+      #         - ninja-build
+      #         - libgtk-4-dev
+      #         - gobject-introspection
+      #         - libgirepository1.0-dev
+      #
+      #   - name: Download gtk4-layer-shell source
+      #     unarchive:
+      #       remote_src: yes
+      #       src: "https://github.com/wmww/gtk4-layer-shell/archive/refs/tags/v1.1.0.tar.gz"
+      #       dest: "/tmp"
+      #
+      #   - name: Build gtk4-layer-shell
+      #     shell:
+      #       chdir: /tmp/gtk4-layer-shell-1.1.0
+      #       cmd: |
+      #         meson setup build -Dprefix=/usr/local -Dexamples=false -Ddocs=false -Dtests=false -Dvapi=false
+      #         ninja -C build
+      #
+      #   - name: Install gtk4-layer-shell
+      #     become: true
+      #     shell:
+      #       chdir: /tmp/gtk4-layer-shell-1.1.0
+      #       cmd: |
+      #         ninja -C build install
 
     - name: Download ghostty source
       when: ghostty_installed.rc not in [ 0 ]
@@ -84,6 +90,6 @@
 
     - name: Build ghostty
       when: ghostty_installed.rc not in [ 0 ]
-      shell: "mise install zig@0.15.2 && mise exec zig@0.15.2 -- zig build -p $HOME/.local -Doptimize=ReleaseFast"
+      shell: "mise exec zig@{{ zig_version }} -- zig build -p $HOME/.local -Doptimize=ReleaseFast"
       args:
         chdir: /tmp/ghostty-{{ version[1:] }}

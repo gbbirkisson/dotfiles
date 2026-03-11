@@ -40,6 +40,9 @@ rules:
 
     # Disabling to allow for code comment blocks and #!/usr/bin/ansible-playbook
     require-starting-space: false
+    ignore-shebangs: true
+
+  comments-indentation: disable
 
   indentation:
     # Defaults
