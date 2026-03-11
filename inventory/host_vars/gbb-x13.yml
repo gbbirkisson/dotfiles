@@ -1,5 +1,4 @@
 skip:
   - hyprland
-  - ghostty # Due to missing lib
 skip_cargo:
   - bluetui

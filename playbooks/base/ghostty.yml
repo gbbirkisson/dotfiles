@@ -31,8 +31,49 @@
           - gettext
           - libadwaita-1-dev
           - libgtk-4-dev
-          - libgtk4-layer-shell-dev
           - libxml2-utils
+
+    - name: Install libgtk4-layer-shell-dev
+      when: ghostty_installed.rc not in [ 0 ]
+      block:
+        - name: Install libgtk4-layer-shell-dev from apt
+          become: true
+          apt:
+            state: latest
+            update_cache: true
+            pkg:
+              - libgtk4-layer-shell-dev
+      rescue:
+        - name: Install gtk4-layer-shell build dependencies
+          become: true
+          apt:
+            state: latest
+            pkg:
+              - meson
+              - ninja-build
+              - libgtk-4-dev
+              - gobject-introspection
+              - libgirepository1.0-dev
+
+        - name: Download gtk4-layer-shell source
+          unarchive:
+            remote_src: yes
+            src: "https://github.com/wmww/gtk4-layer-shell/archive/refs/tags/v1.1.1.tar.gz"
+            dest: "/tmp"
+
+        - name: Build gtk4-layer-shell
+          shell:
+            chdir: /tmp/gtk4-layer-shell-1.1.1
+            cmd: |
+              meson setup build -Dprefix=/usr/local -Dexamples=false -Ddocs=false -Dtests=false -Dvapi=false
+              ninja -C build
+
+        - name: Install gtk4-layer-shell
+          become: true
+          shell:
+            chdir: /tmp/gtk4-layer-shell-1.1.1
+            cmd: |
+              ninja -C build install
 
     - name: Download ghostty source
       when: ghostty_installed.rc not in [ 0 ]
