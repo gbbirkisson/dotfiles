@@ -13,7 +13,7 @@
     border: none;
     border-radius: 3px;
     min-height: 0;
-    margin: 0.2em 0.3em 0.2em 0.3em;
+    margin: 0 0.2em 0 0.1em;
 }
 
 /* The whole bar */
@@ -47,6 +47,8 @@
 #workspaces button.active {
     color: #1e222a;
     background: #61afef;
+    margin-top: 0.4em;
+    margin-bottom: 0.6em;
 }
 
 #workspaces button:hover {
