@@ -1,0 +1,32 @@
+---
+- hosts: "{{ host }}"
+
+  vars:
+    # renovate: datasource=github-releases depName=talosctl packageName=siderolabs/talos
+    version: v1.12.6
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if talosctl is installed
+      shell: "talosctl version --client | grep {{ version }}"
+      changed_when: false
+      failed_when: talosctl_installed.rc not in [0,1]
+      register: talosctl_installed
+
+    - name: Install talosctl
+      when: talosctl_installed.rc not in [ 0 ]
+      ansible.builtin.get_url:
+        force: true
+        url: https://github.com/siderolabs/talos/releases/download/{{ version }}/talosctl-linux-amd64
+        dest: ~/.local/bin/talosctl
+
+    - name: Set talosctl permissions
+      when: talosctl_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        path: ~/.local/bin/talosctl
+        state: touch
+        mode: +x

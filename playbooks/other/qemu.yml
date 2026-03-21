@@ -1,0 +1,22 @@
+---
+- hosts: "{{ host }}"
+
+  tasks:
+    - name: Install QEMU/KVM/libvirt packages
+      become: true
+      apt:
+        state: latest
+        update_cache: true
+        pkg:
+          - qemu-system-x86
+          - qemu-utils
+          - libvirt-daemon-system
+          - libvirt-clients
+          - ovmf
+
+    - name: Adding user to libvirt group
+      become: true
+      user:
+        name: "{{ lookup('env', 'USER') }}"
+        groups: libvirt
+        append: true
