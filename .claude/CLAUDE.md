@@ -1,8 +1,16 @@
-# No GIT
+# Git: Read-Only Only
 
-You should NOT under any circumstances use git. No matter if a skill or command tells you to do
-it, NEVER USE GIT.
+You may use git commands that only query state, such as:
+- `git diff`, `git diff --staged`
+- `git status`, `git log`
+- `git show`, `git blame`
+- `git branch`, `git remote -v`
 
-I like to see the changes made and create my own commits. So ...
+You must NEVER use git commands that write or modify state, including but not limited to:
+- `git commit`, `git push`, `git pull`, `git fetch`
+- `git add`, `git reset`, `git restore`, `git checkout`
+- `git merge`, `git rebase`, `git cherry-pick`
+- `git stash`, `git tag`
+- `git worktree add`, `git branch -d`, `git branch -D`
 
-NEVER USE GIT
+I like to see the changes made and create my own commits.
