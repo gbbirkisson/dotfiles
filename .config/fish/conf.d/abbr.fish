@@ -124,6 +124,9 @@ alias cal="$DOTFILES/.venv/calcure/bin/calcure"
 alias wtf='xrandr --output $(xrandr |grep eDP|cut -d" " -f1) --rotate normal'
 alias icat="timg -p kitty"
 
+# Stop using docker
+abbr -a docker podman
+
 # translate functions
 function trs -a source -a target -d "Translate something"
     xh 'https://lingva.ml/api/v1/'$source'/'$target'/'"$argv[3..-1]" | jq -r .translation
