@@ -52,6 +52,7 @@ return {
         typescript = { "prettier", "prettierd" },
         javascript = { "prettier", "prettierd" },
         html = { "prettier", "prettierd" },
+        svelte = { "prettier", "prettierd" },
         css = { "prettier", "prettierd" },
         ["*"] = { "trim_whitespace" },
       },

@@ -23,6 +23,7 @@ return {
         "python",
         "query",
         "regex",
+        "svelte",
         "terraform",
         "toml",
         "tsx",
