@@ -4,7 +4,7 @@ nodejs     24.14.1
 pre-commit 4.5.1
 python     3.14.3
 opentofu   1.11.5
-terraform  1.14.7
+terraform  1.14.8
 golang     1.26.1
 uv         0.10.12
 helm       3.20.1
