@@ -19,6 +19,10 @@ return {
             "-",
           },
         },
+        sql_formatter = {
+          -- sqlite dialect with ?1, ?2 numbered params (for sqlx compatibility)
+          prepend_args = { "--language", "sqlite", "--config", '{"paramTypes": {"numbered": ["?"]}}' },
+        },
         shfmt = {
           prepend_args = { "-i", "4" },
         },
@@ -32,6 +36,13 @@ return {
           args = { "fmt" },
           stdin = true,
         },
+        injected = {
+          -- ignore errors from injected regions that contain templated values
+          -- (e.g. alloy config with Go/Helm templates)
+          options = {
+            ignore_errors = true,
+          },
+        },
         gherkin = {
           command = "uvx",
           args = { "reformat-gherkin@3.0.1", "--tab-width", "4", "-" },
@@ -39,22 +50,24 @@ return {
         },
       },
       formatters_by_ft = {
+        sql = { "sql_formatter" },
         river = { "alloy" },
         cucumber = { "gherkin" },
         lua = { "stylua" },
-        python = { "isort", "ruff_format", "ruff_organize_imports" },
+        python = { "ruff_format", "ruff_organize_imports" },
         sh = { "shfmt" },
         rust = { "rustfmt" },
         toml = { "taplo" },
         fish = { "fish_indent" },
         yaml = { "yamlfmt" },
         terraform = { "tofu_fmt" },
-        typescript = { "prettier", "prettierd" },
-        javascript = { "prettier", "prettierd" },
-        html = { "prettier", "prettierd" },
-        svelte = { "prettier", "prettierd" },
-        css = { "prettier", "prettierd" },
-        ["*"] = { "trim_whitespace" },
+        typescript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { "prettierd", "prettier", stop_after_first = true },
+        html = { "prettierd", "prettier", stop_after_first = true },
+        svelte = { "prettierd", "prettier", stop_after_first = true },
+        css = { "prettierd", "prettier", stop_after_first = true },
+        -- "injected" formats treesitter injection regions (e.g. SQL inside Rust strings)
+        ["*"] = { "trim_whitespace", "injected" },
       },
     },
   },

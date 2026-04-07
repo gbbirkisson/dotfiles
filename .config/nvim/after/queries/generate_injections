@@ -95,18 +95,139 @@ def rust_generator(language: str, comment: str, alias: str):
   (string_content) @injection.content (#match? @injection.content "^\n*( )*{comment}( )*{alias}( )*\n")
   (#set! injection.language "{language}")
 )
+
+;; {language}: comment before macro string (expression)
+(
+  (line_comment) @_lang (#eq? @_lang "// {alias}")
+  .
+  (expression_statement
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "{language}")
+)
+
+;; {language}: comment before macro string (let binding)
+(
+  (line_comment) @_lang (#eq? @_lang "// {alias}")
+  .
+  (let_declaration
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "{language}")
+)
+
+;; {language}: comment before macro string (inside token_tree)
+(token_tree
+  (line_comment) @_lang (#eq? @_lang "// {alias}")
+  .
+  (identifier)
+  .
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "{language}")
+)
 """
 
 
+def rust_macro_injection(language: str, macro_path: str, macro_names: list[str]):
+    names_str = " ".join(f'"{n}"' for n in macro_names)
+    parts = macro_path.rsplit("::", 1)
+    result = ""
+
+    if len(parts) == 2:
+        path, _ = parts
+        # macro_invocation: sqlx::query!("...")
+        result += rf"""
+;; {macro_path}! macros
+(macro_invocation
+  macro: (scoped_identifier
+    path: (identifier) @_path (#eq? @_path "{path}")
+    name: (identifier) @_name (#any-of? @_name {names_str})
+  )
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "{language}")
+)
+"""
+        # call_expression with generics: sqlx::query_as::<T>("...")
+        result += rf"""
+;; {macro_path}::<T>() calls
+(call_expression
+  function: (generic_function
+    function: (scoped_identifier
+      path: (identifier) @_path (#eq? @_path "{path}")
+      name: (identifier) @_name (#any-of? @_name {names_str})
+    )
+  )
+  arguments: (arguments
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "{language}")
+)
+"""
+    else:
+        result += rf"""
+;; {macro_path} macros
+(macro_invocation
+  macro: (identifier) @_name (#any-of? @_name {names_str})
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "{language}")
+)
+"""
+
+    return result
+
+
+# Extra injections per language: callable returning a string of query content.
+# Macro-based injections: (language, macro_path, macro_names)
+# macro_path with "::" generates a scoped_identifier match,
+# without "::" generates a plain identifier match.
+def rust_extra(file):
+    for language, macro_path, macro_names in [
+        ("sql", "sqlx::query", [
+            "query", "query_as", "query_scalar",
+            "query_unchecked", "query_as_unchecked", "query_scalar_unchecked",
+        ]),
+        ("asm", "asm_test", ["asm_test"]),
+    ]:
+        file.write(rust_macro_injection(language, macro_path, macro_names))
+
+
 generators = {
-    "python": (python_header, python_generator),
-    "yaml": (yaml_header, yaml_generator),
-    "rust": (rust_header, rust_generator),
+    "python": (python_header, python_generator, None),
+    "yaml": (yaml_header, yaml_generator, None),
+    "rust": (rust_header, rust_generator, rust_extra),
 }
 
-for name, (header, gen) in generators.items():
+for name, (header, gen, extra) in generators.items():
     with (Path(name) / "injections.scm").open("w") as file:
         file.write(header())
         for language, comment, aliases in injections:
             for alias in [language] + aliases:
                 file.write(gen(language, comment, alias))
+        if extra:
+            extra(file)

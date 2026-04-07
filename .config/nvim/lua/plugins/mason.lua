@@ -4,9 +4,10 @@ return {
     opts = {
       ensure_installed = {
         -- Python
-        "isort",
-        "black",
         "ruff",
+
+        -- SQL
+        "sql-formatter",
 
         -- Toml
         "taplo",

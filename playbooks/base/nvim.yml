@@ -17,6 +17,12 @@
       failed_when: nvim_installed.rc not in [0,1]
       register: nvim_installed
 
+    - name: Remove old nvim installation
+      when: nvim_installed.rc not in [ 0 ]
+      ansible.builtin.file:
+        path: ~/.local/bin/nvim-linux-x86_64
+        state: absent
+
     - name: Install nvim
       when: nvim_installed.rc not in [ 0 ]
       unarchive:

@@ -3,6 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = function()
       local ensure = {
+        "asm",
         "bash",
         "c",
         "diff",
@@ -19,10 +20,13 @@ return {
         "luap",
         "markdown",
         "markdown_inline",
+        "nginx",
         "printf",
         "python",
         "query",
         "regex",
+        "rust",
+        "sql",
         "svelte",
         "terraform",
         "toml",
@@ -48,7 +52,10 @@ return {
         }
       end
       register_river_parser()
-      vim.api.nvim_create_autocmd("User", { pattern = "TSUpdate", callback = register_river_parser })
+      vim.api.nvim_create_autocmd(
+        "User",
+        { pattern = "TSUpdate", callback = register_river_parser }
+      )
       vim.filetype.add({
         extension = {
           river = "river",
@@ -69,7 +76,10 @@ return {
         }
       end
       register_rhai_parser()
-      vim.api.nvim_create_autocmd("User", { pattern = "TSUpdate", callback = register_rhai_parser })
+      vim.api.nvim_create_autocmd(
+        "User",
+        { pattern = "TSUpdate", callback = register_rhai_parser }
+      )
       vim.filetype.add({
         extension = {
           rhai = "rhai",
@@ -92,13 +102,17 @@ return {
             p[lang] = {
               install_info = {
                 path = vcl_path .. "/vendor/tree-sitter-" .. lang,
+                generate = true,
               },
               filetype = lang,
             }
           end
         end
         register_vcl_parsers()
-        vim.api.nvim_create_autocmd("User", { pattern = "TSUpdate", callback = register_vcl_parsers })
+        vim.api.nvim_create_autocmd(
+          "User",
+          { pattern = "TSUpdate", callback = register_vcl_parsers }
+        )
         vim.filetype.add({
           extension = {
             vcl = "vcl",
@@ -111,46 +125,39 @@ return {
 
       return {
         ensure_installed = ensure,
-
         highlight = { enable = true },
         indent = { enable = true },
-
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            scope_incremental = false,
-            node_decremental = "<bs>",
-          },
-        },
-
-        textobjects = {
-          move = {
-            enable = true,
-            goto_next_start = {
-              ["]f"] = "@function.outer",
-              ["]c"] = "@class.outer",
-              ["]a"] = "@parameter.inner",
-            },
-            goto_next_end = {
-              ["]F"] = "@function.outer",
-              ["]C"] = "@class.outer",
-              ["]A"] = "@parameter.inner",
-            },
-            goto_previous_start = {
-              ["[f"] = "@function.outer",
-              ["[c"] = "@class.outer",
-              ["[a"] = "@parameter.inner",
-            },
-            goto_previous_end = {
-              ["[F"] = "@function.outer",
-              ["[C"] = "@class.outer",
-              ["[A"] = "@parameter.inner",
-            },
-          },
-        },
       }
     end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    opts = {
+      move = {
+        enable = true,
+        keys = {
+          goto_next_start = {
+            ["]f"] = "@function.outer",
+            ["]c"] = "@class.outer",
+            ["]a"] = "@parameter.inner",
+          },
+          goto_next_end = {
+            ["]F"] = "@function.outer",
+            ["]C"] = "@class.outer",
+            ["]A"] = "@parameter.inner",
+          },
+          goto_previous_start = {
+            ["[f"] = "@function.outer",
+            ["[c"] = "@class.outer",
+            ["[a"] = "@parameter.inner",
+          },
+          goto_previous_end = {
+            ["[F"] = "@function.outer",
+            ["[C"] = "@class.outer",
+            ["[A"] = "@parameter.inner",
+          },
+        },
+      },
+    },
   },
 }

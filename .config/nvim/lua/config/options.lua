@@ -6,8 +6,8 @@
 vim.g.lazyvim_picker = "telescope"
 
 -- Use treesitter instead of semantic tokens
--- :h vim.highlight.priorities
-vim.highlight.priorities.semantic_tokens = 95
+-- :h vim.hl.priorities
+vim.hl.priorities.semantic_tokens = 95
 
 -- Do not use relative numbers
 vim.wo.relativenumber = false
@@ -34,12 +34,18 @@ end, { nargs = 1 })
 -- Note: format selection with gq
 vim.cmd.Gl("96")
 
+-- Set .envrc to bash
+vim.filetype.add({
+  filename = {
+    [".envrc"] = "bash",
+  },
+})
+
 -- Match strange shebang lines
 vim.filetype.add({
   pattern = {
     ["[%a-_]*"] = function(path, bufnr)
       local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, true)[1]
-      vim.notify(first_line)
       if string.find(first_line, "uv run") then
         return "python"
       elseif string.find(first_line, "rust%-script") then

@@ -1,38 +1,20 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    opts = function()
-      local lspconfig = require("lspconfig")
-      local lsp_configs = require("lspconfig.configs")
-
-      lsp_configs.varnishls = {
-        default_config = {
-          -- Change the path to varnishls (add --debug for debug log)
+    opts = {
+      document_highlight = { enabled = false },
+      servers = {
+        zls = {},
+        varnishls = {
+          mason = false,
           cmd = {
             "/home/gbb/repos/personal/varnishls/target/release/varnishls",
             "lsp",
             "--stdio",
           },
           filetypes = { "vcl", "vtc" },
-          root_dir = lspconfig.util.root_pattern(".varnishls.toml", ".git"),
-          settings = {},
+          root_markers = { ".varnishls.toml", ".git" },
         },
-      }
-    end,
-  },
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      document_highlight = { enabled = false },
-      servers = {
-        ["*"] = {
-          -- NOTE: https://github.com/nvim-telescope/telescope.nvim/issues/2768
-          keys = {
-            { "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", has = "definition" },
-          },
-        },
-        zls = {},
-        varnishls = {},
         clangd = {},
         bashls = {},
         gopls = {},
