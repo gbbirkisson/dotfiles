@@ -16,8 +16,9 @@
         pkg:
           - sway-notification-center
           - brightnessctl
-          - flameshot
+          - grim # Screenshot capture
           - network-manager-applet
           - playerctl
+          - slurp # Screen region selection
           - waybar
           - wl-clipboard # For nvim clipboard
