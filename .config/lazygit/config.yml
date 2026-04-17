@@ -14,6 +14,18 @@ gui:
     selectedLineBgColor:
       - "#353b45"
 customCommands:
+  - key: "c"
+    description: "Commit changes"
+    context: "files"
+    command: |-
+      git commit -t <(printf "\n\n# Cancel with :cq\n#")
+    output: terminal
+  - key: "C"
+    description: "Commit changes (Claude-assisted)"
+    context: "files"
+    command: |-
+      git commit -t <(printf "\n\nCo-Authored-By: Claude <noreply@anthropic.com>\n\n# Cancel with :cq\n#")
+    output: terminal
   - key: "G"
     description: "Cleanup local branches"
     context: "localBranches"
