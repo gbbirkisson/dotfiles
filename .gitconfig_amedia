@@ -1,5 +1,8 @@
 [user]
 	email = gudmundur.birkisson@amedia.no
 
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+
 [core]
   excludesFile = "~/.gitglobalignore_amedia"
