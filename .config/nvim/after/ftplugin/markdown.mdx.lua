@@ -1,0 +1,1 @@
+-- Stub to register the `markdown.mdx` compound filetype with getcompletion().

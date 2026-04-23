@@ -1,0 +1,1 @@
+-- Stub to register the `yaml.helm-values` compound filetype with getcompletion().

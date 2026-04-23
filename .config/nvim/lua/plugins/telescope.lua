@@ -2,7 +2,12 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      "xiyaowong/telescope-emoji.nvim",
+      {
+        "allaman/emoji.nvim",
+        opts = {
+          enable_cmp_integration = false,
+        },
+      },
     },
     keys = {
       { "<leader>fw", "<Cmd>Telescope live_grep<CR>", desc = "Find Word" },
@@ -67,14 +72,6 @@ return {
         },
       },
       extensions_list = { "emoji" },
-      extensions = {
-        emoji = {
-          action = function(emoji)
-            -- insert emoji when picked
-            vim.api.nvim_put({ emoji.value }, "c", false, true)
-          end,
-        },
-      },
     },
   },
 }

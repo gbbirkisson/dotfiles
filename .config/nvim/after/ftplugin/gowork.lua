@@ -1,0 +1,1 @@
+-- Stub to register the `gowork` filetype with getcompletion().

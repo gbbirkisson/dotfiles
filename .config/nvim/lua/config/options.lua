@@ -5,6 +5,13 @@
 -- Use telescope as picker
 vim.g.lazyvim_picker = "telescope"
 
+-- Disable unused remote-plugin providers (silences :checkhealth noise).
+-- We don't use :py3/:rubydo/:perldo or node remote plugins; LSP is unaffected.
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+
 -- Use treesitter instead of semantic tokens
 -- :h vim.hl.priorities
 vim.hl.priorities.semantic_tokens = 95
@@ -38,6 +45,32 @@ vim.cmd.Gl("96")
 vim.filetype.add({
   filename = {
     [".envrc"] = "bash",
+  },
+})
+
+-- Register filetypes referenced by LSP server configs so :checkhealth vim.lsp
+-- doesn't warn about unknown filetypes.
+vim.filetype.add({
+  extension = {
+    templ = "templ",
+    gotmpl = "gotmpl",
+    mdx = "markdown.mdx",
+    tfvars = "terraform-vars",
+    vtc = "vtc",
+  },
+  filename = {
+    ["go.work"] = "gowork",
+    ["docker-compose.yml"] = "yaml.docker-compose",
+    ["docker-compose.yaml"] = "yaml.docker-compose",
+    ["compose.yml"] = "yaml.docker-compose",
+    ["compose.yaml"] = "yaml.docker-compose",
+    [".gitlab-ci.yml"] = "yaml.gitlab",
+    [".gitlab-ci.yaml"] = "yaml.gitlab",
+  },
+  pattern = {
+    [".*/helm/.*/.*%.ya?ml"] = "yaml.helm-values",
+    [".*/templates/.*%.ya?ml"] = "yaml.helm-values",
+    [".*/values%.ya?ml"] = "yaml.helm-values",
   },
 })
 

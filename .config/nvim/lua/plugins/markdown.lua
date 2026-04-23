@@ -10,12 +10,6 @@ return {
     init = function()
       vim.g.mkdp_theme = "dark"
     end,
-    build = function(plugin)
-      vim.cmd(
-        "!cd "
-          .. plugin.dir
-          .. " && cd app && npx --yes yarn install && npm install && git reset --hard HEAD"
-      )
-    end,
+    build = "cd app && npm install",
   },
 }

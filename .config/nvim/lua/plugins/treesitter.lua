@@ -6,6 +6,7 @@ return {
         "asm",
         "bash",
         "c",
+        "css",
         "diff",
         "go",
         "html",
@@ -15,47 +16,49 @@ return {
         "json",
         "jsonc",
         "just",
+        "latex",
         "lua",
         "luadoc",
         "luap",
         "markdown",
         "markdown_inline",
         "nginx",
+        "norg",
         "printf",
         "python",
         "query",
         "regex",
         "rust",
+        "scss",
         "sql",
         "svelte",
         "terraform",
         "toml",
         "tsx",
         "typescript",
+        "typst",
         "vim",
         "vimdoc",
+        "vue",
         "wgsl",
         "xml",
         "yaml",
       }
 
       -- setup river: https://github.com/grafana/tree-sitter-river
-      local function register_river_parser()
-        local p = require("nvim-treesitter.parsers")
-        p.river = {
-          install_info = {
-            url = "https://github.com/grafana/tree-sitter-river",
-            branch = "main",
-            queries = "queries",
-          },
-          filetype = "river",
-        }
-      end
-      register_river_parser()
-      vim.api.nvim_create_autocmd(
-        "User",
-        { pattern = "TSUpdate", callback = register_river_parser }
-      )
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "TSUpdate",
+        callback = function()
+          require("nvim-treesitter.parsers").river = {
+            install_info = {
+              url = "https://github.com/grafana/tree-sitter-river",
+              branch = "main",
+              queries = "queries",
+            },
+            filetype = "river",
+          }
+        end,
+      })
       vim.filetype.add({
         extension = {
           river = "river",
@@ -64,22 +67,20 @@ return {
       })
       table.insert(ensure, "river")
 
-      local function register_rhai_parser()
-        local p = require("nvim-treesitter.parsers")
-        p.rhai = {
-          install_info = {
-            url = "https://github.com/elkowar/tree-sitter-rhai",
-            branch = "main",
-            queries = "queries",
-          },
-          filetype = "rhai",
-        }
-      end
-      register_rhai_parser()
-      vim.api.nvim_create_autocmd(
-        "User",
-        { pattern = "TSUpdate", callback = register_rhai_parser }
-      )
+      -- setup rhai
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "TSUpdate",
+        callback = function()
+          require("nvim-treesitter.parsers").rhai = {
+            install_info = {
+              url = "https://github.com/elkowar/tree-sitter-rhai",
+              branch = "main",
+              queries = "queries",
+            },
+            filetype = "rhai",
+          }
+        end,
+      })
       vim.filetype.add({
         extension = {
           rhai = "rhai",
@@ -96,23 +97,21 @@ return {
       -- Then run :TSInstall vcl and :TSInstall vtc
       local vcl_path = vim.fn.expand("~/repos/personal/varnishls")
       if vim.fn.isdirectory(vcl_path) == 1 then
-        local function register_vcl_parsers()
-          local p = require("nvim-treesitter.parsers")
-          for _, lang in pairs({ "vcl", "vtc" }) do
-            p[lang] = {
-              install_info = {
-                path = vcl_path .. "/vendor/tree-sitter-" .. lang,
-                generate = true,
-              },
-              filetype = lang,
-            }
-          end
-        end
-        register_vcl_parsers()
-        vim.api.nvim_create_autocmd(
-          "User",
-          { pattern = "TSUpdate", callback = register_vcl_parsers }
-        )
+        vim.api.nvim_create_autocmd("User", {
+          pattern = "TSUpdate",
+          callback = function()
+            local p = require("nvim-treesitter.parsers")
+            for _, lang in pairs({ "vcl", "vtc" }) do
+              p[lang] = {
+                install_info = {
+                  path = vcl_path .. "/vendor/tree-sitter-" .. lang,
+                  generate = true,
+                },
+                filetype = lang,
+              }
+            end
+          end,
+        })
         vim.filetype.add({
           extension = {
             vcl = "vcl",
@@ -125,8 +124,6 @@ return {
 
       return {
         ensure_installed = ensure,
-        highlight = { enable = true },
-        indent = { enable = true },
       }
     end,
   },

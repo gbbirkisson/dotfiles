@@ -21,6 +21,35 @@ map("n", "N", "Nzz")
 map("n", "<leader>cd", "<Cmd>set conceallevel=0<CR>", { desc = "Conceal Level Disable" })
 map("n", "<leader>ce", "<Cmd>set conceallevel=2<CR>", { desc = "Conceal Level Enable" })
 
+-- Show noice message history
+map("n", "<leader>m", "<Cmd>Noice<CR>", { desc = "Messages (Noice History)" })
+
+-- Free <leader>l as an LSP prefix. LazyVim loads its own keymaps.lua before this
+-- file, so a direct override here wins without needing an autocmd.
+map("n", "<leader>l", "<Nop>", { desc = "+lsp" })
+
+-- LSP info / restart (native API, works without :LspInfo/:LspRestart)
+map("n", "<leader>li", "<Cmd>checkhealth vim.lsp<CR>", { desc = "LSP Info (checkhealth)" })
+map("n", "<leader>lr", function()
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  if #clients == 0 then
+    vim.notify("No LSP clients attached to buffer", vim.log.levels.WARN)
+    return
+  end
+  local names = {}
+  for _, c in ipairs(clients) do
+    names[#names + 1] = c.name
+    c:stop()
+  end
+  vim.defer_fn(function()
+    vim.cmd.edit()
+    vim.notify("Restarted LSP: " .. table.concat(names, ", "))
+  end, 500)
+end, { desc = "LSP Restart (buffer clients)" })
+map("n", "<leader>ll", function()
+  vim.cmd("tabnew " .. vim.lsp.get_log_path())
+end, { desc = "LSP Log" })
+
 -- Useful formatting methods
 map("v", "'", "!quotes<CR>", { desc = "Swap single and double quotes" })
 map("v", '"', "!quotes<CR>", { desc = "Swap single and double quotes" })

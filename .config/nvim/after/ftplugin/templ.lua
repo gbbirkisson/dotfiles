@@ -1,0 +1,1 @@
+-- Stub to register the `templ` filetype with getcompletion().

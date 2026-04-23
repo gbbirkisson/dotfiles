@@ -1,0 +1,1 @@
+-- Stub to register the `yaml.docker-compose` compound filetype with getcompletion().

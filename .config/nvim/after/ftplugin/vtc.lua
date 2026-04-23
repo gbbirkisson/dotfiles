@@ -1,0 +1,1 @@
+-- Stub to register the `vtc` filetype with getcompletion().

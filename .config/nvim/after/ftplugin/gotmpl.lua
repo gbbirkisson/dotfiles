@@ -1,0 +1,1 @@
+-- Stub to register the `gotmpl` filetype with getcompletion().

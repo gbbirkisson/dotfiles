@@ -1,0 +1,1 @@
+-- Stub to register the `yaml.gitlab` compound filetype with getcompletion().

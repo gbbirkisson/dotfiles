@@ -1,0 +1,1 @@
+-- Stub to register the `terraform-vars` filetype with getcompletion().
