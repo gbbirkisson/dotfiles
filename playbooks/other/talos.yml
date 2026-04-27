@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=talosctl packageName=siderolabs/talos
-    version: v1.12.6
+    version: v1.12.7
 
   tasks:
     - name: Create local bin path
