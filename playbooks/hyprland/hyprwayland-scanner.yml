@@ -5,7 +5,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=hyprwayland-scanner packageName=hyprwm/hyprwayland-scanner
-    version: v0.4.5
+    version: v0.4.6
     dir: "/tmp/hyprwm-hyprwayland-scanner"
 
   tasks:
