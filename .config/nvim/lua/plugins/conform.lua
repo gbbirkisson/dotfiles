@@ -61,6 +61,7 @@ return {
         fish = { "fish_indent" },
         yaml = { "yamlfmt" },
         terraform = { "tofu_fmt" },
+        jsonnet = { lsp_format = "prefer" },
         typescript = { "prettierd", "prettier", stop_after_first = true },
         javascript = { "prettierd", "prettier", stop_after_first = true },
         html = { "prettierd", "prettier", stop_after_first = true },

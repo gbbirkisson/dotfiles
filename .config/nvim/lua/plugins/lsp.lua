@@ -24,6 +24,7 @@ return {
         },
         terraformls = {},
         jsonls = {},
+        jsonnet_ls = {},
         marksman = {},
         pyright = {
           enabled = false,

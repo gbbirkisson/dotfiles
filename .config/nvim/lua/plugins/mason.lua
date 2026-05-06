@@ -3,6 +3,9 @@ return {
     "mason.nvim",
     opts = {
       ensure_installed = {
+        -- Jsonnet
+        "jsonnet-language-server",
+
         -- Python
         "ruff",
 
