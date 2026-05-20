@@ -54,3 +54,16 @@ index da66183e..678a1f85 100644
  
      if (IS_NIX) {
          const auto NAME = getFromEtcOsRelease("NAME");
+diff --git i/src/config/shared/parserUtils/ParserUtils.cpp w/src/config/shared/parserUtils/ParserUtils.cpp
+index 11111111..22222222 100644
+--- i/src/config/shared/parserUtils/ParserUtils.cpp
++++ w/src/config/shared/parserUtils/ParserUtils.cpp
+@@ -14,7 +14,7 @@ using namespace Config::ParserUtils;
+ using namespace Hyprutils::String;
+
+ static std::expected<uint64_t, std::string> parseHex(std::string_view value) {
+-    auto res = value.starts_with("0x") ? strToNumber<uint64_t>(value) : strToNumber<uint64_t>(std::string{"0x"} + value);
++    auto res = value.starts_with("0x") ? strToNumber<uint64_t>(value) : strToNumber<uint64_t>(std::string{"0x"} + std::string{value});
+     if (!res)
+         return std::unexpected(std::format("invalid hex \"{}\"", value));
+     return *res;

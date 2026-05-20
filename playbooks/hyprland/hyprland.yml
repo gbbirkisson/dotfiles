@@ -25,6 +25,8 @@
           - libre2-dev
           - libudis86-dev
           - libinotify-ocaml-dev
+          - glslang-dev
+          - glslang-tools
 
     - name: Checkout hyprland
       ansible.builtin.git:

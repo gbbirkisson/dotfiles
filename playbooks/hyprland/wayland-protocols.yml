@@ -2,8 +2,8 @@
 - hosts: "{{ host }}"
 
   vars:
-    # renovate: datasource=gitlab-tags depName=wayland-protocols packageName=wayland/wayland-protocols registryUrl=https://gitlab.freedesktop.org
-    version: "1.45"
+    # renovate: datasource=git-tags depName=wayland-protocols packageName=https://gitlab.freedesktop.org/wayland/wayland-protocols.git
+    version: "1.48"
     dir: "/tmp/wayland-protocols"
 
   tasks:

@@ -11,6 +11,7 @@
 - import_playbook: hyprland/hyprcursor.yml
 - import_playbook: hyprland/hyprgraphics.yml
 - import_playbook: hyprland/hyprland-qtutils.yml
+- import_playbook: hyprland/lua.yml
 - import_playbook: hyprland/hyprland.yml
 - import_playbook: hyprland/hyprland-protocols.yml
 

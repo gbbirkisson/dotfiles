@@ -1,0 +1,68 @@
+---
+- hosts: "{{ host }}"
+
+  # Hyprland 0.55+ requires Lua 5.5 (for its lua-based config system).
+  # Debian doesn't package Lua 5.5 yet (still ships 5.4), so we build it from
+  # source into /usr/local. Lua's Makefile doesn't generate a pkg-config file,
+  # so we write one by hand for cmake's pkg_search_module to find.
+
+  vars:
+    # renovate-disabled: datasource=git-tags depName=lua packageName=https://github.com/lua/lua.git
+    version: v5.5.0
+    short_version: "{{ version | regex_replace('^v', '') }}"
+    dir: "/tmp/lua-{{ short_version }}"
+
+  tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
+    - name: Download lua tarball
+      ansible.builtin.get_url:
+        url: "https://www.lua.org/ftp/lua-{{ short_version }}.tar.gz"
+        dest: "/tmp/lua-{{ short_version }}.tar.gz"
+        force: true
+
+    - name: Extract lua
+      ansible.builtin.unarchive:
+        src: "/tmp/lua-{{ short_version }}.tar.gz"
+        dest: /tmp
+        remote_src: true
+
+    - name: Build lua
+      shell:
+        chdir: "{{ dir }}"
+        # -fPIC is required so liblua.a can be linked into Hyprland's shared lib.
+        cmd: |
+          make linux MYCFLAGS=-fPIC
+
+    - name: Install lua to /usr/local
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          make install INSTALL_TOP=/usr/local
+
+    - name: Ensure pkgconfig directory exists
+      become: true
+      ansible.builtin.file:
+        path: /usr/local/lib/pkgconfig
+        state: directory
+
+    - name: Install lua5.5 pkg-config file
+      become: true
+      ansible.builtin.copy:
+        dest: /usr/local/lib/pkgconfig/lua5.5.pc
+        content: |
+          prefix=/usr/local
+          exec_prefix=${prefix}
+          libdir=${exec_prefix}/lib
+          includedir=${prefix}/include
+
+          Name: Lua
+          Description: A powerful, fast, lightweight, embeddable scripting language
+          URL: https://www.lua.org/
+          Version: {{ short_version }}
+
+          Libs: -L${libdir} -llua -lm -ldl
+          Cflags: -I${includedir}
