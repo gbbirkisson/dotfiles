@@ -7,7 +7,7 @@
     # renovate: datasource=github-releases depName=nsc packageName=nats-io/nsc
     nsc_version: v2.14.0
     # renovate: datasource=github-releases depName=nkeys packageName=nats-io/nkeys
-    nk_version: v0.4.15
+    nk_version: v0.4.16
 
   tasks:
     - name: Create local bin path
