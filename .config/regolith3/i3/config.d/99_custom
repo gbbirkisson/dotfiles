@@ -21,7 +21,6 @@ for_window [class="Chromium"] border pixel 0
 bindsym $mod+less move workspace to output next
 
 # Hop between workspaces
-bindsym $mod+u workspace back_and_forth
-bindsym $mod+x workspace back_and_forth
+bindsym $mod+Tab workspace back_and_forth
 
 bindsym $mod+Return exec cwdshell

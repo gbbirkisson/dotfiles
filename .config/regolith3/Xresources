@@ -22,4 +22,7 @@ wm.workspace.10.name: 10:10MSG
 
 wm.binding.terminal: alt+Return
 
+! Move "workspace next" off Tab so $mod+Tab can be bound to back_and_forth
+wm.binding.ws_next: Mod1+Tab
+
 regolith.look.path: /usr/share/regolith-look/nord
