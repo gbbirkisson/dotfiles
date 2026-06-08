@@ -13,6 +13,9 @@
       "warningAcknowledged": true,
       "enabled": true,
       "maxAge": "30d"
+    },
+    "plan": {
+      "enabled": true
     }
   },
   "security": {
@@ -25,10 +28,12 @@
   },
   "experimental": {
     "skills": false,
-    "enableAgents": true,
-    "plan": true
+    "enableAgents": true
   },
   "privacy": {
     "usageStatisticsEnabled": false
+  },
+  "agents": {
+    "overrides": {}
   }
 }
