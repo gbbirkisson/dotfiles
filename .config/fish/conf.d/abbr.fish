@@ -72,17 +72,7 @@ abbr -a di "rm -r .venv && direnv reload"
 
 # nvim
 abbr -a n nvim
-alias day='cd $HOME/repos/personal/notes && nvim -c :ObsidianToday'
-alias notes='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck'
-alias todo='cd $HOME/repos/personal/notes && nvim -c :ObsidianCheck 1-projects/1709554659-todo.md'
 setenv MANPAGER "nvim +Man!"
-
-# ai
-alias llmchad="nvim -c ':CL' -c ':CodeCompanionChat openai' -c ':on'"
-alias llmclaude="nvim -c ':CL' -c ':CodeCompanionChat anthropic' -c ':on'"
-alias llmdeepseek="nvim -c ':CL' -c ':CodeCompanionChat deepseek' -c ':on'"
-alias llmollama="nvim -c ':CL' -c ':CodeCompanionChat ollama' -c ':on'"
-alias pa='cd $HOME/repos/personal/notes && op item list > /dev/null && claude'
 
 function dalle
     curl https://api.openai.com/v1/images/generations \
