@@ -21,7 +21,12 @@ return {
         },
         sql_formatter = {
           -- sqlite dialect with ?1, ?2 numbered params (for sqlx compatibility)
-          prepend_args = { "--language", "sqlite", "--config", '{"paramTypes": {"numbered": ["?"]}}' },
+          prepend_args = {
+            "--language",
+            "sqlite",
+            "--config",
+            '{"paramTypes": {"numbered": ["?"]}}',
+          },
         },
         shfmt = {
           prepend_args = { "-i", "4" },
@@ -67,6 +72,7 @@ return {
         html = { "prettierd", "prettier", stop_after_first = true },
         svelte = { "prettierd", "prettier", stop_after_first = true },
         css = { "prettierd", "prettier", stop_after_first = true },
+        zig = { "zigfmt" },
         -- "injected" formats treesitter injection regions (e.g. SQL inside Rust strings)
         ["*"] = { "trim_whitespace", "injected" },
       },
