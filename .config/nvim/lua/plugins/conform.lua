@@ -69,6 +69,7 @@ return {
         jsonnet = { lsp_format = "prefer" },
         typescript = { "prettierd", "prettier", stop_after_first = true },
         javascript = { "prettierd", "prettier", stop_after_first = true },
+        just = { "just", stop_after_first = true },
         html = { "prettierd", "prettier", stop_after_first = true },
         svelte = { "prettierd", "prettier", stop_after_first = true },
         css = { "prettierd", "prettier", stop_after_first = true },
