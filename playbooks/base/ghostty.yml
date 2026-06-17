@@ -36,6 +36,10 @@
           - libadwaita-1-dev
           - libgtk-4-dev
           - libxml2-utils
+          # Link the distro's fontconfig instead of ghostty's bundled copy (see -fsys below).
+          # The bundled fontconfig segfaults in font fallback; the distro's is stable.
+          # (pulls in libfreetype-dev, which fontconfig.pc requires to build against.)
+          - libfontconfig-dev
 
     - name: Install gtk4-layer-shell, falling back to ghostty's bundled build
       when: ghostty_installed.rc not in [ 0 ]
@@ -64,9 +68,14 @@
 
     - name: Build ghostty
       when: ghostty_installed.rc not in [ 0 ]
+      # -fsys=fontconfig links the distro's fontconfig; ghostty's bundled copy segfaults
+      #   during font fallback. We don't force freetype (its -fsys path links a misnamed
+      #   "bzip2" that doesn't resolve on Debian/Ubuntu, where the lib is libbz2).
       # -fno-sys lets ghostty build gtk4-layer-shell itself when the distro doesn't package it.
       shell: >-
-        mise exec zig@{{ zig_version }} -- zig build -p $HOME/.local -Doptimize=ReleaseFast
+        mise exec zig@{{ zig_version }} -- zig build -p $HOME/.local
+        -Doptimize={{ 'Debug' if ghostty_debug | default(false) else 'ReleaseFast' }}
+        -fsys=fontconfig
         {{ '' if layer_shell_from_apt | default(false) else '-fno-sys=gtk4-layer-shell' }}
       args:
         chdir: /tmp/ghostty-{{ version[1:] }}
