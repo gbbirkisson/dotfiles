@@ -37,7 +37,7 @@
           - libgtk-4-dev
           - libxml2-utils
 
-    - name: Install libgtk4-layer-shell-dev
+    - name: Install gtk4-layer-shell, falling back to ghostty's bundled build
       when: ghostty_installed.rc not in [ 0 ]
       block:
         - name: Install libgtk4-layer-shell-dev from apt
@@ -47,39 +47,13 @@
             update_cache: true
             pkg:
               - libgtk4-layer-shell-dev
+        - name: Use system gtk4-layer-shell
+          set_fact:
+            layer_shell_from_apt: true
       rescue:
-        - debug:
-            msg: skipping
-      #   - name: Install gtk4-layer-shell build dependencies
-      #     become: true
-      #     apt:
-      #       state: latest
-      #       pkg:
-      #         - meson
-      #         - ninja-build
-      #         - libgtk-4-dev
-      #         - gobject-introspection
-      #         - libgirepository1.0-dev
-      #
-      #   - name: Download gtk4-layer-shell source
-      #     unarchive:
-      #       remote_src: yes
-      #       src: "https://github.com/wmww/gtk4-layer-shell/archive/refs/tags/v1.1.0.tar.gz"
-      #       dest: "/tmp"
-      #
-      #   - name: Build gtk4-layer-shell
-      #     shell:
-      #       chdir: /tmp/gtk4-layer-shell-1.1.0
-      #       cmd: |
-      #         meson setup build -Dprefix=/usr/local -Dexamples=false -Ddocs=false -Dtests=false -Dvapi=false
-      #         ninja -C build
-      #
-      #   - name: Install gtk4-layer-shell
-      #     become: true
-      #     shell:
-      #       chdir: /tmp/gtk4-layer-shell-1.1.0
-      #       cmd: |
-      #         ninja -C build install
+        - name: Distro doesn't package gtk4-layer-shell, ghostty will build it from source
+          set_fact:
+            layer_shell_from_apt: false
 
     - name: Download ghostty source
       when: ghostty_installed.rc not in [ 0 ]
@@ -90,6 +64,9 @@
 
     - name: Build ghostty
       when: ghostty_installed.rc not in [ 0 ]
-      shell: "mise exec zig@{{ zig_version }} -- zig build -p $HOME/.local -Doptimize=ReleaseFast"
+      # -fno-sys lets ghostty build gtk4-layer-shell itself when the distro doesn't package it.
+      shell: >-
+        mise exec zig@{{ zig_version }} -- zig build -p $HOME/.local -Doptimize=ReleaseFast
+        {{ '' if layer_shell_from_apt | default(false) else '-fno-sys=gtk4-layer-shell' }}
       args:
         chdir: /tmp/ghostty-{{ version[1:] }}

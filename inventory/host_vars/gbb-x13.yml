@@ -1,5 +1,4 @@
 skip:
   - hyprland
-  - ghostty
 skip_cargo:
   - bluetui
