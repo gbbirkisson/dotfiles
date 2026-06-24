@@ -3,6 +3,9 @@ return {
     "mason.nvim",
     opts = {
       ensure_installed = {
+        -- Go
+        "goimports",
+
         -- Jsonnet
         "jsonnet-language-server",
 

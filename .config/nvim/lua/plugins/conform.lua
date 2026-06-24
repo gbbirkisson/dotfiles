@@ -62,6 +62,7 @@ return {
         python = { "ruff_format", "ruff_organize_imports" },
         sh = { "shfmt" },
         rust = { "rustfmt" },
+        go = { "goimports", "gofmt" },
         toml = { "taplo" },
         fish = { "fish_indent" },
         yaml = { "yamlfmt" },
