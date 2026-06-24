@@ -12,9 +12,9 @@ assign [class="firefox"] $ws7
 assign [class="Signal"] $ws6
 for_window [class="Spotify"] move to workspace $ws8
 for_window [title="Lock Screen — 1Password"] move to workspace $ws9
-assign [class="Slack"] $ws10
+assign [class="slack"] $ws10
 
-assign [class="dozig"] $ws5
+#assign [class="dozig"] $ws5
 
 # Disable chromium titlebar
 for_window [class="Chromium"] border pixel 0
