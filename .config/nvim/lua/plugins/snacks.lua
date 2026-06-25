@@ -2,12 +2,49 @@ return {
   {
     "folke/snacks.nvim",
     keys = {
-      { "gh", function() Snacks.gitbrowse() end, mode = { "n", "v" }, desc = "Git Browse" },
-      { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame (Line)" },
-      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-      { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit File History" },
-      { "<leader>z", function() Snacks.zen() end, desc = "Zen Mode" },
-      { "<leader>Z", function() Snacks.zen.zoom() end, desc = "Zoom" },
+      {
+        "gh",
+        function()
+          Snacks.gitbrowse()
+        end,
+        mode = { "n", "v" },
+        desc = "Git Browse",
+      },
+      {
+        "<leader>gb",
+        function()
+          Snacks.git.blame_line()
+        end,
+        desc = "Git Blame (Line)",
+      },
+      {
+        "<leader>gg",
+        function()
+          Snacks.lazygit()
+        end,
+        desc = "Lazygit",
+      },
+      {
+        "<leader>gf",
+        function()
+          Snacks.lazygit.log_file()
+        end,
+        desc = "Lazygit File History",
+      },
+      {
+        "<leader>z",
+        function()
+          Snacks.zen()
+        end,
+        desc = "Zen Mode",
+      },
+      {
+        "<leader>Z",
+        function()
+          Snacks.zen.zoom()
+        end,
+        desc = "Zoom",
+      },
       {
         "<leader>ud",
         function()
@@ -79,18 +116,54 @@ return {
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
           keys = {
-            { icon = " ", key = "f", desc = "Find File",        action = ":lua require('telescope.builtin').find_files({ hidden = true })" },
-            { icon = " ", key = "w", desc = "Find Word",        action = ":lua require('telescope.builtin').live_grep()" },
-            { icon = " ", key = "n", desc = "New File",         action = ":ene | startinsert" },
-            { icon = " ", key = "c", desc = "Config",           action = ":lua require('telescope.builtin').find_files({ cwd = vim.fn.stdpath('config') })" },
-            { icon = " ", key = "s", desc = "Restore Session",  action = ":lua require('persistence').load()" },
-            { icon = " ", key = "q", desc = "Quit",             action = ":qa" },
+            {
+              icon = " ",
+              key = "n",
+              desc = "Tree",
+              action = ":Neotree toggle",
+            },
+            {
+              icon = " ",
+              key = "f",
+              desc = "Find File",
+              action = ":lua require('telescope.builtin').find_files({ hidden = true })",
+            },
+            {
+              icon = " ",
+              key = "w",
+              desc = "Find Word",
+              action = ":lua require('telescope.builtin').live_grep()",
+            },
+            {
+              icon = " ",
+              key = "g",
+              desc = "Git",
+              action = function()
+                Snacks.lazygit()
+              end,
+            },
+            -- { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+            -- {
+            --   icon = " ",
+            --   key = "c",
+            --   desc = "Config",
+            --   action = ":lua require('telescope.builtin').find_files({ cwd = vim.fn.stdpath('config') })",
+            -- },
+            -- {
+            --   icon = " ",
+            --   key = "s",
+            --   desc = "Restore Session",
+            --   action = ":lua require('persistence').load()",
+            -- },
+            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           },
         },
         sections = {
-          { section = "header" },
+          -- { section = "header" },
+          -- { section = "recent_files" },
+          -- { section = "projects" },
           { section = "keys", gap = 1, padding = 1 },
-          { section = "startup" },
+          -- { section = "startup" },
         },
       },
     },
