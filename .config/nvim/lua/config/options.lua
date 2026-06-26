@@ -39,7 +39,7 @@ end, { nargs = 1 })
 
 -- Default to 96, because github diff view looks nice with that number
 -- Note: format selection with gq
-vim.cmd.Gl("96")
+vim.cmd.Gl("80")
 
 -- Set .envrc to bash
 vim.filetype.add({
