@@ -1,3 +1,22 @@
+## Creating scripts to solve problems
+
+When solving problems, or creating 1 off scripts to solve some task, you should
+know that you have the entire python ecosystem at your fingertips. You can
+always create a script that defines dependencies like this:
+
+```python
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.12"
+# dependencies = []
+# ///
+
+# YOUR CODE
+```
+
+Then just do `chmod +x <script>` and run the script!
+
 ## Git
 
 ### Read-Only Only
