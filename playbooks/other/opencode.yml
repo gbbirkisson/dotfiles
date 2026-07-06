@@ -1,0 +1,27 @@
+---
+- hosts: "{{ host }}"
+
+  vars:
+    # renovate: datasource=github-releases depName=opencode packageName=anomalyco/opencode
+    version: v1.17.13
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if opencode is installed
+      shell: "opencode --version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: opencode_installed.rc not in [0,1]
+      register: opencode_installed
+
+    - name: Install opencode
+      when: opencode_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/anomalyco/opencode/releases/download/{{ version }}/opencode-linux-x64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - opencode
