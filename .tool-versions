@@ -4,7 +4,6 @@ golang              1.26.5
 gradle              8.13.0
 helm                3.21.2
 hk                  0.2.3
-imagemagick         7.1.2-20
 java                openjdk-21.0.1
 kubectl             1.36.2
 kustomize           5.8.1
