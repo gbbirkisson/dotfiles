@@ -5,7 +5,7 @@
 
   vars:
     # renovate: datasource=github-tags depName=hyprland packageName=hyprwm/Hyprland
-    version: v0.55.4
+    version: v0.56.1
     dir: "/tmp/hyprwm-hyprland"
 
   tasks:
