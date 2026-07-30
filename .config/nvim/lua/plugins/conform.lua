@@ -1,3 +1,17 @@
+-- Resolve the gigja catalog formatter (scripts/format-songs.py) by walking up
+-- from the buffer to the repo's `scripts/` dir. Returns nil outside that repo so
+-- conform's `condition` can skip .cho files elsewhere.
+local function chordpro_script(ctx)
+  local scripts = vim.fs.find("scripts", { path = ctx.dirname, upward = true, type = "directory" })[1]
+  if scripts then
+    local p = scripts .. "/format-songs.py"
+    if vim.uv.fs_stat(p) then
+      return p
+    end
+  end
+  return nil
+end
+
 return {
   {
     "stevearc/conform.nvim",
@@ -53,8 +67,20 @@ return {
           args = { "reformat-gherkin@3.0.1", "--tab-width", "4", "-" },
           stdin = true,
         },
+        chordpro_fmt = {
+          -- gigja catalog styleguide formatter (scripts/format-songs.py --stdin)
+          command = function(_, ctx)
+            return chordpro_script(ctx) or "format-songs.py"
+          end,
+          args = { "--stdin" },
+          stdin = true,
+          condition = function(_, ctx)
+            return chordpro_script(ctx) ~= nil
+          end,
+        },
       },
       formatters_by_ft = {
+        chordpro = { "chordpro_fmt" },
         sql = { "sql_formatter" },
         river = { "alloy" },
         cucumber = { "gherkin" },
