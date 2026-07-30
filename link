@@ -40,7 +40,8 @@ link() {
 }
 
 link .claude/CLAUDE.md
-link .claude/skills
+link .claude/skills/fix-pr
+link .claude/skills/prep
 link .config/direnv
 link .config/dunst
 link .config/fish/conf.d
