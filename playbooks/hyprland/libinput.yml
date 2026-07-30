@@ -5,7 +5,7 @@
 
   vars:
     # renovate: datasource=git-tags depName=libinput packageName=https://gitlab.freedesktop.org/libinput/libinput.git
-    version: "1.29.2"
+    version: 1.31.3
     dir: "/tmp/libinput"
 
   tasks:
