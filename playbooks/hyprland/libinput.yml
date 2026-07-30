@@ -1,0 +1,36 @@
+---
+- hosts: "{{ host }}"
+
+  # Debian trixie ships libinput 1.28.1, hyprland requires >= 1.29.
+
+  vars:
+    # renovate: datasource=git-tags depName=libinput packageName=https://gitlab.freedesktop.org/libinput/libinput.git
+    version: "1.29.2"
+    dir: "/tmp/libinput"
+
+  tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
+    - name: Checkout libinput
+      ansible.builtin.git:
+        repo: https://gitlab.freedesktop.org/libinput/libinput.git
+        dest: "{{ dir }}"
+        version: "{{ version }}"
+        force: true
+
+    - name: Build libinput
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          meson setup build --prefix=/usr/local -Dtests=false -Ddocumentation=false -Ddebug-gui=false
+          ninja -C build
+
+    - name: Install libinput to /usr/local
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          ninja -C build install
+          ldconfig

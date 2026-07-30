@@ -120,6 +120,7 @@
           - libcairo2-dev
           - libdisplay-info2
           - libdrm2
+          - libeis-dev
           - libjpeg-dev
           - libjxl-dev
           - libmagic-dev

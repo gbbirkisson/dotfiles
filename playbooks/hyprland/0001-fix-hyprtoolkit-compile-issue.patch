@@ -1,0 +1,40 @@
+diff --git i/src/system/Icons.cpp w/src/system/Icons.cpp
+index e5f1ed6..fbd3f93 100644
+--- i/src/system/Icons.cpp
++++ w/src/system/Icons.cpp
+@@ -68,6 +68,17 @@ static std::optional<std::vector<std::string>> getThemeDir(const std::string& na
+     return results.empty() ? std::nullopt : std::optional<std::vector<std::string>>(results);
+ }
+ 
++// libstdc++ 14 has no std::formatter for ranges, so join by hand for logging
++static std::string joinStrings(const std::vector<std::string>& strings) {
++    std::string result;
++    for (const auto& s : strings) {
++        if (!result.empty())
++            result += ", ";
++        result += s;
++    }
++    return result;
++}
++
+ static std::optional<std::vector<std::string>> findAnyTheme() {
+     // first, try to find the default system theme
+     for (const auto& rawDir : ICON_THEME_DIRS) {
+@@ -99,7 +110,7 @@ static std::optional<std::vector<std::string>> findAnyTheme() {
+             // try to find it
+             auto themeDir = getThemeDir(iconTheme);
+             if (themeDir && !themeDir->empty()) {
+-                g_logger->log(HT_LOG_TRACE, "CSystemIconFactory: Found {} as default fallback", themeDir.value());
++                g_logger->log(HT_LOG_TRACE, "CSystemIconFactory: Found {} as default fallback", joinStrings(themeDir.value()));
+                 return themeDir;
+             }
+ 
+@@ -214,7 +225,7 @@ void CSystemIconFactory::parseTheme(const std::string& themeDir) {
+ 
+             auto inheritTheme = getThemeDir(trim(std::string{inheritName}));
+             if (inheritTheme) {
+-                g_logger->log(HT_LOG_TRACE, "CSystemIconFactory: parsing inherited theme {}", *inheritTheme);
++                g_logger->log(HT_LOG_TRACE, "CSystemIconFactory: parsing inherited theme {}", joinStrings(*inheritTheme));
+                 parseThemes(*inheritTheme);
+             } else
+                 g_logger->log(HT_LOG_WARNING, "CSystemIconFactory: inherited theme {} not found", std::string{inheritName});

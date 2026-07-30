@@ -11,10 +11,10 @@ index 0a33f3ed..09ddc6fe 100644
  
      strncpy(serverAddress.sun_path, socketPath.c_str(), sizeof(serverAddress.sun_path) - 1);
  
-diff --git i/src/helpers/Monitor.cpp w/src/helpers/Monitor.cpp
+diff --git i/src/output/Monitor.cpp w/src/output/Monitor.cpp
 index 3be5be40..9d106bd1 100644
---- i/src/helpers/Monitor.cpp
-+++ w/src/helpers/Monitor.cpp
+--- i/src/output/Monitor.cpp
++++ w/src/output/Monitor.cpp
 @@ -693,7 +693,7 @@ bool CMonitor::applyMonitorRule(SMonitorRule* pMonitorRule, bool force) {
          std::ranges::sort(sortedModes, sortFunc);
          if (sortedModes.size() > 3)
@@ -67,3 +67,25 @@ index 11111111..22222222 100644
      if (!res)
          return std::unexpected(std::format("invalid hex \"{}\"", value));
      return *res;
+diff --git i/src/helpers/MiscFunctions.cpp w/src/helpers/MiscFunctions.cpp
+index 33333333..44444444 100644
+--- i/src/helpers/MiscFunctions.cpp
++++ w/src/helpers/MiscFunctions.cpp
+@@ -833,12 +833,13 @@ bool truthy(const std::string& str) {
+         return true;
+ 
+     // clang-format off
+-    auto str_view = str | std::views::transform([](unsigned char ch) -> char {
+-        return sc<char>(std::tolower(ch));
+-    });
++    std::string lower;
++    lower.reserve(str.size());
++    for (unsigned char ch : str)
++        lower += sc<char>(std::tolower(ch));
+ 
+     return [&](auto&&... prefixes) -> bool {
+-        return (... || std::ranges::starts_with(str_view, prefixes));
++        return (... || lower.starts_with(prefixes));
+     }("true"sv, "yes"sv, "on"sv);
+     // clang-format on
+ }

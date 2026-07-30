@@ -2,6 +2,8 @@
 - hosts: "{{ host }}"
 
   # https://github.com/JaKooLit/Debian-hyprpaper/blob/main/install-scripts/hyprpaper.sh
+  #
+  # Requires hyprtoolkit, run hyprland/hyprtoolkit.yml first.
 
   vars:
     # renovate: datasource=github-tags depName=hyprpaper packageName=hyprwm/hyprpaper
@@ -21,12 +23,19 @@
         version: "{{ version }}"
         force: true
 
+    # We can potentially drop this when GCC15 is available on debian
+    - name: Copy hyprpaper patch
+      ansible.builtin.copy:
+        src: 0001-fix-hyprpaper-compile-issue.patch
+        dest: "{{ dir }}/0001-fix-hyprpaper-compile-issue.patch"
+
     - name: Build hyprpaper
       shell:
         chdir: "{{ dir }}"
         cmd: |
+          patch -p1 < 0001-fix-hyprpaper-compile-issue.patch
           cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
-          cmake --build ./build --config Release --target hyprpaper -j `nproc 2`
+          cmake --build ./build --config Release --target hyprpaper -j `nproc`
 
     - name: Install hyprpaper
       become: true

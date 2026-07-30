@@ -1,0 +1,50 @@
+---
+- hosts: "{{ host }}"
+
+  # Required by hyprpaper >= 0.8.0. Run this before hyprland/hyprpaper.yml.
+
+  vars:
+    # renovate: datasource=github-tags depName=hyprtoolkit packageName=hyprwm/hyprtoolkit
+    version: v0.5.4
+    dir: "/tmp/hyprwm-hyprtoolkit"
+
+  tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
+    - name: Install hyprtoolkit dependencies
+      become: true
+      apt:
+        state: latest
+        pkg:
+          - libiniparser-dev
+
+    - name: Checkout hyprtoolkit
+      ansible.builtin.git:
+        repo: https://github.com/hyprwm/hyprtoolkit.git
+        dest: "{{ dir }}"
+        recursive: true
+        version: "{{ version }}"
+        force: true
+
+    # We can potentially drop this when GCC15 is available on debian
+    - name: Copy hyprtoolkit patch
+      ansible.builtin.copy:
+        src: 0001-fix-hyprtoolkit-compile-issue.patch
+        dest: "{{ dir }}/0001-fix-hyprtoolkit-compile-issue.patch"
+
+    - name: Build hyprtoolkit
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          patch -p1 < 0001-fix-hyprtoolkit-compile-issue.patch
+          CXX=clang++ cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_CXX_FLAGS="-std=gnu++26" -S . -B ./build
+          cmake --build ./build --config Release --target hyprtoolkit -j `nproc`
+
+    - name: Install hyprtoolkit
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          sudo cmake --install ./build

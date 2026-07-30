@@ -1,7 +1,9 @@
 ---
 # Essential
 - import_playbook: hyprland/deps.yml
+- import_playbook: hyprland/wayland.yml
 - import_playbook: hyprland/wayland-protocols.yml
+- import_playbook: hyprland/libinput.yml
 - import_playbook: hyprland/xkbcommon.yml
 - import_playbook: hyprland/hyprwayland-scanner.yml
 - import_playbook: hyprland/hyprutils.yml
@@ -17,6 +19,8 @@
 
 # # Extra
 - import_playbook: hyprland/extra.yml
+- import_playbook: hyprland/hyprtoolkit.yml
+- import_playbook: hyprland/hyprpaper.yml
 - import_playbook: hyprland/hypridle.yml
 - import_playbook: hyprland/hyprlock.yml
 - import_playbook: hyprland/xdg-desktop-portal-hyprland.yml
