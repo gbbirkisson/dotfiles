@@ -20,3 +20,5 @@ end, { range = true, desc = "ChordPro: strip lyrics, keep chords" })
 local opts = { buffer = true, silent = true, desc = "Chords only (strip lyrics)" }
 vim.keymap.set("x", "<leader>C", ":ChordsOnly<CR>", opts)
 vim.keymap.set("n", "<leader>C", ":ChordsOnly<CR>", opts)
+
+vim.cmd.Gl("60")
