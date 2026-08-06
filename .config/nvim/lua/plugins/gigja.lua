@@ -1,6 +1,9 @@
+local dir = "/home/gbb/repos/futurama/gigja/.dev/nvim"
+
 return {
-  dir = "/home/gbb/repos/futurama/gigja/.dev/nvim",
+  dir = dir,
   name = "gigja-preview",
+  enabled = vim.fn.isdirectory(dir) == 1,
   ft = { "chordpro" },
   cmd = { "GigjaPreview", "GigjaPreviewStop" },
 }
