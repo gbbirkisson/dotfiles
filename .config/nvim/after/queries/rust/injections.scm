@@ -1,5 +1,317 @@
 ; extends
 
+;; asm: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*;( )*asm( )*\n")
+  (#set! injection.language "asm")
+)
+
+;; asm: comment before macro string (expression)
+(
+  (line_comment) @_lang (#eq? @_lang "// asm")
+  .
+  (expression_statement
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "asm")
+)
+
+;; asm: comment before macro string (let binding)
+(
+  (line_comment) @_lang (#eq? @_lang "// asm")
+  .
+  (let_declaration
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "asm")
+)
+
+;; asm: comment before macro string (inside token_tree)
+(token_tree
+  (line_comment) @_lang (#eq? @_lang "// asm")
+  .
+  (identifier)
+  .
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "asm")
+)
+
+;; javascript: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*javascript( )*\n")
+  (#set! injection.language "javascript")
+)
+
+;; javascript: comment before macro string (expression)
+(
+  (line_comment) @_lang (#eq? @_lang "// javascript")
+  .
+  (expression_statement
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "javascript")
+)
+
+;; javascript: comment before macro string (let binding)
+(
+  (line_comment) @_lang (#eq? @_lang "// javascript")
+  .
+  (let_declaration
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "javascript")
+)
+
+;; javascript: comment before macro string (inside token_tree)
+(token_tree
+  (line_comment) @_lang (#eq? @_lang "// javascript")
+  .
+  (identifier)
+  .
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "javascript")
+)
+
+;; json: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*json( )*\n")
+  (#set! injection.language "json")
+)
+
+;; json: comment before macro string (expression)
+(
+  (line_comment) @_lang (#eq? @_lang "// json")
+  .
+  (expression_statement
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "json")
+)
+
+;; json: comment before macro string (let binding)
+(
+  (line_comment) @_lang (#eq? @_lang "// json")
+  .
+  (let_declaration
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "json")
+)
+
+;; json: comment before macro string (inside token_tree)
+(token_tree
+  (line_comment) @_lang (#eq? @_lang "// json")
+  .
+  (identifier)
+  .
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "json")
+)
+
+;; nginx: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*nginx( )*\n")
+  (#set! injection.language "nginx")
+)
+
+;; nginx: comment before macro string (expression)
+(
+  (line_comment) @_lang (#eq? @_lang "// nginx")
+  .
+  (expression_statement
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "nginx")
+)
+
+;; nginx: comment before macro string (let binding)
+(
+  (line_comment) @_lang (#eq? @_lang "// nginx")
+  .
+  (let_declaration
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "nginx")
+)
+
+;; nginx: comment before macro string (inside token_tree)
+(token_tree
+  (line_comment) @_lang (#eq? @_lang "// nginx")
+  .
+  (identifier)
+  .
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "nginx")
+)
+
+;; python: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*python( )*\n")
+  (#set! injection.language "python")
+)
+
+;; python: comment before macro string (expression)
+(
+  (line_comment) @_lang (#eq? @_lang "// python")
+  .
+  (expression_statement
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "python")
+)
+
+;; python: comment before macro string (let binding)
+(
+  (line_comment) @_lang (#eq? @_lang "// python")
+  .
+  (let_declaration
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "python")
+)
+
+;; python: comment before macro string (inside token_tree)
+(token_tree
+  (line_comment) @_lang (#eq? @_lang "// python")
+  .
+  (identifier)
+  .
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "python")
+)
+
+;; query: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*;;( )*query( )*\n")
+  (#set! injection.language "query")
+)
+
+;; query: comment before macro string (expression)
+(
+  (line_comment) @_lang (#eq? @_lang "// query")
+  .
+  (expression_statement
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "query")
+)
+
+;; query: comment before macro string (let binding)
+(
+  (line_comment) @_lang (#eq? @_lang "// query")
+  .
+  (let_declaration
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "query")
+)
+
+;; query: comment before macro string (inside token_tree)
+(token_tree
+  (line_comment) @_lang (#eq? @_lang "// query")
+  .
+  (identifier)
+  .
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "query")
+)
+
 ;; river: comment in string
 (
   (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*river( )*\n")
@@ -104,162 +416,6 @@
   (#set! injection.language "river")
 )
 
-;; yaml: comment in string
-(
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*yaml( )*\n")
-  (#set! injection.language "yaml")
-)
-
-;; yaml: comment before macro string (expression)
-(
-  (line_comment) @_lang (#eq? @_lang "// yaml")
-  .
-  (expression_statement
-    (macro_invocation
-      (token_tree
-        (raw_string_literal
-          (string_content) @injection.content
-        )
-      )
-    )
-  )
-  (#set! injection.language "yaml")
-)
-
-;; yaml: comment before macro string (let binding)
-(
-  (line_comment) @_lang (#eq? @_lang "// yaml")
-  .
-  (let_declaration
-    (macro_invocation
-      (token_tree
-        (raw_string_literal
-          (string_content) @injection.content
-        )
-      )
-    )
-  )
-  (#set! injection.language "yaml")
-)
-
-;; yaml: comment before macro string (inside token_tree)
-(token_tree
-  (line_comment) @_lang (#eq? @_lang "// yaml")
-  .
-  (identifier)
-  .
-  (token_tree
-    (raw_string_literal
-      (string_content) @injection.content
-    )
-  )
-  (#set! injection.language "yaml")
-)
-
-;; json: comment in string
-(
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*json( )*\n")
-  (#set! injection.language "json")
-)
-
-;; json: comment before macro string (expression)
-(
-  (line_comment) @_lang (#eq? @_lang "// json")
-  .
-  (expression_statement
-    (macro_invocation
-      (token_tree
-        (raw_string_literal
-          (string_content) @injection.content
-        )
-      )
-    )
-  )
-  (#set! injection.language "json")
-)
-
-;; json: comment before macro string (let binding)
-(
-  (line_comment) @_lang (#eq? @_lang "// json")
-  .
-  (let_declaration
-    (macro_invocation
-      (token_tree
-        (raw_string_literal
-          (string_content) @injection.content
-        )
-      )
-    )
-  )
-  (#set! injection.language "json")
-)
-
-;; json: comment before macro string (inside token_tree)
-(token_tree
-  (line_comment) @_lang (#eq? @_lang "// json")
-  .
-  (identifier)
-  .
-  (token_tree
-    (raw_string_literal
-      (string_content) @injection.content
-    )
-  )
-  (#set! injection.language "json")
-)
-
-;; json: comment in string
-(
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*yml( )*\n")
-  (#set! injection.language "json")
-)
-
-;; json: comment before macro string (expression)
-(
-  (line_comment) @_lang (#eq? @_lang "// yml")
-  .
-  (expression_statement
-    (macro_invocation
-      (token_tree
-        (raw_string_literal
-          (string_content) @injection.content
-        )
-      )
-    )
-  )
-  (#set! injection.language "json")
-)
-
-;; json: comment before macro string (let binding)
-(
-  (line_comment) @_lang (#eq? @_lang "// yml")
-  .
-  (let_declaration
-    (macro_invocation
-      (token_tree
-        (raw_string_literal
-          (string_content) @injection.content
-        )
-      )
-    )
-  )
-  (#set! injection.language "json")
-)
-
-;; json: comment before macro string (inside token_tree)
-(token_tree
-  (line_comment) @_lang (#eq? @_lang "// yml")
-  .
-  (identifier)
-  .
-  (token_tree
-    (raw_string_literal
-      (string_content) @injection.content
-    )
-  )
-  (#set! injection.language "json")
-)
-
 ;; sql: comment in string
 (
   (string_content) @injection.content (#match? @injection.content "^\n*( )*--( )*sql( )*\n")
@@ -312,15 +468,15 @@
   (#set! injection.language "sql")
 )
 
-;; query: comment in string
+;; typescript: comment in string
 (
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*;;( )*query( )*\n")
-  (#set! injection.language "query")
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*typescript( )*\n")
+  (#set! injection.language "typescript")
 )
 
-;; query: comment before macro string (expression)
+;; typescript: comment before macro string (expression)
 (
-  (line_comment) @_lang (#eq? @_lang "// query")
+  (line_comment) @_lang (#eq? @_lang "// typescript")
   .
   (expression_statement
     (macro_invocation
@@ -331,12 +487,12 @@
       )
     )
   )
-  (#set! injection.language "query")
+  (#set! injection.language "typescript")
 )
 
-;; query: comment before macro string (let binding)
+;; typescript: comment before macro string (let binding)
 (
-  (line_comment) @_lang (#eq? @_lang "// query")
+  (line_comment) @_lang (#eq? @_lang "// typescript")
   .
   (let_declaration
     (macro_invocation
@@ -347,12 +503,12 @@
       )
     )
   )
-  (#set! injection.language "query")
+  (#set! injection.language "typescript")
 )
 
-;; query: comment before macro string (inside token_tree)
+;; typescript: comment before macro string (inside token_tree)
 (token_tree
-  (line_comment) @_lang (#eq? @_lang "// query")
+  (line_comment) @_lang (#eq? @_lang "// typescript")
   .
   (identifier)
   .
@@ -361,59 +517,7 @@
       (string_content) @injection.content
     )
   )
-  (#set! injection.language "query")
-)
-
-;; asm: comment in string
-(
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*;( )*asm( )*\n")
-  (#set! injection.language "asm")
-)
-
-;; asm: comment before macro string (expression)
-(
-  (line_comment) @_lang (#eq? @_lang "// asm")
-  .
-  (expression_statement
-    (macro_invocation
-      (token_tree
-        (raw_string_literal
-          (string_content) @injection.content
-        )
-      )
-    )
-  )
-  (#set! injection.language "asm")
-)
-
-;; asm: comment before macro string (let binding)
-(
-  (line_comment) @_lang (#eq? @_lang "// asm")
-  .
-  (let_declaration
-    (macro_invocation
-      (token_tree
-        (raw_string_literal
-          (string_content) @injection.content
-        )
-      )
-    )
-  )
-  (#set! injection.language "asm")
-)
-
-;; asm: comment before macro string (inside token_tree)
-(token_tree
-  (line_comment) @_lang (#eq? @_lang "// asm")
-  .
-  (identifier)
-  .
-  (token_tree
-    (raw_string_literal
-      (string_content) @injection.content
-    )
-  )
-  (#set! injection.language "asm")
+  (#set! injection.language "typescript")
 )
 
 ;; vcl: comment in string
@@ -520,15 +624,15 @@
   (#set! injection.language "vtc")
 )
 
-;; python: comment in string
+;; yaml: comment in string
 (
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*python( )*\n")
-  (#set! injection.language "python")
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*yaml( )*\n")
+  (#set! injection.language "yaml")
 )
 
-;; python: comment before macro string (expression)
+;; yaml: comment before macro string (expression)
 (
-  (line_comment) @_lang (#eq? @_lang "// python")
+  (line_comment) @_lang (#eq? @_lang "// yaml")
   .
   (expression_statement
     (macro_invocation
@@ -539,12 +643,12 @@
       )
     )
   )
-  (#set! injection.language "python")
+  (#set! injection.language "yaml")
 )
 
-;; python: comment before macro string (let binding)
+;; yaml: comment before macro string (let binding)
 (
-  (line_comment) @_lang (#eq? @_lang "// python")
+  (line_comment) @_lang (#eq? @_lang "// yaml")
   .
   (let_declaration
     (macro_invocation
@@ -555,12 +659,12 @@
       )
     )
   )
-  (#set! injection.language "python")
+  (#set! injection.language "yaml")
 )
 
-;; python: comment before macro string (inside token_tree)
+;; yaml: comment before macro string (inside token_tree)
 (token_tree
-  (line_comment) @_lang (#eq? @_lang "// python")
+  (line_comment) @_lang (#eq? @_lang "// yaml")
   .
   (identifier)
   .
@@ -569,18 +673,18 @@
       (string_content) @injection.content
     )
   )
-  (#set! injection.language "python")
+  (#set! injection.language "yaml")
 )
 
-;; nginx: comment in string
+;; yaml: comment in string
 (
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*nginx( )*\n")
-  (#set! injection.language "nginx")
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*yml( )*\n")
+  (#set! injection.language "yaml")
 )
 
-;; nginx: comment before macro string (expression)
+;; yaml: comment before macro string (expression)
 (
-  (line_comment) @_lang (#eq? @_lang "// nginx")
+  (line_comment) @_lang (#eq? @_lang "// yml")
   .
   (expression_statement
     (macro_invocation
@@ -591,12 +695,12 @@
       )
     )
   )
-  (#set! injection.language "nginx")
+  (#set! injection.language "yaml")
 )
 
-;; nginx: comment before macro string (let binding)
+;; yaml: comment before macro string (let binding)
 (
-  (line_comment) @_lang (#eq? @_lang "// nginx")
+  (line_comment) @_lang (#eq? @_lang "// yml")
   .
   (let_declaration
     (macro_invocation
@@ -607,12 +711,12 @@
       )
     )
   )
-  (#set! injection.language "nginx")
+  (#set! injection.language "yaml")
 )
 
-;; nginx: comment before macro string (inside token_tree)
+;; yaml: comment before macro string (inside token_tree)
 (token_tree
-  (line_comment) @_lang (#eq? @_lang "// nginx")
+  (line_comment) @_lang (#eq? @_lang "// yml")
   .
   (identifier)
   .
@@ -621,7 +725,7 @@
       (string_content) @injection.content
     )
   )
-  (#set! injection.language "nginx")
+  (#set! injection.language "yaml")
 )
 
 ;; sqlx::query! macros

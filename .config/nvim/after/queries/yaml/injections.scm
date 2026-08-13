@@ -3,6 +3,150 @@
 ;; for reference
 ;; https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/yaml/injections.scm
 
+;; asm: comment in string
+(block_node
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*;( )asm( )*\n")
+  (#set! injection.language "asm")
+  (#offset! @injection.content 0 1 0 0)
+)
+
+;; asm: comment before string
+(block_mapping_pair
+  (comment) @_lang (#eq? @_lang "# asm")
+  (block_node
+    (block_mapping
+      (block_mapping_pair
+        key: (flow_node) @_content
+        value: (block_node
+          (block_scalar) @injection.content
+          (#set! injection.language "asm")
+          (#offset! @injection.content 0 1 0 0)
+        )
+      )
+    )
+  )
+)
+
+;; javascript: comment in string
+(block_node
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*//( )javascript( )*\n")
+  (#set! injection.language "javascript")
+  (#offset! @injection.content 0 1 0 0)
+)
+
+;; javascript: comment before string
+(block_mapping_pair
+  (comment) @_lang (#eq? @_lang "# javascript")
+  (block_node
+    (block_mapping
+      (block_mapping_pair
+        key: (flow_node) @_content
+        value: (block_node
+          (block_scalar) @injection.content
+          (#set! injection.language "javascript")
+          (#offset! @injection.content 0 1 0 0)
+        )
+      )
+    )
+  )
+)
+
+;; json: comment in string
+(block_node
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*//( )json( )*\n")
+  (#set! injection.language "json")
+  (#offset! @injection.content 0 1 0 0)
+)
+
+;; json: comment before string
+(block_mapping_pair
+  (comment) @_lang (#eq? @_lang "# json")
+  (block_node
+    (block_mapping
+      (block_mapping_pair
+        key: (flow_node) @_content
+        value: (block_node
+          (block_scalar) @injection.content
+          (#set! injection.language "json")
+          (#offset! @injection.content 0 1 0 0)
+        )
+      )
+    )
+  )
+)
+
+;; nginx: comment in string
+(block_node
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*#( )nginx( )*\n")
+  (#set! injection.language "nginx")
+  (#offset! @injection.content 0 1 0 0)
+)
+
+;; nginx: comment before string
+(block_mapping_pair
+  (comment) @_lang (#eq? @_lang "# nginx")
+  (block_node
+    (block_mapping
+      (block_mapping_pair
+        key: (flow_node) @_content
+        value: (block_node
+          (block_scalar) @injection.content
+          (#set! injection.language "nginx")
+          (#offset! @injection.content 0 1 0 0)
+        )
+      )
+    )
+  )
+)
+
+;; python: comment in string
+(block_node
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*#( )python( )*\n")
+  (#set! injection.language "python")
+  (#offset! @injection.content 0 1 0 0)
+)
+
+;; python: comment before string
+(block_mapping_pair
+  (comment) @_lang (#eq? @_lang "# python")
+  (block_node
+    (block_mapping
+      (block_mapping_pair
+        key: (flow_node) @_content
+        value: (block_node
+          (block_scalar) @injection.content
+          (#set! injection.language "python")
+          (#offset! @injection.content 0 1 0 0)
+        )
+      )
+    )
+  )
+)
+
+;; query: comment in string
+(block_node
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*;;( )query( )*\n")
+  (#set! injection.language "query")
+  (#offset! @injection.content 0 1 0 0)
+)
+
+;; query: comment before string
+(block_mapping_pair
+  (comment) @_lang (#eq? @_lang "# query")
+  (block_node
+    (block_mapping
+      (block_mapping_pair
+        key: (flow_node) @_content
+        value: (block_node
+          (block_scalar) @injection.content
+          (#set! injection.language "query")
+          (#offset! @injection.content 0 1 0 0)
+        )
+      )
+    )
+  )
+)
+
 ;; river: comment in string
 (block_node
   (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*//( )river( )*\n")
@@ -51,78 +195,6 @@
   )
 )
 
-;; yaml: comment in string
-(block_node
-  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*#( )yaml( )*\n")
-  (#set! injection.language "yaml")
-  (#offset! @injection.content 0 1 0 0)
-)
-
-;; yaml: comment before string
-(block_mapping_pair
-  (comment) @_lang (#eq? @_lang "# yaml")
-  (block_node
-    (block_mapping
-      (block_mapping_pair
-        key: (flow_node) @_content
-        value: (block_node
-          (block_scalar) @injection.content
-          (#set! injection.language "yaml")
-          (#offset! @injection.content 0 1 0 0)
-        )
-      )
-    )
-  )
-)
-
-;; json: comment in string
-(block_node
-  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*//( )json( )*\n")
-  (#set! injection.language "json")
-  (#offset! @injection.content 0 1 0 0)
-)
-
-;; json: comment before string
-(block_mapping_pair
-  (comment) @_lang (#eq? @_lang "# json")
-  (block_node
-    (block_mapping
-      (block_mapping_pair
-        key: (flow_node) @_content
-        value: (block_node
-          (block_scalar) @injection.content
-          (#set! injection.language "json")
-          (#offset! @injection.content 0 1 0 0)
-        )
-      )
-    )
-  )
-)
-
-;; json: comment in string
-(block_node
-  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*//( )yml( )*\n")
-  (#set! injection.language "json")
-  (#offset! @injection.content 0 1 0 0)
-)
-
-;; json: comment before string
-(block_mapping_pair
-  (comment) @_lang (#eq? @_lang "# yml")
-  (block_node
-    (block_mapping
-      (block_mapping_pair
-        key: (flow_node) @_content
-        value: (block_node
-          (block_scalar) @injection.content
-          (#set! injection.language "json")
-          (#offset! @injection.content 0 1 0 0)
-        )
-      )
-    )
-  )
-)
-
 ;; sql: comment in string
 (block_node
   (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*--( )sql( )*\n")
@@ -147,47 +219,23 @@
   )
 )
 
-;; query: comment in string
+;; typescript: comment in string
 (block_node
-  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*;;( )query( )*\n")
-  (#set! injection.language "query")
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*//( )typescript( )*\n")
+  (#set! injection.language "typescript")
   (#offset! @injection.content 0 1 0 0)
 )
 
-;; query: comment before string
+;; typescript: comment before string
 (block_mapping_pair
-  (comment) @_lang (#eq? @_lang "# query")
+  (comment) @_lang (#eq? @_lang "# typescript")
   (block_node
     (block_mapping
       (block_mapping_pair
         key: (flow_node) @_content
         value: (block_node
           (block_scalar) @injection.content
-          (#set! injection.language "query")
-          (#offset! @injection.content 0 1 0 0)
-        )
-      )
-    )
-  )
-)
-
-;; asm: comment in string
-(block_node
-  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*;( )asm( )*\n")
-  (#set! injection.language "asm")
-  (#offset! @injection.content 0 1 0 0)
-)
-
-;; asm: comment before string
-(block_mapping_pair
-  (comment) @_lang (#eq? @_lang "# asm")
-  (block_node
-    (block_mapping
-      (block_mapping_pair
-        key: (flow_node) @_content
-        value: (block_node
-          (block_scalar) @injection.content
-          (#set! injection.language "asm")
+          (#set! injection.language "typescript")
           (#offset! @injection.content 0 1 0 0)
         )
       )
@@ -243,23 +291,23 @@
   )
 )
 
-;; python: comment in string
+;; yaml: comment in string
 (block_node
-  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*#( )python( )*\n")
-  (#set! injection.language "python")
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*#( )yaml( )*\n")
+  (#set! injection.language "yaml")
   (#offset! @injection.content 0 1 0 0)
 )
 
-;; python: comment before string
+;; yaml: comment before string
 (block_mapping_pair
-  (comment) @_lang (#eq? @_lang "# python")
+  (comment) @_lang (#eq? @_lang "# yaml")
   (block_node
     (block_mapping
       (block_mapping_pair
         key: (flow_node) @_content
         value: (block_node
           (block_scalar) @injection.content
-          (#set! injection.language "python")
+          (#set! injection.language "yaml")
           (#offset! @injection.content 0 1 0 0)
         )
       )
@@ -267,23 +315,23 @@
   )
 )
 
-;; nginx: comment in string
+;; yaml: comment in string
 (block_node
-  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*#( )nginx( )*\n")
-  (#set! injection.language "nginx")
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*#( )yml( )*\n")
+  (#set! injection.language "yaml")
   (#offset! @injection.content 0 1 0 0)
 )
 
-;; nginx: comment before string
+;; yaml: comment before string
 (block_mapping_pair
-  (comment) @_lang (#eq? @_lang "# nginx")
+  (comment) @_lang (#eq? @_lang "# yml")
   (block_node
     (block_mapping
       (block_mapping_pair
         key: (flow_node) @_content
         value: (block_node
           (block_scalar) @injection.content
-          (#set! injection.language "nginx")
+          (#set! injection.language "yaml")
           (#offset! @injection.content 0 1 0 0)
         )
       )

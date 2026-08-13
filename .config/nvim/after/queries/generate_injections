@@ -3,16 +3,18 @@
 from pathlib import Path
 
 injections = [
-    ("river", "//", ["alloy"]),
-    ("yaml", "#", []),
-    ("json", "//", ["yml"]),
-    ("sql", "--", []),
-    ("query", ";;", []),
     ("asm", ";", []),
+    ("javascript", "//", []),
+    ("json", "//", []),
+    ("nginx", "#", []),
+    ("python", "#", []),
+    ("query", ";;", []),
+    ("river", "//", ["alloy"]),
+    ("sql", "--", []),
+    ("typescript", "//", []),
     ("vcl", "//", []),
     ("vtc", "//", []),
-    ("python", "#", []),
-    ("nginx", "#", []),
+    ("yaml", "#", ["yml"]),
 ]
 
 
@@ -208,10 +210,18 @@ def rust_macro_injection(language: str, macro_path: str, macro_names: list[str])
 # without "::" generates a plain identifier match.
 def rust_extra(file):
     for language, macro_path, macro_names in [
-        ("sql", "sqlx::query", [
-            "query", "query_as", "query_scalar",
-            "query_unchecked", "query_as_unchecked", "query_scalar_unchecked",
-        ]),
+        (
+            "sql",
+            "sqlx::query",
+            [
+                "query",
+                "query_as",
+                "query_scalar",
+                "query_unchecked",
+                "query_as_unchecked",
+                "query_scalar_unchecked",
+            ],
+        ),
         ("asm", "asm_test", ["asm_test"]),
     ]:
         file.write(rust_macro_injection(language, macro_path, macro_names))

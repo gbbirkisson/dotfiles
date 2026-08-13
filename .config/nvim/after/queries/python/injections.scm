@@ -3,6 +3,120 @@
 ;; inspired by
 ;; https://github.com/DariusCorvus/tree-sitter-language-injection.nvim
 
+;; asm: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*;( )*asm( )*\n")
+  (#set! injection.language "asm")
+)
+
+;; asm: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# asm")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "asm")
+      )
+    )
+  )
+)
+
+;; javascript: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*javascript( )*\n")
+  (#set! injection.language "javascript")
+)
+
+;; javascript: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# javascript")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "javascript")
+      )
+    )
+  )
+)
+
+;; json: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*json( )*\n")
+  (#set! injection.language "json")
+)
+
+;; json: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# json")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "json")
+      )
+    )
+  )
+)
+
+;; nginx: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*nginx( )*\n")
+  (#set! injection.language "nginx")
+)
+
+;; nginx: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# nginx")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "nginx")
+      )
+    )
+  )
+)
+
+;; python: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*python( )*\n")
+  (#set! injection.language "python")
+)
+
+;; python: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# python")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "python")
+      )
+    )
+  )
+)
+
+;; query: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*;;( )*query( )*\n")
+  (#set! injection.language "query")
+)
+
+;; query: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# query")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "query")
+      )
+    )
+  )
+)
+
 ;; river: comment in string
 (
   (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*river( )*\n")
@@ -41,63 +155,6 @@
   )
 )
 
-;; yaml: comment in string
-(
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*yaml( )*\n")
-  (#set! injection.language "yaml")
-)
-
-;; yaml: comment before string
-(
-  (comment) @_lang (#eq? @_lang "# yaml")
-  (expression_statement
-    (assignment
-      (string
-        (string_content) @injection.content
-        (#set! injection.language "yaml")
-      )
-    )
-  )
-)
-
-;; json: comment in string
-(
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*json( )*\n")
-  (#set! injection.language "json")
-)
-
-;; json: comment before string
-(
-  (comment) @_lang (#eq? @_lang "# json")
-  (expression_statement
-    (assignment
-      (string
-        (string_content) @injection.content
-        (#set! injection.language "json")
-      )
-    )
-  )
-)
-
-;; json: comment in string
-(
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*yml( )*\n")
-  (#set! injection.language "json")
-)
-
-;; json: comment before string
-(
-  (comment) @_lang (#eq? @_lang "# yml")
-  (expression_statement
-    (assignment
-      (string
-        (string_content) @injection.content
-        (#set! injection.language "json")
-      )
-    )
-  )
-)
-
 ;; sql: comment in string
 (
   (string_content) @injection.content (#match? @injection.content "^\n*( )*--( )*sql( )*\n")
@@ -117,39 +174,20 @@
   )
 )
 
-;; query: comment in string
+;; typescript: comment in string
 (
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*;;( )*query( )*\n")
-  (#set! injection.language "query")
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*//( )*typescript( )*\n")
+  (#set! injection.language "typescript")
 )
 
-;; query: comment before string
+;; typescript: comment before string
 (
-  (comment) @_lang (#eq? @_lang "# query")
+  (comment) @_lang (#eq? @_lang "# typescript")
   (expression_statement
     (assignment
       (string
         (string_content) @injection.content
-        (#set! injection.language "query")
-      )
-    )
-  )
-)
-
-;; asm: comment in string
-(
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*;( )*asm( )*\n")
-  (#set! injection.language "asm")
-)
-
-;; asm: comment before string
-(
-  (comment) @_lang (#eq? @_lang "# asm")
-  (expression_statement
-    (assignment
-      (string
-        (string_content) @injection.content
-        (#set! injection.language "asm")
+        (#set! injection.language "typescript")
       )
     )
   )
@@ -193,39 +231,39 @@
   )
 )
 
-;; python: comment in string
+;; yaml: comment in string
 (
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*python( )*\n")
-  (#set! injection.language "python")
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*yaml( )*\n")
+  (#set! injection.language "yaml")
 )
 
-;; python: comment before string
+;; yaml: comment before string
 (
-  (comment) @_lang (#eq? @_lang "# python")
+  (comment) @_lang (#eq? @_lang "# yaml")
   (expression_statement
     (assignment
       (string
         (string_content) @injection.content
-        (#set! injection.language "python")
+        (#set! injection.language "yaml")
       )
     )
   )
 )
 
-;; nginx: comment in string
+;; yaml: comment in string
 (
-  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*nginx( )*\n")
-  (#set! injection.language "nginx")
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*yml( )*\n")
+  (#set! injection.language "yaml")
 )
 
-;; nginx: comment before string
+;; yaml: comment before string
 (
-  (comment) @_lang (#eq? @_lang "# nginx")
+  (comment) @_lang (#eq? @_lang "# yml")
   (expression_statement
     (assignment
       (string
         (string_content) @injection.content
-        (#set! injection.language "nginx")
+        (#set! injection.language "yaml")
       )
     )
   )
