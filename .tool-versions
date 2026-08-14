@@ -2,7 +2,7 @@ gcloud              509.0.0
 github:casey/just   1.50.0
 golang              1.26.5
 gradle              8.13.0
-helm                3.21.3
+helm                3.21.4
 hk                  0.2.3
 java                openjdk-21.0.1
 kubectl             1.36.3
