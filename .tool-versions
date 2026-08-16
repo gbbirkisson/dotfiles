@@ -1,6 +1,6 @@
 gcloud              509.0.0
 github:casey/just   1.50.0
-golang              1.26.5
+golang              1.26.6
 gradle              8.13.0
 helm                3.21.3
 hk                  0.2.3
