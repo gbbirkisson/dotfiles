@@ -33,6 +33,15 @@ return {
         live_grep = {
           prompt_title = "Find Word",
         },
+        -- LSP results are authoritative: a definition in node_modules is still
+        -- the definition. The global file_ignore_patterns below are meant for
+        -- file/grep pickers, but telescope also applies them to LSP responses,
+        -- which silently turns "jump into a dependency" into
+        -- "No LSP Definitions found". Opt these pickers out.
+        lsp_definitions = { file_ignore_patterns = {} },
+        lsp_references = { file_ignore_patterns = {} },
+        lsp_implementations = { file_ignore_patterns = {} },
+        lsp_type_definitions = { file_ignore_patterns = {} },
       },
       defaults = {
         sorting_strategy = "ascending",
