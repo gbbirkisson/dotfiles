@@ -155,6 +155,63 @@
   )
 )
 
+;; sh: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*sh( )*\n")
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# sh")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "sh")
+      )
+    )
+  )
+)
+
+;; sh: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*shell( )*\n")
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# shell")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "sh")
+      )
+    )
+  )
+)
+
+;; sh: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*bash( )*\n")
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# bash")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "sh")
+      )
+    )
+  )
+)
+
 ;; sql: comment in string
 (
   (string_content) @injection.content (#match? @injection.content "^\n*( )*--( )*sql( )*\n")

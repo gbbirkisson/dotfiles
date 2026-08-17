@@ -10,6 +10,7 @@ injections = [
     ("python", "#", []),
     ("query", ";;", []),
     ("river", "//", ["alloy"]),
+    ("sh", "#", ["shell", "bash"]),
     ("sql", "--", []),
     ("typescript", "//", []),
     ("vcl", "//", []),

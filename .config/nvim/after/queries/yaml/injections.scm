@@ -195,6 +195,78 @@
   )
 )
 
+;; sh: comment in string
+(block_node
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*#( )sh( )*\n")
+  (#set! injection.language "sh")
+  (#offset! @injection.content 0 1 0 0)
+)
+
+;; sh: comment before string
+(block_mapping_pair
+  (comment) @_lang (#eq? @_lang "# sh")
+  (block_node
+    (block_mapping
+      (block_mapping_pair
+        key: (flow_node) @_content
+        value: (block_node
+          (block_scalar) @injection.content
+          (#set! injection.language "sh")
+          (#offset! @injection.content 0 1 0 0)
+        )
+      )
+    )
+  )
+)
+
+;; sh: comment in string
+(block_node
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*#( )shell( )*\n")
+  (#set! injection.language "sh")
+  (#offset! @injection.content 0 1 0 0)
+)
+
+;; sh: comment before string
+(block_mapping_pair
+  (comment) @_lang (#eq? @_lang "# shell")
+  (block_node
+    (block_mapping
+      (block_mapping_pair
+        key: (flow_node) @_content
+        value: (block_node
+          (block_scalar) @injection.content
+          (#set! injection.language "sh")
+          (#offset! @injection.content 0 1 0 0)
+        )
+      )
+    )
+  )
+)
+
+;; sh: comment in string
+(block_node
+  (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*#( )bash( )*\n")
+  (#set! injection.language "sh")
+  (#offset! @injection.content 0 1 0 0)
+)
+
+;; sh: comment before string
+(block_mapping_pair
+  (comment) @_lang (#eq? @_lang "# bash")
+  (block_node
+    (block_mapping
+      (block_mapping_pair
+        key: (flow_node) @_content
+        value: (block_node
+          (block_scalar) @injection.content
+          (#set! injection.language "sh")
+          (#offset! @injection.content 0 1 0 0)
+        )
+      )
+    )
+  )
+)
+
 ;; sql: comment in string
 (block_node
   (block_scalar) @injection.content (#match? @injection.content "^[\\|\\>]\n*( )*--( )sql( )*\n")

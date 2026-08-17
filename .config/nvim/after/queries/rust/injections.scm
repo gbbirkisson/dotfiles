@@ -416,6 +416,162 @@
   (#set! injection.language "river")
 )
 
+;; sh: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*sh( )*\n")
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before macro string (expression)
+(
+  (line_comment) @_lang (#eq? @_lang "// sh")
+  .
+  (expression_statement
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before macro string (let binding)
+(
+  (line_comment) @_lang (#eq? @_lang "// sh")
+  .
+  (let_declaration
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before macro string (inside token_tree)
+(token_tree
+  (line_comment) @_lang (#eq? @_lang "// sh")
+  .
+  (identifier)
+  .
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "sh")
+)
+
+;; sh: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*shell( )*\n")
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before macro string (expression)
+(
+  (line_comment) @_lang (#eq? @_lang "// shell")
+  .
+  (expression_statement
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before macro string (let binding)
+(
+  (line_comment) @_lang (#eq? @_lang "// shell")
+  .
+  (let_declaration
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before macro string (inside token_tree)
+(token_tree
+  (line_comment) @_lang (#eq? @_lang "// shell")
+  .
+  (identifier)
+  .
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "sh")
+)
+
+;; sh: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*bash( )*\n")
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before macro string (expression)
+(
+  (line_comment) @_lang (#eq? @_lang "// bash")
+  .
+  (expression_statement
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before macro string (let binding)
+(
+  (line_comment) @_lang (#eq? @_lang "// bash")
+  .
+  (let_declaration
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "sh")
+)
+
+;; sh: comment before macro string (inside token_tree)
+(token_tree
+  (line_comment) @_lang (#eq? @_lang "// bash")
+  .
+  (identifier)
+  .
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "sh")
+)
+
 ;; sql: comment in string
 (
   (string_content) @injection.content (#match? @injection.content "^\n*( )*--( )*sql( )*\n")
