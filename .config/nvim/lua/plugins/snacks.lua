@@ -97,7 +97,7 @@ return {
         on_close = function()
           vim.cmd("set nu")
           vim.b.completion = nil
-          vim.cmd("Gl 80")
+          vim.cmd("Gl 100")
         end,
       },
       styles = {
