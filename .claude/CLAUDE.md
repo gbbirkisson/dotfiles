@@ -1,3 +1,7 @@
+## Writing comments and documentation
+
+NEVER USE `—` when writing comments or documentation.
+
 ## Creating scripts to solve problems
 
 When solving problems, or creating 1 off scripts to solve some task, you should
