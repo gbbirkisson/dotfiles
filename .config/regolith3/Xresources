@@ -26,3 +26,9 @@ wm.binding.terminal: alt+Return
 wm.binding.ws_next: Mod1+Tab
 
 regolith.look.path: /usr/share/regolith-look/nord
+
+! Regolith binds <super>+Ctrl+Shift+N to "move window to workspace 11-19", which
+! collides with the "move every window on this workspace" binding in
+! i3/config.d/99_custom. Park the 11-19 bindings on mod3 (ISO_Level5_Shift, not
+! on any physical key here) to free the keys up.
+wm.workspace.high.key: Mod3

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Move every window on the active workspace to the workspace given as $1.
+# Hyprland only has per-window dispatchers, so collect the addresses first and
+# send them all in one batch to avoid the layout reshuffling between moves.
+
+set -euo pipefail
+
+TARGET="${1:?usage: hypr-move-all <workspace>}"
+
+CURRENT=$(hyprctl activeworkspace -j | jq -r '.id')
+
+mapfile -t ADDRESSES < <(
+  hyprctl clients -j |
+    jq -r --argjson ws "$CURRENT" '.[] | select(.workspace.id == $ws) | .address'
+)
+
+if [ ${#ADDRESSES[@]} -eq 0 ]; then
+  exit 0
+fi
+
+DISPATCHES=()
+for ADDRESS in "${ADDRESSES[@]}"; do
+  DISPATCHES+=("dispatch movetoworkspacesilent $TARGET,address:$ADDRESS")
+done
+
+hyprctl --batch "$(
+  IFS=';'
+  echo "${DISPATCHES[*]}"
+)"

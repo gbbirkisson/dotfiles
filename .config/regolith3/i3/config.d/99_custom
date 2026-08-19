@@ -26,3 +26,19 @@ bindsym $mod+less move workspace to output next
 bindsym $mod+Tab workspace back_and_forth
 
 bindsym $mod+Return exec cwdshell
+
+## Modify // Move Every Window on This Workspace to Workspace 1 - 10 // <><Ctrl><Shift> 0..9 ##
+## The workspace="__focused__" criteria makes i3 apply the move to every window
+## on the current workspace instead of just the focused one.
+## Requires wm.workspace.high.key to be remapped in Xresources, otherwise these
+## keys stay bound to regolith's workspace 11-19 moves.
+bindsym $mod+Ctrl+Shift+$ws1_key [workspace="__focused__"] move container to workspace number $ws1
+bindsym $mod+Ctrl+Shift+$ws2_key [workspace="__focused__"] move container to workspace number $ws2
+bindsym $mod+Ctrl+Shift+$ws3_key [workspace="__focused__"] move container to workspace number $ws3
+bindsym $mod+Ctrl+Shift+$ws4_key [workspace="__focused__"] move container to workspace number $ws4
+bindsym $mod+Ctrl+Shift+$ws5_key [workspace="__focused__"] move container to workspace number $ws5
+bindsym $mod+Ctrl+Shift+$ws6_key [workspace="__focused__"] move container to workspace number $ws6
+bindsym $mod+Ctrl+Shift+$ws7_key [workspace="__focused__"] move container to workspace number $ws7
+bindsym $mod+Ctrl+Shift+$ws8_key [workspace="__focused__"] move container to workspace number $ws8
+bindsym $mod+Ctrl+Shift+$ws9_key [workspace="__focused__"] move container to workspace number $ws9
+bindsym $mod+Ctrl+Shift+$ws10_key [workspace="__focused__"] move container to workspace number $ws10
