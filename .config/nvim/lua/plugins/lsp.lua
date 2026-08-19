@@ -23,6 +23,7 @@ return {
           filetypes = { "html", "templ", "htmldjango" },
         },
         terraformls = {},
+        jdtls = {},
         jsonls = {},
         jsonnet_ls = {},
         marksman = {},

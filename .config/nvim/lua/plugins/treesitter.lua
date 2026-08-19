@@ -11,6 +11,7 @@ return {
         "go",
         "html",
         "http",
+        "java",
         "javascript",
         "jsdoc",
         "json",
