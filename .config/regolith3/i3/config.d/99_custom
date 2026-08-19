@@ -42,3 +42,9 @@ bindsym $mod+Ctrl+Shift+$ws7_key [workspace="__focused__"] move container to wor
 bindsym $mod+Ctrl+Shift+$ws8_key [workspace="__focused__"] move container to workspace number $ws8
 bindsym $mod+Ctrl+Shift+$ws9_key [workspace="__focused__"] move container to workspace number $ws9
 bindsym $mod+Ctrl+Shift+$ws10_key [workspace="__focused__"] move container to workspace number $ws10
+
+## Modify // Swap This Workspace With Its Neighbour // <><Ctrl><Shift> h l ##
+## Renames the two workspaces so they trade numbers, keeping focus on the windows
+## in front of you. Requires wm.binding.take_left/right remapped in Xresources.
+bindsym $mod+Ctrl+Shift+h exec --no-startup-id i3-swap-workspace -1
+bindsym $mod+Ctrl+Shift+l exec --no-startup-id i3-swap-workspace +1

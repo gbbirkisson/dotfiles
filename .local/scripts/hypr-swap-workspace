@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# Swap the windows on the active workspace with those on the neighbouring one and
+# follow them, so the two workspaces trade places. Hyprland cannot renumber a
+# workspace, so the window sets are exchanged instead.
+#
+# Both address lists are collected up front, which is what makes the second half
+# of the batch still target the original windows even though they briefly share a
+# workspace with the incoming ones.
+
+set -euo pipefail
+
+DIRECTION="${1:?usage: hypr-swap-workspace <-1|+1>}"
+
+# Matches the ten workspaces bound in hyprland.conf
+LOWEST=1
+HIGHEST=10
+
+CURRENT=$(hyprctl activeworkspace -j | jq -r '.id')
+
+TARGET=$((CURRENT + DIRECTION))
+if [ "$TARGET" -lt "$LOWEST" ] || [ "$TARGET" -gt "$HIGHEST" ]; then
+  exit 0
+fi
+
+CLIENTS=$(hyprctl clients -j)
+
+addresses() {
+  jq -r --argjson ws "$1" '.[] | select(.workspace.id == $ws) | .address' <<<"$CLIENTS"
+}
+
+mapfile -t CURRENT_WINDOWS < <(addresses "$CURRENT")
+mapfile -t TARGET_WINDOWS < <(addresses "$TARGET")
+
+DISPATCHES=()
+for ADDRESS in "${TARGET_WINDOWS[@]}"; do
+  DISPATCHES+=("dispatch movetoworkspacesilent $CURRENT,address:$ADDRESS")
+done
+for ADDRESS in "${CURRENT_WINDOWS[@]}"; do
+  DISPATCHES+=("dispatch movetoworkspacesilent $TARGET,address:$ADDRESS")
+done
+DISPATCHES+=("dispatch workspace $TARGET")
+
+hyprctl --batch "$(
+  IFS=';'
+  echo "${DISPATCHES[*]}"
+)"

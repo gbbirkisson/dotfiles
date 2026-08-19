@@ -32,3 +32,10 @@ regolith.look.path: /usr/share/regolith-look/nord
 ! i3/config.d/99_custom. Park the 11-19 bindings on mod3 (ISO_Level5_Shift, not
 ! on any physical key here) to free the keys up.
 wm.workspace.high.key: Mod3
+
+! Same collision for <super>+Ctrl+Shift+h/l, which regolith binds to
+! "move workspace to output left/right". Park those on mod3 too; Ctrl+Shift with
+! the arrow keys and with k/j still moves a workspace between screens, as does
+! <super>+less in i3/config.d/99_custom.
+wm.binding.take_left: Mod3+h
+wm.binding.take_right: Mod3+l

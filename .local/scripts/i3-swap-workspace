@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# Swap the number of the active workspace with its neighbour's, so the two trade
+# places in the bar. This renames the workspaces instead of moving windows, which
+# leaves every split, layout and floating position untouched.
+#
+# Regolith labels workspaces per slot (wm.workspace.NN.name) and assign rules
+# target slots by number, so the labels stay with the slot and the windows are
+# what move between them.
+
+set -euo pipefail
+
+DIRECTION="${1:?usage: i3-swap-workspace <-1|+1>}"
+
+# Matches the ten workspaces bound in regolith3/i3/config.d/99_custom
+LOWEST=1
+HIGHEST=10
+
+WORKSPACES=$(i3-msg -t get_workspaces)
+
+read -r CURRENT_NUM CURRENT_NAME < <(
+  jq -r '.[] | select(.focused) | "\(.num) \(.name)"' <<<"$WORKSPACES"
+)
+
+TARGET_NUM=$((CURRENT_NUM + DIRECTION))
+if [ "$TARGET_NUM" -lt "$LOWEST" ] || [ "$TARGET_NUM" -gt "$HIGHEST" ]; then
+  exit 0
+fi
+
+TARGET_NAME=$(jq -r --argjson num "$TARGET_NUM" '.[] | select(.num == $num) | .name' <<<"$WORKSPACES")
+
+if [ -z "$TARGET_NAME" ]; then
+  # Nothing on the other side to swap with, so just take the slot over, using the
+  # label regolith configured for it.
+  KEY=$(printf 'wm.workspace.%02d.name' "$TARGET_NUM")
+  LABEL=$(xrdb -query | sed -n "s/^$KEY:[[:space:]]*//p" | head -n1)
+  i3-msg -t command "rename workspace \"$CURRENT_NAME\" to \"${LABEL:-$TARGET_NUM}\""
+  exit 0
+fi
+
+# Sent as one message so i3 runs the renames back to back. "swaptmp" parks the
+# current name while the target claims it; names starting with __ are reserved by
+# i3, and a name without a leading digit sorts out of the way meanwhile.
+i3-msg -t command "rename workspace \"$CURRENT_NAME\" to \"swaptmp\"; rename workspace \"$TARGET_NAME\" to \"$CURRENT_NAME\"; rename workspace \"swaptmp\" to \"$TARGET_NAME\""
