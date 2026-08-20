@@ -5,7 +5,7 @@ gradle              8.13.0
 helm                3.21.4
 hk                  0.2.3
 java                openjdk-21.0.1
-kubectl             1.36.3
+kubectl             1.36.4
 kustomize           5.8.1
 maven               3.9.12
 nodejs              24.19.0
