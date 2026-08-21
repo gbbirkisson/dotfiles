@@ -208,6 +208,58 @@
   (#set! injection.language "nginx")
 )
 
+;; promql: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*promql( )*\n")
+  (#set! injection.language "promql")
+)
+
+;; promql: comment before macro string (expression)
+(
+  (line_comment) @_lang (#eq? @_lang "// promql")
+  .
+  (expression_statement
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "promql")
+)
+
+;; promql: comment before macro string (let binding)
+(
+  (line_comment) @_lang (#eq? @_lang "// promql")
+  .
+  (let_declaration
+    (macro_invocation
+      (token_tree
+        (raw_string_literal
+          (string_content) @injection.content
+        )
+      )
+    )
+  )
+  (#set! injection.language "promql")
+)
+
+;; promql: comment before macro string (inside token_tree)
+(token_tree
+  (line_comment) @_lang (#eq? @_lang "// promql")
+  .
+  (identifier)
+  .
+  (token_tree
+    (raw_string_literal
+      (string_content) @injection.content
+    )
+  )
+  (#set! injection.language "promql")
+)
+
 ;; python: comment in string
 (
   (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*python( )*\n")

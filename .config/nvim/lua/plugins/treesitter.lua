@@ -27,6 +27,7 @@ return {
         "nginx",
         "norg",
         "printf",
+        "promql",
         "python",
         "query",
         "regex",
@@ -46,6 +47,13 @@ return {
         "xml",
         "yaml",
       }
+
+      -- promql ships with nvim-treesitter, but neovim has no filetype detection for it
+      vim.filetype.add({
+        extension = {
+          promql = "promql",
+        },
+      })
 
       -- setup river: https://github.com/grafana/tree-sitter-river
       vim.api.nvim_create_autocmd("User", {

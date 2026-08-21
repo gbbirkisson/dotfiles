@@ -79,6 +79,25 @@
   )
 )
 
+;; promql: comment in string
+(
+  (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*promql( )*\n")
+  (#set! injection.language "promql")
+)
+
+;; promql: comment before string
+(
+  (comment) @_lang (#eq? @_lang "# promql")
+  (expression_statement
+    (assignment
+      (string
+        (string_content) @injection.content
+        (#set! injection.language "promql")
+      )
+    )
+  )
+)
+
 ;; python: comment in string
 (
   (string_content) @injection.content (#match? @injection.content "^\n*( )*#( )*python( )*\n")

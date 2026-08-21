@@ -7,6 +7,7 @@ injections = [
     ("javascript", "//", []),
     ("json", "//", []),
     ("nginx", "#", []),
+    ("promql", "#", []),
     ("python", "#", []),
     ("query", ";;", []),
     ("river", "//", ["alloy"]),
@@ -84,6 +85,91 @@ def yaml_generator(language: str, comment: str, alias: str):
   )
 )
 """
+
+
+def jsonnet_header():
+    return """; extends
+"""
+
+
+# Positions a `// <lang>` marker comment can sit in front of, as a (prefix, suffix)
+# pair wrapped around the string pattern. The comment is always the immediately
+# preceding sibling of the outermost node listed here.
+jsonnet_positions = [
+    ("", ""),  # parenthesis, array element, second and later call args
+    ("(args . ", ")"),  # first argument of a call
+    ("(member (field ", "))"),  # object field value
+    ("(member (objlocal (bind ", ")))"),  # object local
+    ("(local_bind (bind ", "))"),  # top level local
+]
+
+# The string on its own, or as the left side of a `str % { ... }` format expression.
+jsonnet_formats = [("", ""), ("(binary . ", ")")]
+
+
+def jsonnet_value_alternation():
+    string = "(string (string_content) @injection.content)"
+    branches = [
+        f"    {pos_open}{fmt_open}{string}{fmt_close}{pos_close}"
+        for pos_open, pos_close in jsonnet_positions
+        for fmt_open, fmt_close in jsonnet_formats
+    ]
+    return "[\n" + "\n".join(branches) + "\n  ]"
+
+
+def jsonnet_generator(language: str, comment: str, alias: str):
+    # A `|||-` text block keeps its chomp marker inside string_content, so the
+    # marker has to be trimmed off the injected range with an offset. The two
+    # regexes keep the plain and chomped variants mutually exclusive.
+    return rf"""
+;; {language}: comment in string
+(
+  (string
+    (string_content) @injection.content
+    (#match? @injection.content "^\n*( )*{comment}( )*{alias}( )*\n"))
+  (#set! injection.language "{language}")
+)
+
+;; {language}: comment in chomped text block
+(
+  (string
+    (string_content) @injection.content
+    (#match? @injection.content "^-\n*( )*{comment}( )*{alias}( )*\n"))
+  (#set! injection.language "{language}")
+  (#offset! @injection.content 0 1 0 0)
+)
+"""
+
+
+# Every "comment before value" pattern starts matching on the same (comment) node
+# and fans out over jsonnet_value_alternation(), so one pattern per alias blows
+# past the 256 in-progress match limit that vim.treesitter uses for injections and
+# silently drops whole languages. Emitting one pattern per language instead, with
+# the aliases folded into a single #any-of?, keeps the query inside the budget.
+def jsonnet_extra(file):
+    value = jsonnet_value_alternation()
+    for language, _, aliases in injections:
+        markers = " ".join(f'"// {a}"' for a in [language] + aliases)
+        file.write(rf"""
+;; {language}: comment before value
+(
+  (comment) @_lang (#any-of? @_lang {markers})
+  .
+  {value}
+  (#not-match? @injection.content "^-")
+  (#set! injection.language "{language}")
+)
+
+;; {language}: comment before chomped text block
+(
+  (comment) @_lang (#any-of? @_lang {markers})
+  .
+  {value}
+  (#match? @injection.content "^-")
+  (#set! injection.language "{language}")
+  (#offset! @injection.content 0 1 0 0)
+)
+""")
 
 
 def rust_header():
@@ -231,10 +317,12 @@ def rust_extra(file):
 generators = {
     "python": (python_header, python_generator, None),
     "yaml": (yaml_header, yaml_generator, None),
+    "jsonnet": (jsonnet_header, jsonnet_generator, jsonnet_extra),
     "rust": (rust_header, rust_generator, rust_extra),
 }
 
 for name, (header, gen, extra) in generators.items():
+    Path(name).mkdir(exist_ok=True)
     with (Path(name) / "injections.scm").open("w") as file:
         file.write(header())
         for language, comment, aliases in injections:
