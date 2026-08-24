@@ -1,6 +1,8 @@
 ## Writing comments and documentation
 
-NEVER USE `—` when writing comments or documentation.
+NEVER USE `—` when writing comments or documentation. When working on codebases, before adding a
+comment, question if it is really required, or if the code speaks for it self. If you determine a
+comment is warranted, make concise, to the point, and as short as possible.
 
 ## Creating scripts to solve problems
 
