@@ -13,7 +13,7 @@ opentofu            1.12.6
 pipx                1.7.1
 pipx:podman-compose 1.6.0
 pkl                 0.27.2
-pnpm                11.23.0
+pnpm                11.24.0
 python              3.14.7
 terraform           1.15.9
 usage               latest
