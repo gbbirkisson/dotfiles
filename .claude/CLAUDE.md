@@ -72,6 +72,23 @@ You must NEVER use git commands that write or modify state, including but not li
 
 I like to see the changes made and create my own commits.
 
+### Unsigned Commits
+
+Commit signing goes through 1Password (`op-ssh-sign`), which needs interactive approval and will
+hang or fail for you. If a commit is truly unavoidable, make it unsigned:
+
+```
+git commit --no-gpg-sign -m "message"
+```
+
+Amending or rebasing has the same requirement:
+
+```
+git -c commit.gpgsign=false commit --amend --no-edit
+```
+
+Tell me afterwards, so I can re-sign it.
+
 ### Repo insights
 
 Run these commands to get a sense of the state of the project.
