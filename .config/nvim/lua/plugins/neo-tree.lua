@@ -27,7 +27,7 @@ return {
         root_folder_label = false,
       },
       filesystem = {
-        group_empty_dirs = true,
+        -- group_empty_dirs = true, -- cause problems in neo-tree
         use_libuv_file_watcher = true,
         filtered_items = {
           visible = false, -- when true, they will just be displayed differently than normal items
