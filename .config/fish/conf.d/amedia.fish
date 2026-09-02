@@ -4,6 +4,7 @@ end
 
 setenv AMEDIA_REPOS $HOME/repos/amedia
 setenv K8S_OBJECTS_DIR $AMEDIA_REPOS/k8s-objects
+setenv GOPRIVATE "github.com/amedia/*"
 
 alias gopass="PASSWORD_STORE_DIR=$HOME/repos/amedia/apass $HOME/.local/bin/gopass"
 
