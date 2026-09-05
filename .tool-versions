@@ -17,5 +17,5 @@ pnpm                11.25.0
 python              3.14.7
 terraform           1.16.1
 usage               latest
-uv                  0.12.9
+uv                  0.12.10
 zig                 0.16.0
