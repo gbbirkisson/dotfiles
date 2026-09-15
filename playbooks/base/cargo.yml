@@ -23,6 +23,7 @@
       community.general.cargo:
         name: "{{ item.crate_name }}"
         version: "{{ item.version }}"
+        locked: "{{ item.locked }}"
       with_items:
         - { crate_name: bat, version: 0.26.0, locked: true }              # Better cat
         - { crate_name: bluetui, version: 0.8.0, locked: true }           # Bluetooth TUI
