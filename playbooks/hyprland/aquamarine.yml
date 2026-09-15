@@ -25,7 +25,7 @@
       shell:
         chdir: "{{ dir }}"
         cmd: |
-          cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
+          cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -Dpkgcfg_lib_deps_input=/usr/local/lib/x86_64-linux-gnu/libinput.so -S . -B ./build
           cmake --build ./build --config Release --target all -j `nproc`
 
     - name: Install aquamarine

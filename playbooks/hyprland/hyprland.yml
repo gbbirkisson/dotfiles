@@ -47,7 +47,10 @@
         chdir: "{{ dir }}"
         cmd: |
           patch -p1 < 0001-fix-hyprland-compile-issue.patch
-          PKG_CONFIG_PATH=/usr/local/lib/x86_64-linux-gnu/pkgconfig:/usr/local/share/pkgconfig:$PKG_CONFIG_PATH CXX=clang++ CXXFLAGS=-std=gnu++26 make all
+          export PKG_CONFIG_PATH=/usr/local/lib/x86_64-linux-gnu/pkgconfig:/usr/local/share/pkgconfig:$PKG_CONFIG_PATH CXX=clang++ CXXFLAGS=-std=gnu++26
+          make clear
+          cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:STRING=/usr/local -Dpkgcfg_lib_deps_input=/usr/local/lib/x86_64-linux-gnu/libinput.so -S . -B ./build
+          cmake --build ./build --config Release --target all -j `nproc`
 
     - name: Install hyprland
       become: true
