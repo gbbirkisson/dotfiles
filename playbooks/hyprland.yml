@@ -18,6 +18,7 @@
 - import_playbook: hyprland/hyprland-protocols.yml
 
 # # Extra
+- import_playbook: hyprland/fonts.yml
 - import_playbook: hyprland/extra.yml
 - import_playbook: hyprland/hyprtoolkit.yml
 - import_playbook: hyprland/hyprpaper.yml

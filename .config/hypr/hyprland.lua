@@ -1,4 +1,5 @@
 local home = os.getenv("HOME")
+local colors = require("colors")
 
 ------------------
 ---- MONITORS ----
@@ -78,8 +79,8 @@ hl.config({
 		border_size = 1,
 
 		col = {
-			active_border = "rgb(507ba3)",
-			inactive_border = "rgb(3e4451)",
+			active_border = colors.blue,
+			inactive_border = colors.border,
 		},
 
 		resize_on_border = false,
@@ -182,7 +183,7 @@ hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + X", hl.dsp.layout("togglesplit")) -- dwindle
 hl.bind(mainMod .. " + V", hl.dsp.layout("preselect d"))
-hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("((pgrep 1password && 1password --lock) || true) && hyprlock"))
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(
 	mainMod .. " + ALT + BackSpace",
@@ -192,12 +193,8 @@ hl.bind(
 )
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
 
--- Laptop lid switch
-hl.bind(
-	"switch:on:Lid Switch",
-	hl.dsp.exec_cmd("((pgrep 1password && 1password --lock) || true); hyprlock & systemctl suspend"),
-	{ locked = true }
-)
+-- Laptop lid switch, hypridle's before_sleep_cmd locks the session
+hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("systemctl suspend"), { locked = true })
 
 -- Move focus
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
@@ -215,7 +212,7 @@ hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
 for i = 1, 10 do
 	local key = i % 10 -- 10 maps to key 0
 	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, silent = true }))
+	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
 	hl.bind(mainMod .. " + CTRL + SHIFT + " .. key, hl.dsp.exec_cmd(move_all .. " " .. i))
 end
 

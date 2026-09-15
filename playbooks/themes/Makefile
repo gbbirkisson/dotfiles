@@ -10,7 +10,7 @@ BUILDER:=$(VENV)/bin/python builder.py
 
 THEME:=schemes/onedark.yaml
 
-all: ghostty fzf regolith swaync
+all: ghostty fzf regolith swaync waybar hyprlock hyprland wofi
 
 .PHONY: ghostty
 ghostty:
@@ -20,6 +20,23 @@ ghostty:
 .PHONY: swaync
 swaync:
 	$(Q) IN=templates/swaync.style.css OUT=$(CONFIGS)/swaync/style.css $(MAKE) --no-print-directory _render
+
+.PHONY: waybar
+waybar:
+	$(Q) IN=templates/waybar.colors.css OUT=$(CONFIGS)/waybar/colors.css $(MAKE) --no-print-directory _render
+
+.PHONY: hyprlock
+hyprlock:
+	$(Q) IN=templates/hyprlock.colors.conf OUT=$(CONFIGS)/hypr/hyprlock-colors.conf $(MAKE) --no-print-directory _render
+
+.PHONY: hyprland
+hyprland:
+	$(Q) IN=templates/hyprland.colors.lua OUT=$(CONFIGS)/hypr/colors.lua $(MAKE) --no-print-directory _render
+
+.PHONY: wofi
+wofi:
+	$(Q) mkdir -p $(CONFIGS)/wofi
+	$(Q) IN=templates/wofi.style.css OUT=$(CONFIGS)/wofi/style.css $(MAKE) --no-print-directory _render
 
 .PHONY: fzf
 fzf:

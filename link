@@ -52,6 +52,8 @@ link .config/lazygit/config.yml
 link .config/nvim
 link .config/regolith3
 link .config/swaync
+link .config/waybar
+link .config/wofi
 link .config/starship.toml
 
 link .gemini

@@ -6,5 +6,12 @@
 	"timeout-low": 5,
 	"timeout-critical": 0,
 	"hide-on-clear": true,
-	"hide-on-action": true
+	"hide-on-action": true,
+	"notification-visibility": {
+		"keyboard-layout": {
+			"state": "transient",
+			"app-name": "^notify-send$",
+			"summary": "^Keyboard$"
+		}
+	}
 }

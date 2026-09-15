@@ -1,15 +1,45 @@
-/* @import /etc/xdg/swaync/style.css; */
+/* Layered on top of /etc/xdg/swaync/style.css */
 
 @define-color cc-bg #1e222a;
 @define-color noti-border-color #61afef;
 @define-color noti-bg #1e222a;
 @define-color noti-bg-opaque #1e222a;
 @define-color noti-bg-darker #1e222a;
-@define-color noti-bg-hover #1e222a;
-@define-color noti-bg-hover-opaque #1e222a;
+@define-color noti-bg-hover #353b45;
+@define-color noti-bg-hover-opaque #353b45;
 @define-color noti-bg-focus #1e222a;
-@define-color noti-close-bg #545862;
-@define-color noti-close-bg-hover #abb2bf;
+@define-color noti-close-bg #565c64;
+@define-color noti-close-bg-hover #e06c75;
 @define-color text-color #c8ccd4;
-@define-color text-color-disabled #c8ccd4;
+@define-color text-color-disabled #6f737b;
 @define-color bg-selected #61afef;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    border-radius: 0;
+}
+
+.notification.critical {
+    border-color: #e06c75;
+}
+
+.summary {
+    font-size: 14px;
+}
+
+.time {
+    font-size: 13px;
+    color: #6f737b;
+}
+
+.body {
+    font-size: 13px;
+}
+
+.control-center {
+    border: 1px solid #61afef;
+}
+
+.control-center .control-center-list .notification {
+    box-shadow: none;
+}

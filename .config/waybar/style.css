@@ -1,64 +1,128 @@
+@import "colors.css";
+
 * {
-    font-family: monospace;
-    font-size: 12px;  /* Slightly smaller font size */
-    font-weight: 900;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
     margin: 0;
     padding: 0;
-    transition-property: background-color;
-    transition-duration: 0.5s;
 }
 
-/* Reset all styles */
-* {
-    border: none;
-    border-radius: 3px;
-    min-height: 0;
-    margin: 0 0.2em 0 0.1em;
+window#waybar {
+    background-color: @bg;
+    color: @fg;
 }
 
-/* The whole bar */
-#waybar {
-    background-color: #1e222a;
-    color: #ffffff;
-    transition-property: background-color;
-    transition-duration: 0.5s;
-    border-radius: 0px;
-    margin: 0px 0px;
+tooltip {
+    background-color: @bg;
+    border: 1px solid @blue;
 }
 
-#language {
-
+tooltip label {
+    color: @fg;
 }
 
-#tray {
-
+menu {
+    background-color: @bg;
+    border: 1px solid @dim;
 }
 
+menuitem:hover {
+    background-color: @selection;
+}
+
+/* Blocks sit slightly high to offset the bar's negative bottom margin */
+#workspaces button,
 #submap {
-    background-color: #eb4d4b;
-    padding: 0px 5px 0px 5px
-}
-
-#workspaces button {
-    color: @foreground;
-    /* background-color: #111827; */
-}
-
-#workspaces button.active {
-    color: #1e222a;
-    background: #61afef;
+    padding: 0 0.4em;
     margin-top: 0.4em;
     margin-bottom: 0.6em;
 }
 
+#workspaces button {
+    color: @dim;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+}
+
 #workspaces button:hover {
-    background: #333333;
+    color: @fg;
+    background: @selection;
 }
 
-#workspaces button.urgent {
-    background-color: #eb4d4b;
+#workspaces button.active {
+    color: @bg;
+    background: @blue;
 }
 
-#workspaces {
-    /* background-color: #111827; */
+#workspaces button.urgent,
+#submap {
+    color: @bg;
+    background: @red;
+}
+
+#tray,
+#language,
+#pulseaudio,
+#battery,
+#clock,
+#bluetooth,
+#custom-notification {
+    padding: 0 0.3em;
+}
+
+#custom-separator {
+    color: @dim;
+}
+
+#language {
+    color: @light_grey;
+}
+
+#pulseaudio {
+    color: @teal;
+}
+
+#pulseaudio.muted {
+    color: @dim;
+}
+
+#battery {
+    color: @green;
+}
+
+#battery.warning:not(.charging) {
+    color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+}
+
+#clock {
+    color: @fg;
+}
+
+#bluetooth {
+    color: @light_grey;
+}
+
+#bluetooth.connected {
+    color: @blue;
+}
+
+#custom-notification {
+    color: @fg;
+    padding-right: 0.6em;
+}
+
+#custom-notification.notification,
+#custom-notification.dnd-notification,
+#custom-notification.inhibited-notification,
+#custom-notification.dnd-inhibited-notification {
+    color: @red;
 }

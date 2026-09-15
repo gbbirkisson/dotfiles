@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 
-# Move every window on the active workspace to the workspace given as $1.
-# Hyprland only has per-window dispatchers, so collect the addresses first and
-# send them all in one batch to avoid the layout reshuffling between moves.
+# Move every window on the active workspace to the workspace given as $1, staying on
+# the current one. An empty target takes over the whole workspace by changing its id,
+# which keeps the layout. An occupied target can only receive the windows one by one,
+# sent in one batch to avoid the layout reshuffling between moves.
 
 set -euo pipefail
 
 TARGET="${1:?usage: hypr-move-all <workspace>}"
 
 CURRENT=$(hyprctl activeworkspace -j | jq -r '.id')
+
+if [ "$TARGET" = "$CURRENT" ]; then
+  exit 0
+fi
 
 mapfile -t ADDRESSES < <(
   hyprctl clients -j |
@@ -19,9 +24,17 @@ if [ ${#ADDRESSES[@]} -eq 0 ]; then
   exit 0
 fi
 
+if ! hyprctl workspaces -j | jq -e --argjson ws "$TARGET" 'any(.[]; .id == $ws)' >/dev/null; then
+  hyprctl --batch "dispatch hl.dsp.workspace.change_id({ workspace = $CURRENT, id = $TARGET }); dispatch hl.dsp.focus({ workspace = $CURRENT })"
+
+  # Waybar does not handle the changeworkspaceid event
+  pkill -SIGUSR2 -x waybar || true
+  exit 0
+fi
+
 DISPATCHES=()
 for ADDRESS in "${ADDRESSES[@]}"; do
-  DISPATCHES+=("dispatch movetoworkspacesilent $TARGET,address:$ADDRESS")
+  DISPATCHES+=("dispatch hl.dsp.window.move({ workspace = $TARGET, follow = false, window = \"address:$ADDRESS\" })")
 done
 
 hyprctl --batch "$(

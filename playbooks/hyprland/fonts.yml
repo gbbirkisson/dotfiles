@@ -6,6 +6,10 @@
     version: v3.5.1
 
   tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
     - name: Ensure fonts directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.fonts"

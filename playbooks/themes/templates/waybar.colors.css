@@ -1,0 +1,12 @@
+@define-color bg #{{base00_hex}};
+@define-color fg #{{base07_hex}};
+@define-color dim #{{base04_hex}};
+@define-color light_grey #{{light_grey_hex}};
+@define-color selection #{{base04_hex}};
+@define-color red #{{base08_hex}};
+@define-color green #{{base0B_hex}};
+@define-color yellow #{{base0A_hex}};
+@define-color blue #{{base0D_hex}};
+@define-color magenta #{{base0E_hex}};
+@define-color cyan #{{base0C_hex}};
+@define-color teal #{{teal_hex}};
