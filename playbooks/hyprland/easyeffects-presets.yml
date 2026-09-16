@@ -1,0 +1,34 @@
+---
+- hosts: "{{ host }}"
+
+  # https://github.com/wwmm/easyeffects/blob/master/COMMUNITY_PRESETS_GUIDELINES.md
+  # Community presets live under a XDG_DATA_DIRS path and show up in the
+  # Community tab. They cannot be autoloaded per device, import them locally for that.
+
+  vars:
+    # renovate: datasource=git-refs depName=easyeffects-presets packageName=https://github.com/JackHack96/EasyEffects-Presets
+    version: dd966e41ad9e44d4b11e19047f526ba718bbbe57
+    dir: "/tmp/easyeffects-presets"
+    package: JackHack96
+    datadir: /usr/local/share/easyeffects
+
+  tasks:
+    - name: Check if skip
+      meta: end_play
+      when: '"hyprland" in skip'
+
+    - name: Checkout easyeffects presets
+      ansible.builtin.git:
+        repo: https://github.com/JackHack96/EasyEffects-Presets.git
+        dest: "{{ dir }}"
+        version: "{{ version }}"
+        force: true
+
+    - name: Install easyeffects presets
+      become: true
+      shell:
+        chdir: "{{ dir }}"
+        cmd: |
+          install -d {{ datadir }}/output/{{ package }} {{ datadir }}/irs/{{ package }}
+          install -m 644 *.json {{ datadir }}/output/{{ package }}/
+          install -m 644 irs/*.irs {{ datadir }}/irs/{{ package }}/

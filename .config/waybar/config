@@ -104,7 +104,7 @@
                 ""
             ]
         },
-        // "on-click": "ghostty --command=bluetui"
+        "on-click": "easyeffects",
         // "on-click": "pavucontrol",
         // "on-click-right": "amixer sset Master toggle"
     },

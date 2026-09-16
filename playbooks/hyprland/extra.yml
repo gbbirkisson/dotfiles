@@ -16,6 +16,7 @@
         pkg:
           - sway-notification-center
           - brightnessctl
+          - easyeffects # PipeWire audio effects
           - grim # Screenshot capture
           - network-manager-applet
           - playerctl

@@ -20,6 +20,7 @@
 # # Extra
 - import_playbook: hyprland/fonts.yml
 - import_playbook: hyprland/extra.yml
+- import_playbook: hyprland/easyeffects-presets.yml
 - import_playbook: hyprland/hyprtoolkit.yml
 - import_playbook: hyprland/hyprpaper.yml
 - import_playbook: hyprland/hypridle.yml
