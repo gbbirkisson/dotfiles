@@ -46,6 +46,7 @@ return {
         "wgsl",
         "xml",
         "yaml",
+        "zig",
       }
 
       -- promql ships with nvim-treesitter, but neovim has no filetype detection for it
