@@ -158,7 +158,8 @@ hl.config({
 
 		sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
-		touchpad = { natural_scroll = false },
+		-- clickfinger drops the button areas, so no stray middle click at the bottom center.
+		touchpad = { natural_scroll = false, clickfinger_behavior = true },
 	},
 
 	cursor = {
