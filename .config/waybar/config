@@ -29,7 +29,7 @@
         "custom/notification"
     ],
     "battery": {
-        "interval": 2,
+        "interval": 60,
         "states": {
             "good": 95,
             "warning": 30,
@@ -70,7 +70,7 @@
             "9": "9PASS",
             "10": "10MSG"
         },
-        "sort-by-number": true,
+        "sort-by": "number",
         "active-only": false
     },
     "hyprland/window": {

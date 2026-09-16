@@ -53,4 +53,4 @@
       shell:
         chdir: "{{ dir }}"
         cmd: |
-          sudo cmake --install build
+          cmake --install build

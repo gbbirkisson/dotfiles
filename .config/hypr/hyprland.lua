@@ -134,6 +134,11 @@ hl.config({
 		background_color = "rgb(1e222a)",
 		vrr = 1,
 	},
+
+	-- Set explicitly, the documented default of true is not taking effect.
+	debug = {
+		disable_logs = true,
+	},
 })
 
 ---------------

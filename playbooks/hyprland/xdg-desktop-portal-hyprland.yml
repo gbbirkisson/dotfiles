@@ -35,10 +35,17 @@
         version: "{{ version }}"
         force: true
 
+    # Upstream hardcodes persist_mode 2, so a screencast grant survives browser restarts.
+    - name: Copy persist mode patch
+      ansible.builtin.copy:
+        src: 0001-limit-screencast-persist-mode.patch
+        dest: "{{ dir }}/0001-limit-screencast-persist-mode.patch"
+
     - name: Build xdg-desktop-portal-hyprland
       shell:
         chdir: "{{ dir }}"
         cmd: |
+          patch -p1 < 0001-limit-screencast-persist-mode.patch
           cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build
           cmake --build build
 
@@ -47,4 +54,4 @@
       shell:
         chdir: "{{ dir }}"
         cmd: |
-          sudo cmake --install build
+          cmake --install build

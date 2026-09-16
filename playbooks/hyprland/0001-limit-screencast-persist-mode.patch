@@ -1,0 +1,15 @@
+diff --git i/src/portals/Screencopy.cpp w/src/portals/Screencopy.cpp
+index 34af332..7a99ff3 100644
+--- i/src/portals/Screencopy.cpp
++++ w/src/portals/Screencopy.cpp
+@@ -274,7 +274,9 @@ dbUasv CScreencopyPortal::onStart(sdbus::ObjectPath requestHandle, sdbus::Object
+     if (PSESSION->selection.allowToken) {
+         // give them a token :)
+         options["restore_data"] = sdbus::Variant{getFullRestoreStruct(PSESSION->selection, PSESSION->cursorMode)};
+-        options["persist_mode"] = sdbus::Variant{uint32_t{2}};
++        // honor the requested mode, capped at 1 so a grant never outlives the app.
++        // chromium already asks for 1, so the cap only guards apps asking for 2. drop it if that proves unnecessary.
++        options["persist_mode"] = sdbus::Variant{std::min(PSESSION->persistMode, uint32_t{1})};
+ 
+         Debug::log(LOG, "[screencopy] Sent restore token to {}", PSESSION->sessionHandle.c_str());
+     }

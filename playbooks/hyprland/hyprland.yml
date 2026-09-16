@@ -57,4 +57,4 @@
       shell:
         chdir: "{{ dir }}"
         cmd: |
-          sudo make install
+          make install
