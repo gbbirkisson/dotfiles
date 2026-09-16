@@ -33,11 +33,11 @@
       shell:
         chdir: "{{ dir }}"
         cmd: |
-          meson setup build
+          cmake -DCMAKE_INSTALL_PREFIX=/usr/local -B build
 
     - name: Install hyprland-protocols
       become: true
       shell:
         chdir: "{{ dir }}"
         cmd: |
-          meson install -C build
+          cmake --install build
