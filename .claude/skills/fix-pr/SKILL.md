@@ -1,6 +1,7 @@
 ---
 name: fix-pr
 description: Figure out why GH pipeline is failing
+argument-hint: "[pr-number]"
 allowed-tools: Bash(gh *)
 ---
 
@@ -10,9 +11,9 @@ You are an expert software engineer. You are tasked with fixing the CI failures 
 
 ## Steps
 
-1.  **Ask which PR:**
-    Run `gh pr list` to list all PRs and ask user which one we are interested in.
-    ```
+1.  **Determine which PR:**
+    If a PR number was passed with the invocation (e.g. `/fix-pr 40`), use it and skip ahead.
+    Otherwise run `gh pr list` and ask the user which one to work on.
 
 2.  **Checkout PR:**
     Check out the pull request locally using the GitHub CLI:
