@@ -99,6 +99,22 @@ return {
       })
       table.insert(ensure, "rhai")
 
+      -- setup lilypond: https://github.com/tristanperalta/tree-sitter-lilypond
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "TSUpdate",
+        callback = function()
+          require("nvim-treesitter.parsers").lilypond = {
+            install_info = {
+              url = "https://github.com/tristanperalta/tree-sitter-lilypond",
+              branch = "main",
+              queries = "queries",
+            },
+            filetype = "lilypond",
+          }
+        end,
+      })
+      table.insert(ensure, "lilypond")
+
       -- setup vcl/vtc: https://github.com/M4R7iNP/varnishls
       -- These parsers don't ship pre-built src/parser.c, so they can't be installed
       -- via :TSInstall. Instead, clone the repo and generate the parsers manually:
