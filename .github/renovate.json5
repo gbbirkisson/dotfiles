@@ -28,6 +28,13 @@
         '!hyprwm/hyprland',
       ],
     },
+    {
+      groupName: 'cargo crates',
+      groupSlug: 'cargo',
+      matchDatasources: [
+        'crate',
+      ],
+    },
   ],
   customManagers: [
     {
@@ -44,6 +51,7 @@
       customType: 'regex',
       description: 'Match versions of cargo crates',
       datasourceTemplate: 'crate',
+      versioningTemplate: 'semver',
       managerFilePatterns: [
         '/^.*.ya?ml$/',
       ],
