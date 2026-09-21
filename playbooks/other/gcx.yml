@@ -1,0 +1,27 @@
+---
+- hosts: "{{ host }}"
+
+  vars:
+    # renovate: datasource=github-releases depName=gcx packageName=grafana/gcx
+    version: v1.3.0
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if gcx is installed
+      shell: "gcx --version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: gcx_installed.rc not in [0,1]
+      register: gcx_installed
+
+    - name: Install gcx
+      when: gcx_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/grafana/gcx/releases/download/{{ version }}/gcx_{{ version[1:] }}_linux_amd64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - gcx

@@ -39,9 +39,12 @@ link() {
     ln -sf "$src" "$dst"
 }
 
+mkdir -p ~/.agents/skills ~/.claude
+ln -s ~/.agents/skills ~/.claude/skills
+
+link .agents/skills/fix-pr
+link .agents/skills/prep
 link .claude/CLAUDE.md
-link .claude/skills/fix-pr
-link .claude/skills/prep
 link .config/direnv
 link .config/dunst
 link .config/fish/conf.d
