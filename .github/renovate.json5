@@ -70,5 +70,38 @@
         "'(?<depName>[^\\s]+)',\\s*.*version\\s=\\s'(?<currentValue>[^\\s]+)',",
       ],
     },
+    {
+      "description": "mise github: and ubi: backends, taken from the owner/repo in the entry itself",
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)\\.tool-versions$/"
+      ],
+      "matchStrings": [
+        "(?m)^(?:github|ubi):(?<packageName>[^\\s/]+/(?<depName>[^\\s/]+))[ \\t]+(?<currentValue>[^\\s#]+)"
+      ],
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v?(?<version>.+)$"
+    },
+    {
+      "description": "mise npm: backends",
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)\\.tool-versions$/"
+      ],
+      "matchStrings": [
+        "(?m)^npm:(?<depName>[^\\s]+)[ \\t]+(?<currentValue>[^\\s#]+)"
+      ],
+      "datasourceTemplate": "npm"
+    },
+    {
+      "description": "Anything else, annotated with a `# renovate:` comment on the line above",
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)\\.tool-versions$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>[^\\s]+)( packageName=(?<packageName>[^\\s]+))?( registryUrl=(?<registryUrl>[^\\s]+))?( versioning=(?<versioning>[^\\s]+))?( extractVersion=(?<extractVersion>[^\\s]+))?[ \\t\\r]*\\n[^\\s]+[ \\t]+(?<currentValue>[^\\s#]+)"
+      ]
+    },
   ],
 }
