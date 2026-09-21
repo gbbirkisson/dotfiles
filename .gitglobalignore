@@ -1,4 +1,5 @@
 .envrc
+.mise.local.toml
 .null-ls*
 .venv
 TODO.md

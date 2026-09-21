@@ -32,9 +32,5 @@ function gen_completions --description "generate completions"
         if mise which just >/dev/null
             eval (mise which just) --completions fish >$DIR/just.fish
         end
-
-        if mise which hk >/dev/null
-            eval (mise which hk) completion fish >$DIR/hk.fish
-        end
     end
 end

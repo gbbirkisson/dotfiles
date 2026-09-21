@@ -1,21 +1,8 @@
 gcloud              509.0.0
-github:casey/just   1.50.0
-golang              1.27.1
-gradle              8.13.0
 helm                3.22.0
-hk                  0.2.3
-java                openjdk-21.0.1
 kubectl             1.37.0
-kustomize           5.8.1
-maven               3.9.12
-nodejs              24.21.0
-opentofu            1.12.6
-pipx                1.7.1
-pipx:podman-compose 1.6.0
-pkl                 0.27.2
-pnpm                12.5.1
-python              3.14.7
-terraform           1.16.3
-usage               latest
 uv                  0.12.17
-zig                 0.16.0
+nodejs              26.9.0
+
+pipx:podman-compose 1.6.0
+github:casey/just   1.50.0

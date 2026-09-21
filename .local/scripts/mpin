@@ -1,0 +1,178 @@
+#!/usr/bin/env -S uv run --script
+# vim:ts=4:sw=4:ft=python
+#
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "tomlkit==0.13.*",
+# ]
+# ///
+
+# Pin tools at their latest version in ./.mise.local.toml
+
+import subprocess
+import sys
+from pathlib import Path
+
+import tomlkit
+
+FILE = Path(".mise.local.toml")
+NAME = Path(sys.argv[0]).name
+
+
+def error(msg, *hints):
+    print(f"\033[31mERROR\033[0m: {msg}", file=sys.stderr)
+    for hint in hints:
+        print(f"  {hint}", file=sys.stderr)
+    sys.exit(1)
+
+
+def usage():
+    print(
+        f"""Usage: {NAME} TOOL[@VERSION] [TOOL[@VERSION]...]
+       {NAME} -r TOOL [TOOL...]
+       {NAME}
+
+Pin every TOOL in ./{FILE}, then install them. Without a VERSION the
+latest is used, a partial VERSION resolves to the newest match.
+Existing pins are updated, the rest of the file is left alone.
+
+Run without arguments to print what is pinned in ./{FILE}.
+
+Options:
+  -r, --remove   Drop TOOLs from ./{FILE}
+  -h, --help     Print this dialog
+
+Examples:
+  $ {NAME} go
+  $ {NAME} node kubectl helm
+  $ {NAME} zig@0.16.0 python@3.12
+  $ {NAME} -r zig""",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+
+def load():
+    if not FILE.exists():
+        return tomlkit.document()
+    try:
+        return tomlkit.parse(FILE.read_text())
+    except tomlkit.exceptions.ParseError as e:
+        error(f"Cannot parse {FILE}: {e}")
+
+
+def status():
+    tools = load().get("tools", {})
+    if not tools:
+        error(
+            f"Nothing pinned in ./{FILE}",
+            "Pin a tool with:",
+            f"  $ {NAME} node",
+        )
+    for tool in sorted(tools, key=str.lower):
+        print(f"{tool} {tools[tool]}")
+
+
+def remove(names):
+    if not names:
+        error("--remove needs at least one TOOL")
+
+    doc = load()
+    tools = doc.get("tools")
+    if not tools:
+        error(f"Nothing pinned in ./{FILE}")
+
+    names = list(dict.fromkeys(name.split("@", 1)[0] for name in names))
+    missing = [name for name in names if name not in tools]
+    if missing:
+        error(
+            f"Not pinned: {', '.join(missing)}",
+            "List what is pinned with:",
+            f"  $ {NAME}",
+        )
+
+    for name in names:
+        print(f"{name} {tools[name]} (removed)")
+        del tools[name]
+
+    if not tools:
+        del doc["tools"]
+
+    FILE.write_text(tomlkit.dumps(doc))
+
+
+def resolve(spec):
+    tool = spec.split("@", 1)[0]
+    # run from / so an untrusted config in PWD cannot fail the lookup
+    result = subprocess.run(
+        ["mise", "latest", spec],
+        stdout=subprocess.PIPE,
+        text=True,
+        cwd="/",
+        check=False,
+    )
+    if result.returncode != 0:
+        error(
+            f"Cannot resolve '{tool}'",
+            "Search for the right name with:",
+            f"  $ mise search {tool}",
+        )
+    version = result.stdout.strip()
+    if not version:
+        error(
+            f"Nothing matches '{spec}'",
+            "List the available versions with:",
+            f"  $ mise ls-remote {tool}",
+        )
+    return tool, version
+
+
+def sort_table(table):
+    items = {key.key: value for key, value in table.value.body if key is not None}
+    for name in items:
+        del table[name]
+    for name in sorted(items, key=str.lower):
+        table[name] = items[name]
+
+
+def main():
+    specs = sys.argv[1:]
+    if not specs:
+        status()
+        return
+
+    if specs[0] in ("-h", "--help"):
+        usage()
+
+    if specs[0] in ("-r", "--remove"):
+        remove(specs[1:])
+        return
+
+    doc = load()
+    if "tools" not in doc:
+        doc["tools"] = tomlkit.table()
+    tools = doc["tools"]
+
+    for spec in specs:
+        tool, version = resolve(spec)
+        current = tools.get(tool)
+        if current == version:
+            print(f"{tool} {version}")
+        elif current:
+            print(f"{tool} {current} -> {version}")
+        else:
+            print(f"{tool} {version} (added)")
+        tools[tool] = version
+
+    sort_table(tools)
+    FILE.write_text(tomlkit.dumps(doc))
+
+    sys.stdout.flush()
+    code = subprocess.run(["mise", "install"], check=False).returncode
+    if code != 0:
+        sys.exit(code)
+
+
+if __name__ == "__main__":
+    main()
