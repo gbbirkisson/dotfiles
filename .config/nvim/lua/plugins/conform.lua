@@ -67,6 +67,11 @@ return {
           args = { "reformat-gherkin@3.0.1", "--tab-width", "4", "-" },
           stdin = true,
         },
+        lilypond = {
+          command = "uvx",
+          args = { "--from", "python-ly==0.9.10", "ly", "reformat" },
+          stdin = true,
+        },
         chordpro_fmt = {
           -- gigja catalog styleguide formatter (scripts/format-songs.py --stdin)
           command = function(_, ctx)
@@ -101,6 +106,7 @@ return {
         svelte = { "prettierd", "prettier", stop_after_first = true },
         css = { "prettierd", "prettier", stop_after_first = true },
         zig = { "zigfmt" },
+        lilypond = { "lilypond" },
         -- "injected" formats treesitter injection regions (e.g. SQL inside Rust strings)
         ["*"] = { "trim_whitespace", "injected" },
       },
