@@ -136,3 +136,5 @@ function karafun
     pkill waybar || true
     waydroid app launch com.recisio.kfandroid
 end
+
+alias todo="nvim ~/.TODO.md"

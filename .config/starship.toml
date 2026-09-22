@@ -1,7 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-$custom\
 $username\
 $hostname\
 $kubernetes\
@@ -10,9 +9,13 @@ $git_branch\
 $git_commit\
 $git_state\
 $git_metrics\
+$custom\
 $git_status\
 $cmd_duration\
+$java\
 $python\
+$terraform\
+$nodejs\
 $zig\
 $golang\
 $rust\
@@ -27,10 +30,15 @@ $character"""
 [directory]
 style = "bold blue"
 
-# Only trigger when venv is activated
 [python]
+style = "green bold"
+# Only trigger when venv is activated
 detect_extensions = []
 detect_files = []
+
+[terraform]
+format = 'via [$symbol$version]($style) '
+detect_files = ["atlantis.yaml"]
 
 [status]
 symbol = '💩'
@@ -63,9 +71,8 @@ min_time = 2000
 format = "took [$duration]($style) "
 
 # Run in home folder
-# [custom.todo]
-# command = "todo-print"
-# style = "bold #d19a66"
-# detect_files = ['.profile']
-# format = '$symbol[$output]($style)'
-# ignore_timeout = true
+[custom.todo]
+shell = ["sh"]
+when = '''cat .TODO.md TODO.md 2>/dev/null | rg -q "\[\s*\]"'''
+style = "bold #d19a66"
+format = '$symbol[\[TODO\] ]($style)'
