@@ -5,4 +5,4 @@ uv                  0.12.17
 nodejs              26.9.0
 
 pipx:podman-compose 1.6.0
-github:casey/just   1.50.0
+github:casey/just   1.58.0
