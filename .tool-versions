@@ -2,7 +2,7 @@ gcloud              509.0.0
 helm                3.22.0
 kubectl             1.37.0
 uv                  0.12.17
-nodejs              26.9.0
+nodejs              26.10.0
 
 pipx:podman-compose 1.6.0
 github:casey/just   1.58.0
