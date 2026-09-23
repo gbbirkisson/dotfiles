@@ -3,9 +3,9 @@
 set -euo pipefail
 
 CURL_BIN="curl"
-if command -v curlie >/dev/null 2>&1; then
-    CURL_BIN="curlie --pretty"
-fi
+# if command -v curlie >/dev/null 2>&1; then
+#     CURL_BIN="curlie --pretty"
+# fi
 
 R_CDN=aka
 R_BYTES=6000

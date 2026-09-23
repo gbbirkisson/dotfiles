@@ -34,10 +34,10 @@ if command -v bat >/dev/null
 end
 
 # curlie
-if command -v curlie >/dev/null
-    alias curl='curlie'
-end
-abbr -a --set-cursor=! c "curl https://!"
+# if command -v curlie >/dev/null
+#     alias curl='curlie'
+# end
+abbr -a --set-cursor=! c "curlie https://!"
 
 function aka
     mig --cdn aka $argv
