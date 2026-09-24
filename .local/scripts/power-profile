@@ -14,13 +14,13 @@ if [ "$1" = "--nr" ]; then
 	exit
 fi
 
-for profile in balanced performance power-saver; do
+for profile in power-saver balanced performance; do
 	if [ "$profile" = "$current" ]; then
 		echo "* $profile"
 	else
 		echo "  $profile"
 	fi
-done | wofi --dmenu --prompt profile | sed 's/^[* ]*//' | xargs -r powerprofilesctl set
+done | wofi --dmenu --cache-file /dev/null --prompt profile | sed 's/^[* ]*//' | xargs -r powerprofilesctl set
 
 # Refresh waybar's custom/power-profile module (its "signal" is 8).
 pkill -RTMIN+8 -x waybar
