@@ -68,6 +68,8 @@ menuitem:hover {
 #tray,
 #language,
 #pulseaudio,
+#custom-monitor-mode,
+#custom-power-profile,
 #battery,
 #clock,
 #bluetooth,
@@ -103,6 +105,18 @@ menuitem:hover {
     color: @red;
 }
 
+#custom-power-profile.power-saver {
+    color: @green;
+}
+
+#custom-power-profile.balanced {
+    color: @yellow;
+}
+
+#custom-power-profile.performance {
+    color: @red;
+}
+
 #clock {
     color: @fg;
 }
@@ -113,6 +127,10 @@ menuitem:hover {
 
 #bluetooth.connected {
     color: @blue;
+}
+
+#custom-monitor-mode {
+    padding-right: 0.6em;
 }
 
 #custom-notification {

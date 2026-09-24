@@ -25,8 +25,11 @@ local swap_ws = home .. "/.local/scripts/hypr-swap-workspace"
 -------------------
 
 hl.on("hyprland.start", function()
+	-- Dark mode for GTK4/libadwaita, and via the portal for Chromium, Firefox and Electron.
+	hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme prefer-dark")
 	hl.exec_cmd("nm-applet")
-	hl.exec_cmd("waybar")
+	-- Waybar < 0.10.3 (Ubuntu 24.04) looks for Hyprland's sockets in /tmp/hypr; Hyprland keeps them in $XDG_RUNTIME_DIR/hypr.
+	hl.exec_cmd('ln -sfn "$XDG_RUNTIME_DIR/hypr" /tmp/hypr && waybar')
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("swaync")
 	hl.exec_cmd("batsignal")
@@ -117,6 +120,36 @@ hl.window_rule({
 	match = { float = false, workspace = "f[1]" },
 	border_size = 0,
 })
+-- The picker caps itself at 1280x800.
+hl.window_rule({
+	name = "share-picker-size",
+	match = { class = "hyprland-share-picker" },
+	float = true,
+	size = "1200 800",
+	center = true,
+})
+hl.window_rule({
+	name = "easyeffects-float",
+	match = { class = "^(com\\.github\\.wwmm\\.easyeffects)$" },
+	float = true,
+	size = "1200 800",
+	center = true,
+})
+hl.window_rule({
+	name = "pavucontrol-float",
+	match = { class = "^(org\\.pulseaudio\\.pavucontrol|pavucontrol)$" },
+	float = true,
+	size = "1200 800",
+	center = true,
+})
+-- Waybar launches bluetui in ghostty with this class.
+hl.window_rule({
+	name = "bluetui-float",
+	match = { class = "^(com\\.mitchellh\\.ghostty\\.bluetui)$" },
+	float = true,
+	size = "1200 800",
+	center = true,
+})
 
 hl.config({
 	dwindle = {
@@ -199,6 +232,7 @@ hl.bind(
 	)
 )
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
+hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("swaync-client -C -sw"))
 
 -- Laptop lid switch, hypridle's before_sleep_cmd locks the session
 hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("systemctl suspend"), { locked = true })
@@ -294,11 +328,16 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 --------------------------------
 
 -- hyprctl clients
-hl.window_rule({ name = "signal-ws", match = { class = "^(signal)$" }, workspace = 6 })
-hl.window_rule({ name = "firefox-ws", match = { class = "^(firefox-esr)$" }, workspace = 7 })
+hl.window_rule({ name = "chromium-ws", match = { class = "^(chromium)$" }, workspace = 1 })
+hl.window_rule({ name = "signal-ws", match = { class = "^(signal|signal-desktop)$" }, workspace = 6 })
+hl.window_rule({ name = "firefox-ws", match = { class = "^(firefox|firefox-esr|firefox_firefox)$" }, workspace = 7 })
 hl.window_rule({ name = "spotify-ws", match = { class = "^(spotify)$" }, workspace = 8 })
-hl.window_rule({ name = "1password-ws", match = { class = "^(1password)$", float = false }, workspace = 9 })
-hl.window_rule({ name = "slack-ws", match = { class = "^(Slack)$" }, workspace = 10 })
+hl.window_rule({
+	name = "1password-ws",
+	match = { class = "com.onepassword.OnePassword", float = false },
+	workspace = "9",
+})
+hl.window_rule({ name = "slack-ws", match = { class = "^(slack)$" }, workspace = 10 })
 
 -- Drop maximize requests from all windows so apps can't break the tiling layout
 hl.window_rule({
