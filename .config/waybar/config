@@ -65,12 +65,14 @@
         "format": "{}",
         "format-en": "EN",
         "format-no": "NO",
-        "format-is": "IS"
+        "format-is": "IS",
+        "on-click": "hyprctl switchxkblayout all next"
     },
     "clock": {
         "format": " {:%H:%M   %e %b}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "today-format": "<b>{}</b>"
+        "today-format": "<b>{}</b>",
+        "on-click": "GDK_DPI_SCALE=1.3 gsimplecal"
     },
     "hyprland/workspaces": {
         "all-outputs": false,

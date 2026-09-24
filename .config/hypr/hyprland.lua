@@ -150,6 +150,12 @@ hl.window_rule({
 	size = "1200 800",
 	center = true,
 })
+hl.window_rule({
+	name = "gsimplecal-float",
+	match = { class = "^(gsimplecal)$" },
+	float = true,
+	size = "440 230",
+})
 
 hl.config({
 	dwindle = {

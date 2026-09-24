@@ -50,6 +50,7 @@ link .config/dunst
 link .config/fish/conf.d
 link .config/gh-dash
 link .config/ghostty
+link .config/gsimplecal
 link .config/hypr
 link .config/lazygit/config.yml
 link .config/nvim
