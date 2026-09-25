@@ -1,6 +1,13 @@
 local home = os.getenv("HOME")
 local colors = require("colors")
 
+-- Per-machine overrides in hosts/<hostname>.lua
+local hostname = io.open("/etc/hostname"):read("l")
+local ok, host = pcall(require, "hosts." .. hostname)
+if not ok then
+	host = {}
+end
+
 ------------------
 ---- MONITORS ----
 ------------------
@@ -333,11 +340,11 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 -- hyprctl clients
 hl.window_rule({ name = "chromium-ws", match = { class = "^(chromium)$" }, workspace = 1 })
 hl.window_rule({ name = "signal-ws", match = { class = "^(signal|signal-desktop)$" }, workspace = 6 })
-hl.window_rule({ name = "firefox-ws", match = { class = "^(firefox|firefox-esr|firefox_firefox)$" }, workspace = 7 })
+hl.window_rule({ name = "firefox-ws", match = { class = "^(firefox|firefox-esr|firefox_firefox)$" }, workspace = host.firefox_ws or 7 })
 hl.window_rule({ name = "spotify-ws", match = { class = "^(spotify)$" }, workspace = 8 })
 hl.window_rule({
 	name = "1password-ws",
-	match = { class = "com.onepassword.OnePassword", float = false },
+	match = { class = "^(1password|com\\.onepassword\\.OnePassword)$", float = false },
 	workspace = "9",
 })
 hl.window_rule({ name = "slack-ws", match = { class = "^(slack)$" }, workspace = 10 })
