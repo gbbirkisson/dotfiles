@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# List git repos under a directory (default: .) with uncommitted changes or no remote
+
+fd --hidden --no-ignore --prune --type d '^\.git$' "${1:-.}" --exec sh -c '
+  repo=${1%/.git/}
+  repo=${repo%/.git}
+  remotes=$(git -C "$repo" remote 2>/dev/null) || exit
+  [ -z "$remotes" ] || [ -n "$(git -C "$repo" status --porcelain)" ] && echo "$repo"
+' _ {}
