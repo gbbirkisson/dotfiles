@@ -52,10 +52,13 @@ window {
 }
 
 #entry:selected {
-    background-color: #{{base0D_hex}};
+    background-color: #{{base01_hex}};
+    box-shadow: inset 2px 0 0 #{{base0D_hex}};
     outline: none;
 }
 
+/* GTK highlights the selected label on its own; keep only the row's background */
 #entry:selected #text {
-    color: #{{base00_hex}};
+    color: #{{base0D_hex}};
+    background-color: transparent;
 }

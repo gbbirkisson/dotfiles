@@ -72,7 +72,6 @@
     "clock": {
         "format": " {:%H:%M   %e %b}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "today-format": "<b>{}</b>",
         "on-click": "GDK_DPI_SCALE=1.3 gsimplecal"
     },
     "hyprland/workspaces": {

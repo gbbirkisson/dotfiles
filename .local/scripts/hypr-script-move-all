@@ -27,7 +27,7 @@ fi
 if ! hyprctl workspaces -j | jq -e --argjson ws "$TARGET" 'any(.[]; .id == $ws)' >/dev/null; then
   hyprctl --batch "dispatch hl.dsp.workspace.change_id({ workspace = $CURRENT, id = $TARGET }); dispatch hl.dsp.focus({ workspace = $CURRENT })"
 
-  # Waybar does not handle the changeworkspaceid event
+  # Waybar 0.15 does not handle the changeworkspaceid event; master does, so 0.16 likely drops this reload.
   pkill -SIGUSR2 -x waybar || true
   exit 0
 fi

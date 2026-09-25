@@ -52,10 +52,13 @@ window {
 }
 
 #entry:selected {
-    background-color: #61afef;
+    background-color: #353b45;
+    box-shadow: inset 2px 0 0 #61afef;
     outline: none;
 }
 
+/* GTK highlights the selected label on its own; keep only the row's background */
 #entry:selected #text {
-    color: #1e222a;
+    color: #61afef;
+    background-color: transparent;
 }

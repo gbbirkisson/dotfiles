@@ -29,11 +29,11 @@ hl.on("hyprland.start", function()
 	-- Dark mode for GTK4/libadwaita, and via the portal for Chromium, Firefox and Electron.
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme prefer-dark")
 	hl.exec_cmd("nm-applet")
-	-- Waybar < 0.10.3 (Ubuntu 24.04) looks for Hyprland's sockets in /tmp/hypr; Hyprland keeps them in $XDG_RUNTIME_DIR/hypr.
-	hl.exec_cmd('ln -sfn "$XDG_RUNTIME_DIR/hypr" /tmp/hypr && waybar')
+	hl.exec_cmd("waybar")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("swaync")
 	hl.exec_cmd("batsignal")
+	hl.exec_cmd(home .. "/.local/scripts/hypr-script-power-profile --auto")
 	hl.exec_cmd("easyeffects --gapplication-service")
 	-- hl.exec_cmd("hyprpaper")
 end)
@@ -235,6 +235,7 @@ hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + ALT + BackSpace", hl.dsp.exec_cmd("~/.local/scripts/hypr-script-kb-layout"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("swaync-client -C -sw"))
+hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("swaync-client -d -sw"))
 
 -- Laptop lid switch, hypridle's before_sleep_cmd locks the session
 hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("systemctl suspend"), { locked = true })
@@ -265,13 +266,7 @@ hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd(swap_ws .. " +1"))
 
 -- Move workspaces between monitors
 hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "previous" }))
--- Waybar 0.9.24 (Ubuntu) only learns the active workspace from focus events, and a move
--- reports the old one. Bounce monitor focus so the last event names the moved workspace.
-hl.bind(mainMod .. " + less", function()
-	hl.dispatch(hl.dsp.workspace.move({ monitor = "+1" }))
-	hl.dispatch(hl.dsp.focus({ monitor = "+1" }))
-	hl.dispatch(hl.dsp.focus({ monitor = "-1" }))
-end)
+hl.bind(mainMod .. " + less", hl.dsp.workspace.move({ monitor = "+1" }))
 
 -- Resize windows
 hl.define_submap("resize", function()
@@ -368,11 +363,11 @@ hl.window_rule({
 	no_focus = true,
 })
 
--- Screenshot: select region with slurp, capture with grim, annotate with satty
+-- Screenshot: capture the focused monitor first (hover popups survive), then crop and annotate in satty
 hl.bind(
 	"Print",
 	hl.dsp.exec_cmd(
-		'grim -g "$(slurp -d)" - | satty --filename - --copy-command wl-copy --early-exit --initial-tool arrow --annotation-size-factor 0.4 --font-family monospace --fullscreen'
+		'grim -o "$(hyprctl monitors -j | jq -r ".[] | select(.focused) | .name")" - | satty --filename - --copy-command wl-copy --early-exit --initial-tool crop --annotation-size-factor 0.4 --font-family monospace --fullscreen'
 	)
 )
 hl.window_rule({ name = "satty", match = { title = "^(satty)$" }, float = true })
