@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+# Pick an external monitor's mode in wofi; the active one is marked with *.
+# --watch prints waybar JSON on every monitor hotplug; empty text hides the module.
+# --config prints hl.monitor rules that keep the current external modes.
+# --mirror picks whether every external monitor mirrors the laptop panel.
+# External monitors are always centered above the laptop panel.
+
+externals() {
+  # Plain `monitors` omits mirrored outputs.
+  hyprctl monitors all -j | jq -c '.[] | select((.name | startswith("eDP") | not) and (.disabled | not))'
+}
+
+# Formatted like availableModes, e.g. 1920x1200@60.00Hz.
+mode() {
+  printf '%dx%d@%.2fHz' $(jq -r '"\(.width) \(.height) \(.refreshRate)"' <<<"$1")
+}
+
+status() {
+  local tooltip
+  tooltip=$(externals | while read -r m; do echo "$(jq -r .name <<<"$m") $(mode "$m")"; done)
+  if [ -n "$tooltip" ]; then
+    jq -cn --arg tooltip "$tooltip" '{text: "󰍹", tooltip: $tooltip}'
+  else
+    echo '{"text": ""}'
+  fi
+}
+
+case "$1" in
+--watch)
+  status
+  socat -U - "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" | while read -r event; do
+    case "$event" in
+    monitoraddedv2* | monitorremovedv2*) status ;;
+    esac
+  done
+  ;;
+--mirror)
+  externals | jq -e 'select(.mirrorOf != "none")' >/dev/null && current=on || current=off
+  pick=$(for state in on off; do
+    [ "$state" = "$current" ] && echo "* $state" || echo "  $state"
+  done | wofi --dmenu --cache-file /dev/null --prompt mirror | sed 's/^[* ]*//')
+  [ -n "$pick" ] && [ "$pick" != "$current" ] || exit
+  if [ "$pick" = off ]; then
+    # Runtime rules cannot clear a mirror; a reload restores the configured layout.
+    hyprctl reload
+  else
+    externals | jq -r '.name' | while read -r name; do
+      hyprctl eval "hl.monitor({ output = \"$name\", mode = \"preferred\", position = \"auto-center-up\", scale = 1, mirror = \"eDP-1\" })"
+    done
+  fi
+  ;;
+--config)
+  externals | while read -r m; do
+    mode=$(mode "$m")
+    jq -r --arg mode "${mode%Hz}" '"hl.monitor({ output = \"desc:\(.description)\", mode = \"\($mode)\", position = \"auto-center-up\", scale = \(.scale) })"' <<<"$m"
+  done
+  ;;
+*)
+  pick=$(externals | while read -r m; do
+    name=$(jq -r .name <<<"$m")
+    current=$(mode "$m")
+    # Most pixels first, then fastest refresh.
+    jq -r '.availableModes | unique | sort_by(capture("(?<w>\\d+)x(?<h>\\d+)@(?<r>[\\d.]+)") | map_values(tonumber) | [-.w * .h, -.r])[]' <<<"$m" | while read -r available; do
+      [ "$available" = "$current" ] && marker="* " || marker="  "
+      echo "$marker$name $available"
+    done
+  done | wofi --dmenu --cache-file /dev/null --prompt mode | sed 's/^[* ]*//')
+  [ -n "$pick" ] || exit
+  read -r name available <<<"$pick"
+  m=$(externals | jq -c --arg name "$name" 'select(.name == $name)')
+  hyprctl eval "$(jq -r --arg mode "${available%Hz}" '"hl.monitor({ output = \"\(.name)\", mode = \"\($mode)\", position = \"auto-center-up\", scale = \(.scale) })"' <<<"$m")"
+  ;;
+esac

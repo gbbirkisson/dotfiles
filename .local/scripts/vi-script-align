@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# For use in vim with !align to align tables and comments, i.e:
+# For use in vim with !vi-script-align to align tables and comments, i.e:
 #
 # hello // | adfasdf | asdfasfdff |
 # howsahoing // | fff | ggg |

@@ -3,7 +3,7 @@
 set -euo pipefail
 
 SCRIPT=$(
-    cat <<EOF
+  cat <<EOF
 set -euo pipefail
 
 if ${@}; then
@@ -21,8 +21,8 @@ EOF
 )
 
 if [ "$1" == "--debug" ]; then
-    echo DEBUG MODE
-    exec watchexec --only-emit-events --emit-events-to stdio
+  echo DEBUG MODE
+  exec watchexec --only-emit-events --emit-events-to stdio
 fi
 
 exec watchexec --quiet --clear --restart --stop-timeout=0s --shell=bash -- "$SCRIPT"

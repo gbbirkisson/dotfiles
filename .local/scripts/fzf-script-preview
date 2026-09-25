@@ -3,14 +3,14 @@
 set -euo pipefail
 
 if [ -d "$1" ]; then
-    tree -C -L 5 $1
-    exit 0
+  tree -C -L 5 $1
+  exit 0
 fi
 
 TYPE=$(file -b --mime $1)
 if [[ $TYPE =~ binary ]]; then
-    echo $TYPE
-    exit 0
+  echo $TYPE
+  exit 0
 fi
 
 batcat -r 0:70 --style=numbers --color=always "$1"

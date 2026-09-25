@@ -50,13 +50,11 @@ map("n", "<leader>ll", function()
   vim.cmd("tabnew " .. vim.lsp.get_log_path())
 end, { desc = "LSP Log" })
 
--- Useful formatting methods
-map("v", "'", "!quotes<CR>", { desc = "Swap single and double quotes" })
-map("v", '"', "!quotes<CR>", { desc = "Swap single and double quotes" })
-map("v", "a", "!align<CR>", { desc = "Run align script" })
-
--- Other nice things
-map("v", "<leader>yt", "!ytt<CR>", { desc = "Fetch youtube transcript" })
+-- vi-script-* filters: <leader>v + first letter of the script name
+require("which-key").add({ { "<leader>v", group = "vi-scripts", mode = "v" } })
+map("v", "<leader>va", "!vi-script-align<CR>", { desc = "Align tables and comments" })
+map("v", "<leader>vq", "!vi-script-quotes<CR>", { desc = "Swap single and double quotes" })
+map("v", "<leader>vt", "!vi-script-title<CR>", { desc = "Title case" })
 
 -- For vim diff mode
 if vim.opt.diff:get() then

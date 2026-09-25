@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Switch every keyboard to the layout after the one most of them use. Hyprland tracks layouts
+# per device, so `switchxkblayout all next` lets devices drift apart; an explicit index keeps
+# them in sync.
+keyboards=$(hyprctl devices -j | jq -c '.keyboards')
+count=$(jq -r '.[0].layout | split(",") | length' <<<"$keyboards")
+current=$(jq -r 'map(.active_layout_index) | group_by(.) | max_by(length)[0]' <<<"$keyboards")
+next=$(((current + 1) % count))
+
+hyprctl switchxkblayout all "$next" >/dev/null
+keymap=$(hyprctl devices -j | jq -r '.keyboards[0].active_keymap')
+notify-send -t 1500 -h string:x-canonical-private-synchronous:kblayout "Keyboard" "$keymap"

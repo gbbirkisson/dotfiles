@@ -31,16 +31,17 @@
         "custom/notification"
     ],
     "custom/monitor-mode": {
-        "exec": "~/.local/scripts/monitor-mode --watch",
+        "exec": "~/.local/scripts/hypr-script-monitor-mode --watch",
         "return-type": "json",
-        "on-click": "~/.local/scripts/monitor-mode"
+        "on-click": "~/.local/scripts/hypr-script-monitor-mode",
+        "on-click-right": "~/.local/scripts/hypr-script-monitor-mode --mirror"
     },
     "custom/power-profile": {
-        "exec": "~/.local/scripts/power-profile --nr",
+        "exec": "~/.local/scripts/hypr-script-power-profile --nr",
         "return-type": "json",
         "interval": 30,
         "signal": 8,
-        "on-click": "~/.local/scripts/power-profile"
+        "on-click": "~/.local/scripts/hypr-script-power-profile"
     },
     "battery": {
         "interval": 60,
@@ -59,14 +60,14 @@
             "",
             ""
         ],
-        "on-click": "~/.local/scripts/power-profile"
+        "on-click": "~/.local/scripts/hypr-script-power-profile"
     },
     "hyprland/language": {
         "format": "{}",
         "format-en": "EN",
         "format-no": "NO",
         "format-is": "IS",
-        "on-click": "hyprctl switchxkblayout all next"
+        "on-click": "~/.local/scripts/hypr-script-kb-layout"
     },
     "clock": {
         "format": " {:%H:%M   %e %b}",

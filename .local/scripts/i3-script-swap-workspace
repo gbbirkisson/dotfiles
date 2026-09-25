@@ -10,7 +10,7 @@
 
 set -euo pipefail
 
-DIRECTION="${1:?usage: i3-swap-workspace <-1|+1>}"
+DIRECTION="${1:?usage: i3-script-swap-workspace <-1|+1>}"
 
 # Matches the ten workspaces bound in regolith3/i3/config.d/99_custom
 LOWEST=1

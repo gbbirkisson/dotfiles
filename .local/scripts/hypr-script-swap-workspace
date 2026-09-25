@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-DIRECTION="${1:?usage: hypr-swap-workspace <-1|+1>}"
+DIRECTION="${1:?usage: hypr-script-swap-workspace <-1|+1>}"
 
 # Matches the ten workspaces bound in hyprland.lua
 LOWEST=1

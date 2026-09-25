@@ -5,21 +5,21 @@ current=$(powerprofilesctl get)
 
 # --nr prints waybar JSON: 1 power-saver, 2 balanced, 3 performance, classed by profile.
 if [ "$1" = "--nr" ]; then
-	case "$current" in
-	power-saver) nr=1 ;;
-	balanced) nr=2 ;;
-	performance) nr=3 ;;
-	esac
-	printf '{"text": "%s", "class": "%s", "tooltip": "%s"}\n' "$nr" "$current" "$current"
-	exit
+  case "$current" in
+  power-saver) nr=1 ;;
+  balanced) nr=2 ;;
+  performance) nr=3 ;;
+  esac
+  printf '{"text": "%s", "class": "%s", "tooltip": "%s"}\n' "$nr" "$current" "$current"
+  exit
 fi
 
 for profile in power-saver balanced performance; do
-	if [ "$profile" = "$current" ]; then
-		echo "* $profile"
-	else
-		echo "  $profile"
-	fi
+  if [ "$profile" = "$current" ]; then
+    echo "* $profile"
+  else
+    echo "  $profile"
+  fi
 done | wofi --dmenu --cache-file /dev/null --prompt profile | sed 's/^[* ]*//' | xargs -r powerprofilesctl set
 
 # Refresh waybar's custom/power-profile module (its "signal" is 8).

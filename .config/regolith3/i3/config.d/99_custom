@@ -25,7 +25,7 @@ bindsym $mod+less move workspace to output next
 # Hop between workspaces
 bindsym $mod+Tab workspace back_and_forth
 
-bindsym $mod+Return exec cwdshell
+bindsym $mod+Return exec hypr-script-cwdshell
 
 ## Modify // Move Every Window on This Workspace to Workspace 1 - 10 // <><Ctrl><Shift> 0..9 ##
 ## The workspace="__focused__" criteria makes i3 apply the move to every window
@@ -46,5 +46,5 @@ bindsym $mod+Ctrl+Shift+$ws10_key [workspace="__focused__"] move container to wo
 ## Modify // Swap This Workspace With Its Neighbour // <><Ctrl><Shift> h l ##
 ## Renames the two workspaces so they trade numbers, keeping focus on the windows
 ## in front of you. Requires wm.binding.take_left/right remapped in Xresources.
-bindsym $mod+Ctrl+Shift+h exec --no-startup-id i3-swap-workspace -1
-bindsym $mod+Ctrl+Shift+l exec --no-startup-id i3-swap-workspace +1
+bindsym $mod+Ctrl+Shift+h exec --no-startup-id i3-script-swap-workspace -1
+bindsym $mod+Ctrl+Shift+l exec --no-startup-id i3-script-swap-workspace +1

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# For use in vim with !quotes to swap quotes:
+# For use in vim with !vi-script-quotes to swap quotes:
 #   "some 'old' thing" -> 'some "old" thing'
 
 import sys

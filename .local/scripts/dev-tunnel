@@ -2,15 +2,31 @@
 
 set -euo pipefail
 
+# Usage: dev-tunnel [--mitm] [PORT | HOST:PORT]; the host defaults to 127.0.0.1.
+# --mitm proxies through mitmweb instead of socat, to inspect traffic.
+mitm=false
+if [[ ${1:-} == --mitm ]]; then
+  mitm=true
+  shift
+fi
 upstream=${1:-"8080"}
-host=${2:-"127.0.0.1"}
+[[ $upstream == *:* ]] || upstream="127.0.0.1:$upstream"
 
 echo "Fetching token"
 token=$(op read op://hemwnx22rvxga5v2zkicawq6sq/oy5g4ntwcf4lfom5lzzrzfl5ua/credential --no-newline)
 
+echo "Starting proxy"
+if $mitm; then
+  mitmweb --set keep_host_header=true --listen-host 127.0.0.1 --listen-port 4040 -m reverse:http://${upstream} 2>/dev/null &
+else
+  socat tcp-l:4040,fork,reuseaddr tcp:${upstream} &
+fi
+
+# Background jobs ignore Ctrl+C and outlive the script; stop them whenever it exits.
+trap 'kill $(jobs -p) 2>/dev/null' EXIT
+
 echo "Starting cloudflared"
 cloudflared --no-autoupdate tunnel run --token $token &
 
-echo "Starting mitmweb"
-socat tcp-l:4040,fork,reuseaddr tcp:${host}:${upstream}
-# mitmweb --set keep_host_header=true --listen-host 127.0.0.1 --listen-port 4040 -m reverse:http://127.0.0.1:${upstream} 2>/dev/null
+# Return when either exits, so the trap stops the other.
+wait -n

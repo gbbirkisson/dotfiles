@@ -5,7 +5,7 @@ set -euo pipefail
 REC=$(mktemp -u rec-XXX)
 
 if [[ $# -eq 0 ]]; then
-    set -- "fish -C 'set fish_autosuggestion_enabled 0'"
+  set -- "fish -C 'set fish_autosuggestion_enabled 0'"
 fi
 
 asciinema rec -c "$@" /tmp/${REC}

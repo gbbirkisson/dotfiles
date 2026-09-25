@@ -6,19 +6,20 @@ local colors = require("colors")
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
-hl.monitor({ output = "desc:Chimei Innolux Corporation 0x14C9", mode = "preferred", position = "860x1440", scale = 1 })
-hl.monitor({ output = "", mode = "preferred", position = "0x0", scale = 1 })
+-- The last matching rule wins; "" only applies to monitors no other rule matches.
+hl.monitor({ output = "", mode = "preferred", position = "auto-center-up", scale = 1 })
+hl.monitor({ output = "eDP-1", mode = "preferred", position = "0x0", scale = 1 })
 
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
 
-local terminal = home .. "/.local/scripts/cwdshell"
+local terminal = home .. "/.local/scripts/hypr-script-cwdshell"
 local fileManager = "dolphin"
 local menu = "wofi -G --show drun"
-local bg_rand = home .. "/.local/scripts/hyprpaper-randomize"
-local move_all = home .. "/.local/scripts/hypr-move-all"
-local swap_ws = home .. "/.local/scripts/hypr-swap-workspace"
+local bg_rand = home .. "/.local/scripts/hypr-script-hyprpaper-randomize"
+local move_all = home .. "/.local/scripts/hypr-script-move-all"
+local swap_ws = home .. "/.local/scripts/hypr-script-swap-workspace"
 
 -------------------
 ---- AUTOSTART ----
@@ -191,7 +192,7 @@ hl.config({
 		kb_variant = "",
 		kb_model = "",
 		kb_rules = "",
-		kb_options = "caps:swapescape,grp:alt_space_toggle",
+		kb_options = "caps:swapescape",
 
 		follow_mouse = 1,
 
@@ -231,12 +232,7 @@ hl.bind(mainMod .. " + X", hl.dsp.layout("togglesplit")) -- dwindle
 hl.bind(mainMod .. " + V", hl.dsp.layout("preselect d"))
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
-hl.bind(
-	mainMod .. " + ALT + BackSpace",
-	hl.dsp.exec_cmd(
-		'hyprctl switchxkblayout all next && notify-send -t 1500 -h string:x-canonical-private-synchronous:kblayout "Keyboard" "$(hyprctl devices -j | jq -r \'.keyboards[] | select(.main==true) | .active_keymap\')"'
-	)
-)
+hl.bind(mainMod .. " + ALT + BackSpace", hl.dsp.exec_cmd("~/.local/scripts/hypr-script-kb-layout"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("swaync-client -C -sw"))
 
@@ -269,7 +265,13 @@ hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd(swap_ws .. " +1"))
 
 -- Move workspaces between monitors
 hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "previous" }))
-hl.bind(mainMod .. " + less", hl.dsp.workspace.move({ monitor = "+1" }))
+-- Waybar 0.9.24 (Ubuntu) only learns the active workspace from focus events, and a move
+-- reports the old one. Bounce monitor focus so the last event names the moved workspace.
+hl.bind(mainMod .. " + less", function()
+	hl.dispatch(hl.dsp.workspace.move({ monitor = "+1" }))
+	hl.dispatch(hl.dsp.focus({ monitor = "+1" }))
+	hl.dispatch(hl.dsp.focus({ monitor = "-1" }))
+end)
 
 -- Resize windows
 hl.define_submap("resize", function()
