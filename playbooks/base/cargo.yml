@@ -27,7 +27,7 @@
       with_items:
         - { crate_name: bat, version: 0.26.1, locked: true }              # Better cat
         - { crate_name: bluetui, version: 0.8.0, locked: true }           # Bluetooth TUI
-        - { crate_name: cargo-tarpaulin, version: 0.37.4, locked: true }  # For cargo code coverage
+        - { crate_name: cargo-tarpaulin, version: 0.37.5, locked: true }  # For cargo code coverage
         - { crate_name: cargo-udeps, version: 0.1.61, locked: true }      # For cargo dependencies
         - { crate_name: cargo-upgrades, version: 3.1.0, locked: true }    # For cargo dependencies
         - { crate_name: drill, version: 0.9.1, locked: true }             # HTTP stress testing (ansible-esqe)
