@@ -48,5 +48,5 @@
         - { crate_name: starship, version: 1.26.0, locked: true }         # Fancy prompt
         - { crate_name: tealdeer, version: 1.9.0, locked: true }          # Better tldr
         - { crate_name: trunk, version: 0.21.14, locked: true }           # WASM development
-        - { crate_name: watchexec-cli, version: 2.7.3, locked: true }     # Used for 'dev' script
+        - { crate_name: watchexec-cli, version: 2.7.4, locked: true }     # Used for 'dev' script
         - { crate_name: xh, version: 0.26.2, locked: true }               # Better HTTPie
