@@ -27,6 +27,9 @@ status() {
 }
 
 case "$1" in
+-h | --help)
+  sed -n '3,7s/^# //p' "$0"
+  ;;
 --watch)
   status
   socat -U - "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" | while read -r event; do
