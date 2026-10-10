@@ -16,6 +16,7 @@ end
 -- The last matching rule wins; "" only applies to monitors no other rule matches.
 hl.monitor({ output = "", mode = "preferred", position = "auto-center-up", scale = 1 })
 hl.monitor({ output = "eDP-1", mode = "preferred", position = "0x0", scale = 1 })
+hl.monitor({ output = "desc:OEM 32W_LCD_TV", mode = "1024x768@60.00", position = "auto-center-up", scale = 1 }) -- Amma Sjónvarp
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -340,7 +341,11 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 -- hyprctl clients
 hl.window_rule({ name = "chromium-ws", match = { class = "^(chromium)$" }, workspace = 1 })
 hl.window_rule({ name = "signal-ws", match = { class = "^(signal|signal-desktop)$" }, workspace = 6 })
-hl.window_rule({ name = "firefox-ws", match = { class = "^(firefox|firefox-esr|firefox_firefox)$" }, workspace = host.firefox_ws or 7 })
+hl.window_rule({
+	name = "firefox-ws",
+	match = { class = "^(firefox|firefox-esr|firefox_firefox)$" },
+	workspace = host.firefox_ws or 7,
+})
 hl.window_rule({ name = "spotify-ws", match = { class = "^(spotify)$" }, workspace = 8 })
 hl.window_rule({
 	name = "1password-ws",
