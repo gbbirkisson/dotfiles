@@ -37,7 +37,7 @@ hl.on("hyprland.start", function()
 	-- Dark mode for GTK4/libadwaita, and via the portal for Chromium, Firefox and Electron.
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme prefer-dark")
 	hl.exec_cmd("nm-applet")
-	hl.exec_cmd("waybar")
+	hl.exec_cmd("systemd-cat -t waybar sh -c 'ulimit -c unlimited; exec waybar'")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("swaync")
 	hl.exec_cmd("batsignal")
