@@ -13,10 +13,6 @@
     datadir: /usr/local/share/easyeffects
 
   tasks:
-    - name: Check if skip
-      meta: end_play
-      when: '"hyprland" in skip'
-
     - name: Checkout easyeffects presets
       ansible.builtin.git:
         repo: https://github.com/JackHack96/EasyEffects-Presets.git

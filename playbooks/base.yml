@@ -4,6 +4,7 @@
 - import_playbook: base/fish.yml
 - import_playbook: base/fzf.yml
 - import_playbook: base/ghostty.yml
+- import_playbook: base/fonts.yml
 - import_playbook: base/mise.yml
 
 - import_playbook: base/rust.yml
