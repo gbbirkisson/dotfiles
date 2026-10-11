@@ -34,6 +34,11 @@ local swap_ws = home .. "/.local/scripts/hypr-script-swap-workspace"
 -------------------
 
 hl.on("hyprland.start", function()
+	-- Portal backends die when Hyprland exits and hit systemd's restart limit before the next session
+	-- starts. Without them, portal calls time out (25s each), stalling GTK apps on launch.
+	hl.exec_cmd(
+		"systemctl --user reset-failed; systemctl --user restart xdg-desktop-portal-hyprland xdg-desktop-portal-gtk xdg-desktop-portal"
+	)
 	-- Dark mode for GTK4/libadwaita, and via the portal for Chromium, Firefox and Electron.
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme prefer-dark")
 	hl.exec_cmd("nm-applet")
