@@ -39,11 +39,9 @@ link() {
     ln -sf "$src" "$dst"
 }
 
-mkdir -p ~/.agents/skills ~/.claude
-ln -s ~/.agents/skills ~/.claude/skills
-
 link .agents/skills/fix-pr
 link .agents/skills/prep
+link .agents/skills/bump-versions
 link .claude/CLAUDE.md
 link .config/direnv
 link .config/dunst
@@ -71,3 +69,6 @@ link .profile_gbb
 link .taplo.toml
 link .tool-versions
 link .yamlfmt
+
+mkdir -p ~/.agents/skills ~/.claude
+ln -sf ~/.agents/skills ~/.claude
