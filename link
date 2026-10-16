@@ -43,7 +43,6 @@ link .agents/skills/fix-pr
 link .agents/skills/prep
 link .agents/skills/bump-versions
 link .claude/CLAUDE.md
-link .claude/settings.json
 link .config/bottom
 link .config/direnv
 link .config/dunst
