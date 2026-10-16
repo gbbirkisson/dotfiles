@@ -159,7 +159,7 @@ hl.window_rule({
 -- Waybar launches TUIs in ghostty with these classes.
 hl.window_rule({
 	name = "tui-float",
-	match = { class = "^(com\\.mitchellh\\.ghostty\\.(bluetui|btm|gdu))$" },
+	match = { class = "^(com\\.mitchellh\\.ghostty\\.(bluetui|btm|gdu|nethogs))$" },
 	float = true,
 	size = "1200 800",
 	center = true,

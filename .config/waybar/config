@@ -72,7 +72,8 @@
     "custom/network": {
         "exec": "~/.local/scripts/hypr-script-waybar-net",
         "return-type": "json",
-        "on-click": "ghostty --class=com.mitchellh.ghostty.btm --command='btm -C ~/.config/bottom/network.toml'"
+        "on-click": "ghostty --class=com.mitchellh.ghostty.btm --command='btm -C ~/.config/bottom/network.toml'",
+        "on-click-right": "ghostty --class=com.mitchellh.ghostty.nethogs --command='sudo TERM=xterm-256color nethogs -C'"
     },
     "disk": {
         "interval": 60,
