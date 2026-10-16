@@ -156,10 +156,10 @@ hl.window_rule({
 	size = "1200 800",
 	center = true,
 })
--- Waybar launches bluetui in ghostty with this class.
+-- Waybar launches TUIs in ghostty with these classes.
 hl.window_rule({
-	name = "bluetui-float",
-	match = { class = "^(com\\.mitchellh\\.ghostty\\.bluetui)$" },
+	name = "tui-float",
+	match = { class = "^(com\\.mitchellh\\.ghostty\\.(bluetui|btm|gdu))$" },
 	float = true,
 	size = "1200 800",
 	center = true,

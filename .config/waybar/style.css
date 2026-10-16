@@ -71,6 +71,10 @@ menuitem:hover {
 #custom-monitor-mode,
 #custom-power-profile,
 #battery,
+#custom-network,
+#disk,
+#cpu,
+#memory,
 #clock,
 #bluetooth,
 #custom-notification {
@@ -114,6 +118,31 @@ menuitem:hover {
 }
 
 #custom-power-profile.performance {
+    color: @red;
+}
+
+#custom-network,
+#disk,
+#cpu,
+#memory {
+    color: @light_grey;
+}
+
+#custom-network.disconnected,
+#custom-network.critical {
+    color: @red;
+}
+
+#custom-network.warning,
+#disk.warning,
+#cpu.warning,
+#memory.warning {
+    color: @yellow;
+}
+
+#disk.critical,
+#cpu.critical,
+#memory.critical {
     color: @red;
 }
 

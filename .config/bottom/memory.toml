@@ -1,0 +1,16 @@
+[flags]
+process_memory_as_value = true
+enable_cache_memory = true
+
+[processes]
+default_sort = "mem"
+
+[[row]]
+  [[row.child]]
+  type = "mem"
+
+[[row]]
+  ratio = 2
+  [[row.child]]
+  type = "proc"
+  default = true

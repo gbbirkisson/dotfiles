@@ -1,0 +1,12 @@
+[processes]
+default_sort = "cpu%"
+
+[[row]]
+  [[row.child]]
+  type = "cpu"
+
+[[row]]
+  ratio = 2
+  [[row.child]]
+  type = "proc"
+  default = true

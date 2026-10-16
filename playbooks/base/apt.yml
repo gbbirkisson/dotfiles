@@ -29,6 +29,7 @@
           - tree          # Tree for directories
           - wireguard     # VPN
           - timg          # Cat images in terminal
+          - gdu           # Disk usage TUI
 
           # Dicts
           - dictd

@@ -15,18 +15,25 @@
     // ],
     "modules-right": [
         "hyprland/submap",
-        "tray",
-        "custom/separator",
         "hyprland/language",
         "custom/separator",
-        "pulseaudio",
+        "custom/network",
+        "custom/separator",
+        "disk",
+        "custom/separator",
+        "memory",
+        "custom/separator",
+        "cpu",
         "custom/separator",
         "custom/power-profile",
         "battery",
         "custom/separator",
+        "pulseaudio",
+        "custom/separator",
         "clock",
         "custom/separator",
         "custom/monitor-mode",
+        "tray",
         "bluetooth",
         "custom/notification"
     ],
@@ -62,11 +69,44 @@
         ],
         "on-click": "~/.local/scripts/hypr-script-power-profile"
     },
+    "custom/network": {
+        "exec": "~/.local/scripts/hypr-script-waybar-net",
+        "return-type": "json",
+        "on-click": "ghostty --class=com.mitchellh.ghostty.btm --command='btm -C ~/.config/bottom/network.toml'"
+    },
+    "disk": {
+        "interval": 60,
+        "path": "/",
+        "format": "󰋊 {percentage_used:2}%",
+        "on-click": "ghostty --class=com.mitchellh.ghostty.gdu --command='gdu ~'",
+        "states": {
+            "warning": 80,
+            "critical": 90
+        }
+    },
+    "memory": {
+        "interval": 5,
+        "format": "󰘚 {percentage:2}%",
+        "on-click": "ghostty --class=com.mitchellh.ghostty.btm --command='btm -C ~/.config/bottom/memory.toml'",
+        "states": {
+            "warning": 80,
+            "critical": 90
+        }
+    },
+    "cpu": {
+        "interval": 5,
+        "format": " {usage:2}%",
+        "on-click": "ghostty --class=com.mitchellh.ghostty.btm --command='btm -C ~/.config/bottom/cpu.toml'",
+        "states": {
+            "warning": 80,
+            "critical": 90
+        }
+    },
     "hyprland/language": {
         "format": "{}",
-        "format-en": "EN",
-        "format-no": "NO",
-        "format-is": "IS",
+        "format-en": "<span color='#c678dd'>EN</span>",
+        "format-no": "<span color='#56b6c2'>NO</span>",
+        "format-is": "<span color='#e5c07b'>IS</span>",
         "on-click": "~/.local/scripts/hypr-script-kb-layout"
     },
     "clock": {

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Waybar module: total traffic over physical interfaces, classed by rate
+
+interval=2
+warning=$((100 * 1000)) # bits/s
+critical=$((10 * 1000 * 1000))
+icon=$(printf '\U000F04E1')
+icon_off=$(printf '\U000F05AA')
+
+total_bytes() {
+  local sum=0 dev
+  for dev in /sys/class/net/*; do
+    [ -e "$dev/device" ] || continue
+    sum=$((sum + $(<"$dev/statistics/rx_bytes") + $(<"$dev/statistics/tx_bytes")))
+  done
+  echo "$sum"
+}
+
+prev=$(total_bytes)
+while sleep "$interval"; do
+  cur=$(total_bytes)
+  bits=$(((cur - prev) * 8 / interval))
+  prev=$cur
+
+  dev=$(ip route show default | awk '{ print $5; exit }')
+  if [ -z "$dev" ]; then
+    printf '{"text": "%s", "class": "disconnected"}\n' "$icon_off"
+    continue
+  fi
+
+  class=normal
+  ((bits >= warning)) && class=warning
+  ((bits >= critical)) && class=critical
+  rate=$(awk -v b="$bits" 'BEGIN { split(" kMGT", u, ""); p = 1; while (b >= 999.5 && p < 5) { b /= 1000; p++ }; printf "%3.0f%sb/s", b, u[p] }')
+  printf '{"text": "%s %s", "class": "%s", "tooltip": "%s"}\n' "$icon" "$rate" "$class" "$dev"
+done
