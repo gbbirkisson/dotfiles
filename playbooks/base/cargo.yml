@@ -45,7 +45,7 @@
         - { crate_name: rust-script, version: 0.36.0, locked: true }      # Create rust "scripts"
         - { crate_name: satty, version: 0.22.0, locked: true }            # Screenshot annotation
         - { crate_name: sfz, version: 0.7.1, locked: true }               # Simple web server for dirs
-        - { crate_name: starship, version: 1.26.0, locked: true }         # Fancy prompt
+        - { crate_name: starship, version: 1.27.0, locked: true }         # Fancy prompt
         - { crate_name: tealdeer, version: 1.9.0, locked: true }          # Better tldr
         - { crate_name: trunk, version: 0.21.14, locked: true }           # WASM development
         - { crate_name: watchexec-cli, version: 2.8.0, locked: true }     # Used for 'dev' script
