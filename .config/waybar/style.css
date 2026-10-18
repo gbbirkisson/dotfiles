@@ -101,6 +101,11 @@ menuitem:hover {
     color: @green;
 }
 
+#battery.warning,
+#battery.critical {
+    background: transparent;
+}
+
 #battery.warning:not(.charging) {
     color: @yellow;
 }
@@ -131,6 +136,7 @@ menuitem:hover {
 #custom-network.disconnected,
 #custom-network.critical {
     color: @red;
+    background: transparent;
 }
 
 #custom-network.warning,
@@ -138,12 +144,14 @@ menuitem:hover {
 #cpu.warning,
 #memory.warning {
     color: @yellow;
+    background: transparent;
 }
 
 #disk.critical,
 #cpu.critical,
 #memory.critical {
     color: @red;
+    background: transparent;
 }
 
 #clock {
