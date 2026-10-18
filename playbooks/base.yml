@@ -6,6 +6,7 @@
 - import_playbook: base/ghostty.yml
 - import_playbook: base/fonts.yml
 - import_playbook: base/mise.yml
+- import_playbook: base/fnox.yml
 
 - import_playbook: base/rust.yml
 - import_playbook: base/cargo.yml

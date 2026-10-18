@@ -13,4 +13,5 @@ if command -v mise >/dev/null
     setenv CLOUDSDK_PYTHON /usr/bin/python3
 
     mise activate fish | source
+    mise completion fish | source
 end

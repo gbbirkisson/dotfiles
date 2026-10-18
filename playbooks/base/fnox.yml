@@ -1,0 +1,27 @@
+---
+- hosts: "{{ host }}"
+
+  vars:
+    # renovate: datasource=github-releases depName=fnox packageName=jdx/fnox
+    version: v1.40.0
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if fnox is installed
+      shell: "fnox --version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: fnox_installed.rc not in [0,1]
+      register: fnox_installed
+
+    - name: Install fnox
+      when: fnox_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/jdx/fnox/releases/download/{{ version }}/fnox-x86_64-unknown-linux-musl.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - fnox
