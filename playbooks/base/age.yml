@@ -1,0 +1,30 @@
+---
+- hosts: "{{ host }}"
+
+  vars:
+    # renovate: datasource=github-releases depName=age packageName=FiloSottile/age
+    version: v1.3.2
+
+  tasks:
+    - name: Create local bin path
+      ansible.builtin.file:
+        path: ~/.local/bin
+        state: directory
+
+    - name: Check if age is installed
+      shell: "age --version | grep {{ version[1:] }}"
+      changed_when: false
+      failed_when: age_installed.rc not in [0,1]
+      register: age_installed
+
+    - name: Install age
+      when: age_installed.rc not in [ 0 ]
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/FiloSottile/age/releases/download/{{ version }}/age-{{ version }}-linux-amd64.tar.gz"
+        dest: ~/.local/bin
+        extra_opts:
+          - --strip-components
+          - 1
+          - age/age
+          - age/age-keygen

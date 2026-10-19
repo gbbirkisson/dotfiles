@@ -3,6 +3,7 @@
 - import_playbook: base/ghostty.yml
 - import_playbook: base/mise.yml
 - import_playbook: base/fnox.yml
+- import_playbook: base/age.yml
 - import_playbook: base/cargo.yml
 - import_playbook: base/nvim.yml
 - import_playbook: base/lazygit.yml
