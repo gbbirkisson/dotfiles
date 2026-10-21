@@ -105,6 +105,7 @@
     },
     "hyprland/language": {
         "format": "{}",
+        "keyboard-name": "at-translated-set-2-keyboard",
         "format-en": "<span color='#c678dd'>EN</span>",
         "format-no": "<span color='#56b6c2'>NO</span>",
         "format-is": "<span color='#e5c07b'>IS</span>",
