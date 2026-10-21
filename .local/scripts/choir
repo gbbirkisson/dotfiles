@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if (($# == 0)); then
+  echo "usage: choir <lead> [backing...] [labels.txt...]" >&2
+  exit 1
+fi
+
+# Audacity NFC-normalizes paths, so NFD names (e.g. from macOS) are "not found".
+for f in "$@"; do
+  if ! realpath "$f" | python3 -c 'import sys, unicodedata; p = sys.stdin.read(); sys.exit(p != unicodedata.normalize("NFC", p))'; then
+    echo "choir: '$f': path has decomposed (NFD) characters Audacity can't open; rename it" >&2
+    exit 1
+  fi
+done
+
+CFG="$HOME/.config/audacity/audacity.cfg"
+TO="/tmp/audacity_script_pipe.to.$(id -u)"
+FROM="/tmp/audacity_script_pipe.from.$(id -u)"
+
+if ! pgrep -x audacity >/dev/null; then
+  [[ -f $CFG ]] && sed -i 's/^mod-script-pipe=[0-9]$/mod-script-pipe=1/' "$CFG"
+  rm -f "$TO" "$FROM"
+  audacity &>/dev/null &
+  disown
+fi
+
+# Commands sent while Audacity is starting hang the session; reconnect until one is answered.
+connect() {
+  for _ in {1..30}; do
+    if [[ -p $TO && -p $FROM ]]; then
+      exec 3>"$TO" 4<"$FROM"
+      printf '%s\n' 'GetInfo: Type=Tracks' >&3
+      while IFS= read -r -t 1 line <&4; do
+        [[ $line == BatchCommand* ]] && return
+      done
+      exec 3>&- 4<&-
+    fi
+    sleep 0.5
+  done
+  echo "choir: no response; enable mod-script-pipe in Audacity Preferences > Modules and restart it" >&2
+  exit 1
+}
+
+connect
+
+query() {
+  printf '%s\n' "$1" >&3
+  while IFS= read -r line <&4 && [[ $line != BatchCommand* ]]; do printf '%s\n' "$line"; done
+}
+
+cmd() {
+  query "$1" >/dev/null
+}
+
+# Prints "start<TAB>end<TAB>text" sorted by time, from lines like "1:23 B (description)".
+# Each region ends at the next label, the last at $2. Text after " (" is not shown.
+parse_labels() {
+  python3 - "$1" "$2" <<'EOF'
+import re, sys
+rows = []
+for line in open(sys.argv[1], encoding="utf-8"):
+    m = re.match(r"\s*(\d[\d:.]*)\s+(.*\S)", line)
+    if m:
+        secs = 0.0
+        for part in m[1].split(":"):
+            secs = secs * 60 + float(part)
+        rows.append((secs, m[2].split(" (")[0].replace('"', "'")))
+rows.sort()
+ends = [r[0] for r in rows[1:]] + [max(float(sys.argv[2]), rows[-1][0])] if rows else []
+for (start, text), end in zip(rows, ends):
+    print(f"{start}\t{end}\t{text}")
+EOF
+}
+
+# SetLabel indexes all labels in the project; ours go last on a new track.
+add_labels() {
+  local i length start end text name track stale
+  name=$(basename "$1" .txt)
+  # Replace the track from a previous run on this file; highest index first so indices stay valid.
+  stale=$(query 'GetInfo: Type=Tracks Format=JSON' | python3 -c 'import json, sys; print(*reversed([i for i, t in enumerate(json.load(sys.stdin)) if t["kind"] == "label" and t["name"] == sys.argv[1]]))' "$name")
+  for track in $stale; do
+    cmd "SelectTracks: Track=$track TrackCount=1 Mode=Set"
+    cmd "RemoveTracks:"
+  done
+  i=$(query 'GetInfo: Type=Labels Format=JSON' | python3 -c 'import json, sys; print(sum(len(t[1]) for t in json.load(sys.stdin)))')
+  length=$(query 'GetInfo: Type=Tracks Format=JSON' | python3 -c 'import json, sys; print(max([t["end"] for t in json.load(sys.stdin) if "end" in t], default=0))')
+  cmd "NewLabelTrack:"
+  cmd "SetTrackStatus: Name=\"$name\""
+  while IFS=$'\t' read -r start end text; do
+    cmd "Select: Start=$start End=$end"
+    cmd "AddLabel:"
+    cmd "SetLabel: Label=$i Text=\"$text\""
+    i=$((i + 1))
+  done < <(parse_labels "$1" "$length")
+}
+
+volume=0
+for f in "$@"; do
+  if [[ $f == *.txt ]]; then
+    add_labels "$f"
+    continue
+  fi
+  cmd "Import2: Filename=\"$(realpath "$f")\""
+  cmd "SetTrackAudio: Volume=$volume"
+  volume=-20
+done
+cmd "FitInWindow:"
