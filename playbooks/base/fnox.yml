@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=fnox packageName=jdx/fnox
-    version: v1.40.0
+    version: v1.42.0
 
   tasks:
     - name: Create local bin path
