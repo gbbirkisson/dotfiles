@@ -189,6 +189,10 @@ hl.config({
 		vrr = 1,
 	},
 
+	xwayland = {
+		enabled = true,
+	},
+
 	-- Set explicitly, the documented default of true is not taking effect.
 	debug = {
 		disable_logs = true,
