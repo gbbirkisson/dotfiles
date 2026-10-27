@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=opencode packageName=anomalyco/opencode
-    version: v1.19.4
+    version: v2.2.0
 
   tasks:
     - name: Create local bin path
