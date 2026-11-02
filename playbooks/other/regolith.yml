@@ -4,7 +4,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=regolith-desktop packageName=regolith-linux/regolith-desktop
-    version: v3.3
+    version: v4.11.0
 
   tasks:
     - name: Check if skip
