@@ -33,7 +33,7 @@
         - { crate_name: cargo-upgrades, version: 3.1.0, locked: true }    # For cargo dependencies
         - { crate_name: drill, version: 0.9.1, locked: true }             # HTTP stress testing (ansible-esqe)
         - { crate_name: du-dust, version: 1.2.7, locked: true }           # Better du
-        - { crate_name: fd-find, version: 10.5.0, locked: true }          # Better find
+        - { crate_name: fd-find, version: 10.5.1, locked: true }          # Better find
         - { crate_name: git-delta, version: 0.20.1, locked: true }        # Better diff
         - { crate_name: hyperfine, version: 2.0.0, locked: true }        # Benchmarking
         - { crate_name: loc, version: 0.5.0, locked: true }               # Count loc
