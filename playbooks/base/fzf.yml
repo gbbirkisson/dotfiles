@@ -3,7 +3,7 @@
 
   vars:
     # renovate: datasource=github-releases depName=fzf packageName=junegunn/fzf
-    version: v0.74.5
+    version: v0.75.0
 
   tasks:
     - name: Create local bin path
