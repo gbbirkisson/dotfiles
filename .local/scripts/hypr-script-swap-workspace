@@ -38,6 +38,3 @@ hyprctl --batch "$(
   IFS=';'
   echo "${DISPATCHES[*]}"
 )"
-
-# Waybar 0.15 does not handle the changeworkspaceid event; master does, so 0.16 likely drops this reload.
-pkill -SIGUSR2 -x waybar || true
