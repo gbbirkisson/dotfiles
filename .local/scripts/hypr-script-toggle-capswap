@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+swapped() {
+  [[ $(hyprctl getoption input:kb_options -j | jq -r '.str') == *caps:swapescape* ]]
+}
+
+# --status prints waybar JSON, classed swapped or normal.
+if [ "$1" = "--status" ]; then
+  if swapped; then
+    echo '{"text": "󰪛", "class": "swapped", "tooltip": "Caps Lock and Escape swapped"}'
+  else
+    echo '{"text": "󰪛", "class": "normal", "tooltip": "Caps Lock and Escape normal"}'
+  fi
+  exit
+fi
+
+if swapped; then
+  opts=""
+else
+  opts="caps:swapescape"
+fi
+hyprctl eval "hl.config({ input = { kb_options = \"$opts\" } })"
+
+# Refresh waybar's custom/capswap module (its "signal" is 9).
+pkill -RTMIN+9 -x waybar

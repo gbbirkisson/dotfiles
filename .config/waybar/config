@@ -15,6 +15,7 @@
     // ],
     "modules-right": [
         "hyprland/submap",
+        "custom/capswap",
         "hyprland/language",
         "custom/separator",
         "custom/network",
@@ -110,6 +111,13 @@
         "format-no": "<span color='#56b6c2'>NO</span>",
         "format-is": "<span color='#e5c07b'>IS</span>",
         "on-click": "~/.local/scripts/hypr-script-kb-layout"
+    },
+    "custom/capswap": {
+        "exec": "~/.local/scripts/hypr-script-toggle-capswap --status",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 9,
+        "on-click": "~/.local/scripts/hypr-script-toggle-capswap"
     },
     "clock": {
         "format": " {:%H:%M   %e %b}",

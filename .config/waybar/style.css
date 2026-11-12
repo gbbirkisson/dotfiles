@@ -67,6 +67,7 @@ menuitem:hover {
 
 #tray,
 #language,
+#custom-capswap,
 #pulseaudio,
 #custom-monitor-mode,
 #custom-power-profile,
@@ -87,6 +88,14 @@ menuitem:hover {
 
 #language {
     color: @light_grey;
+}
+
+#custom-capswap.swapped {
+    color: @dim;
+}
+
+#custom-capswap.normal {
+    color: @yellow;
 }
 
 #pulseaudio {

@@ -247,6 +247,8 @@ hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + X", hl.dsp.layout("togglesplit")) -- dwindle
 hl.bind(mainMod .. " + V", hl.dsp.layout("preselect d"))
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("loginctl lock-session"))
+hl.bind(mainMod .. " + ALT + Escape", hl.dsp.exec_cmd("~/.local/scripts/hypr-script-toggle-capswap"))
+hl.bind(mainMod .. " + ALT + CAPS + Caps_Lock", hl.dsp.exec_cmd("~/.local/scripts/hypr-script-toggle-capswap"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + ALT + BackSpace", hl.dsp.exec_cmd("~/.local/scripts/hypr-script-kb-layout"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
