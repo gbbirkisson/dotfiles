@@ -46,6 +46,7 @@ link .claude/CLAUDE.md
 link .config/bottom
 link .config/direnv
 link .config/dunst
+link .config/easyeffects/output
 link .config/fish/conf.d
 link .config/gh-dash
 link .config/ghostty
