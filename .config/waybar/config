@@ -73,7 +73,7 @@
     "custom/network": {
         "exec": "~/.local/scripts/hypr-script-waybar-net",
         "return-type": "json",
-        "on-click": "ghostty --class=com.mitchellh.ghostty.btm --command='btm -C ~/.config/bottom/network.toml'",
+        "on-click": "ghostty --class=com.mitchellh.ghostty.btm --command='mise exec -- btm -C ~/.config/bottom/network.toml'",
         "on-click-right": "ghostty --class=com.mitchellh.ghostty.nethogs --command='sudo TERM=xterm-256color nethogs -C'"
     },
     "disk": {
@@ -89,7 +89,7 @@
     "memory": {
         "interval": 5,
         "format": "󰘚 {percentage:2}%",
-        "on-click": "ghostty --class=com.mitchellh.ghostty.btm --command='btm -C ~/.config/bottom/memory.toml'",
+        "on-click": "ghostty --class=com.mitchellh.ghostty.btm --command='mise exec -- btm -C ~/.config/bottom/memory.toml'",
         "states": {
             "warning": 80,
             "critical": 90
@@ -98,7 +98,7 @@
     "cpu": {
         "interval": 5,
         "format": " {usage:2}%",
-        "on-click": "ghostty --class=com.mitchellh.ghostty.btm --command='btm -C ~/.config/bottom/cpu.toml'",
+        "on-click": "ghostty --class=com.mitchellh.ghostty.btm --command='mise exec -- btm -C ~/.config/bottom/cpu.toml'",
         "states": {
             "warning": 80,
             "critical": 90
@@ -195,7 +195,7 @@
         "tooltip-format": "{controller_alias}\t{controller_address}",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "ghostty --class=com.mitchellh.ghostty.bluetui --command=bluetui"
+        "on-click": "ghostty --class=com.mitchellh.ghostty.bluetui --command='mise exec -- bluetui'"
     },
     "tray": {
         "icon-size": 15,
