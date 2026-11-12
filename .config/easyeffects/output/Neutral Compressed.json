@@ -13,7 +13,7 @@
             "knee": -6.0,
             "lpf-frequency": 20000.0,
             "lpf-mode": "off",
-            "makeup": 8.0,
+            "makeup": 10.0,
             "mode": "Downward",
             "output-gain": 0.0,
             "ratio": 4.0,
@@ -35,7 +35,7 @@
         "equalizer#0": {
             "balance": 0.0,
             "bypass": false,
-            "input-gain": -0.3,
+            "input-gain": 0.0,
             "left": {
                 "band0": {
                     "frequency": 22.59,
@@ -370,7 +370,7 @@
             },
             "mode": "IIR",
             "num-bands": 30,
-            "output-gain": -6.5,
+            "output-gain": 0.0,
             "pitch-left": 0.0,
             "pitch-right": 0.0,
             "right": {
@@ -707,17 +707,6 @@
             },
             "split-channels": false
         },
-        "exciter#0": {
-            "amount": 6.0,
-            "blend": 0.0,
-            "bypass": false,
-            "ceil": 16000.0,
-            "ceil-active": false,
-            "harmonics": 8.000000000000002,
-            "input-gain": -2.0,
-            "output-gain": 0.0,
-            "scope": 5500.0
-        },
         "limiter#0": {
             "alr": false,
             "alr-attack": 5.0,
@@ -740,7 +729,6 @@
         },
         "plugins_order": [
             "equalizer#0",
-            "exciter#0",
             "compressor#0",
             "limiter#0"
         ]
