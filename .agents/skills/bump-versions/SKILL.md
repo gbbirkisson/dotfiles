@@ -5,11 +5,13 @@ description: Use when asked to find pinned versions, check for available updates
 
 # Task: Find Pinned Versions and Bump Them
 
+Loading this skill is the request. Do not ask for a task or wait for one. Unless the user names another repo or scope, start step 1 immediately on the current working directory, covering every pin in it, and stop only at the batching confirmation in step 3.
+
 You edit files, research and verify. The user applies changes (deploys, runs playbooks, installs, commits). Never apply, deploy or commit yourself.
 
 ## 1. Inventory
 
-- Start with `renovate-check --full` from the repo root. It prints a table of every dependency Renovate finds, with the latest major, minor and patch for each (`renovate-check` without `--full` lists only outdated ones). Use it as the inventory and as the latest versions for step 2, then grep for pins it missed. If the command is missing or fails (e.g. no Renovate config), do everything manually as below.
+- Start with `renovate-check` from the repo root. It prints a table of outdated dependencies Renovate finds, with the latest major, minor and patch for each. Use `--full` (every dependency, outdated or not) only when the user asks for a full inventory. Use the output as the latest versions for step 2, then grep for pins it missed. If the command is missing or fails (e.g. no Renovate config), do everything manually as below.
 - Grep the repo for every pin. Typical places: tool version files (`.tool-versions`, `mise.toml`, `.nvmrc`), package manifests (`package.json`, `pyproject.toml`, `Cargo.toml`, `go.mod`, `requirements*.txt`), `Dockerfile` `FROM`, `image:`/`tag:`, chart `version:`, CI action refs, IaC provider constraints, `*_version` variables in build files and scripts, URLs containing versions.
 - Find floating references and report them as findings: `latest`, `stable`, `main`/`master`, untagged images, missing chart/package versions, wide ranges (`*`, `>=`, `^`, `~>`), installs without a version (`go install ...@latest`, `apt install pkg`, `curl .../latest/...`). Propose an exact pin for each, set to the version currently running when it can be determined, so pinning changes nothing. Check implicit defaults too: a chart, base image or module may default to `latest` when the repo sets nothing.
 - Note pins that are defined but never referenced.

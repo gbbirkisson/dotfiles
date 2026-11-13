@@ -1,0 +1,10 @@
+{
+  "lastChangelogVersion": "1.5.2",
+  "defaultProvider": "llama.cpp",
+  "defaultModel": "grettir-fast",
+  "defaultTools": [
+    "+ls",
+    "+grep"
+  ],
+  "hideThinkingBlock": true
+}

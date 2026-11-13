@@ -1,0 +1,11 @@
+{
+  "$schema": "https://pi.dev/schemas/models.schema.json",
+  "providers": {
+    "google": {
+      "apiKey": "!op read op://hemwnx22rvxga5v2zkicawq6sq/ld4ypfwlvf44j2xx5g7ylb2wgi/credential --no-newline"
+    },
+    "llama.cpp": {
+      "apiKey": "!op read op://xasj5b6lodrmerxxgzy4nb6k2y/hn6f2tkfkf5f6i7yyy6njclmgy/credential --no-newline"
+    }
+  }
+}

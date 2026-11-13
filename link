@@ -3,46 +3,46 @@
 set -e
 
 ensure_backup() {
-    local bak="$1.bak"
+  local bak="$1.bak"
 
-    # If no previous file exists, exit ...
-    [ ! -f "$1" ] && [ ! -d "$1" ] && return
+  # If no previous file exists, exit ...
+  [ ! -f "$1" ] && [ ! -d "$1" ] && return
 
-    # Has this already been linked, exit ...
-    [[ -L "$1" ]] && return
+  # Has this already been linked, exit ...
+  [[ -L "$1" ]] && return
 
-    # If previous backup file exits, exit ...
-    [ -f "$bak" ] || [ -d "$bak" ] && return
+  # If previous backup file exits, exit ...
+  [ -f "$bak" ] || [ -d "$bak" ] && return
 
-    cp -rf "$1" "$bak"
+  cp -rf "$1" "$bak"
 }
 
 ensure_parent() {
-    local parent="$(dirname "$1")"
-    [ -d "$parent" ] || mkdir -p "$parent"
+  local parent="$(dirname "$1")"
+  [ -d "$parent" ] || mkdir -p "$parent"
 }
 
 link() {
-    [ ! -f "$1" ] && [ ! -d "$1" ] && echo "Not found $1" && return
+  [ ! -f "$1" ] && [ ! -d "$1" ] && echo "Not found $1" && return
 
-    local src=$(realpath "$1")
-    if [ -n "$2" ]; then
-        local dst=${HOME}/${2}
-    else
-        local dst=${HOME}/$(realpath --relative-to=$PWD "$1")
-    fi
+  local src=$(realpath "$1")
+  if [ -n "$2" ]; then
+    local dst=${HOME}/${2}
+  else
+    local dst=${HOME}/$(realpath --relative-to=$PWD "$1")
+  fi
 
-    echo "Link $src -> $dst"
-    ensure_backup "$dst"
-    ensure_parent "$dst"
-    rm -rf "$dst"
-    ln -sf "$src" "$dst"
+  echo "Link $src -> $dst"
+  ensure_backup "$dst"
+  ensure_parent "$dst"
+  rm -rf "$dst"
+  ln -sf "$src" "$dst"
 }
 
 link .agents/skills/fix-pr
 link .agents/skills/prep
 link .agents/skills/bump-versions
-link .claude/CLAUDE.md
+link .agents/AGENTS.md
 link .config/bottom
 link .config/direnv
 link .config/dunst
@@ -60,8 +60,11 @@ link .config/waybar
 link .config/wofi
 link .config/starship.toml
 
-link .gemini
 link .local/scripts
+link .pi/agent/extensions
+link .pi/agent/keybindings.json
+link .pi/agent/models.json
+link .pi/agent/settings.json
 
 link .gitconfig
 link .gitconfig_amedia
@@ -72,5 +75,8 @@ link .taplo.toml
 link .tool-versions
 link .yamlfmt
 
-mkdir -p ~/.agents/skills ~/.claude
+mkdir -p ~/.agents/skills ~/.claude ~/.gemini ~/.pi/agent
 ln -sf ~/.agents/skills ~/.claude
+for f in .claude/CLAUDE.md .gemini/GEMINI.md .pi/agent/CLAUDE.md; do
+  ln -sf ~/.agents/AGENTS.md ~/$f
+done
