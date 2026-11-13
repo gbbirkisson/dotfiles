@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+full=false
+case "${1-}" in
+"") ;;
+--full) full=true ;;
+*)
+  echo "usage: renovate-check [--full]" >&2
+  exit 1
+  ;;
+esac
+
+# renovate: datasource=npm depName=renovate
+RENOVATE_VERSION=44.221.0
+NODE_VERSION=26
+
+report=$(mktemp)
+trap 'rm -f "$report"' EXIT
+
+GITHUB_COM_TOKEN=$(gh auth token)
+export GITHUB_COM_TOKEN
+mapfile -t configs < <(fd --hidden --type f --max-depth 2 \
+  '^(renovate\.json5?|\.renovaterc(\.json5?)?)$')
+if ((${#configs[@]} == 0)); then
+  echo "renovate-check: no renovate config found" >&2
+  exit 1
+elif ((${#configs[@]} > 1)); then
+  echo "renovate-check: multiple renovate configs found:" >&2
+  printf '  %s\n' "${configs[@]}" >&2
+  exit 1
+fi
+export RENOVATE_CONFIG_FILE=${configs[0]}
+export LOG_LEVEL=warn
+
+mise exec "node@$NODE_VERSION" -- npx --yes "renovate@$RENOVATE_VERSION" \
+  --platform=local \
+  --onboarding=false \
+  --require-config=ignored \
+  --report-type=file \
+  --report-path="$report" >&2
+
+# shellcheck disable=SC2016
+table='
+  def updates: reduce .updates[]? as $u ({}; .[$u.updateType] = $u.newValue);
+
+  def row($file):
+    updates as $u
+    | {
+        key: [$file, .depName],
+        skip: .skipReason,
+        outdated: ($u.patch or $u.minor or $u.major),
+        cols: [$file, .depName, .currentValue // .skipReason,
+               $u.major // "-", $u.minor // "-", $u.patch // "-"]
+      };
+
+  [ .repositories[].packageFiles[][]
+    | .packageFile as $file
+    | .deps[]
+    | row($file) ]
+  # Two managers may find one dependency: keep the one that tracks it.
+  | group_by(.key)
+  | map(sort_by(.skip != null) | .[0] | select($full or .outdated) | .cols)
+  | if length == 0 then "No updates found."
+    else
+      [["FILE", "DEPENDENCY", "CURRENT", "MAJOR", "MINOR", "PATCH"]] + .
+      | (transpose | map(map(length) | max)) as $widths
+      | .[:1] + [$widths | map("-" * .)] + .[1:]
+      | .[]
+      | [., $widths] | transpose
+      | map(.[0] + (" " * (.[1] - (.[0] | length)) // ""))
+      | "| " + join(" | ") + " |"
+    end
+'
+
+jq -r --argjson full "$full" "$table" "$report"
