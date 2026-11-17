@@ -13,7 +13,7 @@ case "${1-}" in
 esac
 
 # renovate: datasource=npm depName=renovate
-RENOVATE_VERSION=44.247.2
+RENOVATE_VERSION=44.248.1
 NODE_VERSION=26
 
 report=$(mktemp)
