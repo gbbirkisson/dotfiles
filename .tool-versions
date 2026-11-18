@@ -21,7 +21,7 @@ github:sharkdp/bat              0.26.1
 github:sharkdp/fd               10.5.2
 github:sharkdp/hyperfine        2.0.0
 github:starship/starship        1.27.0
-github:trunk-rs/trunk           0.22.1
+github:trunk-rs/trunk           0.22.2
 github:watchexec/watchexec      2.8.0
 github:weihanglo/sfz            0.7.1
 github:xd009642/tarpaulin       0.37.6
