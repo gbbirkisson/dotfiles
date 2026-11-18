@@ -63,6 +63,7 @@ link .config/starship.toml
 link .local/scripts
 link .pi/agent/extensions
 link .pi/agent/keybindings.json
+link .pi/agent/mcp.json
 link .pi/agent/models.json
 link .pi/agent/settings.json
 

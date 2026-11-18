@@ -113,5 +113,16 @@
         "# renovate: datasource=(?<datasource>[^\\s]+) depName=(?<depName>[^\\s]+)\\n[A-Z_]+=(?<currentValue>[^\\s]+)"
       ]
     },
+    {
+      "description": "uvx packages pinned as `name@version` in pi MCP servers",
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)\\.pi/agent/mcp\\.json$/"
+      ],
+      "matchStrings": [
+        "\"(?<depName>[A-Za-z0-9_.-]+)@(?<currentValue>[^\"\\s]+)\""
+      ],
+      "datasourceTemplate": "pypi"
+    },
   ],
 }

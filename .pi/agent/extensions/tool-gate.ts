@@ -1,6 +1,14 @@
 import { type ExtensionAPI, isToolCallEventType } from "@earendil-works/pi-coding-agent";
 
-const allowedTools = new Set(["read", "write", "edit", "ls", "grep"]);
+const allowedTools = new Set([
+	"read",
+	"write",
+	"edit",
+	"ls",
+	"grep",
+	"mcp__kagi__kagi_search_fetch",
+	"mcp__kagi__kagi_extract",
+]);
 
 // `true` is a command taking only arguments; a record lists a group's own subcommands.
 type Subcommands = { [name: string]: Subcommands | true };
