@@ -1,4 +1,4 @@
-local dir = "/home/gbb/repos/futurama/gigja/.dev/nvim"
+local dir = "/home/gbb/repos/personal/gigja/.dev/nvim"
 
 return {
   dir = dir,
