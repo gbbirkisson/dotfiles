@@ -5,7 +5,7 @@ kubectl             1.37.2
 uv                  0.13.9
 nodejs              26.13.1
 
-github:BurntSushi/ripgrep       15.2.0
+github:BurntSushi/ripgrep       16.0.0
 github:ClementTsang/bottom      0.15.0
 github:bootandy/dust            1.2.7
 github:casey/just               1.59.0
