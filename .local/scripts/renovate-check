@@ -43,7 +43,11 @@ mise exec "node@$NODE_VERSION" -- npx --yes "renovate@$RENOVATE_VERSION" \
 
 # shellcheck disable=SC2016
 table='
-  def updates: reduce .updates[]? as $u ({}; .[$u.updateType] = $u.newValue);
+  def updates:
+    .currentValue as $cur
+    | reduce .updates[]? as $u ({}; .[$u.updateType] =
+        if $u.newValue == $cur then $u.newVersion // $u.newValue
+        else $u.newValue end);
 
   def row($file):
     updates as $u
