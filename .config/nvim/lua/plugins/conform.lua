@@ -1,16 +1,5 @@
--- Resolve the gigja catalog formatter (scripts/format-songs.py) by walking up
--- from the buffer to the repo's `scripts/` dir. Returns nil outside that repo so
--- conform's `condition` can skip .cho files elsewhere.
-local function chordpro_script(ctx)
-  local scripts = vim.fs.find("scripts", { path = ctx.dirname, upward = true, type = "directory" })[1]
-  if scripts then
-    local p = scripts .. "/format-songs.py"
-    if vim.uv.fs_stat(p) then
-      return p
-    end
-  end
-  return nil
-end
+-- The gigja catalog formatter, from gigja-transcribe's venv (`uv sync` there).
+local gigja_fmt = "/home/gbb/repos/personal/gigja-transcribe/.venv/bin/gigja-fmt"
 
 return {
   {
@@ -73,14 +62,11 @@ return {
           stdin = true,
         },
         chordpro_fmt = {
-          -- gigja catalog styleguide formatter (scripts/format-songs.py --stdin)
-          command = function(_, ctx)
-            return chordpro_script(ctx) or "format-songs.py"
-          end,
+          command = gigja_fmt,
           args = { "--stdin" },
           stdin = true,
-          condition = function(_, ctx)
-            return chordpro_script(ctx) ~= nil
+          condition = function()
+            return vim.uv.fs_stat(gigja_fmt) ~= nil
           end,
         },
       },
