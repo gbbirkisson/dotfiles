@@ -7,7 +7,7 @@ nodejs              26.13.1
 
 github:BurntSushi/ripgrep       16.0.0
 github:ClementTsang/bottom      0.15.0
-github:bootandy/dust            1.2.7
+github:bootandy/dust            1.2.8
 github:casey/just               1.59.0
 github:dandavison/delta         0.22.0
 github:ducaale/xh               0.26.3
