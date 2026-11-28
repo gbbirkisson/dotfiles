@@ -2,7 +2,7 @@
   "mcpServers": {
     "kagi": {
       "command": "uvx",
-      "args": ["--python", "3.13", "kagimcp@1.1.0"],
+      "args": ["--python", "3.13", "kagimcp@1.2.0"],
       "env": {
         "KAGI_API_KEY": "!op item get iivuwmludrnwe6t6jnqp5irs2m --fields credential --reveal"
       },
