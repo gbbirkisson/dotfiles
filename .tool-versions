@@ -30,4 +30,4 @@ github:xd009642/tarpaulin       0.37.6
 pipx:podman-compose 1.6.0
 
 # renovate: datasource=npm depName=@earendil-works/pi-coding-agent
-npm:@earendil-works/pi-coding-agent 1.6.1
+npm:@earendil-works/pi-coding-agent 1.7.0
